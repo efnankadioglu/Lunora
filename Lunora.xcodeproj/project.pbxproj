@@ -10,6 +10,7 @@
 		5961DC032EB3953B00A8C049 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 5961DC022EB3953B00A8C049 /* FirebaseAuth */; };
 		5961DC052EB3953B00A8C049 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 5961DC042EB3953B00A8C049 /* FirebaseCore */; };
 		5961DC082EB395DA00A8C049 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 5961DC072EB395DA00A8C049 /* GoogleSignIn */; };
+		59A461252F7BDBDA009A5995 /* UICircularProgressRing in Frameworks */ = {isa = PBXBuildFile; productRef = 59A461242F7BDBDA009A5995 /* UICircularProgressRing */; };
 		59A55C8F2F73F2850040A4F6 /* FirebaseDatabase in Frameworks */ = {isa = PBXBuildFile; productRef = 59A55C8E2F73F2850040A4F6 /* FirebaseDatabase */; };
 		59A6E5AB2EC7760C003A4B5C /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 59A6E5AA2EC7760C003A4B5C /* FirebaseFirestore */; };
 		59A6E5AD2EC7760C003A4B5C /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 59A6E5AC2EC7760C003A4B5C /* FirebaseStorage */; };
@@ -81,6 +82,7 @@
 				59A6E5AB2EC7760C003A4B5C /* FirebaseFirestore in Frameworks */,
 				5961DC082EB395DA00A8C049 /* GoogleSignIn in Frameworks */,
 				59A55C8F2F73F2850040A4F6 /* FirebaseDatabase in Frameworks */,
+				59A461252F7BDBDA009A5995 /* UICircularProgressRing in Frameworks */,
 				59A6E5AD2EC7760C003A4B5C /* FirebaseStorage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -157,6 +159,7 @@
 				59A6E5AA2EC7760C003A4B5C /* FirebaseFirestore */,
 				59A6E5AC2EC7760C003A4B5C /* FirebaseStorage */,
 				59A55C8E2F73F2850040A4F6 /* FirebaseDatabase */,
+				59A461242F7BDBDA009A5995 /* UICircularProgressRing */,
 			);
 			productName = Lunora;
 			productReference = 59911ACD2EA50F0D001D8148 /* Lunora.app */;
@@ -244,6 +247,7 @@
 				5961DC012EB3953B00A8C049 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */,
 				5961DC062EB395DA00A8C049 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */,
 				59AB560E2EBE398600A276F0 /* XCRemoteSwiftPackageReference "TOCropViewController" */,
+				59A461232F7BDBDA009A5995 /* XCRemoteSwiftPackageReference "UICircularProgressRing" */,
 			);
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 59911ACE2EA50F0D001D8148 /* Products */;
@@ -628,6 +632,14 @@
 				minimumVersion = 9.0.0;
 			};
 		};
+		59A461232F7BDBDA009A5995 /* XCRemoteSwiftPackageReference "UICircularProgressRing" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/luispadron/UICircularProgressRing.git";
+			requirement = {
+				kind = exactVersion;
+				version = 6.5.0;
+			};
+		};
 		59AB560E2EBE398600A276F0 /* XCRemoteSwiftPackageReference "TOCropViewController" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/TimOliver/TOCropViewController";
@@ -653,6 +665,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 5961DC062EB395DA00A8C049 /* XCRemoteSwiftPackageReference "GoogleSignIn-iOS" */;
 			productName = GoogleSignIn;
+		};
+		59A461242F7BDBDA009A5995 /* UICircularProgressRing */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 59A461232F7BDBDA009A5995 /* XCRemoteSwiftPackageReference "UICircularProgressRing" */;
+			productName = UICircularProgressRing;
 		};
 		59A55C8E2F73F2850040A4F6 /* FirebaseDatabase */ = {
 			isa = XCSwiftPackageProductDependency;
