@@ -38,6 +38,7 @@
 		59911ACD2EA50F0D001D8148 /* Lunora.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Lunora.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		59911AE62EA50F0E001D8148 /* LunoraTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LunoraTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		59911AF02EA50F0E001D8148 /* LunoraUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = LunoraUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		59E88CEE2F7D578400EA9BC4 /* Lunora.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; path = Lunora.xcodeproj; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFileSystemSynchronizedBuildFileExceptionSet section */
@@ -130,6 +131,13 @@
 			children = (
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		59E88CEF2F7D578400EA9BC4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Products;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -252,6 +260,12 @@
 			preferredProjectObjectVersion = 77;
 			productRefGroup = 59911ACE2EA50F0D001D8148 /* Products */;
 			projectDirPath = "";
+			projectReferences = (
+				{
+					ProductGroup = 59E88CEF2F7D578400EA9BC4 /* Products */;
+					ProjectRef = 59E88CEE2F7D578400EA9BC4 /* Lunora.xcodeproj */;
+				},
+			);
 			projectRoot = "";
 			targets = (
 				59911ACC2EA50F0D001D8148 /* Lunora */,
