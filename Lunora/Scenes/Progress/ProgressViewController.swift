@@ -6,49 +6,1216 @@
 //
 
 import UIKit
-import UICircularProgressRing
+import FirebaseAuth
 
 class ProgressViewController: UIViewController {
 
-    @IBOutlet weak var progressRing: UICircularProgressRing!
+    @IBOutlet weak var scrollContentView: UIScrollView!
+    @IBOutlet weak var contentContainerView: UIView!
+    @IBOutlet weak var bottomSummaryView: UIView!
+    @IBOutlet weak var segmentControl: UISegmentedControl!
+    @IBOutlet weak var headerStatusLabel: UILabel!
+    @IBOutlet weak var headerTitleLabel: UILabel!
+    @IBOutlet weak var userProfileImageView: UIImageView!
+    @IBOutlet weak var headerContainerView: UIView!
+    
+    
+    private let contentStackView = UIStackView()
+    private let tasksCardView = TasksCardView()
+    private let bottomSummaryCardView = BottomSummaryCardView()
+    private let programPlaceholderView = UIView()
+    private let programProgressCardView = ProgramProgressCardView()
+    private let programBadgeCardView = ProgramBadgeCardView()
+    private var selectedProgram: Program?
+    private var programInfoStates: [Bool] = [false, false, false, false, false]
+    private let programInfoIcons: [String] = ["🪞", "⚜️", "🦋", "☀", "💫"]
+    private var currentStreak: Int = 0
+
+    private var tasks: [DailyTask] = []
+    private var taskStates: [DailyTaskUIState] = []
+    private let enrollmentRepository = EnrollmentRepository()
+    private var activeEnrollment: ActiveEnrollment?
+    private var todayLog: DailyLog?
+    private var allDailyLogs: [DailyLog] = []
 
     override func viewDidLoad() {
-            super.viewDidLoad()   // ❗️ BUNU UNUTMA
+        super.viewDidLoad()
+        setupScreen()
+        setupContentStack()
+        bindTaskActions()
+        setupBottomSummaryCard()
+        setupSegmentControl()
+        showTodayContent()
+        loadProfileImage()
+        loadProgressFromCache()
+        fetchActiveEnrollmentAndLog()
+        updateHeaderUI()
+        
+        endJourneyButton.addTarget(self, action: #selector(didTapEndJourney), for: .touchUpInside)
+        
+        NetworkMonitor.shared.onConnectionRestored = { [weak self] in
+            self?.syncPendingProgressActions()
+        }
+    }
 
-            setupRing()
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        navigationController?.setNavigationBarHidden(true, animated: false)
+        loadProfileImage()
+        syncPendingProgressActions()
+        fetchActiveEnrollmentAndLog()
+    }
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        userProfileImageView.layer.cornerRadius = userProfileImageView.bounds.width / 2
+        userProfileImageView.clipsToBounds = true
+    }
+
+        private func setupScreen() {
+            view.backgroundColor = UIColor(red: 246/255, green: 238/255, blue: 244/255, alpha: 1)
+
+            scrollContentView.alwaysBounceVertical = true
+            scrollContentView.showsVerticalScrollIndicator = false
+            scrollContentView.contentInsetAdjustmentBehavior = .never
         }
 
-        override func viewDidAppear(_ animated: Bool) {
-            super.viewDidAppear(animated)
+        private func setupContentStack() {
+            contentStackView.translatesAutoresizingMaskIntoConstraints = false
+            contentStackView.axis = .vertical
+            contentStackView.alignment = .fill
+            contentStackView.distribution = .fill
+            contentStackView.spacing = 16
 
-            animateRing()
+            contentContainerView.addSubview(contentStackView)
+
+            NSLayoutConstraint.activate([
+                contentStackView.topAnchor.constraint(equalTo: contentContainerView.topAnchor, constant: 16),
+                contentStackView.leadingAnchor.constraint(equalTo: contentContainerView.leadingAnchor, constant: 20),
+                contentStackView.trailingAnchor.constraint(equalTo: contentContainerView.trailingAnchor, constant: -20),
+                contentStackView.bottomAnchor.constraint(equalTo: contentContainerView.bottomAnchor, constant: -16)
+            ])
         }
 
-        // MARK: - Setup
-        private func setupRing() {
-            progressRing.maxValue = 100
+    private func loadTasks(for program: Program) {
+        selectedProgram = program
 
-            progressRing.outerRingColor = UIColor.systemOrange.withAlphaComponent(0.2)
-            progressRing.innerRingColor = UIColor.systemOrange
-
-            progressRing.outerRingWidth = 10
-            progressRing.innerRingWidth = 10
-
-            progressRing.font = UIFont.systemFont(ofSize: 32, weight: .bold)
-            progressRing.fontColor = UIColor.black
-
-            progressRing.shouldShowValueText = true
-            progressRing.startAngle = -90
+        tasks = program.dailyTasks.map { task in
+            DailyTask(
+                id: task.id,
+                title: task.title,
+                shortDescription: task.shortDescription,
+                details: task.details
+            )
         }
 
-        // MARK: - Animation
-        private func animateRing() {
-            // Önce sıfırla
-            progressRing.startProgress(to: 0, duration: 0)
+        taskStates = tasks.map {
+            DailyTaskUIState(
+                taskId: $0.id,
+                isCompleted: false,
+                isExpanded: false
+            )
+        }
 
-            // Sonra animasyonu başlat
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.05) {
-                self.progressRing.startProgress(to: 75, duration: 1.5)
+        tasksCardView.configure(tasks: tasks, states: taskStates)
+        updateBottomSummaryUI()
+    }
+
+        private func bindTaskActions() {
+            tasksCardView.onToggleTaskCompletion = { [weak self] taskId in
+                self?.toggleCompletion(for: taskId)
+            }
+
+            tasksCardView.onToggleTaskExpansion = { [weak self] taskId in
+                self?.toggleExpansion(for: taskId)
+             }
+        }
+    
+    private func setHeaderVisibility(isVisible: Bool) {
+        headerContainerView.isHidden = !isVisible
+    }
+    
+//    private func updateHeaderUI() {
+//        guard let selectedProgram = selectedProgram,
+//              let todayLog = todayLog else {
+//            headerStatusLabel.text = "Gün - / - · 0 gün streak 🔥"
+//            findProgramNameLabel()?.text = ""
+//            userProfileImageView.image = UIImage(named: "defaultAvatar")
+//            return
+//        }
+    
+    private func updateHeaderUI() {
+        guard let selectedProgram = selectedProgram,
+              let todayLog = todayLog else {
+            setHeaderVisibility(isVisible: false)
+            headerStatusLabel.text = "Gün - / - · 0 gün streak 🔥"
+            findProgramNameLabel()?.text = ""
+            userProfileImageView.image = UIImage(named: "defaultAvatar")
+            return
+        }
+
+        setHeaderVisibility(isVisible: true)
+
+        findProgramNameLabel()?.text = selectedProgram.name
+
+        let currentDayText = "Gün \(todayLog.dayNumber) / \(selectedProgram.durationDays)"
+        let streakText = "\(currentStreak) gün streak 🔥"
+
+        headerStatusLabel.text = "\(currentDayText) · \(streakText)"
+
+        if userProfileImageView.image == nil {
+            userProfileImageView.image = UIImage(named: "defaultAvatar")
+        }
+
+        userProfileImageView.contentMode = .scaleAspectFill
+        userProfileImageView.clipsToBounds = true
+        userProfileImageView.layer.cornerRadius = userProfileImageView.bounds.width / 2
+    }
+        
+        
+
+//        // Program adı label'ını tag ile bulup güncelle
+//        findProgramNameLabel()?.text = selectedProgram.name
+//
+//        let currentDayText = "Gün \(todayLog.dayNumber) / \(selectedProgram.durationDays)"
+//        let streakText = "\(currentStreak) gün streak 🔥"
+//
+//        headerStatusLabel.text = "\(currentDayText) · \(streakText)"
+//
+//        if userProfileImageView.image == nil {
+//            userProfileImageView.image = UIImage(named: "defaultAvatar")
+//        }
+//
+//        userProfileImageView.contentMode = .scaleAspectFill
+//        userProfileImageView.clipsToBounds = true
+//        userProfileImageView.layer.cornerRadius = userProfileImageView.bounds.width / 2
+//    }
+    
+    private func getDefaultAvatar(for uid: String) -> UIImage? {
+        
+//        Default avatar BURAYI UNUTMA BURADAN EKLE !!
+        return nil
+    }
+    
+    private func resolveAvatarImage(for uid: String) -> UIImage? {
+        
+        if let profile = ProfileStore.shared.fetchProfile(uid: uid),
+           let data = profile.avatarImageData,
+           let image = UIImage(data: data) {
+            return image
+        }
+
+        if let defaultAvatar = getDefaultAvatar(for: uid) {
+            return defaultAvatar
+        }
+
+        return UIImage(named: "defaultAvatar")
+    }
+    
+    private func loadProfileImage() {
+        guard let uid = Auth.auth().currentUser?.uid else {
+            applyAvatarUI(image: UIImage(named: "defaultAvatar"))
+            return
+        }
+
+        let avatar = resolveAvatarImage(for: uid)
+        applyAvatarUI(image: avatar)
+    }
+    
+    private func applyAvatarUI(image: UIImage?) {
+        userProfileImageView.image = image
+        userProfileImageView.contentMode = .scaleAspectFill
+        userProfileImageView.clipsToBounds = true
+        userProfileImageView.layer.cornerRadius = userProfileImageView.bounds.width / 2
+    }
+    
+    private func updateBottomSummaryUI() {
+        let completedCount = taskStates.filter { $0.isCompleted }.count
+        let remainingTimeText = calculateRemainingTimeText()
+
+        bottomSummaryCardView.configure(
+            mantra: "Her küçük adım, büyük değişimin parçası.",
+            streakText: "\(currentStreak)",
+            completedText: "\(completedCount)/\(tasks.count)",
+            remainingText: remainingTimeText
+        )
+    }
+    
+    private func buildProgramProgressCardData() -> ProgramProgressCardData? {
+        guard let selectedProgram = selectedProgram else {
+            return nil
+        }
+
+        let totalDays = max(1, selectedProgram.durationDays)
+
+        let currentDay: Int
+        if let todayLog = todayLog {
+            currentDay = min(todayLog.dayNumber, totalDays)
+        } else {
+            currentDay = 1
+        }
+
+        let totalTaskCountPerDay = max(1, tasks.count)
+        let totalPossibleTaskCompletions = totalDays * totalTaskCountPerDay
+
+        // Tüm günlük loglardan tamamlanan task sayılarını topla
+        let totalCompletedTaskCount = allDailyLogs.reduce(0) { partialResult, log in
+            partialResult + log.completedTaskIds.count
+        }
+
+        // Genel program ilerleme yüzdesi
+        let progressRatio = Double(totalCompletedTaskCount) / Double(totalPossibleTaskCompletions)
+        let progressPercent = Int((progressRatio * 100.0).rounded())
+
+        // Kategori bazlı toplam tamamlanma sayıları
+        let morningCompletedCount = allDailyLogs.filter { $0.completedTaskIds.contains("morning") }.count
+        let dayCompletedCount = allDailyLogs.filter { $0.completedTaskIds.contains("day") }.count
+        let eveningCompletedCount = allDailyLogs.filter { $0.completedTaskIds.contains("evening") }.count
+        let weeklyCompletedCount = allDailyLogs.filter { $0.completedTaskIds.contains("weekly") }.count
+
+        // Legend için: 40 gün içinde o kategori kaç gün yapılmış?
+        let morningPercent = Int((Double(morningCompletedCount) / Double(totalDays) * 100.0).rounded())
+        let dayPercent = Int((Double(dayCompletedCount) / Double(totalDays) * 100.0).rounded())
+        let eveningPercent = Int((Double(eveningCompletedCount) / Double(totalDays) * 100.0).rounded())
+        let weeklyPercent = Int((Double(weeklyCompletedCount) / Double(totalDays) * 100.0).rounded())
+
+        // Donut segmentleri: tam program içindeki katkı
+        let morningChartValue = CGFloat(Double(morningCompletedCount) / Double(totalPossibleTaskCompletions))
+        let dayChartValue = CGFloat(Double(dayCompletedCount) / Double(totalPossibleTaskCompletions))
+        let eveningChartValue = CGFloat(Double(eveningCompletedCount) / Double(totalPossibleTaskCompletions))
+        let weeklyChartValue = CGFloat(Double(weeklyCompletedCount) / Double(totalPossibleTaskCompletions))
+
+        let legendItems: [ProgramProgressCardLegendItem] = [
+            ProgramProgressCardLegendItem(
+                color: UIColor(red: 241/255, green: 64/255, blue: 154/255, alpha: 1),
+                title: "Sabah Rutini",
+                valueText: "\(morningPercent)%",
+                chartValue: morningChartValue
+            ),
+            ProgramProgressCardLegendItem(
+                color: UIColor(red: 156/255, green: 77/255, blue: 255/255, alpha: 1),
+                title: "Öğle Aktiviteleri",
+                valueText: "\(dayPercent)%",
+                chartValue: dayChartValue
+            ),
+            ProgramProgressCardLegendItem(
+                color: UIColor(red: 92/255, green: 99/255, blue: 235/255, alpha: 1),
+                title: "Akşam Rutini",
+                valueText: "\(eveningPercent)%",
+                chartValue: eveningChartValue
+            ),
+            ProgramProgressCardLegendItem(
+                color: UIColor(red: 204/255, green: 70/255, blue: 255/255, alpha: 1),
+                title: "Haftalık Hedefler",
+                valueText: "\(weeklyPercent)%",
+                chartValue: weeklyChartValue
+            )
+        ]
+
+        print("🟣 totalDays:", totalDays)
+        print("🟣 totalTaskCountPerDay:", totalTaskCountPerDay)
+        print("🟣 totalPossibleTaskCompletions:", totalPossibleTaskCompletions)
+        print("🟣 totalCompletedTaskCount:", totalCompletedTaskCount)
+        print("🟣 progressPercent:", progressPercent)
+
+        print("🟣 allDailyLogs count:", allDailyLogs.count)
+        allDailyLogs.forEach { log in
+            print("🟣", log.dateKey, log.completedTaskIds)
+        }
+
+        print("🟣 morningCompletedCount:", morningCompletedCount)
+        print("🟣 dayCompletedCount:", dayCompletedCount)
+        print("🟣 eveningCompletedCount:", eveningCompletedCount)
+        print("🟣 weeklyCompletedCount:", weeklyCompletedCount)
+        
+        
+        return ProgramProgressCardData(
+            currentDay: currentDay,
+            totalDays: totalDays,
+            progressPercent: progressPercent,
+            donutCenterPercent: progressPercent,
+            legendItems: legendItems
+        )
+        
+    }
+    
+
+    private func updateProgramProgressCardUI() {
+        guard let data = buildProgramProgressCardData() else { return }
+        programProgressCardView.configure(with: data)
+    }
+    
+    private func applyLocalTaskToggle(
+        taskId: String,
+        completedTaskIds: [String],
+        isCompleted: Bool
+    ) {
+        guard let todayLog = todayLog else { return }
+
+        let updatedTodayLog = DailyLog(
+            logId: todayLog.logId,
+            enrollmentId: todayLog.enrollmentId,
+            userId: todayLog.userId,
+            programId: todayLog.programId,
+            dateKey: todayLog.dateKey,
+            dayNumber: todayLog.dayNumber,
+            completedTaskIds: completedTaskIds,
+            isCompleted: isCompleted,
+            completedAt: todayLog.completedAt,
+            createdAt: todayLog.createdAt,
+            updatedAt: todayLog.updatedAt
+        )
+
+        self.todayLog = updatedTodayLog
+
+        self.taskStates = self.taskStates.map { state in
+            var newState = state
+            newState.isCompleted = completedTaskIds.contains(state.taskId)
+            return newState
+        }
+
+        if let existingIndex = self.allDailyLogs.firstIndex(where: { $0.dateKey == updatedTodayLog.dateKey }) {
+            self.allDailyLogs[existingIndex] = updatedTodayLog
+        } else {
+            self.allDailyLogs.append(updatedTodayLog)
+        }
+
+        self.tasksCardView.update(states: self.taskStates)
+        self.updateHeaderUI()
+        self.updateBottomSummaryUI()
+        self.updateProgramProgressCardUI()
+        self.updateProgramBadgeCardUI()
+        self.saveProgressToCache()
+    }
+    
+    private func toggleCompletion(for taskId: String) {
+        guard let userId = Auth.auth().currentUser?.uid else {
+                   print("🔴 toggleCompletion: userId yok")
+                   return
+               }
+
+               guard let activeEnrollment = activeEnrollment else {
+                   print("🔴 toggleCompletion: activeEnrollment yok")
+                   return
+               }
+
+        guard let todayLog = todayLog else {
+            print("🔴 toggleCompletion: todayLog yok")
+            return
+        }
+
+        var updatedTaskIds = todayLog.completedTaskIds
+
+        if updatedTaskIds.contains(taskId) {
+            updatedTaskIds.removeAll { $0 == taskId }
+        } else {
+            updatedTaskIds.append(taskId)
+        }
+
+        let totalTaskCount = tasks.count
+        let completedCount = updatedTaskIds.count
+
+        let completionRate = totalTaskCount > 0
+            ? Double(completedCount) / Double(totalTaskCount)
+            : 0
+
+        let isCompleted = completionRate >= 0.5
+        
+        if !NetworkMonitor.shared.isConnected {
+            print("🟡 Offline mod: değişiklik pending queue'ya yazılacak")
+
+            applyLocalTaskToggle(
+                taskId: taskId,
+                completedTaskIds: updatedTaskIds,
+                isCompleted: isCompleted
+            )
+
+            let pendingAction = PendingProgressAction(
+                id: UUID(),
+                userId: userId,
+                enrollmentId: activeEnrollment.enrollmentId,
+                dateKey: todayLog.dateKey,
+                completedTaskIds: updatedTaskIds,
+                isCompleted: isCompleted,
+                createdAt: Date()
+            )
+
+            PendingProgressManager.shared.add(pendingAction)
+            return
+        }
+
+        enrollmentRepository.updateCompletedTaskIds(
+            userId: userId,
+            enrollmentId: activeEnrollment.enrollmentId,
+            dateKey: todayLog.dateKey,
+            completedTaskIds: updatedTaskIds,
+            isCompleted: isCompleted
+        ) { [weak self] result in
+            DispatchQueue.main.async {
+                guard let self = self else { return }
+
+                switch result {
+                case .success(let updatedLog):
+                    self.todayLog = updatedLog
+
+                    self.taskStates = self.taskStates.map { state in
+                        var newState = state
+                        newState.isCompleted = updatedLog.completedTaskIds.contains(state.taskId)
+                        return newState
+                    }
+
+                    self.tasksCardView.update(states: self.taskStates)
+
+                    self.updateBottomSummaryUI()
+                    
+                    self.enrollmentRepository.refreshUserStreak(
+                        userId: userId,
+                        todayLog: updatedLog
+                    ) { result in
+                        DispatchQueue.main.async {
+                            switch result {
+                            case .success(let streakData):
+                                self.currentStreak = streakData.currentStreak
+
+                                self.enrollmentRepository.fetchAllDailyLogs(
+                                    userId: userId,
+                                    enrollmentId: activeEnrollment.enrollmentId
+                                ) { logsResult in
+                                    DispatchQueue.main.async {
+                                        switch logsResult {
+                                        case .success(let logs):
+                                            self.allDailyLogs = logs
+
+                                        case .failure(let error):
+                                            print("🔴 Tüm daily loglar alınamadı:", error.localizedDescription)
+                                            self.allDailyLogs = []
+                                        }
+
+                                        self.updateHeaderUI()
+                                        self.updateBottomSummaryUI()
+                                        self.updateProgramProgressCardUI()
+                                        self.saveProgressToCache()
+                                        print("✅ User streak güncellendi:", streakData.currentStreak)
+                                    }
+                                }
+                            case .failure(let error):
+                                print("🔴 User streak güncellenemedi:", error.localizedDescription)
+                            }
+                        }
+                    }
+
+                    print("✅ toggleCompletion güncellendi")
+                    print("✅ completedTaskIds:", updatedLog.completedTaskIds)
+                    print("✅ isCompleted:", updatedLog.isCompleted)
+
+//                    self.enrollmentRepository.refreshEnrollmentProgressSummary(
+//                        userId: userId,
+//                        enrollment: activeEnrollment
+//                    ) { result in
+//                        DispatchQueue.main.async {
+//                            switch result {
+//                            case .success:
+//                                print("✅ Enrollment summary güncellendi")
+//
+//                            case .failure(let error):
+//                                print("🔴 Enrollment summary güncellenemedi:", error.localizedDescription)
+//                            }
+//                        }
+//                    }
+                    
+                    self.enrollmentRepository.refreshEnrollmentProgressSummary(
+                        userId: userId,
+                        enrollment: activeEnrollment
+                    ) { result in
+                        DispatchQueue.main.async {
+                            switch result {
+                            case .success:
+                                print("✅ Enrollment summary güncellendi")
+
+                                self.enrollmentRepository.fetchActiveEnrollment(userId: userId) { result in
+                                    DispatchQueue.main.async {
+                                        switch result {
+                                        case .success(let refreshedEnrollment):
+                                            guard let refreshedEnrollment = refreshedEnrollment else { return }
+
+                                            self.activeEnrollment = refreshedEnrollment
+                                            self.updateHeaderUI()
+                                            self.updateBottomSummaryUI()
+                                            self.updateProgramProgressCardUI()
+                                            self.saveProgressToCache()
+
+                                        case .failure(let error):
+                                            print("🔴 Enrollment yeniden alınamadı:", error.localizedDescription)
+                                        }
+                                    }
+                                }
+
+                            case .failure(let error):
+                                print("🔴 Enrollment summary güncellenemedi:", error.localizedDescription)
+                            }
+                        }
+                    }
+
+                case .failure(let error):
+                    print("🔴 toggleCompletion update hatası:", error.localizedDescription)
+                }
             }
         }
+    }
+    
+    private func syncPendingProgressActions() {
+        let pendingActions = PendingProgressManager.shared.loadAll()
+
+        guard !pendingActions.isEmpty else {
+            print("🟢 Pending action yok")
+            return
+        }
+
+        print("🟡 Pending sync başladı. Action count:", pendingActions.count)
+
+        for action in pendingActions {
+            enrollmentRepository.updateCompletedTaskIds(
+                userId: action.userId,
+                enrollmentId: action.enrollmentId,
+                dateKey: action.dateKey,
+                completedTaskIds: action.completedTaskIds,
+                isCompleted: action.isCompleted
+            ) { [weak self] result in
+                DispatchQueue.main.async {
+                    switch result {
+                    case .success(let updatedLog):
+                        print("✅ Pending action sync edildi:", action.id)
+
+                        PendingProgressManager.shared.remove(id: action.id)
+
+                        guard let self = self else { return }
+
+                        if self.todayLog?.dateKey == updatedLog.dateKey {
+                            self.todayLog = updatedLog
+
+                            self.taskStates = self.taskStates.map { state in
+                                var newState = state
+                                newState.isCompleted = updatedLog.completedTaskIds.contains(state.taskId)
+                                return newState
+                            }
+
+                            if let existingIndex = self.allDailyLogs.firstIndex(where: { $0.dateKey == updatedLog.dateKey }) {
+                                self.allDailyLogs[existingIndex] = updatedLog
+                            } else {
+                                self.allDailyLogs.append(updatedLog)
+                            }
+
+                            self.tasksCardView.update(states: self.taskStates)
+                            self.updateHeaderUI()
+                            self.updateBottomSummaryUI()
+                            self.updateProgramProgressCardUI()
+                            self.updateProgramBadgeCardUI()
+                            self.saveProgressToCache()
+                        }
+
+                    case .failure(let error):
+                        print("🔴 Pending action sync edilemedi:", error.localizedDescription)
+                    }
+                }
+            }
+        }
+    }
+    
+    private func calculateRemainingTimeText() -> String {
+        let calendar = Calendar.current
+        let now = Date()
+
+        guard let endOfDay = calendar.date(bySettingHour: 23, minute: 59, second: 59, of: now) else {
+            return "--"
+        }
+
+        let components = calendar.dateComponents([.hour, .minute], from: now, to: endOfDay)
+
+        let hour = max(0, components.hour ?? 0)
+        let minute = max(0, components.minute ?? 0)
+
+        return "\(hour)s \(minute)dk"
+    }
+    
+    private func toggleExpansion(for taskId: String) {
+        guard taskStates.firstIndex(where: { $0.taskId == taskId }) != nil else { return }
+
+        for i in taskStates.indices {
+            if taskStates[i].taskId == taskId {
+                taskStates[i].isExpanded.toggle()
+            } else {
+                taskStates[i].isExpanded = false
+            }
+        }
+
+        tasksCardView.update(states: taskStates)
+
+        contentStackView.setNeedsLayout()
+        contentStackView.layoutIfNeeded()
+        contentContainerView.setNeedsLayout()
+        contentContainerView.layoutIfNeeded()
+        scrollContentView.setNeedsLayout()
+        scrollContentView.layoutIfNeeded()
+
+        UIView.animate(withDuration: 0.25) {
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+      private func setupBottomSummaryCard() {
+        bottomSummaryView.backgroundColor = .clear
+
+        bottomSummaryCardView.translatesAutoresizingMaskIntoConstraints = false
+        bottomSummaryView.addSubview(bottomSummaryCardView)
+
+        NSLayoutConstraint.activate([
+            bottomSummaryCardView.topAnchor.constraint(equalTo: bottomSummaryView.topAnchor, constant: 12),
+            bottomSummaryCardView.leadingAnchor.constraint(equalTo: bottomSummaryView.leadingAnchor, constant: 14),
+            bottomSummaryCardView.trailingAnchor.constraint(equalTo: bottomSummaryView.trailingAnchor, constant: -14),
+            bottomSummaryCardView.bottomAnchor.constraint(equalTo: bottomSummaryView.bottomAnchor, constant: -12)
+        ])
+    }
+    
+    private func setupSegmentControl() {
+        segmentControl.selectedSegmentIndex = 0
+    }
+    
+    @IBAction func didChangeSegment(_ sender: UISegmentedControl) {
+        if sender.selectedSegmentIndex == 0 {
+               showTodayContent()
+           } else {
+               showProgramContent()
+           }
+    }
+    private func showTodayContent() {
+        clearContentStack()
+        contentStackView.addArrangedSubview(tasksCardView)
+    }
+
+    private func showProgramContent() {
+        clearContentStack()
+        contentStackView.addArrangedSubview(programProgressCardView)
+        contentStackView.addArrangedSubview(programBadgeCardView)
+        addProgramInfoCards()
+        contentStackView.addArrangedSubview(endJourneyButton)
+    }
+    
+    private func buildProgramInfoItems(from program: Program) -> [ProgramInfoItem] {
+        return [
+            ProgramInfoItem(
+                title: program.weeklyReflection.title,
+                shortDescription: program.weeklyReflection.shortDescription,
+                details: program.weeklyReflection.details
+            ),
+            ProgramInfoItem(
+                title: program.goldenRules.title,
+                shortDescription: program.goldenRules.shortDescription,
+                details: program.goldenRules.details
+            ),
+            ProgramInfoItem(
+                title: program.realImpact.title,
+                shortDescription: program.realImpact.shortDescription,
+                details: program.realImpact.details
+            ),
+            ProgramInfoItem(
+                title: program.dailyPlanSummary.title,
+                shortDescription: program.dailyPlanSummary.shortDescription,
+                details: program.dailyPlanSummary.details
+            ),
+            ProgramInfoItem(
+                title: program.processResult.title,
+                shortDescription: program.processResult.shortDescription,
+                details: program.processResult.details
+            )
+        ]
+    }
+
+    private func addProgramInfoCards() {
+        guard let program = selectedProgram else { return }
+
+        let items = buildProgramInfoItems(from: program)
+
+        for (index, item) in items.enumerated() {
+            let accordionView = ProgramInfoAccordionView()
+            accordionView.configure(
+                item: item,
+                isExpanded: programInfoStates[index],
+                iconText: programInfoIcons[index]
+            )
+
+            accordionView.onToggleExpand = { [weak self] in
+                self?.toggleProgramInfo(at: index)
+            }
+
+            contentStackView.addArrangedSubview(accordionView)
+        }
+    }
+
+    private func toggleProgramInfo(at index: Int) {
+        for i in programInfoStates.indices {
+            if i == index {
+                programInfoStates[i].toggle()
+            } else {
+                programInfoStates[i] = false
+            }
+        }
+
+        showProgramContent()
+
+        contentStackView.setNeedsLayout()
+        contentStackView.layoutIfNeeded()
+        contentContainerView.setNeedsLayout()
+        contentContainerView.layoutIfNeeded()
+        scrollContentView.setNeedsLayout()
+        scrollContentView.layoutIfNeeded()
+
+        UIView.animate(withDuration: 0.25) {
+            self.view.layoutIfNeeded()
+        }
+    }
+    
+    @objc private func didTapEndJourney() {
+        let title = "Emin misin?"
+        let message = "Gayet iyi gidiyordun. Bu yolculuğu şimdi sonlandırırsan aktif programın kapanacak. Yolculuğu sonlandırmak istediğine emin misin?"
+
+        let alert = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
+
+        let titleParagraphStyle = NSMutableParagraphStyle()
+        titleParagraphStyle.alignment = .center
+
+        let attributedTitle = NSAttributedString(
+            string: title,
+            attributes: [
+                .paragraphStyle: titleParagraphStyle,
+                .font: UIFont.systemFont(ofSize: 18, weight: .semibold)
+            ]
+        )
+
+        let messageParagraphStyle = NSMutableParagraphStyle()
+        messageParagraphStyle.alignment = .center
+
+        let attributedMessage = NSAttributedString(
+            string: message,
+            attributes: [
+                .paragraphStyle: messageParagraphStyle,
+                .font: UIFont.systemFont(ofSize: 15, weight: .regular)
+            ]
+        )
+
+        alert.setValue(attributedTitle, forKey: "attributedTitle")
+        alert.setValue(attributedMessage, forKey: "attributedMessage")
+
+        alert.addAction(UIAlertAction(title: "Vazgeç", style: .cancel))
+
+        alert.addAction(UIAlertAction(title: "Yolculuğu Sonlandır", style: .destructive, handler: { [weak self] _ in
+            self?.confirmEndJourney()
+        }))
+
+        present(alert, animated: true)
+    }
+    
+    private func confirmEndJourney() {
+        guard let userId = Auth.auth().currentUser?.uid else {
+            print("🔴 endJourney: userId yok")
+            return
+        }
+
+        guard let activeEnrollment = activeEnrollment else {
+            print("🔴 endJourney: activeEnrollment yok")
+            return
+        }
+
+        enrollmentRepository.endJourney(
+            userId: userId,
+            enrollmentId: activeEnrollment.enrollmentId
+        ) { [weak self] result in
+            DispatchQueue.main.async {
+                guard let self = self else { return }
+
+                switch result {
+                case .success:
+                    print("✅ Yolculuk sonlandırıldı")
+
+                    self.activeEnrollment = nil
+                    self.todayLog = nil
+                    self.allDailyLogs = []
+                    self.currentStreak = 0
+                    self.selectedProgram = nil
+                    self.tasks = []
+                    self.taskStates = []
+
+                    ProgressCacheManager.shared.clear()
+                    self.showEmptyState()
+
+                case .failure(let error):
+                    print("🔴 endJourney hata:", error.localizedDescription)
+
+                    let alert = UIAlertController(
+                        title: "Bir şeyler ters gitti",
+                        message: error.localizedDescription,
+                        preferredStyle: .alert
+                    )
+                    alert.addAction(UIAlertAction(title: "Tamam", style: .default))
+                    self.present(alert, animated: true)
+                }
+            }
+        }
+    }
+      
+    private func showEmptyState() {
+        setHeaderVisibility(isVisible: false)
+        clearContentStack()
+
+        let emptyView = makeEmptyStateView()
+        contentStackView.addArrangedSubview(emptyView)
+
+        headerStatusLabel.text = "Henüz aktif programın yok"
+        findProgramNameLabel()?.text = ""
+        userProfileImageView.image = UIImage(named: "defaultAvatar")
+
+        bottomSummaryCardView.configure(
+            mantra: "Başlamak için kendine uygun bir program seç.",
+            streakText: "0",
+            completedText: "0/0",
+            remainingText: "--"
+        )
+    }
+
+    private func makeEmptyStateView() -> UIView {
+        let container = UIView()
+        container.translatesAutoresizingMaskIntoConstraints = false
+        container.backgroundColor = .white
+        container.layer.cornerRadius = 24
+
+        let titleLabel = UILabel()
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        titleLabel.text = "Henüz aktif bir program seçmedin"
+        titleLabel.font = .systemFont(ofSize: 20, weight: .bold)
+        titleLabel.textColor = UIColor(red: 35/255, green: 45/255, blue: 63/255, alpha: 1)
+        titleLabel.textAlignment = .center
+        titleLabel.numberOfLines = 0
+
+        let subtitleLabel = UILabel()
+        subtitleLabel.translatesAutoresizingMaskIntoConstraints = false
+        subtitleLabel.text = "Programlar ekranından bir yolculuk seçerek ilerlemeni buradan takip edebilirsin."
+        subtitleLabel.font = .systemFont(ofSize: 15, weight: .medium)
+        subtitleLabel.textColor = UIColor(red: 113/255, green: 122/255, blue: 138/255, alpha: 1)
+        subtitleLabel.textAlignment = .center
+        subtitleLabel.numberOfLines = 0
+
+        let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Programlara Git", for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 16, weight: .semibold)
+        button.backgroundColor = UIColor(red: 250/255, green: 185/255, blue: 219/255, alpha: 1)
+        button.setTitleColor(.white, for: .normal)
+        button.layer.cornerRadius = 14
+        button.contentEdgeInsets = UIEdgeInsets(top: 14, left: 20, bottom: 14, right: 20)
+        button.addTarget(self, action: #selector(didTapGoToPrograms), for: .touchUpInside)
+
+        container.addSubview(titleLabel)
+        container.addSubview(subtitleLabel)
+        container.addSubview(button)
+
+        NSLayoutConstraint.activate([
+            titleLabel.topAnchor.constraint(equalTo: container.topAnchor, constant: 28),
+            titleLabel.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 20),
+            titleLabel.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -20),
+
+            subtitleLabel.topAnchor.constraint(equalTo: titleLabel.bottomAnchor, constant: 12),
+            subtitleLabel.leadingAnchor.constraint(equalTo: container.leadingAnchor, constant: 20),
+            subtitleLabel.trailingAnchor.constraint(equalTo: container.trailingAnchor, constant: -20),
+
+            button.topAnchor.constraint(equalTo: subtitleLabel.bottomAnchor, constant: 20),
+            button.centerXAnchor.constraint(equalTo: container.centerXAnchor),
+            button.bottomAnchor.constraint(equalTo: container.bottomAnchor, constant: -28),
+            button.heightAnchor.constraint(greaterThanOrEqualToConstant: 50)
+        ])
+
+        return container
+    }
+
+    @objc private func didTapGoToPrograms() {
+        tabBarController?.selectedIndex = 0
+    }
+    
+
+    private func clearContentStack() {
+        contentStackView.arrangedSubviews.forEach { view in
+            contentStackView.removeArrangedSubview(view)
+            view.removeFromSuperview()
+        }
+    }
+    
+    private func findProgramNameLabel() -> UILabel? {
+        return view.viewWithTag(101) as? UILabel
+    }
+    
+    private func saveProgressToCache() {
+        guard let selectedProgram = selectedProgram,
+              let todayLog = todayLog else {
+            print("🟡 Cache save atlandı: eksik veri")
+            return
+        }
+
+        let cachedLogs = allDailyLogs.map {
+            CachedDailyLog(
+                dateKey: $0.dateKey,
+                dayNumber: $0.dayNumber,
+                completedTaskIds: $0.completedTaskIds,
+                isCompleted: $0.isCompleted
+            )
+        }
+
+        let cache = ProgressCache(
+            programId: selectedProgram.id,
+            programName: selectedProgram.name,
+            totalDays: selectedProgram.durationDays,
+            dateKey: todayLog.dateKey,
+            dayNumber: todayLog.dayNumber,
+            todayCompletedTaskIds: todayLog.completedTaskIds,
+            todayIsCompleted: todayLog.isCompleted,
+            currentStreak: currentStreak,
+            allDailyLogs: cachedLogs
+        )
+
+        ProgressCacheManager.shared.save(cache)
+        print("🟢 Progress cache kaydedildi")
+    }
+    
+    
+       private func loadProgressFromCache() {
+        guard let cache = ProgressCacheManager.shared.load() else {
+            print("🟡 Progress cache bulunamadı")
+            return
+        }
+
+        print("🟢 Progress cache bulundu")
+        print("🟢 cache dateKey:", cache.dateKey)
+        print("🟢 cache dayNumber:", cache.dayNumber)
+        print("🟢 cache todayCompletedTaskIds:", cache.todayCompletedTaskIds)
+        print("🟢 cache allDailyLogs count:", cache.allDailyLogs.count)
+
+        let programs = ProgramLoader.loadPrograms()
+        if let cachedProgram = programs.first(where: { $0.id == cache.programId }) {
+            self.loadTasks(for: cachedProgram)
+
+            DispatchQueue.main.async {
+                self.applyCacheToUI(cache)
+            }
+        }
+    }
+    
+    private func applyCacheToUI(_ cache: ProgressCache) {
+        self.currentStreak = cache.currentStreak
+
+        self.todayLog = DailyLog(
+            logId: cache.dateKey,
+            enrollmentId: "",
+            userId: "",
+            programId: cache.programId,
+            dateKey: cache.dateKey,
+            dayNumber: cache.dayNumber,
+            completedTaskIds: cache.todayCompletedTaskIds,
+            isCompleted: cache.todayIsCompleted,
+            completedAt: nil,
+            createdAt: nil,
+            updatedAt: nil
+        )
+
+        self.allDailyLogs = cache.allDailyLogs.map {
+            DailyLog(
+                logId: $0.dateKey,
+                enrollmentId: "",
+                userId: "",
+                programId: cache.programId,
+                dateKey: $0.dateKey,
+                dayNumber: $0.dayNumber,
+                completedTaskIds: $0.completedTaskIds,
+                isCompleted: $0.isCompleted,
+                completedAt: nil,
+                createdAt: nil,
+                updatedAt: nil
+            )
+        }
+
+        self.taskStates = self.taskStates.map { state in
+            var newState = state
+            newState.isCompleted = cache.todayCompletedTaskIds.contains(state.taskId)
+            return newState
+        }
+
+        self.tasksCardView.update(states: self.taskStates)
+        self.updateHeaderUI()
+        self.updateBottomSummaryUI()
+        self.updateProgramProgressCardUI()
+        self.updateProgramBadgeCardUI()
+    }
+    
+    private func updateProgramBadgeCardUI() {
+        guard let data = buildProgramBadgeCardData() else { return }
+        programBadgeCardView.configure(with: data)
+    }
+    
+    private func buildProgramBadgeCardData() -> ProgramBadgeCardData? {
+        guard let selectedProgram = selectedProgram else {
+            return nil
+        }
+
+        let totalDays = max(1, selectedProgram.durationDays)
+        let totalTaskCountPerDay = max(1, tasks.count)
+        let totalPossibleTaskCompletions = totalDays * totalTaskCountPerDay
+
+        let totalCompletedTaskCount = allDailyLogs.reduce(0) { partialResult, log in
+            partialResult + log.completedTaskIds.count
+        }
+
+        let progressRatio = Double(totalCompletedTaskCount) / Double(totalPossibleTaskCompletions)
+        let progressPercent = Int((progressRatio * 100.0).rounded())
+
+        let unlockThreshold = 80
+        let isUnlocked = progressPercent >= unlockThreshold
+
+        return ProgramBadgeCardData(
+            badgeName: "✨ \(selectedProgram.name) Rozeti",
+            badgeDescription: "Bu rozeti açmak için ilerlemeni %\(unlockThreshold) seviyesine ulaştır.",
+            badgeImageName: selectedProgram.imageName,
+            progressPercent: progressPercent,
+            unlockThreshold: unlockThreshold,
+            isUnlocked: isUnlocked
+        )
+    }
+
+    
+    private func fetchActiveEnrollmentAndLog() {
+                guard let userId = Auth.auth().currentUser?.uid else {
+                    print("🔴 Progress: userId yok")
+                    showEmptyState()
+                    return
+                }
+
+        enrollmentRepository.fetchActiveEnrollment(userId: userId) { [weak self] result in
+            DispatchQueue.main.async {
+                guard let self = self else { return }
+
+                switch result {
+                    
+                case .success(let enrollment):
+                    guard let enrollment = enrollment else {
+                        print("🟡 Progress: aktif enrollment yok")
+                        self.showEmptyState()
+                        return
+                    }
+
+                    self.activeEnrollment = enrollment
+
+                    let programs = ProgramLoader.loadPrograms()
+                    guard let matchedProgram = programs.first(where: { $0.id == enrollment.programId }) else {
+                        print("🔴 Progress: enrollment programId ile eşleşen program bulunamadı")
+                        self.showEmptyState()
+                        return
+                    }
+
+                    self.loadTasks(for: matchedProgram)
+
+                    print("🟢 Progress: enrollment bulundu:", enrollment.enrollmentId)
+
+                    self.enrollmentRepository.getOrCreateTodayLog(
+                        userId: userId,
+                        enrollment: enrollment
+                    ) { result in
+                        DispatchQueue.main.async {
+                            switch result {
+                            case .success(let log):
+                                self.todayLog = log
+
+                                self.taskStates = self.taskStates.map { state in
+                                    var newState = state
+                                    newState.isCompleted = log.completedTaskIds.contains(state.taskId)
+                                    return newState
+                                }
+                                self.enrollmentRepository.refreshUserStreak(
+                                    userId: userId,
+                                    todayLog: log
+                                ) { result in
+                                    DispatchQueue.main.async {
+                                        switch result {
+                                        case .success(let streakData):
+                                            self.currentStreak = streakData.currentStreak
+
+                                            self.enrollmentRepository.fetchAllDailyLogs(
+                                                userId: userId,
+                                                enrollmentId: enrollment.enrollmentId
+                                            ) { logsResult in
+                                                DispatchQueue.main.async {
+                                                    switch logsResult {
+                                                    case .success(let logs):
+                                                        self.allDailyLogs = logs
+
+                                                    case .failure(let error):
+                                                        print("🔴 Tüm daily loglar alınamadı:", error.localizedDescription)
+                                                        self.allDailyLogs = []
+                                                    }
+
+                                                    self.updateHeaderUI()
+                                                    self.updateBottomSummaryUI()
+                                                    self.updateProgramProgressCardUI()
+                                                    self.updateProgramBadgeCardUI()
+                                                    self.saveProgressToCache()
+                                                }
+                                            }                                        case .failure(let error):
+                                            print("🔴 User streak okunamadı/güncellenemedi:", error.localizedDescription)
+                                            self.updateHeaderUI()
+                                        }
+                                    }
+                                }
+
+                                self.tasksCardView.update(states: self.taskStates)
+
+                                self.updateBottomSummaryUI()
+                                self.updateHeaderUI()
+
+                                print("✅ Progress: bugünün log'u hazır")
+                                print("✅ dateKey:", log.dateKey)
+                                print("✅ dayNumber:", log.dayNumber)
+                                print("✅ completedTaskIds:", log.completedTaskIds)
+
+                            case .failure(let error):
+                                print("🔴 Progress: DailyLog hatası:", error.localizedDescription)
+                            }
+                        }
+                    }
+
+                case .failure(let error):
+                    print("🔴 Progress: enrollment alınamadı:", error.localizedDescription)
+                }
+            }
+        }
+    }
+    
+    private let endJourneyButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.setTitle("Yolculuğu Sonlandır", for: .normal)
+        button.setTitleColor(.systemRed, for: .normal)
+        button.titleLabel?.font = .systemFont(ofSize: 16, weight: .semibold)
+        button.backgroundColor = .white
+        button.layer.cornerRadius = 18
+        button.layer.borderWidth = 1
+        button.layer.borderColor = UIColor.systemRed.withAlphaComponent(0.25).cgColor
+        button.contentEdgeInsets = UIEdgeInsets(top: 16, left: 20, bottom: 16, right: 20)
+        return button
+    }()
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     }

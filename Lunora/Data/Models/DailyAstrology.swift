@@ -14,12 +14,12 @@ struct DailyAstrology: Codable {
     let suitabilityScore: Int
     let moonSign: String
 
-    enum CodingKeys: String, CodingKey {
-        case date
-        case moonPhase = "moon_phase"
-        case dailyComment = "daily_comment"
-        case celestialEvents = "celestial_events"
-        case suitabilityScore = "suitability_score"
-        case moonSign = "moon_sign"
-    }
+//    enum CodingKeys: String, CodingKey {
+//        case date
+//        case moonPhase = "moon_phase"
+//        case dailyComment = "daily_comment"
+//        case celestialEvents = "celestial_events"
+//        case suitabilityScore = "suitability_score"
+//        case moonSign = "moon_sign"
+//    }
 }

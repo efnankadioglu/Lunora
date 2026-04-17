@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="24506" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="24765" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
     <device id="retina6_12" orientation="portrait" appearance="light"/>
     <dependencies>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24504"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="24743"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
@@ -31,15 +31,18 @@
                                     <constraint firstAttribute="width" constant="46" id="j1e-rw-hor"/>
                                 </constraints>
                             </imageView>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JCJ-0F-57Z">
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="JCJ-0F-57Z" customClass="GradientPrimaryButton" customModule="Lunora" customModuleProvider="target">
                                 <rect key="frame" x="405" y="153" width="120" height="35"/>
                                 <constraints>
                                     <constraint firstAttribute="width" constant="120" id="JMG-93-goe"/>
                                 </constraints>
                                 <state key="normal" title="Button"/>
                                 <buttonConfiguration key="configuration" style="filled" title="Başlat">
-                                    <color key="baseBackgroundColor" red="0.60392156862745094" green="0.83921568627450982" blue="0.60392156862745094" alpha="1" colorSpace="custom" customColorSpace="displayP3"/>
+                                    <color key="baseBackgroundColor" white="0.0" alpha="0.0" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </buttonConfiguration>
+                                <connections>
+                                    <action selector="didTapProgramStartButton:" destination="KGk-i7-Jjw" eventType="touchUpInside" id="g65-LR-DGU"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zJR-pF-srK">
                                 <rect key="frame" x="394" y="14" width="124" height="34"/>
@@ -124,6 +127,7 @@
                 <outlet property="programImage" destination="LX8-U9-q4o" id="16Z-L3-UYP"/>
                 <outlet property="programLevel" destination="zJR-pF-srK" id="zhJ-0l-GKh"/>
                 <outlet property="programName" destination="jH6-ng-0G5" id="zUG-11-ED9"/>
+                <outlet property="programStartButton" destination="JCJ-0F-57Z" id="P3v-Wt-uD7"/>
             </connections>
             <point key="canvasLocation" x="275.57251908396944" y="71.83098591549296"/>
         </tableViewCell>

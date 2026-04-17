@@ -248,11 +248,14 @@
                         <outlet property="lunarEclipseView" destination="Tsf-hW-PkF" id="aPa-me-7V6"/>
                         <outlet property="marsRetrogradeView" destination="ZhH-Oi-swP" id="KOP-9c-uQ0"/>
                         <outlet property="mercuryRetrogradeView" destination="BoW-bT-L41" id="T5u-No-TDn"/>
+                        <outlet property="moonSignLabel" destination="Y02-Qz-nuP" id="TTJ-JF-X16"/>
                         <outlet property="newMoonView" destination="c4L-z4-FDh" id="aZd-Wv-Cdc"/>
                         <outlet property="programsCardView" destination="DgO-AR-2oo" id="vnF-9a-0Nn"/>
                         <outlet property="programsTableView" destination="dCQ-Dw-dsL" id="HMh-zP-8gJ"/>
                         <outlet property="saturnRetrogradeView" destination="jBR-JR-uyd" id="8iJ-24-buZ"/>
                         <outlet property="solarEclipseView" destination="sD3-35-Oqr" id="TJd-yt-Ehk"/>
+                        <outlet property="suitabilityLabel" destination="90W-Sw-euK" id="dLU-Rj-YYM"/>
+                        <outlet property="suitabilityProgressView" destination="pX3-dd-oJB" id="INU-lX-eRU"/>
                         <outlet property="venusRetrogradeView" destination="KKs-OK-zSz" id="p0a-PB-RtB"/>
                     </connections>
                 </viewController>

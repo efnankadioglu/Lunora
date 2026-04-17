@@ -1,5 +1,5 @@
 {
-  "originHash" : "9e6ea0f7eb2f5e971b1d895d3d170fdcb4a98728192102fe44e3c9b64c1e3aa0",
+  "originHash" : "e3f1baadda56ae3a2c3ecc11741693d458186c29b2e049997540aceb546a8595",
   "pins" : [
     {
       "identity" : "abseil-cpp-binary",
@@ -161,15 +161,6 @@
       "state" : {
         "revision" : "15a88f88afd0f25d4acfc4ad84b4612a50c968fc",
         "version" : "3.1.0"
-      }
-    },
-    {
-      "identity" : "uicircularprogressring",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/luispadron/UICircularProgressRing.git",
-      "state" : {
-        "revision" : "4a1fd4a77bcc27f8b3714aae3ea35835251dcef3",
-        "version" : "6.5.0"
       }
     }
   ],

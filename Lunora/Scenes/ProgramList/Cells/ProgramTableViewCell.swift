@@ -15,7 +15,10 @@ class ProgramTableViewCell: UITableViewCell {
     @IBOutlet weak var programDuration: UIButton!
     @IBOutlet weak var oneSentence: UILabel!
     @IBOutlet weak var cardView: UIView!
-
+    @IBOutlet weak var programStartButton: UIButton!
+    
+    var onTapStartButton: (() -> Void)?
+    
     override func awakeFromNib() {
             super.awakeFromNib()
             setupUI()
@@ -38,8 +41,19 @@ class ProgramTableViewCell: UITableViewCell {
             programImage.image = UIImage(named: program.imageName) ?? UIImage(named: "program_placeholder")
             programLevel.setTitle("Zorluk \(program.difficultyLevel)/\(program.difficultyScale)", for: .normal)
         }
+    func applyStartButtonState(isActiveProgram: Bool) {
+        if isActiveProgram {
+            programStartButton.setTitle("Aktif", for: .normal)
+            programStartButton.alpha = 0.75
+        } else {
+            programStartButton.setTitle("Başlat", for: .normal)
+            programStartButton.alpha = 1.0
+        }
+    }
+    
         
         private func setupUI() {
+            programStartButton.addTarget(self, action: #selector(didTapProgramStartButton), for: .touchUpInside)
             selectionStyle = .none
             backgroundColor = .clear
             contentView.backgroundColor = .clear
@@ -86,4 +100,10 @@ class ProgramTableViewCell: UITableViewCell {
             
             programLevel.titleLabel?.font = .systemFont(ofSize: 15, weight: .semibold)
         }
+    
+    
+    @IBAction func didTapProgramStartButton(_ sender: UIButton) {
+        onTapStartButton?()
+    }
+    
     }

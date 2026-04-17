@@ -7,6 +7,9 @@
 
 import UIKit
 import FirebaseDatabase
+import FirebaseFirestore
+import FirebaseAuth
+
 class ProgramListViewController: UIViewController {
     
     @IBOutlet weak var astrologyCard: UIView!
@@ -22,174 +25,337 @@ class ProgramListViewController: UIViewController {
     @IBOutlet weak var lunarEclipseView: UIButton!
     @IBOutlet weak var solarEclipseView: UIButton!
     
+    @IBOutlet weak var moonSignLabel: UILabel!
+    @IBOutlet weak var suitabilityProgressView: UIProgressView!
+    @IBOutlet weak var suitabilityLabel: UILabel!
+    
+    private let enrollmentRepository = EnrollmentRepository()
+    private var activeEnrollment: ActiveEnrollment?
     
     private var programs: [Program] = []
-//    private var popupBackgroundView: UIView?
-    private var tooltipView: UIView?
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        setupUI()
-        setupTableView()
-        loadPrograms()
-        testFirebaseConnection()
-    }
-    
-    func testFirebaseConnection() {
-        // Firebase referansını oluşturuyoruz
-        let ref = Database.database().reference()
+        private var tooltipView: UIView?
+        private let programService = ProgramService.shared
+        let uploader = AstrologyFirestoreUploader()
         
-        // Veritabanına "test_mesaji" adında bir dal açıp içine yazı yazıyoruz
-        ref.child("test_mesaji").setValue("Selam Efnan! Bağlantı başarılı 🚀") { error, _ in
-            if let error = error {
-                print("Eyvah! Veri gönderilemedi: \(error.localizedDescription)")
-            } else {
-                print("Yaşasın! Veri başarıyla Firebase'e uçtu.")
+        override func viewDidLoad() {
+            super.viewDidLoad()
+            
+            print(">>> viewDidLoad çalıştı")
+            setupUI()
+            setupTableView()
+            fetchTodayAstrology()
+            fetchProgramsFromSource()
+            checkActiveEnrollment()
+            fetchActiveEnrollmentDetails()
+            
+            ProgramMigrationService.shared.uploadAllProgramsFromLocalJSON { result in
+                switch result {
+                case .success:
+                    print("✅ Tüm programlar Firestore'a yüklendi")
+                case .failure(let error):
+                    print("❌ Migration hatası: \(error.localizedDescription)")
+                }
+            }
+            
+            EarnedBadgeService.shared.fetchEarnedBadges { result in
+                print(">>> fetchEarnedBadges callback geldi")
+
+                switch result {
+                case .success(let badges):
+                    print(">>> Kazanılan rozetler:", badges)
+                case .failure(let error):
+                    print(">>> Rozetler çekilemedi:", error.localizedDescription)
+                }
+            }
+           
+        }
+    
+    
+    private func checkActiveEnrollment() {
+        guard let userId = Auth.auth().currentUser?.uid else {
+            print("🔴 ProgramList: userId yok")
+            return
+        }
+
+        enrollmentRepository.fetchActiveEnrollmentId(userId: userId) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let activeEnrollmentId):
+                    print("🟢 activeEnrollmentId:", activeEnrollmentId ?? "nil")
+
+                case .failure(let error):
+                    print("🔴 active enrollment okunamadı:", error.localizedDescription)
+                }
             }
         }
     }
     
-    private func setupUI() {
-        applyCardStyle(to: astrologyCard)
-        applyCardStyle(to: programsCardView)
-    }
-    
-    private func setupTableView() {
-        programsTableView.delegate = self
-        programsTableView.dataSource = self
-        
-        programsTableView.separatorStyle = .none
-        programsTableView.backgroundColor = .clear
-        //            programsTableView.rowHeight = UITableView.automaticDimension
-        //            programsTableView.estimatedRowHeight = 180
-        programsTableView.rowHeight = 220
-        programsTableView.showsVerticalScrollIndicator = false
-        
-        programsTableView.register(
-            UINib(nibName: "ProgramTableViewCell", bundle: nil),
-            forCellReuseIdentifier: "ProgramTableViewCell"
-        )
-    }
-    
-    private func loadPrograms() {
-        programs = ProgramLoader.loadPrograms()
-        programsTableView.reloadData()
-    }
-    
-    private func showTooltip(from button: UIButton, text: String) {
-        
-        // varsa eskiyi kaldır
-        tooltipView?.removeFromSuperview()
-        
-        // ?? SHADOW CONTAINER (YENİ)
-        let containerView = UIView()
-        containerView.translatesAutoresizingMaskIntoConstraints = false
-        
-        containerView.layer.shadowColor = UIColor.black.cgColor // ??
-        containerView.layer.shadowOpacity = 0.1                  // ??
-        containerView.layer.shadowOffset = CGSize(width: 0, height: 4) // ??
-        containerView.layer.shadowRadius = 8                     // ??
-        
-        // ?? TOOLTIP (ARTIK İÇ VIEW)
-        let tooltip = UIView()
-        tooltip.backgroundColor = tooltipColor(for: button)
-        tooltip.layer.cornerRadius = 12
-        tooltip.clipsToBounds = true // ?? önemli!
-        tooltip.translatesAutoresizingMaskIntoConstraints = false
-        
-        let label = UILabel()
-        label.text = text
-        label.textColor = .white
-        label.font = UIFont.systemFont(ofSize: 14)
-        label.numberOfLines = 0
-        label.textAlignment = .center
-        label.translatesAutoresizingMaskIntoConstraints = false
-        
-        tooltip.addSubview(label)
-        containerView.addSubview(tooltip) // ?? tooltip artık container içine
-        
-        self.view.addSubview(containerView) // ?? tooltip yerine container ekledik
-        
-        NSLayoutConstraint.activate([
-            
-            // ?? container konumu
-            containerView.topAnchor.constraint(equalTo: button.bottomAnchor, constant: 8),
-            containerView.centerXAnchor.constraint(equalTo: button.centerXAnchor),
-            containerView.widthAnchor.constraint(lessThanOrEqualToConstant: 220),
-            
-            // ?? tooltip container'a tam oturuyor
-            tooltip.topAnchor.constraint(equalTo: containerView.topAnchor),
-            tooltip.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
-            tooltip.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
-            tooltip.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
-            
-            // label constraints (aynı)
-            label.topAnchor.constraint(equalTo: tooltip.topAnchor, constant: 10),
-            label.bottomAnchor.constraint(equalTo: tooltip.bottomAnchor, constant: -10),
-            label.leadingAnchor.constraint(equalTo: tooltip.leadingAnchor, constant: 10),
-            label.trailingAnchor.constraint(equalTo: tooltip.trailingAnchor, constant: -10)
-        ])
-        
-        containerView.alpha = 0 // ?? artık tooltip değil container animate ediliyor
-        UIView.animate(withDuration: 0.2) {
-            containerView.alpha = 1
+    private func fetchActiveEnrollmentDetails() {
+        guard let userId = Auth.auth().currentUser?.uid else {
+            print("🔴 ProgramList: userId yok")
+            self.activeEnrollment = nil
+            self.programsTableView.reloadData()
+            return
         }
-        
-        tooltipView = containerView // ?? referans güncellendi
-    
-        // 🔥 ÖNEMLİ: ekranın boş alanına tıklama ekliyoruz
-        let tap = UITapGestureRecognizer(target: self, action: #selector(handleOutsideTap))
-        tap.cancelsTouchesInView = false
-        self.view.addGestureRecognizer(tap)
-    }
-    @objc private func handleOutsideTap(_ gesture: UITapGestureRecognizer) {
-        
-        let location = gesture.location(in: self.view)
-        
-        // Eğer tooltip'e tıklamadıysa kapat
-        if let tooltip = tooltipView, !tooltip.frame.contains(location) {
-            hideTooltip()
+
+        enrollmentRepository.fetchActiveEnrollment(userId: userId) { result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success(let enrollment):
+                    self.activeEnrollment = enrollment
+
+                    if let enrollment = enrollment {
+                        print("🟢 aktif enrollment bulundu")
+                        print("🟢 enrollmentId:", enrollment.enrollmentId)
+                        print("🟢 programId:", enrollment.programId)
+                        print("🟢 status:", enrollment.status)
+                        print("🟢 currentDay:", enrollment.currentDay)
+                        print("🟢 completedDaysCount:", enrollment.completedDaysCount)
+                        print("🟢 isCompleted:", enrollment.isCompleted)
+                        print("🟢 isFailed:", enrollment.isFailed)
+                    } else {
+                        print("🟡 aktif enrollment yok")
+                    }
+
+                    self.programsTableView.reloadData()
+
+                case .failure(let error):
+                    print("🔴 aktif enrollment detayları okunamadı:", error.localizedDescription)
+                    self.activeEnrollment = nil
+                    self.programsTableView.reloadData()
+                }
+            }
         }
     }
-    private func hideTooltip() {
-        UIView.animate(withDuration: 0.3, animations: {
-            self.tooltipView?.alpha = 0
-        }) { _ in
-            self.tooltipView?.removeFromSuperview()
-            self.tooltipView = nil
+    
+    
+        
+        // MARK: - Hibrit veri çekme
+        private func fetchProgramsFromSource() {
+            programService.fetchPrograms { [weak self] firestorePrograms in
+                guard let self = self else { return }
+                
+                DispatchQueue.main.async {
+                    if firestorePrograms.isEmpty {
+                        print("⚠️ Firestore boş/hatalı, JSON kullanılacak")
+                        self.programs = ProgramLoader.loadPrograms()
+                    } else {
+                        print("🔥 Firestore verisi kullanılıyor")
+                        self.programs = firestorePrograms
+                    }
+                    
+                    print(">>> Ekrana basılan program sayısı: \(self.programs.count)")
+                    self.programsTableView.reloadData()
+                }
+            }
         }
-    }
-    private func tooltipColor(for button: UIButton) -> UIColor {
-        switch button {
+        
+        func testFirebaseConnection() {
+            let ref = Database.database().reference()
             
-        case mercuryRetrogradeView:
-            return UIColor.astroMercuryColor
-            
-        case venusRetrogradeView:
-            return UIColor.astroVenusColor
-            
-        case marsRetrogradeView:
-            return UIColor.astroMarsColor
-            
-        case saturnRetrogradeView:
-            return UIColor.astroSaturnColor
-            
-        case newMoonView:
-            return UIColor.astroNewMoonColor
-            
-        case fullMoonView:
-            return UIColor.astroFullMoonColor
-            
-        case lunarEclipseView:
-            return UIColor.astroLunarEclipseColor
-            
-        case solarEclipseView:
-            return UIColor.astroSolarEclipseColor
-            
-        default:
-            return .black
+            ref.child("test_mesaji").setValue("Selam Efnan! Bağlantı başarılı 🚀") { error, _ in
+                if let error = error {
+                    print("Eyvah! Veri gönderilemedi: \(error.localizedDescription)")
+                } else {
+                    print("Yaşasın! Veri başarıyla Firebase'e uçtu.")
+                }
+            }
         }
-    }
+        
+        private func setupUI() {
+            applyCardStyle(to: astrologyCard)
+            applyCardStyle(to: programsCardView)
+        }
+        
+        private func setupTableView() {
+            programsTableView.delegate = self
+            programsTableView.dataSource = self
+            
+            print(">>> tableView bağlandı")
+            
+            programsTableView.separatorStyle = .none
+            programsTableView.backgroundColor = .clear
+            programsTableView.rowHeight = 220
+            programsTableView.showsVerticalScrollIndicator = false
+            
+            programsTableView.register(
+                UINib(nibName: "ProgramTableViewCell", bundle: nil),
+                forCellReuseIdentifier: "ProgramTableViewCell"
+            )
+        }
+        
+        private func loadPrograms() {
+            programs = ProgramLoader.loadPrograms()
+            programsTableView.reloadData()
+        }
+        
+        private func fetchTodayAstrology() {
+            let db = Firestore.firestore()
+            let today = getTodayDateString()
+
+            db.collection("sky_days").document(today).getDocument { snapshot, error in
+                if let error = error {
+                    print("Firestore hata:", error.localizedDescription)
+                    return
+                }
+
+                guard let data = snapshot?.data() else {
+                    print("Veri yok")
+                    return
+                }
+
+                print("Gelen veri:", data)
+
+                DispatchQueue.main.async {
+                    self.updateAstrologyUI(data: data)
+                }
+            }
+        }
+
+        private func getTodayDateString() -> String {
+            let formatter = DateFormatter()
+            formatter.dateFormat = "yyyy-MM-dd"
+            return formatter.string(from: Date())
+        }
+        
+        private func updateAstrologyUI(data: [String: Any]) {
+            let moonSign = data["moon_sign"] as? String ?? "Ay Burcu"
+            let events = data["celestial_events"] as? [String] ?? []
+            let score = data["suitability_score"] as? Int ?? 0
+            let date = data["date"] as? String ?? ""
+
+            moonSignLabel.text = "🌕 \(moonSign)"
+            suitabilityProgressView.progress = Float(score) / 10.0
+
+            let percentage = generateStablePercentage(score: score, date: date)
+            suitabilityLabel.text = "Bugünün enerjisi %\(percentage) seninle"
+
+            updateEventButtons(events: events)
+        }
+        
+        private func generateStablePercentage(score: Int, date: String) -> Int {
+            let base = score * 10
+            let hash = abs(date.hashValue)
+            let offset = (hash % 9) - 4
+            let result = base + offset
+            return max(0, min(100, result))
+        }
+        
+        private func updateEventButtons(events: [String]) {
+            let lowercased = events.map { $0.lowercased() }
+            
+            mercuryRetrogradeView.isHidden = !lowercased.contains { $0.contains("merkür retrosu") }
+            venusRetrogradeView.isHidden = !lowercased.contains { $0.contains("venüs retrosu") }
+            marsRetrogradeView.isHidden = !lowercased.contains { $0.contains("mars retrosu") }
+            saturnRetrogradeView.isHidden = !lowercased.contains { $0.contains("satürn retrosu") }
+            
+            newMoonView.isHidden = !lowercased.contains { $0.contains("yeni ay") }
+            fullMoonView.isHidden = !lowercased.contains { $0.contains("dolunay") }
+            lunarEclipseView.isHidden = !lowercased.contains { $0.contains("ay tutulması") }
+            solarEclipseView.isHidden = !lowercased.contains { $0.contains("güneş tutulması") }
+        }
+        
+        private func showTooltip(from button: UIButton, text: String) {
+            tooltipView?.removeFromSuperview()
+            
+            let containerView = UIView()
+            containerView.translatesAutoresizingMaskIntoConstraints = false
+            containerView.layer.shadowColor = UIColor.black.cgColor
+            containerView.layer.shadowOpacity = 0.1
+            containerView.layer.shadowOffset = CGSize(width: 0, height: 4)
+            containerView.layer.shadowRadius = 8
+            
+            let tooltip = UIView()
+            tooltip.backgroundColor = tooltipColor(for: button)
+            tooltip.layer.cornerRadius = 12
+            tooltip.clipsToBounds = true
+            tooltip.translatesAutoresizingMaskIntoConstraints = false
+            
+            let label = UILabel()
+            label.text = text
+            label.textColor = .white
+            label.font = UIFont.systemFont(ofSize: 14)
+            label.numberOfLines = 0
+            label.textAlignment = .center
+            label.translatesAutoresizingMaskIntoConstraints = false
+            
+            tooltip.addSubview(label)
+            containerView.addSubview(tooltip)
+            self.view.addSubview(containerView)
+            
+            NSLayoutConstraint.activate([
+                containerView.topAnchor.constraint(equalTo: button.bottomAnchor, constant: 8),
+                containerView.centerXAnchor.constraint(equalTo: button.centerXAnchor),
+                containerView.widthAnchor.constraint(lessThanOrEqualToConstant: 220),
+                
+                tooltip.topAnchor.constraint(equalTo: containerView.topAnchor),
+                tooltip.bottomAnchor.constraint(equalTo: containerView.bottomAnchor),
+                tooltip.leadingAnchor.constraint(equalTo: containerView.leadingAnchor),
+                tooltip.trailingAnchor.constraint(equalTo: containerView.trailingAnchor),
+                
+                label.topAnchor.constraint(equalTo: tooltip.topAnchor, constant: 10),
+                label.bottomAnchor.constraint(equalTo: tooltip.bottomAnchor, constant: -10),
+                label.leadingAnchor.constraint(equalTo: tooltip.leadingAnchor, constant: 10),
+                label.trailingAnchor.constraint(equalTo: tooltip.trailingAnchor, constant: -10)
+            ])
+            
+            containerView.alpha = 0
+            UIView.animate(withDuration: 0.2) {
+                containerView.alpha = 1
+            }
+            
+            tooltipView = containerView
+            
+            let tap = UITapGestureRecognizer(target: self, action: #selector(handleOutsideTap))
+            tap.cancelsTouchesInView = false
+            self.view.addGestureRecognizer(tap)
+        }
+        
+        @objc private func handleOutsideTap(_ gesture: UITapGestureRecognizer) {
+            let location = gesture.location(in: self.view)
+            
+            if let tooltip = tooltipView, !tooltip.frame.contains(location) {
+                hideTooltip()
+            }
+        }
+        
+        private func hideTooltip() {
+            UIView.animate(withDuration: 0.3, animations: {
+                self.tooltipView?.alpha = 0
+            }) { _ in
+                self.tooltipView?.removeFromSuperview()
+                self.tooltipView = nil
+            }
+        }
+        
+        private func tooltipColor(for button: UIButton) -> UIColor {
+            switch button {
+            case mercuryRetrogradeView:
+                return UIColor.astroMercuryColor
+            case venusRetrogradeView:
+                return UIColor.astroVenusColor
+            case marsRetrogradeView:
+                return UIColor.astroMarsColor
+            case saturnRetrogradeView:
+                return UIColor.astroSaturnColor
+            case newMoonView:
+                return UIColor.astroNewMoonColor
+            case fullMoonView:
+                return UIColor.astroFullMoonColor
+            case lunarEclipseView:
+                return UIColor.astroLunarEclipseColor
+            case solarEclipseView:
+                return UIColor.astroSolarEclipseColor
+            default:
+                return .black
+            }
+        }
+    
+    
+    
+    
+    
+    
     @IBAction func mercuryRetrogradeViewTapped(_ sender: UIButton) {
         showTooltip(from: sender, text: "İletişimde yavaşla. Hızlı cevap vermek yerine anlamayı seç. Eski konular geri gelirse çözmek için fırsattır. Yaz, düşün, gözlemle. Netlik dışarıda değil, içeride oluşur.")
         
@@ -238,32 +404,117 @@ class ProgramListViewController: UIViewController {
     }
 }
 
-
 extension ProgramListViewController: UITableViewDataSource, UITableViewDelegate {
     
-    // EKLEDİM: Her programı ayrı bir section yaptım ki section footer ile araya boşluk verebilelim
     func numberOfSections(in tableView: UITableView) -> Int {
+        print(">>> numberOfRows çalıştı")
         return programs.count
     }
     
-    // DEĞİŞTİRDİM: Artık her section içinde sadece 1 cell var
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return 1
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
         let cell = tableView.dequeueReusableCell(
             withIdentifier: "ProgramTableViewCell",
             for: indexPath
         ) as! ProgramTableViewCell
         
-        // DEĞİŞTİRDİM: indexPath.row yerine indexPath.section kullanıyoruz
         let program = programs[indexPath.section]
+        
         cell.configure(with: program)
+        
+        let isActiveProgram = (activeEnrollment?.programId == program.id)
+        cell.applyStartButtonState(isActiveProgram: isActiveProgram)
+
+        cell.onTapStartButton = { [weak self] in
+            guard let self = self else { return }
+            if isActiveProgram {
+                self.showSimpleAlert(
+                    title: "Bu program zaten aktif",
+                    message: "Şu anda devam ettiğin program bu."
+                )
+                return
+            }
+
+            let popup = ConfirmationPopupView()
+
+            popup.titleText = "Hazır mısın?"
+            popup.messageText = "Bu yolculuk seni değiştirebilir.\nBaşlamak ister misin? ✨"
+            popup.cancelTitle = "Vazgeç"
+            popup.confirmTitle = "Başla"
+
+            popup.onCancel = {
+                print("❌ Vazgeçildi")
+            }
+
+//            popup.onConfirm = {
+//                print("🚀 Program başlatılıyor: \(program.name)")
+//            }
+            popup.onConfirm = { [weak self] in
+                guard let self = self else { return }
+
+                let repo = EnrollmentRepository()
+
+                // ⚠️ Şimdilik test user (sonra auth bağlayacağız)
+                guard let userId = Auth.auth().currentUser?.uid else {
+                    self.showSimpleAlert(
+                        title: "Hata",
+                        message: "Kullanıcı oturumu bulunamadı."
+                    )
+                    return
+                }
+
+                repo.startProgram(userId: userId, programId: program.id) { result in
+                    DispatchQueue.main.async {
+                        switch result {
+                        case .success(let enrollmentId):
+                            print("✅ Program başladı:", enrollmentId)
+                            self.fetchActiveEnrollmentDetails()
+                            self.tabBarController?.selectedIndex = 1
+
+                            // 👉 İstersen burada Progress ekranına geçebiliriz (şimdilik log)
+
+                        case .failure(let error):
+
+                            if let customError = error as? EnrollmentStartError,
+                               customError == .alreadyHasActiveProgram {
+
+                                print("⚠️ Zaten aktif program var")
+
+                                self.showSimpleAlert(
+                                    title: "Zaten aktif programın var",
+                                    message: "Yeni bir programa başlamak için mevcut programını tamamlamalısın."
+                                )
+
+                            } else {
+                                print("❌ Hata:", error.localizedDescription)
+
+                                self.showSimpleAlert(
+                                    title: "Hata",
+                                    message: error.localizedDescription
+                                )
+                            }
+                        }
+                    }
+                }
+            }
+
+            popup.present(in: self.view)
+        }
+        
         return cell
     }
     
-    // EKLEDİM: Kartlar arası boşluk
+    
+    func showSimpleAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Tamam", style: .default))
+        present(alert, animated: true)
+    }
+    
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         return 12
     }

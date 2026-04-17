@@ -1,7 +1,7 @@
 {
   "programs": [
     {
-      "id": 1,
+      "id": "1",
       "name": "Öz Farkındalık Gelişim",
       "difficultyLevel": 8,
       "difficultyScale": 10,
@@ -10,6 +10,12 @@
       "imageName": "auraimg1",
       "badgeDescription": "Kendini yargılamadan gözlemleyebildiğini gösterir.",
       "elements": "✨AKASHA",
+      "version": 1,
+      "isActive": true,
+      "badgeId": "badge_1",
+      "completionRuleType": "strict_daily_threshold",
+      "dailyTaskCompletionThreshold": 0.5,
+      "allowRestart": true,
       "dailyDurationText": "Günlük süre: esnek",
       "coreProblems": [
         "Otomatik tepkilerle hareket etme",
@@ -129,7 +135,7 @@
     },
     
     {
-      "id": 2,
+      "id": "2",
       "name": "Algı Genişletme ",
       "difficultyLevel": 5,
       "difficultyScale": 10,
@@ -138,6 +144,15 @@
       "imageName": "auraimg2",
       "badgeDescription": "Hayatındaki iyi olanı daha net fark edebildiğini gösterir.",
       "elements": "💧SU ✨AKASHA",
+      "version": 1,
+      "isActive": true,
+
+      "badgeId": "badge_2",
+
+      "completionRuleType": "strict_daily_threshold",
+      "dailyTaskCompletionThreshold": 0.5,
+
+      "allowRestart": true,
       "dailyDurationText": "Günlük süre: kısa & esnek",
       "coreProblems": [
         "Şikâyet etme otomatikliği",
@@ -259,7 +274,7 @@
         }
     },
     {
-      "id": 3,
+      "id": "3",
       "name": "Olumlu Zihniyet Dönüşüm",
       "difficultyLevel": 7,
       "difficultyScale": 10,
@@ -268,6 +283,15 @@
       "imageName": "auraimg3",
       "badgeDescription": "Düşüncelerini daha esnek ve destekleyici yönetebildiğini gösterir.",
       "elements": "🔥ATEŞ 🌬️HAVA",
+      "version": 1,
+      "isActive": true,
+
+      "badgeId": "badge_3",
+
+      "completionRuleType": "strict_daily_threshold",
+      "dailyTaskCompletionThreshold": 0.5,
+
+      "allowRestart": true,
       "dailyDurationText": "Günlük süre: kısa & esnek",
       "coreProblems": [
         "Otomatik olumsuz düşünceler",
@@ -399,7 +423,7 @@
         }
     },
     {
-      "id": 4,
+      "id": "4",
       "name": "Manevi Bağımsızlık & Bağlanmama",
       "difficultyLevel": 9,
       "difficultyScale": 10,
@@ -408,6 +432,15 @@
       "imageName": "auraimg4",
       "badgeDescription": "Kontrol etmeden de dengede kalabildiğini gösterir.",
       "elements": "🌬️HAVA ✨AKASHA",
+      "version": 1,
+      "isActive": true,
+
+      "badgeId": "badge_4",
+
+      "completionRuleType": "strict_daily_threshold",
+      "dailyTaskCompletionThreshold": 0.5,
+
+      "allowRestart": true,
       "dailyDurationText": "Günlük süre: kısa ama derin",
       "coreProblems": [
         "Kontrol etme ihtiyacı",
@@ -537,7 +570,7 @@
         }
     },
     {
-      "id": 5,
+      "id": "5",
       "name": "Sabah Ritmi & Bilinçli Uyanış",
       "difficultyLevel": 8,
       "difficultyScale": 10,
@@ -546,6 +579,15 @@
       "imageName": "auraimg5",
       "badgeDescription": "Gününe bilinçli ve kararlı başlayabildiğini gösterir.",
       "elements": "🔥ATEŞ",
+      "version": 1,
+      "isActive": true,
+
+      "badgeId": "badge_5",
+
+      "completionRuleType": "strict_daily_threshold",
+      "dailyTaskCompletionThreshold": 0.5,
+
+      "allowRestart": true,
       "dailyDurationText": "Hedef: 1 saat 15 saat erken uyanma( Kendine göre süreyi şekillendirebilirsin )",
       "coreProblems": ["Sabah uyanma direnci", "Alarm erteleme alışkanlığı"],
       "oneSentenceSummary": "Bu program “erken kalk” demez; seni istediğin saate kademeli olarak taşır.",
@@ -672,7 +714,7 @@
         }
     },
     {
-      "id": 6,
+      "id": "6",
       "name": "Meditasyonla Zihinsel Denge",
       "difficultyLevel": 7,
       "difficultyScale": 10,
@@ -681,6 +723,15 @@
       "imageName": "auraimg6",
       "badgeDescription": "Zihnini sakinleştirip tepkilerini yavaşlatabildiğini gösterir.",
       "elements": "🌬️HAVA ✨AKASHA",
+      "version": 1,
+      "isActive": true,
+
+      "badgeId": "badge_6",
+
+      "completionRuleType": "strict_daily_threshold",
+      "dailyTaskCompletionThreshold": 0.5,
+
+      "allowRestart": true,
       "dailyDurationText": "Günlük süre: 10–20 dk",
       "coreProblems": [
         "Zihinsel gürültü / dikkat dağınıklığı",
@@ -810,7 +861,7 @@
         }
     },
     {
-      "id": 7,
+      "id": "7",
       "name": "Bilinçli Beslenme ",
       "difficultyLevel": 8,
       "difficultyScale": 10,
@@ -819,6 +870,15 @@
       "imageName": "auraimg7",
       "badgeDescription": "Bedeninin ihtiyaçlarını daha doğru okuyabildiğini gösterir.",
       "elements": "🌍TOPRAK 💧SU",
+      "version": 1,
+      "isActive": true,
+
+      "badgeId": "badge_7",
+
+      "completionRuleType": "strict_daily_threshold",
+      "dailyTaskCompletionThreshold": 0.5,
+
+      "allowRestart": true,
       "dailyDurationText": "Günlük süre: esnek",
       "coreProblems": [
         "Yetersiz su tüketimi alışkanlığı",
@@ -830,10 +890,135 @@
         "Bilinçli Beslenme & Bedensel Denge Programı",
         "Bu program ne yemen gerektiğini dayatmaz.\n60 gün boyunca bedeninin neye ihtiyacı olduğunu fark etmeyi öğretir.",
         "📅 Program boyunca neler yapacaksın?\n🥗 Günlük Uygulama Sistemi\nBu programın amacı bir anda değişmek değil,\nbedenini zorlamadan daha sağlıklı seçimlere geçmektir.\nOdak noktası daha fazla su içmek ve paketli gıdaları kademeli olarak azaltmaktır.\n\n💧Sabah → Su ile Başlangıç (1 dk)\nAmaç: Güne bedeni destekleyerek başlamak.\nUyanır uyanmaz 1 bardak su içersin.\n💡 Kural:\nZorlamak yok.\nAlışkanlık oluşturmak yeterli.\n\n🌍Gün İçinde → Su Artırma (kademeli)\nİlk günlerde sadece normalden 1 bardak fazla içersin.\nSonraki günlerde bunu yavaş yavaş artırırsın.\n👉 Örnek ilerleme:\n1–10 gün: +1 bardak\n10–20 gün: +2 bardak\n20–60 gün: hedef seviyeye yaklaşma\nAmaç bir anda çok içmek değil, alışkanlık oluşturmaktır.\n\n🥤Gün İçinde → Otomatik Tüketimi Fark Etme\nPaketli bir şey yemek istediğinde kısa bir durak verirsin.\n📍 Kendine sorarsın:\n“Gerçekten aç mıyım yoksa alışkanlık mı?”\nBu farkındalık bile davranışı değiştirmeye başlar.\n\n🍔 Gün İçinde → Küçük Değişimler\nHer şeyi bir anda kesmezsin.\nSadece küçük değişimler yaparsın.\n👉 Örnek:\nBir paketli ürünü daha doğal bir alternatifle değiştirirsin\nBir öğünde fast food yerine daha basit bir yemek seçersin\nAmaç mükemmel olmak değil, yön değiştirmektir.\n\n🌿Gün İçinde → Seçim Farkındalığı\nYediğin şeylere dikkat edersin.\n📍 Kendine sorarsın:\n“Bu bana iyi hissettirecek mi?”\nBazen yine paketli gıda seçebilirsin.\nBu normaldir.\nÖnemli olan fark ederek seçim yapmandır.\n\n📓 Akşam → Kısa Değerlendirme (5 dk)\nGün sonunda kısa bir gözlem yaparsın:\n👉 Bugün ne kadar su içtim?\n👉 Paketli gıda tükettiğim anlar neydi?\n👉 Daha iyi bir seçim yaptığım bir an oldu mu?\nAmaç kendini suçlamak değil, fark etmektir.\n\n⚙️ Altın Kurallar\nHer şeyi bir anda değiştirmeye çalışma\nKüçük adımlar büyük değişim yaratır\nBazen eski alışkanlıklara dönmek normaldir\nÖnemli olan tekrar denemektir\n👉 “Küçük değişimler zamanla alışkanlığa dönüşür.”\n\n🔥 Gerçek Etkiyi Yaratan Şey\nBu programın gücü yasaklarda değil,\nfarkındalıkla yapılan küçük seçimlerde oluşur.\nHer fark ettiğin an, yeni bir alışkanlık inşa eder.\n\n🎯 Net Günlük Plan\nSabah 1 bardak su\nGün içinde suyu kademeli artırma\nPaketli gıda öncesi durak\nKüçük sağlıklı alternatif seçimi\nAkşam kısa değerlendirme\n\n💥 Süreç Sonucu\n10–15 gün: daha fazla su içtiğini fark edersin\n30 gün: paketli gıdalara olan ihtiyacın azalır\n60 gün: daha dengeli ve bilinçli beslendiğini hissedersin"
-      ]
-    },
+      ],
+      "dailyTasks": [
+          {
+            "id": "morning_water",
+            "title": "Su ile Başlangıç",
+            "shortDescription": "Güne bir bardak su içerek bedenini destekle.",
+            "details": [
+              "Uyanır uyanmaz 1 bardak su iç",
+              "Zorlamadan içmeye odaklan",
+              "Bunu günlük bir ritüel haline getir",
+              "Amaç alışkanlık oluşturmak"
+            ]
+          },
+          {
+            "id": "water_increase",
+            "title": "Suyu Kademeli Artırma",
+            "shortDescription": "Su tüketimini küçük adımlarla artır.",
+            "details": [
+              "İlk günlerde +1 bardak ekle",
+              "Zamanla miktarı artır",
+              "Bir anda fazla içmeye çalışma",
+              "Bedenine uyum sağlaması için zaman tanı"
+            ]
+          },
+          {
+            "id": "pause_before_eating",
+            "title": "Dur ve Fark Et",
+            "shortDescription": "Yemek öncesi kısa bir farkındalık duraklaması yap.",
+            "details": [
+              "Paketli gıda öncesi kısa dur",
+              "“Gerçekten aç mıyım?” diye sor",
+              "Alışkanlık mı ihtiyaç mı ayırt et",
+              "Bu farkındalığı gözlemle"
+            ]
+          },
+          {
+            "id": "small_changes",
+            "title": "Küçük Değişimler",
+            "shortDescription": "Beslenmende küçük ama etkili değişimler yap.",
+            "details": [
+              "Bir öğünde daha doğal bir alternatif seç",
+              "Fast food yerine basit yemek tercih et",
+              "Her şeyi aynı anda değiştirme",
+              "Küçük adımlarla ilerle"
+            ]
+          },
+          {
+            "id": "food_awareness",
+            "title": "Seçim Farkındalığı",
+            "shortDescription": "Yediklerinin bedenine etkisini fark et.",
+            "details": [
+              "“Bu bana iyi hissettirecek mi?” diye sor",
+              "Seçimini bilinçli yap",
+              "Bazen eski alışkanlıklara dönmenin normal olduğunu kabul et",
+              "Yargılamadan gözlemle"
+            ]
+          },
+          {
+            "id": "evening_review",
+            "title": "Akşam Değerlendirmesi",
+            "shortDescription": "Günü kısa bir farkındalıkla gözden geçir.",
+            "details": [
+              "Ne kadar su içtiğini düşün",
+              "Hangi anlarda paketli gıda tükettiğini fark et",
+              "Yaptığın iyi seçimleri hatırla",
+              "Kendini yargılamadan gözlemle"
+            ]
+          }
+        ],
+
+        "weeklyReflection": {
+          "title": "Beslenme Farkındalığını Gözlemleme",
+          "shortDescription": "Yeme alışkanlıklarını fark ederek daha bilinçli seçimler yap.",
+          "details": [
+            "Hangi günler daha iyi beslendiğini fark et",
+            "Su tüketiminin etkisini gözlemle",
+            "Hangi anlarda otomatik yediğini fark et",
+            "Kendine uygun beslenme ritmini keşfet"
+          ]
+        },
+
+        "goldenRules": {
+          "title": "Nazik Beslenme Yaklaşımı",
+          "shortDescription": "Beslenmeyi bir zorunluluk değil, bir farkındalık alanı olarak gör.",
+          "details": [
+            "Her şeyi bir anda değiştirmeye çalışma",
+            "Küçük değişimler büyük etki yaratır",
+            "Bazen eski alışkanlıklara dönmek normaldir",
+            "Kendine sabırlı ve nazik yaklaş",
+            "Farkındalık en güçlü değişim aracıdır"
+          ]
+        },
+
+        "realImpact": {
+          "title": "Gerçek Değişim Noktası",
+          "shortDescription": "Değişim yasaklarla değil, farkındalıkla oluşur.",
+          "details": [
+            "Asıl etki seçim anlarında oluşur",
+            "Fark ettiğin her an yeni bir alışkanlık başlatır",
+            "Zamanla otomatik davranışlar azalır",
+            "Bedenin sinyallerini daha iyi anlamaya başlarsın"
+          ]
+        },
+
+        "dailyPlanSummary": {
+          "title": "Günlük Beslenme Akışı",
+          "shortDescription": "Gününü sade ve sürdürülebilir bir beslenme ritmiyle destekle.",
+          "details": [
+            "Sabah su iç",
+            "Gün içinde suyu artır",
+            "Yemek öncesi kısa durak ver",
+            "Küçük sağlıklı alternatifler seç",
+            "Akşam kısa değerlendirme yap"
+          ]
+        },
+
+        "processResult": {
+          "title": "Zamanla Oluşan Denge",
+          "shortDescription": "Farkındalık arttıkça beslenme alışkanlıkların doğal olarak değişir.",
+          "details": [
+            "10–15 gün: su tüketimin arttığını fark edersin",
+            "30 gün: paketli gıdalara olan ihtiyaç azalır",
+            "60 gün: daha dengeli ve bilinçli beslendiğini hissedersin",
+            "Genel olarak bedenine daha uyumlu seçimler yaparsın"
+          ]
+        }
+      },
     {
-      "id": 8,
+      "id": "8",
       "name": "Uyku Ritmi & Derin Dinlenme",
       "difficultyLevel": 7,
       "difficultyScale": 10,
@@ -842,6 +1027,15 @@
       "imageName": "auraimg8",
       "badgeDescription": "Zihnini dinlendirip daha kaliteli uyuyabildiğini gösterir.",
       "elements": "💧SU ✨AKASHA",
+      "version": 1,
+      "isActive": true,
+
+      "badgeId": "badge_8",
+
+      "completionRuleType": "strict_daily_threshold",
+      "dailyTaskCompletionThreshold": 0.5,
+
+      "allowRestart": true,
       "dailyDurationText": "Hedef: daha hızlı uykuya geçiş & daha dinlendirici uyku",
       "coreProblems": [
         "Uykuya geçişte zihnin susmaması",
@@ -981,7 +1175,7 @@
         }
     },
     {
-      "id": 9,
+      "id": "9",
       "name": "Bilinçli Dil & Olumlu İletişim",
       "difficultyLevel": 7,
       "difficultyScale": 10,
@@ -990,6 +1184,15 @@
       "imageName": "auraimg9",
       "badgeDescription": "Konuşmalarında daha bilinçli ve yapıcı olabildiğini gösterir.",
       "elements": "🌬️HAVA 🔥ATEŞ",
+      "version": 1,
+      "isActive": true,
+
+      "badgeId": "badge_9",
+
+      "completionRuleType": "strict_daily_threshold",
+      "dailyTaskCompletionThreshold": 0.5,
+
+      "allowRestart": true,
       "dailyDurationText": "Günlük süre: belirtilmemiş",
       "coreProblems": [
         "Gıybet / olumsuz konuşma otomatikliği",
@@ -1132,7 +1335,7 @@
         }
     },
     {
-      "id": 10,
+      "id": "10",
       "name": "Boş Zaman Okuma Rutini",
       "difficultyLevel": 4,
       "difficultyScale": 10,
@@ -1141,6 +1344,15 @@
       "imageName": "auraimg10",
       "badgeDescription": "Okumayı hayatına sürdürülebilir şekilde dahil edebildiğini gösterir.",
       "elements": "🌬️HAVA ✨AKASHA",
+      "version": 1,
+      "isActive": true,
+
+      "badgeId": "badge_10",
+
+      "completionRuleType": "strict_daily_threshold",
+      "dailyTaskCompletionThreshold": 0.5,
+
+      "allowRestart": true,
       "dailyDurationText": "Günlük süre: 2–7 dk",
       "coreProblems": [
         "Okumaya başlama direnci",
@@ -1282,7 +1494,7 @@
         }
     },
     {
-      "id": 11,
+      "id": "11",
       "name": "Cesaret & Bilinçli Genişleme",
       "difficultyLevel": 8,
       "difficultyScale": 10,
@@ -1291,6 +1503,15 @@
       "imageName": "auraimg11",
       "badgeDescription": "Konfor alanının dışına bilinçli adımlar atabildiğini gösterir.",
       "elements": "🔥ATEŞ 🌬️HAVA",
+      "version": 1,
+      "isActive": true,
+
+      "badgeId": "badge_11",
+
+      "completionRuleType": "strict_daily_threshold",
+      "dailyTaskCompletionThreshold": 0.5,
+
+      "allowRestart": true,
       "dailyDurationText": "Günlük süre: değişken",
       "coreProblems": [
         "Kaçınma davranışları",
@@ -1420,7 +1641,7 @@
         }
     },
     {
-      "id": 12,
+      "id": "12",
       "name": "Bilinçli Ekran Süresi Azaltma",
       "difficultyLevel": 7,
       "difficultyScale": 10,
@@ -1429,6 +1650,15 @@
       "imageName": "auraimg12",
       "badgeDescription": "Ekran kullanımını daha bilinçli yönetebildiğini gösterir.",
       "elements": "✨AKASHA 🌬️HAVA",
+      "version": 1,
+      "isActive": true,
+
+      "badgeId": "badge_12",
+
+      "completionRuleType": "strict_daily_threshold",
+      "dailyTaskCompletionThreshold": 0.5,
+
+      "allowRestart": true,
       "dailyDurationText": "Hedef: minimum ama işlevsel ekran kullanımı",
       "coreProblems": [
         "Otomatik ekran açma alışkanlığı",

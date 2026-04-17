@@ -579,8 +579,8 @@
     "date": "2026-04-02",
     "moon_phase": "Küçülen Ay",
     "daily_comment": "İlişkilerde denge kurma zamanı. Mars-Kova desteğiyle sosyal projeler veya dijital planlamalar için içsel bir motivasyon bulabilirsin.",
-    "celestial_events": ["Ay-Mars Olumlu Açı"],
-    "suitability_score": 6,
+    "celestial_events": ["Ay-Mars Olumlu Açı", "Dolunay"],
+    "suitability_score": 4,
     "moon_sign": "Terazi"
   },
   {

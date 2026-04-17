@@ -15,9 +15,81 @@ final class ProgramDetailViewController: UIViewController {
 
     @IBOutlet weak var titleLabel: UILabel!
     
+    @IBAction func didTapDetailProgramStartButton(_ sender: UIButton) {
+        // ✅ Eğer açılan detail zaten aktif programa aitse
+            if activeEnrollment?.programId == program.id {
+                showSimpleAlert(
+                    title: "Bu program zaten aktif",
+                    message: "Şu anda devam ettiğin program bu."
+                )
+                return
+            }
+
+            // ✅ Eğer başka bir aktif program varsa
+            if activeEnrollment != nil {
+                showSimpleAlert(
+                    title: "Zaten aktif programın var",
+                    message: "Yeni bir programa başlamak için mevcut programını tamamlamalısın."
+                )
+                return
+            }
+
+            let popup = ConfirmationPopupView()
+
+            popup.titleText = "Hazır mısın?"
+            popup.messageText = "Bu yolculuk seni değiştirebilir.\nBaşlamak ister misin? ✨"
+            popup.cancelTitle = "Vazgeç"
+            popup.confirmTitle = "Başla"
+
+            popup.onCancel = {
+                print("❌ Vazgeçildi")
+            }
+
+            popup.onConfirm = { [weak self] in
+                guard let self = self else { return }
+
+                let userId = "testUser"
+
+                self.enrollmentRepository.startProgram(userId: userId, programId: self.program.id) { result in
+                    DispatchQueue.main.async {
+                        switch result {
+                        case .success(let enrollmentId):
+                            print("✅ Detail program başladı:", enrollmentId)
+                            self.fetchActiveEnrollmentDetails()
+
+                        case .failure(let error):
+                            if let customError = error as? EnrollmentStartError,
+                               customError == .alreadyHasActiveProgram {
+                                self.showSimpleAlert(
+                                    title: "Zaten aktif programın var",
+                                    message: "Yeni bir programa başlamak için mevcut programını tamamlamalısın."
+                                )
+                            } else {
+                                self.showSimpleAlert(
+                                    title: "Hata",
+                                    message: error.localizedDescription
+                                )
+                            }
+                        }
+                    }
+                }
+            }
+
+            popup.present(in: self.view)
+    }
+    
+    func showSimpleAlert(title: String, message: String) {
+        let alert = UIAlertController(title: title, message: message, preferredStyle: .alert)
+        alert.addAction(UIAlertAction(title: "Tamam", style: .default))
+        present(alert, animated: true)
+    }
     // MARK: - Data
     var program: Program!   // ProgramList’ten push/segue ile set edilecek
     private var sections: [ProgramDetailSection] = []
+    private let enrollmentRepository = EnrollmentRepository()
+    private var activeEnrollment: ActiveEnrollment?
+    
+    
 
         override func viewDidLoad() {
             super.viewDidLoad()
@@ -27,7 +99,55 @@ final class ProgramDetailViewController: UIViewController {
 
             setupTableView()
             buildSections()
+            fetchActiveEnrollmentDetails()
         }
+    
+    private func fetchActiveEnrollmentDetails() {
+        let userId = "testUser"
+
+        enrollmentRepository.fetchActiveEnrollment(userId: userId) { [weak self] result in
+            DispatchQueue.main.async {
+                guard let self = self else { return }
+
+                switch result {
+                case .success(let enrollment):
+                    self.activeEnrollment = enrollment
+
+                    if let enrollment = enrollment {
+                        print("🟢 Detail aktif enrollment bulundu")
+                        print("🟢 Detail enrollmentId:", enrollment.enrollmentId)
+                        print("🟢 Detail programId:", enrollment.programId)
+
+                        // 🔥 YENİ EKLENEN KISIM
+                        self.enrollmentRepository.getOrCreateTodayLog(
+                            userId: userId,
+                            enrollment: enrollment
+                        ) { result in
+                            DispatchQueue.main.async {
+                                switch result {
+                                case .success(let dailyLog):
+                                    print("✅ Bugünün daily log'u hazır")
+                                    print("✅ logId:", dailyLog.logId)
+                                    print("✅ dateKey:", dailyLog.dateKey)
+                                    print("✅ dayNumber:", dailyLog.dayNumber)
+                                    print("✅ completedTaskIds:", dailyLog.completedTaskIds)
+
+                                case .failure(let error):
+                                    print("🔴 DailyLog alınamadı/oluşturulamadı:", error.localizedDescription)
+                                }
+                            }
+                        }
+
+                    } else {
+                        print("🟡 Detail aktif enrollment yok")
+                    }
+
+                case .failure(let error):
+                    print("🔴 Detail aktif enrollment okunamadı:", error.localizedDescription)
+                }
+            }
+        }
+    }
 
         private func setupTableView() {
             tableView.delegate = self
@@ -58,7 +178,7 @@ final class ProgramDetailViewController: UIViewController {
             sections.append(.badge(
                 title: "Tamamladığında Kazanacağın Rozet",
                 subtitle: program.badgeDescription,
-                imageName: program.imageName
+                imageName: program.badgeImageName ?? program.imageName
             ))
 
             let summary = program.oneSentenceSummary.trimmingCharacters(in: .whitespacesAndNewlines)
