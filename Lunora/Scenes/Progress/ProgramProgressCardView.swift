@@ -74,7 +74,7 @@ final class ProgramProgressCardView: UIView {
         let stack = UIStackView()
         stack.translatesAutoresizingMaskIntoConstraints = false
         stack.axis = .vertical
-        stack.spacing = 12
+        stack.spacing = 8
         stack.alignment = .fill
         stack.distribution = .fill
         return stack
@@ -124,6 +124,7 @@ final class ProgramProgressCardView: UIView {
     }()
 
     private var progressFillWidthConstraint: NSLayoutConstraint?
+    private var currentProgressMultiplier: CGFloat = 0
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -134,53 +135,23 @@ final class ProgramProgressCardView: UIView {
         super.init(coder: coder)
         setupUI()
     }
-
+    
     override func layoutSubviews() {
         super.layoutSubviews()
-
-        if progressFillWidthConstraint == nil {
-            progressFillWidthConstraint = progressFillView.widthAnchor.constraint(
-                equalTo: progressTrackView.widthAnchor,
-                multiplier: 0.48
-            )
-            progressFillWidthConstraint?.isActive = true
-        }
+        progressFillWidthConstraint?.constant = progressTrackView.bounds.width * currentProgressMultiplier
     }
-    
-//    func configure(with data: ProgramProgressCardData) {
-//        dayLabel.text = "Gün \(data.currentDay) / \(data.totalDays)"
-//        percentLabel.text = "\(data.progressPercent)%"
-//        progressPercentLabel.text = "\(data.progressPercent)%"
+
+//    override func layoutSubviews() {
+//        super.layoutSubviews()
 //
-//        updateProgressFill(multiplier: CGFloat(data.progressPercent) / 100.0)
-//
-//        // Legend yenile
-//        legendStackView.arrangedSubviews.forEach {
-//            legendStackView.removeArrangedSubview($0)
-//            $0.removeFromSuperview()
-//        }
-//
-//        data.legendItems.forEach { item in
-//            legendStackView.addArrangedSubview(
-//                makeLegendRow(color: item.color, title: item.title, value: item.valueText)
+//        if progressFillWidthConstraint == nil {
+//            progressFillWidthConstraint = progressFillView.widthAnchor.constraint(
+//                equalTo: progressTrackView.widthAnchor,
+//                multiplier: 0.48
 //            )
+//            progressFillWidthConstraint?.isActive = true
 //        }
-//
-//        let segments = data.legendItems
-//            .filter { $0.chartValue > 0 }
-//            .map {
-//                SegmentedDonutChartView.Segment(
-//                    value: $0.chartValue,
-//                    color: $0.color
-//                )
-//            }
-//
-//        donutChartView.configure(
-//            segments: segments,
-//            totalText: "\(data.donutCenterPercent)%"
-//        )
 //    }
-    
     
     func configure(with data: ProgramProgressCardData) {
         dayLabel.text = "Gün \(data.currentDay) / \(data.totalDays)"
@@ -277,19 +248,26 @@ final class ProgramProgressCardView: UIView {
         }
     }
     
+//    private func updateProgressFill(multiplier: CGFloat) {
+//        let clampedValue = max(0, min(1, multiplier))
+//
+//        if let progressFillWidthConstraint = progressFillWidthConstraint {
+//            progressFillWidthConstraint.isActive = false
+//        }
+//
+//        progressFillWidthConstraint = progressFillView.widthAnchor.constraint(
+//            equalTo: progressTrackView.widthAnchor,
+//            multiplier: clampedValue
+//        )
+//        progressFillWidthConstraint?.isActive = true
+//
+//        layoutIfNeeded()
+//    }
     private func updateProgressFill(multiplier: CGFloat) {
-        let clampedValue = max(0, min(1, multiplier))
+        currentProgressMultiplier = max(0, min(1, multiplier))
+        progressFillWidthConstraint?.constant = progressTrackView.bounds.width * currentProgressMultiplier
 
-        if let progressFillWidthConstraint = progressFillWidthConstraint {
-            progressFillWidthConstraint.isActive = false
-        }
-
-        progressFillWidthConstraint = progressFillView.widthAnchor.constraint(
-            equalTo: progressTrackView.widthAnchor,
-            multiplier: clampedValue
-        )
-        progressFillWidthConstraint?.isActive = true
-
+        setNeedsLayout()
         layoutIfNeeded()
     }
 
@@ -332,12 +310,14 @@ final class ProgramProgressCardView: UIView {
             donutChartView.widthAnchor.constraint(equalToConstant: 140),
             donutChartView.heightAnchor.constraint(equalToConstant: 140),
 
-            legendStackView.centerYAnchor.constraint(equalTo: donutChartView.centerYAnchor),
+//            legendStackView.centerYAnchor.constraint(equalTo: donutChartView.centerYAnchor),
+            legendStackView.topAnchor.constraint(equalTo: donutChartView.topAnchor),
             legendStackView.leadingAnchor.constraint(equalTo: donutChartView.trailingAnchor, constant: 24),
 
             legendStackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -24),
 
-            dividerView.topAnchor.constraint(equalTo: donutChartView.bottomAnchor, constant: 24),
+//            dividerView.topAnchor.constraint(equalTo: donutChartView.bottomAnchor, constant: 24),
+            dividerView.topAnchor.constraint(equalTo: legendStackView.bottomAnchor, constant: 20),
             dividerView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 24),
             dividerView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -24),
             dividerView.heightAnchor.constraint(equalToConstant: 1),
@@ -358,8 +338,10 @@ final class ProgramProgressCardView: UIView {
             progressFillView.leadingAnchor.constraint(equalTo: progressTrackView.leadingAnchor),
             progressFillView.bottomAnchor.constraint(equalTo: progressTrackView.bottomAnchor),
 
-            heightAnchor.constraint(equalToConstant: 400)
+//            heightAnchor.constraint(greaterThanOrEqualToConstant: 460)
         ])
+        progressFillWidthConstraint = progressFillView.widthAnchor.constraint(equalToConstant: 0)
+        progressFillWidthConstraint?.isActive = true
     }
 
     private func makeLegendRow(color: UIColor, title: String, value: String) -> UIView {

@@ -242,7 +242,7 @@ final class ProgramBadgeCardView: UIView {
         badgeImageView.image = UIImage(named: data.badgeImageName)
 
         let clampedProgress = max(0, min(100, data.progressPercent))
-        let remainingPercent = max(0, data.unlockThreshold - clampedProgress)
+        let remainingPercent = max(0, 100 - clampedProgress)
 
         badgeDescriptionLabel.text = message(for: clampedProgress)
 

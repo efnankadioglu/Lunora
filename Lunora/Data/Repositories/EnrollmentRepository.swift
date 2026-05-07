@@ -459,6 +459,218 @@ final class EnrollmentRepository {
             completion(.success(logs))
         }
     }
+    
+    func fetchLongestFullTaskStreak(
+        userId: String,
+        programs: [Program],
+        completion: @escaping (Result<Int, Error>) -> Void
+    ) { // EKLEDİM
+        
+        let programTaskCounts: [String: Int] = Dictionary(
+            uniqueKeysWithValues: programs.map { program in
+                (program.id, program.dailyTasks.count)
+            }
+        ) // EKLEDİM
+        
+        let enrollmentsRef = db
+            .collection(FirestoreCollection.users)
+            .document(userId)
+            .collection(FirestoreCollection.programEnrollments)
+        
+        enrollmentsRef.getDocuments { snapshot, error in
+            
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            
+            let enrollmentDocuments = snapshot?.documents ?? []
+            
+            if enrollmentDocuments.isEmpty {
+                completion(.success(0))
+                return
+            }
+            
+            let group = DispatchGroup() // EKLEDİM
+            var fullCompletedDateKeys = Set<String>() // EKLEDİM
+            var firstError: Error? // EKLEDİM
+            
+            for enrollmentDocument in enrollmentDocuments {
+                group.enter()
+                
+                let logsRef = enrollmentDocument.reference.collection("dailyLogs")
+                
+                logsRef.getDocuments { logsSnapshot, logsError in
+                    defer { group.leave() }
+                    
+                    if let logsError = logsError {
+                        firstError = logsError
+                        return
+                    }
+                    
+                    let logs: [DailyLog] = logsSnapshot?.documents.compactMap { document in
+                        DailyLog(documentId: document.documentID, data: document.data())
+                    } ?? []
+                    
+                    for log in logs {
+                        guard let requiredTaskCount = programTaskCounts[log.programId],
+                              requiredTaskCount > 0 else {
+                            continue
+                        }
+                        
+                        let completedTaskCount = Set(log.completedTaskIds).count
+                        
+                        if completedTaskCount >= requiredTaskCount {
+                            fullCompletedDateKeys.insert(log.dateKey)
+                        }
+                    }
+                }
+            }
+            
+            group.notify(queue: .main) {
+                if let firstError = firstError {
+                    completion(.failure(firstError))
+                    return
+                }
+                
+                let longestStreak = self.calculateLongestConsecutiveDateKeyStreak(
+                    from: fullCompletedDateKeys
+                ) // EKLEDİM
+                
+                completion(.success(longestStreak))
+            }
+        }
+    }
+
+    private func calculateLongestConsecutiveDateKeyStreak(
+        from dateKeys: Set<String>
+    ) -> Int { // EKLEDİM
+        
+        if dateKeys.isEmpty {
+            return 0
+        }
+        
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        formatter.timeZone = TimeZone.current
+        
+        let dates = dateKeys
+            .compactMap { formatter.date(from: $0) }
+            .sorted()
+        
+        if dates.isEmpty {
+            return 0
+        }
+        
+        var longestStreak = 1
+        var currentStreak = 1
+        
+        let calendar = Calendar.current
+        
+        for index in 1..<dates.count {
+            let previousDate = calendar.startOfDay(for: dates[index - 1])
+            let currentDate = calendar.startOfDay(for: dates[index])
+            
+            let dayDifference = calendar.dateComponents(
+                [.day],
+                from: previousDate,
+                to: currentDate
+            ).day ?? 0
+            
+            if dayDifference == 1 {
+                currentStreak += 1
+                longestStreak = max(longestStreak, currentStreak)
+            } else if dayDifference > 1 {
+                currentStreak = 1
+            }
+        }
+        
+        return longestStreak
+    }
+    
+    
+    // MARK: - Completed Enrollments // EKLEDİM
+    func fetchCompletedEnrollments(
+        userId: String,
+        completion: @escaping (Result<[CompletedEnrollment], Error>) -> Void
+    ) {
+        
+        let enrollmentsRef = db
+            .collection(FirestoreCollection.users)
+            .document(userId)
+            .collection(FirestoreCollection.programEnrollments)
+        
+        enrollmentsRef.getDocuments { snapshot, error in
+            
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+            
+            let completed: [CompletedEnrollment] = snapshot?.documents.compactMap { document in
+                CompletedEnrollment(
+                    documentId: document.documentID,
+                    data: document.data()
+                )
+            } ?? []
+            
+            // 🔥 En yeniler üstte olacak şekilde sırala
+            let sorted = completed.sorted {
+                ($0.completedAt?.dateValue() ?? Date()) >
+                ($1.completedAt?.dateValue() ?? Date())
+            }
+            
+            completion(.success(sorted))
+        }
+    }
+    
+    
+    
+    
+    
+    func completeJourney(
+        userId: String,
+        enrollmentId: String,
+        note: String,
+        completion: @escaping (Result<Void, Error>) -> Void
+    ) {
+        let userRef = db
+            .collection(FirestoreCollection.users)
+            .document(userId)
+
+        let enrollmentRef = userRef
+            .collection(FirestoreCollection.programEnrollments)
+            .document(enrollmentId)
+
+        let now = Timestamp(date: Date())
+
+        let enrollmentUpdate: [String: Any] = [
+            "status": "completed",
+            "isCompleted": true,
+            "isFailed": false,
+            "completionNote": note,
+            "completedAt": now,
+            "updatedAt": now
+        ]
+
+        let userUpdate: [String: Any] = [
+            "activeEnrollmentId": FieldValue.delete(),
+            "updatedAt": now
+        ]
+
+        let batch = db.batch()
+        batch.updateData(enrollmentUpdate, forDocument: enrollmentRef)
+        batch.setData(userUpdate, forDocument: userRef, merge: true)
+
+        batch.commit { error in
+            if let error = error {
+                completion(.failure(error))
+            } else {
+                completion(.success(()))
+            }
+        }
+    }
+    
     func endJourney(
         userId: String,
         enrollmentId: String,

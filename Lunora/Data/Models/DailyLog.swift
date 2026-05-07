@@ -75,3 +75,4 @@ struct DailyLog {
         self.updatedAt = data["updatedAt"] as? Timestamp
     }
 }
+

@@ -31,6 +31,7 @@ class ProgramListViewController: UIViewController {
     
     private let enrollmentRepository = EnrollmentRepository()
     private var activeEnrollment: ActiveEnrollment?
+    private var todaySkyData: DailyAstrology?
     
     private var programs: [Program] = []
         private var tooltipView: UIView?
@@ -43,9 +44,9 @@ class ProgramListViewController: UIViewController {
             print(">>> viewDidLoad çalıştı")
             setupUI()
             setupTableView()
+            setupAstrologyCardTap()
             fetchTodayAstrology()
             fetchProgramsFromSource()
-            checkActiveEnrollment()
             fetchActiveEnrollmentDetails()
             
             ProgramMigrationService.shared.uploadAllProgramsFromLocalJSON { result in
@@ -166,6 +167,38 @@ class ProgramListViewController: UIViewController {
             applyCardStyle(to: astrologyCard)
             applyCardStyle(to: programsCardView)
         }
+    private func setupAstrologyCardTap() {
+        astrologyCard.isUserInteractionEnabled = true
+
+        let tapGesture = UITapGestureRecognizer(
+            target: self,
+            action: #selector(didTapAstrologyCard)
+        )
+
+        astrologyCard.addGestureRecognizer(tapGesture)
+    }
+    @objc private func didTapAstrologyCard() {
+        guard let todaySkyData = todaySkyData else {
+            showSimpleAlert(
+                title: "Gökyüzü bilgisi hazır değil",
+                message: "Bugünün astroloji verisi henüz yüklenmedi."
+            )
+            return
+        }
+
+        let displayData = DailySkyService.shared.makeDisplayData(from: todaySkyData)
+
+        let vc = DailySkyViewController(displayData: displayData)
+        vc.hidesBottomBarWhenPushed = true
+
+        if let navigationController = navigationController {
+            navigationController.pushViewController(vc, animated: true)
+        } else {
+            vc.modalPresentationStyle = .fullScreen
+            present(vc, animated: true)
+        }
+    }
+    
         
         private func setupTableView() {
             programsTableView.delegate = self
@@ -352,10 +385,6 @@ class ProgramListViewController: UIViewController {
         }
     
     
-    
-    
-    
-    
     @IBAction func mercuryRetrogradeViewTapped(_ sender: UIButton) {
         showTooltip(from: sender, text: "İletişimde yavaşla. Hızlı cevap vermek yerine anlamayı seç. Eski konular geri gelirse çözmek için fırsattır. Yaz, düşün, gözlemle. Netlik dışarıda değil, içeride oluşur.")
         
@@ -450,15 +479,11 @@ extension ProgramListViewController: UITableViewDataSource, UITableViewDelegate 
                 print("❌ Vazgeçildi")
             }
 
-//            popup.onConfirm = {
-//                print("🚀 Program başlatılıyor: \(program.name)")
-//            }
             popup.onConfirm = { [weak self] in
                 guard let self = self else { return }
 
                 let repo = EnrollmentRepository()
 
-                // ⚠️ Şimdilik test user (sonra auth bağlayacağız)
                 guard let userId = Auth.auth().currentUser?.uid else {
                     self.showSimpleAlert(
                         title: "Hata",
@@ -472,10 +497,11 @@ extension ProgramListViewController: UITableViewDataSource, UITableViewDelegate 
                         switch result {
                         case .success(let enrollmentId):
                             print("✅ Program başladı:", enrollmentId)
+
+                            UserDefaults.standard.set(true, forKey: "shouldOpenProgressTodayTab")
+
                             self.fetchActiveEnrollmentDetails()
                             self.tabBarController?.selectedIndex = 1
-
-                            // 👉 İstersen burada Progress ekranına geçebiliriz (şimdilik log)
 
                         case .failure(let error):
 
@@ -519,7 +545,6 @@ extension ProgramListViewController: UITableViewDataSource, UITableViewDelegate 
         return 12
     }
     
-    // EKLEDİM: Footer görünmesin, sadece şeffaf boşluk olarak çalışsın
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
         let view = UIView()
         view.backgroundColor = .clear
@@ -530,7 +555,6 @@ extension ProgramListViewController: UITableViewDataSource, UITableViewDelegate 
         print("✅ didSelect çalıştı: \(indexPath.row)")
         print("nav var mı:", navigationController != nil)
         
-        // DEĞİŞTİRDİM: Burada da row yerine section kullanıyoruz
         let selectedProgram = programs[indexPath.section]
         print("Seçilen program:", selectedProgram.name)
         

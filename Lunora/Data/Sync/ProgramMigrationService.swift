@@ -40,11 +40,20 @@ final class ProgramMigrationService {
                 "durationText": program.durationText,
                 "imageName": program.imageName,
                 "badgeDescription": program.badgeDescription,
+                "version": program.version ?? 1,
+                    "isActive": program.isActive ?? true,
+                    "badgeId": program.badgeId ?? "badge_\(program.id)",
+                    "badgeTitle": program.badgeTitle ?? "\(program.name) Rozeti",
+                    "badgeImageName": program.badgeImageName ?? program.imageName,
+                    "completionRuleType": program.completionRuleType?.rawValue ?? "strict_daily_threshold",
+                    "dailyTaskCompletionThreshold": program.dailyTaskCompletionThreshold ?? 0.5,
+                    "allowRestart": program.allowRestart ?? true,
                 "elements": program.elements,
                 "dailyDurationText": program.dailyDurationText,
                 "coreProblems": program.coreProblems,
                 "oneSentenceSummary": program.oneSentenceSummary,
                 "fullText": program.fullText,
+                
 
                 "dailyTasks": program.dailyTasks.map { task in
                     [

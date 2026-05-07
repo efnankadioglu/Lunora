@@ -1,5 +1,188 @@
 {
   "programs": [
+      {
+          
+            "id": "test_1",
+            "name": "Test Programı",
+            "difficultyLevel": 1,
+            "difficultyScale": 10,
+            "durationDays": 1,
+            "durationText": "1 gün",
+            "imageName": "auraimg1",
+            "badgeDescription": "Test rozeti kazandın.",
+            "elements": "🌍TOPRAK",
+
+            "version": 1,
+            "isActive": true,
+            "badgeId": "badge_test_1",
+
+            "completionRuleType": "strict_daily_threshold",
+            "dailyTaskCompletionThreshold": 0.5,
+            "allowRestart": true,
+
+            "dailyDurationText": "Test süresi",
+
+            "coreProblems": ["Test"],
+            "oneSentenceSummary": "Bu sadece test programıdır.",
+            "fullText": ["Test programı açıklaması"],
+
+            "dailyTasks": [
+              {
+                "id": "morning",
+                "title": "Sabah Görevi",
+                "shortDescription": "Test",
+                "details": ["Test"]
+              },
+              {
+                "id": "day",
+                "title": "Gün Görevi",
+                "shortDescription": "Test",
+                "details": ["Test"]
+              },
+              {
+                "id": "evening",
+                "title": "Akşam Görevi",
+                "shortDescription": "Test",
+                "details": ["Test"]
+              },
+              {
+                "id": "weekly",
+                "title": "Haftalık Görev",
+                "shortDescription": "Test",
+                "details": ["Test"]
+              },
+              {
+                "id": "extra1",
+                "title": "Ekstra Görev 1",
+                "shortDescription": "Test",
+                "details": ["Test"]
+              },
+              {
+                "id": "extra2",
+                "title": "Ekstra Görev 2",
+                "shortDescription": "Test",
+                "details": ["Test"]
+              }
+            ],
+
+            "weeklyReflection": {
+              "title": "Test",
+              "shortDescription": "Test",
+              "details": ["Test"]
+            },
+            "goldenRules": {
+              "title": "Test",
+              "shortDescription": "Test",
+              "details": ["Test"]
+            },
+            "realImpact": {
+              "title": "Test",
+              "shortDescription": "Test",
+              "details": ["Test"]
+            },
+            "dailyPlanSummary": {
+              "title": "Test",
+              "shortDescription": "Test",
+              "details": ["Test"]
+            },
+            "processResult": {
+              "title": "Test",
+              "shortDescription": "Test",
+              "details": ["Test"]
+            }
+          },
+      {
+              
+              "id": "test_2",
+              "name": "Test Programı 2",
+              "difficultyLevel": 1,
+              "difficultyScale": 10,
+              "durationDays": 2,
+              "durationText": "2 gün",
+              "imageName": "auraimg4",
+              "badgeDescription": "Test rozeti kazandın.",
+              "elements": "🔥ATEŞ",
+
+              "version": 1,
+              "isActive": true,
+              "badgeId": "badge_test_1",
+
+              "completionRuleType": "strict_daily_threshold",
+              "dailyTaskCompletionThreshold": 0.5,
+              "allowRestart": true,
+
+              "dailyDurationText": "Test süresi",
+
+              "coreProblems": ["Test"],
+              "oneSentenceSummary": "Bu sadece test programıdır.",
+              "fullText": ["Test programı açıklaması"],
+
+              "dailyTasks": [
+                {
+                  "id": "morning",
+                  "title": "Sabah Görevi",
+                  "shortDescription": "Test",
+                  "details": ["Test"]
+                },
+                {
+                  "id": "day",
+                  "title": "Gün Görevi",
+                  "shortDescription": "Test",
+                  "details": ["Test"]
+                },
+                {
+                  "id": "evening",
+                  "title": "Akşam Görevi",
+                  "shortDescription": "Test",
+                  "details": ["Test"]
+                },
+                {
+                  "id": "weekly",
+                  "title": "Haftalık Görev",
+                  "shortDescription": "Test",
+                  "details": ["Test"]
+                },
+                {
+                  "id": "extra1",
+                  "title": "Ekstra Görev 1",
+                  "shortDescription": "Test",
+                  "details": ["Test"]
+                },
+                {
+                  "id": "extra2",
+                  "title": "Ekstra Görev 2",
+                  "shortDescription": "Test",
+                  "details": ["Test"]
+                }
+              ],
+
+              "weeklyReflection": {
+                "title": "Test",
+                "shortDescription": "Test",
+                "details": ["Test"]
+              },
+              "goldenRules": {
+                "title": "Test",
+                "shortDescription": "Test",
+                "details": ["Test"]
+              },
+              "realImpact": {
+                "title": "Test",
+                "shortDescription": "Test",
+                "details": ["Test"]
+              },
+              "dailyPlanSummary": {
+                "title": "Test",
+                "shortDescription": "Test",
+                "details": ["Test"]
+              },
+              "processResult": {
+                "title": "Test",
+                "shortDescription": "Test",
+                "details": ["Test"]
+              }
+            },
+      
     {
       "id": "1",
       "name": "Öz Farkındalık Gelişim",
@@ -424,7 +607,7 @@
     },
     {
       "id": "4",
-      "name": "Manevi Bağımsızlık & Bağlanmama",
+      "name": "Manevi Bağımsızlık",
       "difficultyLevel": 9,
       "difficultyScale": 10,
       "durationDays": 60,

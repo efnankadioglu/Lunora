@@ -19,7 +19,6 @@ class ProgressViewController: UIViewController {
     @IBOutlet weak var userProfileImageView: UIImageView!
     @IBOutlet weak var headerContainerView: UIView!
     
-    
     private let contentStackView = UIStackView()
     private let tasksCardView = TasksCardView()
     private let bottomSummaryCardView = BottomSummaryCardView()
@@ -57,12 +56,20 @@ class ProgressViewController: UIViewController {
             self?.syncPendingProgressActions()
         }
     }
-
+    
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
         navigationController?.setNavigationBarHidden(true, animated: false)
         loadProfileImage()
         syncPendingProgressActions()
+
+        let shouldOpenTodayTab = UserDefaults.standard.bool(forKey: "shouldOpenProgressTodayTab")
+        if shouldOpenTodayTab {
+            segmentControl.selectedSegmentIndex = 0
+            showTodayContent()
+            UserDefaults.standard.set(false, forKey: "shouldOpenProgressTodayTab")
+        }
+
         fetchActiveEnrollmentAndLog()
     }
     override func viewDidLayoutSubviews() {
@@ -134,15 +141,6 @@ class ProgressViewController: UIViewController {
         headerContainerView.isHidden = !isVisible
     }
     
-//    private func updateHeaderUI() {
-//        guard let selectedProgram = selectedProgram,
-//              let todayLog = todayLog else {
-//            headerStatusLabel.text = "Gün - / - · 0 gün streak 🔥"
-//            findProgramNameLabel()?.text = ""
-//            userProfileImageView.image = UIImage(named: "defaultAvatar")
-//            return
-//        }
-    
     private func updateHeaderUI() {
         guard let selectedProgram = selectedProgram,
               let todayLog = todayLog else {
@@ -157,7 +155,8 @@ class ProgressViewController: UIViewController {
 
         findProgramNameLabel()?.text = selectedProgram.name
 
-        let currentDayText = "Gün \(todayLog.dayNumber) / \(selectedProgram.durationDays)"
+        let displayDay = min(todayLog.dayNumber, selectedProgram.durationDays)
+        let currentDayText = "Gün \(displayDay) / \(selectedProgram.durationDays)"
         let streakText = "\(currentStreak) gün streak 🔥"
 
         headerStatusLabel.text = "\(currentDayText) · \(streakText)"
@@ -171,24 +170,6 @@ class ProgressViewController: UIViewController {
         userProfileImageView.layer.cornerRadius = userProfileImageView.bounds.width / 2
     }
         
-        
-
-//        // Program adı label'ını tag ile bulup güncelle
-//        findProgramNameLabel()?.text = selectedProgram.name
-//
-//        let currentDayText = "Gün \(todayLog.dayNumber) / \(selectedProgram.durationDays)"
-//        let streakText = "\(currentStreak) gün streak 🔥"
-//
-//        headerStatusLabel.text = "\(currentDayText) · \(streakText)"
-//
-//        if userProfileImageView.image == nil {
-//            userProfileImageView.image = UIImage(named: "defaultAvatar")
-//        }
-//
-//        userProfileImageView.contentMode = .scaleAspectFill
-//        userProfileImageView.clipsToBounds = true
-//        userProfileImageView.layer.cornerRadius = userProfileImageView.bounds.width / 2
-//    }
     
     private func getDefaultAvatar(for uid: String) -> UIImage? {
         
@@ -239,7 +220,7 @@ class ProgressViewController: UIViewController {
             remainingText: remainingTimeText
         )
     }
-    
+
     private func buildProgramProgressCardData() -> ProgramProgressCardData? {
         guard let selectedProgram = selectedProgram else {
             return nil
@@ -257,59 +238,47 @@ class ProgressViewController: UIViewController {
         let totalTaskCountPerDay = max(1, tasks.count)
         let totalPossibleTaskCompletions = totalDays * totalTaskCountPerDay
 
-        // Tüm günlük loglardan tamamlanan task sayılarını topla
-        let totalCompletedTaskCount = allDailyLogs.reduce(0) { partialResult, log in
-            partialResult + log.completedTaskIds.count
+        let validTaskIds = Set(tasks.map { $0.id })
+
+        // ✅ Sadece bu programa ait task id'lerini say
+        let totalCompletedTaskCount = allDailyLogs.reduce(0) { result, log in
+            let validCompletedIds = log.completedTaskIds.filter { validTaskIds.contains($0) }
+            return result + validCompletedIds.count
         }
 
-        // Genel program ilerleme yüzdesi
         let progressRatio = Double(totalCompletedTaskCount) / Double(totalPossibleTaskCompletions)
         let progressPercent = Int((progressRatio * 100.0).rounded())
 
-        // Kategori bazlı toplam tamamlanma sayıları
-        let morningCompletedCount = allDailyLogs.filter { $0.completedTaskIds.contains("morning") }.count
-        let dayCompletedCount = allDailyLogs.filter { $0.completedTaskIds.contains("day") }.count
-        let eveningCompletedCount = allDailyLogs.filter { $0.completedTaskIds.contains("evening") }.count
-        let weeklyCompletedCount = allDailyLogs.filter { $0.completedTaskIds.contains("weekly") }.count
-
-        // Legend için: 40 gün içinde o kategori kaç gün yapılmış?
-        let morningPercent = Int((Double(morningCompletedCount) / Double(totalDays) * 100.0).rounded())
-        let dayPercent = Int((Double(dayCompletedCount) / Double(totalDays) * 100.0).rounded())
-        let eveningPercent = Int((Double(eveningCompletedCount) / Double(totalDays) * 100.0).rounded())
-        let weeklyPercent = Int((Double(weeklyCompletedCount) / Double(totalDays) * 100.0).rounded())
-
-        // Donut segmentleri: tam program içindeki katkı
-        let morningChartValue = CGFloat(Double(morningCompletedCount) / Double(totalPossibleTaskCompletions))
-        let dayChartValue = CGFloat(Double(dayCompletedCount) / Double(totalPossibleTaskCompletions))
-        let eveningChartValue = CGFloat(Double(eveningCompletedCount) / Double(totalPossibleTaskCompletions))
-        let weeklyChartValue = CGFloat(Double(weeklyCompletedCount) / Double(totalPossibleTaskCompletions))
-
-        let legendItems: [ProgramProgressCardLegendItem] = [
-            ProgramProgressCardLegendItem(
-                color: UIColor(red: 241/255, green: 64/255, blue: 154/255, alpha: 1),
-                title: "Sabah Rutini",
-                valueText: "\(morningPercent)%",
-                chartValue: morningChartValue
-            ),
-            ProgramProgressCardLegendItem(
-                color: UIColor(red: 156/255, green: 77/255, blue: 255/255, alpha: 1),
-                title: "Öğle Aktiviteleri",
-                valueText: "\(dayPercent)%",
-                chartValue: dayChartValue
-            ),
-            ProgramProgressCardLegendItem(
-                color: UIColor(red: 92/255, green: 99/255, blue: 235/255, alpha: 1),
-                title: "Akşam Rutini",
-                valueText: "\(eveningPercent)%",
-                chartValue: eveningChartValue
-            ),
-            ProgramProgressCardLegendItem(
-                color: UIColor(red: 204/255, green: 70/255, blue: 255/255, alpha: 1),
-                title: "Haftalık Hedefler",
-                valueText: "\(weeklyPercent)%",
-                chartValue: weeklyChartValue
-            )
+        // ✅ Sabit morning/day/evening/weekly yok. Gelen task listesine göre çalışır.
+        let colorPalette: [UIColor] = [
+            UIColor(red: 241/255, green: 64/255, blue: 154/255, alpha: 1),
+            UIColor(red: 156/255, green: 77/255, blue: 255/255, alpha: 1),
+            UIColor(red: 92/255, green: 99/255, blue: 235/255, alpha: 1),
+            UIColor(red: 204/255, green: 70/255, blue: 255/255, alpha: 1),
+            UIColor(red: 255/255, green: 170/255, blue: 80/255, alpha: 1),
+            UIColor(red: 80/255, green: 190/255, blue: 180/255, alpha: 1),
+            UIColor(red: 120/255, green: 130/255, blue: 255/255, alpha: 1),
+            UIColor(red: 255/255, green: 120/255, blue: 150/255, alpha: 1)
         ]
+
+        let legendItems: [ProgramProgressCardLegendItem] = tasks.enumerated().map { index, task in
+            let completedCountForTask = allDailyLogs.filter { log in
+                log.completedTaskIds.contains(task.id)
+            }.count
+
+            // Bu görev, program günlerinin yüzde kaçında tamamlandı?
+            let taskPercent = Int((Double(completedCountForTask) / Double(totalDays) * 100.0).rounded())
+
+            // Bu görevin toplam program ilerlemesine katkısı
+            let chartValue = CGFloat(Double(completedCountForTask) / Double(totalPossibleTaskCompletions))
+
+            return ProgramProgressCardLegendItem(
+                color: colorPalette[index % colorPalette.count],
+                title: task.title,
+                valueText: "\(taskPercent)%",
+                chartValue: chartValue
+            )
+        }
 
         print("🟣 totalDays:", totalDays)
         print("🟣 totalTaskCountPerDay:", totalTaskCountPerDay)
@@ -317,17 +286,6 @@ class ProgressViewController: UIViewController {
         print("🟣 totalCompletedTaskCount:", totalCompletedTaskCount)
         print("🟣 progressPercent:", progressPercent)
 
-        print("🟣 allDailyLogs count:", allDailyLogs.count)
-        allDailyLogs.forEach { log in
-            print("🟣", log.dateKey, log.completedTaskIds)
-        }
-
-        print("🟣 morningCompletedCount:", morningCompletedCount)
-        print("🟣 dayCompletedCount:", dayCompletedCount)
-        print("🟣 eveningCompletedCount:", eveningCompletedCount)
-        print("🟣 weeklyCompletedCount:", weeklyCompletedCount)
-        
-        
         return ProgramProgressCardData(
             currentDay: currentDay,
             totalDays: totalDays,
@@ -335,9 +293,7 @@ class ProgressViewController: UIViewController {
             donutCenterPercent: progressPercent,
             legendItems: legendItems
         )
-        
     }
-    
 
     private func updateProgramProgressCardUI() {
         guard let data = buildProgramProgressCardData() else { return }
@@ -388,6 +344,8 @@ class ProgressViewController: UIViewController {
     }
     
     private func toggleCompletion(for taskId: String) {
+        
+        
         guard let userId = Auth.auth().currentUser?.uid else {
                    print("🔴 toggleCompletion: userId yok")
                    return
@@ -410,9 +368,27 @@ class ProgressViewController: UIViewController {
         } else {
             updatedTaskIds.append(taskId)
         }
-
+        
+        
+        
         let totalTaskCount = tasks.count
         let completedCount = updatedTaskIds.count
+
+        let isTryingToCompleteTask = !todayLog.completedTaskIds.contains(taskId)
+        let isLastTask = completedCount == totalTaskCount
+        let programDuration = selectedProgram?.durationDays ?? 0
+        let isLastDay = todayLog.dayNumber >= programDuration
+
+        let shouldSkipPopup = UserDefaults.standard.bool(forKey: "skipCompletionPopupOnce")
+
+        if shouldSkipPopup {
+            UserDefaults.standard.set(false, forKey: "skipCompletionPopupOnce")
+        }
+
+        if !shouldSkipPopup && isTryingToCompleteTask && isLastTask && isLastDay {
+            showCompletionPopup(for: taskId)
+            return
+        }
 
         let completionRate = totalTaskCount > 0
             ? Double(completedCount) / Double(totalTaskCount)
@@ -493,6 +469,7 @@ class ProgressViewController: UIViewController {
                                         self.updateHeaderUI()
                                         self.updateBottomSummaryUI()
                                         self.updateProgramProgressCardUI()
+                                        self.updateProgramBadgeCardUI()
                                         self.saveProgressToCache()
                                         print("✅ User streak güncellendi:", streakData.currentStreak)
                                     }
@@ -507,20 +484,6 @@ class ProgressViewController: UIViewController {
                     print("✅ completedTaskIds:", updatedLog.completedTaskIds)
                     print("✅ isCompleted:", updatedLog.isCompleted)
 
-//                    self.enrollmentRepository.refreshEnrollmentProgressSummary(
-//                        userId: userId,
-//                        enrollment: activeEnrollment
-//                    ) { result in
-//                        DispatchQueue.main.async {
-//                            switch result {
-//                            case .success:
-//                                print("✅ Enrollment summary güncellendi")
-//
-//                            case .failure(let error):
-//                                print("🔴 Enrollment summary güncellenemedi:", error.localizedDescription)
-//                            }
-//                        }
-//                    }
                     
                     self.enrollmentRepository.refreshEnrollmentProgressSummary(
                         userId: userId,
@@ -560,6 +523,28 @@ class ProgressViewController: UIViewController {
                 }
             }
         }
+    }
+    
+    
+    private func showCompletionPopup(for taskId: String) {
+        
+        let popup = ConfirmationPopupView()
+
+        popup.titleText = "Son adımdasın ✨"
+        popup.messageText = "Bu görevi tamamladığında program bitecek. Devam etmek istiyor musun?"
+        popup.cancelTitle = "Vazgeç"
+        popup.confirmTitle = "Devam et"
+
+        popup.onConfirm = { [weak self] in
+            UserDefaults.standard.set(true, forKey: "skipCompletionPopupOnce")
+            self?.toggleCompletion(for: taskId)
+            self?.showProgramCompletionScreen()
+        }
+        popup.onCancel = {
+            // hiçbir şey yapma
+        }
+
+        popup.present(in: self.view)
     }
     
     private func syncPendingProgressActions() {
@@ -1056,7 +1041,7 @@ class ProgressViewController: UIViewController {
         programBadgeCardView.configure(with: data)
     }
     
-    private func buildProgramBadgeCardData() -> ProgramBadgeCardData? {
+    private func buildProgramBadgeCardData() -> ProgramBadgeCardData?  {
         guard let selectedProgram = selectedProgram else {
             return nil
         }
@@ -1116,6 +1101,10 @@ class ProgressViewController: UIViewController {
                     }
 
                     self.loadTasks(for: matchedProgram)
+                    
+                    if self.segmentControl.selectedSegmentIndex == 0 {
+                        self.showTodayContent()
+                    }
 
                     print("🟢 Progress: enrollment bulundu:", enrollment.enrollmentId)
 
@@ -1206,7 +1195,19 @@ class ProgressViewController: UIViewController {
         return button
     }()
     
-    
+    private func showProgramCompletionScreen() {
+        guard let userId = Auth.auth().currentUser?.uid,
+              let activeEnrollment = activeEnrollment else { return }
+
+        let vc = ProgramCompletionViewController()
+        vc.programTitle = selectedProgram?.name
+        vc.programImageName = selectedProgram?.imageName
+        vc.userId = userId
+        vc.enrollmentId = activeEnrollment.enrollmentId
+
+        vc.modalPresentationStyle = .fullScreen
+        present(vc, animated: true)
+    }
     
     
     
