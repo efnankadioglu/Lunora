@@ -177,6 +177,29 @@ class ProgramListViewController: UIViewController {
 
         astrologyCard.addGestureRecognizer(tapGesture)
     }
+//    @objc private func didTapAstrologyCard() {
+//        guard let todaySkyData = todaySkyData else {
+//            showSimpleAlert(
+//                title: "Gökyüzü bilgisi hazır değil",
+//                message: "Bugünün astroloji verisi henüz yüklenmedi."
+//            )
+//            return
+//        }
+//
+//        let displayData = DailySkyService.shared.makeDisplayData(from: todaySkyData)
+//
+//        let vc = DailySkyViewController(displayData: displayData)
+//        vc.hidesBottomBarWhenPushed = true
+//
+//        if let navigationController = navigationController {
+//            navigationController.pushViewController(vc, animated: true)
+//        } else {
+//            vc.modalPresentationStyle = .fullScreen
+//            present(vc, animated: true)
+//        }
+//    }
+    
+    
     @objc private func didTapAstrologyCard() {
         guard let todaySkyData = todaySkyData else {
             showSimpleAlert(
@@ -186,6 +209,10 @@ class ProgramListViewController: UIViewController {
             return
         }
 
+        openDailySkyDetail(with: todaySkyData)
+    }
+    
+    private func openDailySkyDetail(with todaySkyData: DailyAstrology) {
         let displayData = DailySkyService.shared.makeDisplayData(from: todaySkyData)
 
         let vc = DailySkyViewController(displayData: displayData)
@@ -251,20 +278,48 @@ class ProgramListViewController: UIViewController {
             return formatter.string(from: Date())
         }
         
-        private func updateAstrologyUI(data: [String: Any]) {
-            let moonSign = data["moon_sign"] as? String ?? "Ay Burcu"
-            let events = data["celestial_events"] as? [String] ?? []
-            let score = data["suitability_score"] as? Int ?? 0
-            let date = data["date"] as? String ?? ""
+//        private func updateAstrologyUI(data: [String: Any]) {
+//            let moonSign = data["moon_sign"] as? String ?? "Ay Burcu"
+//            let events = data["celestial_events"] as? [String] ?? []
+//            let score = data["suitability_score"] as? Int ?? 0
+//            let date = data["date"] as? String ?? ""
+//
+//            moonSignLabel.text = "🌕 \(moonSign)"
+//            suitabilityProgressView.progress = Float(score) / 10.0
+//
+//            let percentage = generateStablePercentage(score: score, date: date)
+//            suitabilityLabel.text = "Bugünün enerjisi %\(percentage) seninle"
+//
+//            updateEventButtons(events: events)
+//        }
+    
+    private func updateAstrologyUI(data: [String: Any]) {
+        let moonSign = data["moon_sign"] as? String ?? "Ay Burcu"
+        let moonPhase = data["moon_phase"] as? String ?? "Ay fazı"
+        let dailyComment = data["daily_comment"] as? String ?? "Bugünün gökyüzü yorumu hazırlanıyor."
+        let events = data["celestial_events"] as? [String] ?? []
+        let score = data["suitability_score"] as? Int ?? 0
+        let date = data["date"] as? String ?? getTodayDateString()
 
-            moonSignLabel.text = "🌕 \(moonSign)"
-            suitabilityProgressView.progress = Float(score) / 10.0
+        let dailyAstrology = DailyAstrology(
+            date: date,
+            moonPhase: moonPhase,
+            dailyComment: dailyComment,
+            celestialEvents: events,
+            suitabilityScore: score,
+            moonSign: moonSign
+        )
 
-            let percentage = generateStablePercentage(score: score, date: date)
-            suitabilityLabel.text = "Bugünün enerjisi %\(percentage) seninle"
+        self.todaySkyData = dailyAstrology
 
-            updateEventButtons(events: events)
-        }
+        moonSignLabel.text = "🌕 \(moonSign)"
+        suitabilityProgressView.progress = Float(score) / 10.0
+
+        let percentage = generateStablePercentage(score: score, date: date)
+        suitabilityLabel.text = "Bugünün enerjisi %\(percentage) seninle"
+
+        updateEventButtons(events: events)
+    }
         
         private func generateStablePercentage(score: Int, date: String) -> Int {
             let base = score * 10

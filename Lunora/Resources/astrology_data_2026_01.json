@@ -915,7 +915,7 @@
     "date": "2026-05-14",
     "moon_phase": "Küçülen Ay",
     "daily_comment": "Mars Koç burcuna geçiyor! Fiziksel enerjin artıyor ama Yeniay öncesi bu gücü hazırlık yapmak için kullanmalısın.",
-    "celestial_events": [],
+    "celestial_events": ["Ay-Satürn Olumlu Açı"],
     "suitability_score": 5,
     "moon_sign": "Koç"
   },
