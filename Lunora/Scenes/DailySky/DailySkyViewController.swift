@@ -333,34 +333,6 @@ private func addActionsCard() {
             )
         )
     }
-//    private func addExtraEvents() {
-//        guard !displayData.extraEventInsights.isEmpty else {
-//            return
-//        }
-//
-//        let sectionLabel = UILabel()
-//        sectionLabel.text = "Gökyüzünde ayrıca"
-//        sectionLabel.font = .systemFont(ofSize: 22, weight: .bold)
-//        sectionLabel.textColor = UIColor(hex: "#2D2430")
-//        sectionLabel.numberOfLines = 0
-//
-//        stackView.addArrangedSubview(sectionLabel)
-//
-//        for event in displayData.extraEventInsights {
-//            stackView.addArrangedSubview(
-//                makeIconCard(
-//                    icon: "☾",
-//                    iconBackgroundColor: UIColor(hex: "#C89AF5"),
-//                    title: event.title,
-//                    subtitle: event.subtitle,
-//                    body: event.content.meaning,
-//                    backgroundColor: UIColor.white.withAlphaComponent(0.82),
-//                    bulletItems: nil,
-//                    bulletColor: nil
-//                )
-//            )
-//        }
-//    }
     
     private func addExtraEvents() {
         guard !displayData.extraEventInsights.isEmpty else {

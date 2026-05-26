@@ -14,6 +14,7 @@
 		59A6E5AB2EC7760C003A4B5C /* FirebaseFirestore in Frameworks */ = {isa = PBXBuildFile; productRef = 59A6E5AA2EC7760C003A4B5C /* FirebaseFirestore */; };
 		59A6E5AD2EC7760C003A4B5C /* FirebaseStorage in Frameworks */ = {isa = PBXBuildFile; productRef = 59A6E5AC2EC7760C003A4B5C /* FirebaseStorage */; };
 		59AB56102EBE398600A276F0 /* TOCropViewController in Frameworks */ = {isa = PBXBuildFile; productRef = 59AB560F2EBE398600A276F0 /* TOCropViewController */; };
+		59CE91C02FB61F510059E8F3 /* FirebaseFunctions in Frameworks */ = {isa = PBXBuildFile; productRef = 59CE91BF2FB61F510059E8F3 /* FirebaseFunctions */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -78,6 +79,7 @@
 				5961DC052EB3953B00A8C049 /* FirebaseCore in Frameworks */,
 				5961DC032EB3953B00A8C049 /* FirebaseAuth in Frameworks */,
 				59AB56102EBE398600A276F0 /* TOCropViewController in Frameworks */,
+				59CE91C02FB61F510059E8F3 /* FirebaseFunctions in Frameworks */,
 				59A6E5AB2EC7760C003A4B5C /* FirebaseFirestore in Frameworks */,
 				5961DC082EB395DA00A8C049 /* GoogleSignIn in Frameworks */,
 				59A55C8F2F73F2850040A4F6 /* FirebaseDatabase in Frameworks */,
@@ -157,6 +159,7 @@
 				59A6E5AA2EC7760C003A4B5C /* FirebaseFirestore */,
 				59A6E5AC2EC7760C003A4B5C /* FirebaseStorage */,
 				59A55C8E2F73F2850040A4F6 /* FirebaseDatabase */,
+				59CE91BF2FB61F510059E8F3 /* FirebaseFunctions */,
 			);
 			productName = Lunora;
 			productReference = 59911ACD2EA50F0D001D8148 /* Lunora.app */;
@@ -671,6 +674,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 59AB560E2EBE398600A276F0 /* XCRemoteSwiftPackageReference "TOCropViewController" */;
 			productName = TOCropViewController;
+		};
+		59CE91BF2FB61F510059E8F3 /* FirebaseFunctions */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5961DC012EB3953B00A8C049 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseFunctions;
 		};
 /* End XCSwiftPackageProductDependency section */
 	};

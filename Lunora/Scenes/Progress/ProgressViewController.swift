@@ -1210,13 +1210,4 @@ class ProgressViewController: UIViewController {
     }
     
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
     }

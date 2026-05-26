@@ -17,6 +17,7 @@ final class ProfileViewController: UIViewController {
     private let enrollmentRepository = EnrollmentRepository()
 
     private var hasActiveJourney: Bool = false
+    private var isLoadingDailyInsight = false
 
     private let pageBackgroundColor = UIColor(named: "lunoraPink") ?? UIColor(
         red: 246/255,
@@ -65,6 +66,11 @@ final class ProfileViewController: UIViewController {
     private let elementDescriptionLabel = UILabel()
 
     private let insightCardView = UIView()
+    private let insightSectionTitleLabel = UILabel()
+    private let insightTitleLabel = UILabel()
+    private let insightSubtitleLabel = UILabel()
+    private let insightBodyLabel = UILabel()
+
     private let settingsCardView = UIView()
 
     // MARK: - Lifecycle
@@ -84,13 +90,11 @@ final class ProfileViewController: UIViewController {
 
         loadProfileInfo()
         loadProfileDashboardData()
+        loadDailyInsight()
     }
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-
-        headerGradientLayer.frame = headerContainerView.bounds
-        headerGradientLayer.cornerRadius = 32
 
         avatarContainerView.layer.cornerRadius = avatarContainerView.bounds.width / 2
         avatarImageView.layer.cornerRadius = avatarImageView.bounds.width / 2
@@ -155,25 +159,18 @@ final class ProfileViewController: UIViewController {
 
     private func setupHeader() {
         headerContainerView.translatesAutoresizingMaskIntoConstraints = false
-        headerContainerView.layer.cornerRadius = 32
-        headerContainerView.clipsToBounds = true
-
-        headerGradientLayer.colors = [
-            UIColor(hex: "#FFE6F3").cgColor,
-            UIColor(hex: "#FFB6DB").cgColor,
-            UIColor(hex: "#FF70B8").cgColor
-        ]
-        headerGradientLayer.locations = [0.0, 0.48, 1.0]
-        headerGradientLayer.type = .radial
-        headerGradientLayer.startPoint = CGPoint(x: 0.5, y: 0.5)
-        headerGradientLayer.endPoint = CGPoint(x: 1.0, y: 1.0)
-
-        headerContainerView.layer.insertSublayer(headerGradientLayer, at: 0)
+        headerContainerView.backgroundColor = .white
+        headerContainerView.layer.cornerRadius = 24
+        headerContainerView.layer.shadowColor = UIColor.black.cgColor
+        headerContainerView.layer.shadowOpacity = 0.06
+        headerContainerView.layer.shadowRadius = 10
+        headerContainerView.layer.shadowOffset = CGSize(width: 0, height: 5)
+        headerContainerView.clipsToBounds = false
 
         avatarContainerView.translatesAutoresizingMaskIntoConstraints = false
-        avatarContainerView.backgroundColor = UIColor.white.withAlphaComponent(0.35)
-        avatarContainerView.layer.borderWidth = 2
-        avatarContainerView.layer.borderColor = UIColor.white.withAlphaComponent(0.65).cgColor
+        avatarContainerView.backgroundColor = UIColor(hex: "#FFF4FA")
+        avatarContainerView.layer.borderWidth = 3
+        avatarContainerView.layer.borderColor = UIColor(hex: "#F3D4E8").cgColor
         avatarContainerView.clipsToBounds = true
 
         avatarImageView.translatesAutoresizingMaskIntoConstraints = false
@@ -184,16 +181,16 @@ final class ProfileViewController: UIViewController {
 
         avatarPlaceholderLabel.translatesAutoresizingMaskIntoConstraints = false
         avatarPlaceholderLabel.text = "✿"
-        avatarPlaceholderLabel.font = .systemFont(ofSize: 42, weight: .semibold)
+        avatarPlaceholderLabel.font = .systemFont(ofSize: 36, weight: .semibold)
         avatarPlaceholderLabel.textAlignment = .center
-        avatarPlaceholderLabel.textColor = .white
+        avatarPlaceholderLabel.textColor = UIColor(hex: "#E85A9F")
 
         avatarContainerView.addSubview(avatarImageView)
         avatarContainerView.addSubview(avatarPlaceholderLabel)
 
         NSLayoutConstraint.activate([
-            avatarContainerView.widthAnchor.constraint(equalToConstant: 84),
-            avatarContainerView.heightAnchor.constraint(equalToConstant: 84),
+            avatarContainerView.widthAnchor.constraint(equalToConstant: 76),
+            avatarContainerView.heightAnchor.constraint(equalToConstant: 76),
 
             avatarImageView.topAnchor.constraint(equalTo: avatarContainerView.topAnchor),
             avatarImageView.leadingAnchor.constraint(equalTo: avatarContainerView.leadingAnchor),
@@ -205,20 +202,20 @@ final class ProfileViewController: UIViewController {
         ])
 
         nameLabel.text = "Lunora Soul"
-        nameLabel.font = .systemFont(ofSize: 28, weight: .bold)
-        nameLabel.textColor = .white
+        nameLabel.font = .systemFont(ofSize: 22, weight: .bold)
+        nameLabel.textColor = UIColor(hex: "#171219")
         nameLabel.textAlignment = .center
-        nameLabel.numberOfLines = 2
+        nameLabel.numberOfLines = 1
 
         usernameLabel.text = "@lunora"
-        usernameLabel.font = .systemFont(ofSize: 14, weight: .semibold)
-        usernameLabel.textColor = UIColor.white.withAlphaComponent(0.85)
+        usernameLabel.font = .systemFont(ofSize: 14, weight: .medium)
+        usernameLabel.textColor = UIColor(hex: "#706575")
         usernameLabel.textAlignment = .center
         usernameLabel.numberOfLines = 1
 
         motivationLabel.text = "You're doing beautifully, keep shining ✨"
-        motivationLabel.font = .systemFont(ofSize: 15, weight: .medium)
-        motivationLabel.textColor = UIColor.white.withAlphaComponent(0.95)
+        motivationLabel.font = .systemFont(ofSize: 14, weight: .semibold)
+        motivationLabel.textColor = UIColor(hex: "#E85A9F")
         motivationLabel.textAlignment = .center
         motivationLabel.numberOfLines = 2
 
@@ -231,17 +228,17 @@ final class ProfileViewController: UIViewController {
         headerStack.translatesAutoresizingMaskIntoConstraints = false
         headerStack.axis = .vertical
         headerStack.alignment = .center
-        headerStack.spacing = 8
+        headerStack.spacing = 6
 
         headerContainerView.addSubview(headerStack)
 
         NSLayoutConstraint.activate([
-            headerContainerView.heightAnchor.constraint(greaterThanOrEqualToConstant: 230),
+            headerContainerView.heightAnchor.constraint(greaterThanOrEqualToConstant: 170),
 
-            headerStack.topAnchor.constraint(equalTo: headerContainerView.topAnchor, constant: 28),
+            headerStack.topAnchor.constraint(equalTo: headerContainerView.topAnchor, constant: 20),
             headerStack.leadingAnchor.constraint(equalTo: headerContainerView.leadingAnchor, constant: 24),
             headerStack.trailingAnchor.constraint(equalTo: headerContainerView.trailingAnchor, constant: -24),
-            headerStack.bottomAnchor.constraint(equalTo: headerContainerView.bottomAnchor, constant: -26)
+            headerStack.bottomAnchor.constraint(equalTo: headerContainerView.bottomAnchor, constant: -20)
         ])
 
         mainStackView.addArrangedSubview(headerContainerView)
@@ -442,7 +439,7 @@ final class ProfileViewController: UIViewController {
 
         mainStackView.addArrangedSubview(elementCardView)
     }
-
+    
     private func setupInsightCard() {
         insightCardView.backgroundColor = .white
         insightCardView.layer.cornerRadius = 26
@@ -451,26 +448,32 @@ final class ProfileViewController: UIViewController {
         insightCardView.layer.shadowRadius = 14
         insightCardView.layer.shadowOffset = CGSize(width: 0, height: 8)
 
-        let titleLabel = UILabel()
-        titleLabel.text = "Today’s Insight"
-        titleLabel.font = .systemFont(ofSize: 18, weight: .bold)
-        titleLabel.textColor = UIColor(hex: "#2D2430")
+        insightSectionTitleLabel.text = "Bugünün İçgörüsü"
+        insightSectionTitleLabel.font = .systemFont(ofSize: 18, weight: .bold)
+        insightSectionTitleLabel.textColor = UIColor(hex: "#2D2430")
+        insightSectionTitleLabel.numberOfLines = 1
 
-        let insightTitleLabel = UILabel()
-        insightTitleLabel.text = "Emotional Awareness"
+        insightTitleLabel.text = "İç sesine dön"
         insightTitleLabel.font = .systemFont(ofSize: 16, weight: .semibold)
         insightTitleLabel.textColor = UIColor(hex: "#E85A9F")
+        insightTitleLabel.numberOfLines = 2
 
-        let descriptionLabel = UILabel()
-        descriptionLabel.text = "Today is a gentle reminder to honor your feelings. Take a moment to breathe and acknowledge what you're experiencing."
-        descriptionLabel.font = .systemFont(ofSize: 14, weight: .medium)
-        descriptionLabel.textColor = UIColor(hex: "#7B6A80")
-        descriptionLabel.numberOfLines = 0
+        insightSubtitleLabel.text = "Küçük adım da yeterli."
+        insightSubtitleLabel.font = .systemFont(ofSize: 14, weight: .semibold)
+        insightSubtitleLabel.textColor = UIColor(hex: "#9A7FA3")
+        insightSubtitleLabel.numberOfLines = 2
+
+        insightBodyLabel.text = "Bugün kendine yüklenmeden ilerlemen yeterli. Bir görevi bilinçle tamamlamak bile yolculuğunu canlı tutar."
+        insightBodyLabel.font = .systemFont(ofSize: 14, weight: .medium)
+        insightBodyLabel.textColor = UIColor(hex: "#7B6A80")
+        insightBodyLabel.numberOfLines = 0
+        insightBodyLabel.setLineSpacing(4)
 
         let stack = UIStackView(arrangedSubviews: [
-            titleLabel,
+            insightSectionTitleLabel,
             insightTitleLabel,
-            descriptionLabel
+            insightSubtitleLabel,
+            insightBodyLabel
         ])
         stack.translatesAutoresizingMaskIntoConstraints = false
         stack.axis = .vertical
@@ -487,6 +490,8 @@ final class ProfileViewController: UIViewController {
 
         mainStackView.addArrangedSubview(insightCardView)
     }
+    
+    
 
     private func setupSettingsCard() {
         settingsCardView.backgroundColor = .white
@@ -681,6 +686,67 @@ final class ProfileViewController: UIViewController {
         }
 
         return motivation
+    }
+    
+    // MARK: - Daily Insight
+
+    private func loadDailyInsight() {
+        guard !isLoadingDailyInsight else {
+            print("🟡 DailyInsight zaten yükleniyor, tekrar çağrı engellendi")
+            return
+        }
+
+        guard let userId = Auth.auth().currentUser?.uid else {
+            print("🔴 DailyInsight: userId yok")
+            applyDailyInsightFallback()
+            return
+        }
+
+        isLoadingDailyInsight = true
+        applyDailyInsightLoadingState()
+
+        DailyInsightService.shared.fetchTodayInsight(userId: userId) { [weak self] result in
+            DispatchQueue.main.async {
+                guard let self = self else { return }
+
+                self.isLoadingDailyInsight = false
+
+                switch result {
+                case .success(let insight):
+                    self.configureDailyInsight(with: insight)
+
+                case .failure(let error):
+                    print("🔴 DailyInsight alınamadı:", error.localizedDescription)
+                    self.applyDailyInsightFallback()
+                }
+            }
+        }
+    }
+
+    private func applyDailyInsightLoadingState() {
+        insightTitleLabel.text = "İçgörün hazırlanıyor"
+        insightSubtitleLabel.text = "Bugünün enerjisi okunuyor."
+        insightBodyLabel.text = "Kısa bir anda, yolculuğuna eşlik edecek mesaj hazırlanıyor."
+    }
+
+    private func configureDailyInsight(with insight: DailyInsight) {
+        insightTitleLabel.text = insight.title
+        insightSubtitleLabel.text = insight.subtitle
+        insightBodyLabel.text = insight.body
+        insightBodyLabel.setLineSpacing(4)
+    }
+
+    private func applyDailyInsightFallback() {
+        let dateKey = makeTodayDateKeyForProfile()
+        let fallback = DailyInsight.fallback(dateKey: dateKey)
+        configureDailyInsight(with: fallback)
+    }
+
+    private func makeTodayDateKeyForProfile() -> String {
+        let formatter = DateFormatter()
+        formatter.dateFormat = "yyyy-MM-dd"
+        formatter.timeZone = TimeZone.current
+        return formatter.string(from: Date())
     }
 
     // MARK: - Real Dashboard Data
@@ -1171,5 +1237,22 @@ final class ProfileViewController: UIViewController {
         ])
 
         return rowView
+    }
+}
+private extension UILabel {
+    func setLineSpacing(_ spacing: CGFloat) {
+        guard let text = self.text else { return }
+
+        let paragraphStyle = NSMutableParagraphStyle()
+        paragraphStyle.lineSpacing = spacing
+
+        let attributedString = NSMutableAttributedString(string: text)
+        attributedString.addAttribute(
+            .paragraphStyle,
+            value: paragraphStyle,
+            range: NSRange(location: 0, length: attributedString.length)
+        )
+
+        self.attributedText = attributedString
     }
 }

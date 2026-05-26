@@ -14,6 +14,7 @@ enum FirestoreCollection {
     static let programEnrollments = "program_enrollments"
     static let dailyLogs = "daily_logs"
     static let earnedBadges = "earned_badges"
+    static let dailyInsights = "dailyInsights"
 }
 
 enum FirestorePath {
@@ -44,5 +45,8 @@ enum FirestorePath {
     
     static func badgeDocument(badgeId: String) -> String {
         return "\(FirestoreCollection.badges)/\(badgeId)"
+    }
+    static func userDailyInsights(userId: String) -> String {
+        return "\(FirestoreCollection.users)/\(userId)/\(FirestoreCollection.dailyInsights)"
     }
 }

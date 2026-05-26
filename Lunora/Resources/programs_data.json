@@ -2,185 +2,328 @@
   "programs": [
       {
           
-            "id": "test_1",
-            "name": "Test Programı",
-            "difficultyLevel": 1,
-            "difficultyScale": 10,
-            "durationDays": 1,
-            "durationText": "1 gün",
-            "imageName": "auraimg1",
-            "badgeDescription": "Test rozeti kazandın.",
-            "elements": "🌍TOPRAK",
+          "id": "test_1",
+                      "name": "Bir Günlük Sakin Başlangıç",
+                      "difficultyLevel": 1,
+                      "difficultyScale": 10,
+                      "durationDays": 1,
+                      "durationText": "1 gün",
+                      "imageName": "auraimg1",
+                      "badgeDescription": "Kendine kısa bir sakinlik alanı açtığını gösterir.",
+                      "elements": "🌍TOPRAK",
 
-            "version": 1,
-            "isActive": true,
-            "badgeId": "badge_test_1",
+                      "version": 1,
+                      "isActive": true,
+                      "badgeId": "badge_test_1",
 
-            "completionRuleType": "strict_daily_threshold",
-            "dailyTaskCompletionThreshold": 0.5,
-            "allowRestart": true,
+                      "completionRuleType": "strict_daily_threshold",
+                      "dailyTaskCompletionThreshold": 0.5,
+                      "allowRestart": true,
 
-            "dailyDurationText": "Test süresi",
+                      "dailyDurationText": "Günlük süre: 5-10 dakika",
 
-            "coreProblems": ["Test"],
-            "oneSentenceSummary": "Bu sadece test programıdır.",
-            "fullText": ["Test programı açıklaması"],
+                      "coreProblems": [
+                        "Güne dağınık başlama",
+                        "Kendine alan açmayı erteleme"
+                      ],
+                      "oneSentenceSummary": "1 gün boyunca kendine küçük bir sakinlik alanı açarsın; nefes, farkındalık ve kısa yazı pratiğiyle gününü daha yumuşak karşılamayı denersin.",
+                      "fullText": [
+                        "🌿 Bu program, tek bir gün içinde kendine küçük ama bilinçli bir alan açman için hazırlandı.",
+                        "Amaç büyük bir değişim yaratmak değil; bugün bedenini, zihnini ve iç sesini daha sakin fark etmektir.",
+                        "🌍 Toprak elementi bu programda düzen, sakinlik ve bedene dönme temasını destekler.",
+                        "Gün içinde kısa bir durak vermek, zihnin dağınık olduğu anlarda yeniden merkeze dönmene yardımcı olabilir.",
+                        "Bu programı mükemmel yapmak zorunda değilsin. Bugün sadece kendine birkaç dakika ayırman bile yeterli bir başlangıçtır."
+                      ],
 
-            "dailyTasks": [
-              {
-                "id": "morning",
-                "title": "Sabah Görevi",
-                "shortDescription": "Test",
-                "details": ["Test"]
-              },
-              {
-                "id": "day",
-                "title": "Gün Görevi",
-                "shortDescription": "Test",
-                "details": ["Test"]
-              },
-              {
-                "id": "evening",
-                "title": "Akşam Görevi",
-                "shortDescription": "Test",
-                "details": ["Test"]
-              },
-              {
-                "id": "weekly",
-                "title": "Haftalık Görev",
-                "shortDescription": "Test",
-                "details": ["Test"]
-              },
-              {
-                "id": "extra1",
-                "title": "Ekstra Görev 1",
-                "shortDescription": "Test",
-                "details": ["Test"]
-              },
-              {
-                "id": "extra2",
-                "title": "Ekstra Görev 2",
-                "shortDescription": "Test",
-                "details": ["Test"]
-              }
-            ],
+                      "dailyTasks": [
+                        {
+                          "id": "morning",
+                          "title": "Sabah Sakin Niyet",
+                          "shortDescription": "Güne küçük bir niyetle daha yumuşak başla.",
+                          "details": [
+                            "Güne başlamadan önce 1-2 dakika sessizce dur",
+                            "Kendine sor: “Bugün kendime nasıl davranmak istiyorum?”",
+                            "Kısa ve gerçekçi bir niyet seç",
+                            "Niyetini içinden yavaşça tekrar et",
+                            "Örnek: “Bugün kendime biraz daha nazik yaklaşacağım.”"
+                          ]
+                        },
+                        {
+                          "id": "day",
+                          "title": "Gün İçinde Topraklanma",
+                          "shortDescription": "Gün içinde kısa bir durak vererek bedene ve ana dön.",
+                          "details": [
+                            "Gün içinde bir kez kısa bir mola ver",
+                            "Ayaklarının yere temasını fark et",
+                            "Omuzlarını gevşet ve 3 derin nefes al",
+                            "Bulunduğun ortamda gördüğün 3 şeyi fark et",
+                            "Kendine “Şu an buradayım” de"
+                          ]
+                        },
+                        {
+                          "id": "evening",
+                          "title": "Akşam Kısa Yazı",
+                          "shortDescription": "Günü birkaç cümleyle yargısızca tamamla.",
+                          "details": [
+                            "Bugün kendinle ilgili fark ettiğin bir şeyi yaz",
+                            "Seni sakinleştiren küçük bir anı not et",
+                            "Zorlandığın bir an varsa bunu yargılamadan yaz",
+                            "Bugün kendine verdiğin küçük desteği fark et",
+                            "Yazının uzun olması gerekmez, dürüst olması yeterlidir"
+                          ]
+                        },
+                        {
+                          "id": "weekly",
+                          "title": "Günün İçsel Özeti",
+                          "shortDescription": "Bugünün sende bıraktığı küçük farkındalığı gözlemle.",
+                          "details": [
+                            "Bugün en çok hangi duygu öne çıktı?",
+                            "Hangi küçük pratik sana iyi geldi?",
+                            "Kendine biraz daha nazik yaklaşabildiğin bir an oldu mu?",
+                            "Yarın da taşımak istediğin küçük bir niyet var mı?",
+                            "Cevabını kısa ve içten tut"
+                          ]
+                        },
+                        {
+                          "id": "extra1",
+                          "title": "Bir Nefeslik Alan",
+                          "shortDescription": "Yoğun hissettiğinde kendine kısa bir nefes alanı aç.",
+                          "details": [
+                            "Gözlerini kapatmadan sadece nefesine odaklan",
+                            "Burnundan yavaşça nefes al",
+                            "Nefesi verirken bedenindeki ağırlığı fark et",
+                            "Bunu 3 tur tekrar et",
+                            "Kendine “Şu an yavaşlayabilirim” de"
+                          ]
+                        },
+                        {
+                          "id": "extra2",
+                          "title": "Nazik İç Ses",
+                          "shortDescription": "Gün içinde kendine destekleyici bir cümle söyle.",
+                          "details": [
+                            "Bugün kendine söylemek istediğin nazik bir cümle seç",
+                            "Cümlenin gerçekçi ve sade olmasına dikkat et",
+                            "Örnek: “Bugün elimden gelen kadarını yapmam yeterli.”",
+                            "Bu cümleyi gün içinde bir kez hatırla",
+                            "Kendini zorlamak yerine desteklemeye odaklan"
+                          ]
+                        }
+                      ],
 
-            "weeklyReflection": {
-              "title": "Test",
-              "shortDescription": "Test",
-              "details": ["Test"]
-            },
-            "goldenRules": {
-              "title": "Test",
-              "shortDescription": "Test",
-              "details": ["Test"]
-            },
-            "realImpact": {
-              "title": "Test",
-              "shortDescription": "Test",
-              "details": ["Test"]
-            },
-            "dailyPlanSummary": {
-              "title": "Test",
-              "shortDescription": "Test",
-              "details": ["Test"]
-            },
-            "processResult": {
-              "title": "Test",
-              "shortDescription": "Test",
-              "details": ["Test"]
-            }
+                      "weeklyReflection": {
+                        "title": "Günün Kısa Yansıması",
+                        "shortDescription": "Bugünün sende bıraktığı küçük içsel izi fark et.",
+                        "details": [
+                          "Bugün kendine nasıl davrandığını gözlemle",
+                          "Sakinleşmeni kolaylaştıran bir anı hatırla",
+                          "Zorlandığın anlarda kendine nasıl yaklaştığını fark et",
+                          "Yarın için küçük ve nazik bir niyet seç"
+                        ]
+                      },
+                      "goldenRules": {
+                        "title": "Sakin Başlangıç Kuralları",
+                        "shortDescription": "Bu kısa süreçte kendini zorlamadan ilerle.",
+                        "details": [
+                          "Mükemmel uygulama bekleme",
+                          "Bir dakikalık farkındalığın bile değerli olduğunu hatırla",
+                          "Dağınık hissettiğin anları başarısızlık gibi görme",
+                          "Kendini düzeltmeye değil, kendini fark etmeye odaklan",
+                          "Bugün küçük bir alan açman yeterlidir"
+                        ]
+                      },
+                      "realImpact": {
+                        "title": "Küçük Alanın Etkisi",
+                        "shortDescription": "Asıl etki, gün içinde kendine verdiğin kısa duraklarda oluşur.",
+                        "details": [
+                          "Kısa bir nefes zihnini yumuşatabilir",
+                          "Topraklanma pratiği bedene dönmeni kolaylaştırır",
+                          "Kısa yazı kendini daha net görmeni sağlar",
+                          "Nazik iç ses günün tonunu değiştirebilir"
+                        ]
+                      },
+                      "dailyPlanSummary": {
+                        "title": "Bir Günlük Akış",
+                        "shortDescription": "Gününü kısa, sade ve uygulanabilir bir sakinlik pratiğiyle destekle.",
+                        "details": [
+                          "Sabah küçük bir niyet belirle",
+                          "Gün içinde kısa bir topraklanma molası ver",
+                          "Akşam birkaç cümlelik değerlendirme yap",
+                          "Yoğun hissettiğinde bir nefeslik alan aç",
+                          "Kendine nazik bir cümleyle destek ol"
+                        ]
+                      },
+                      "processResult": {
+                        "title": "Günün Sonunda",
+                        "shortDescription": "Tek bir gün içinde bile kendine yaklaşımındaki küçük değişimi fark edebilirsin.",
+                        "details": [
+                          "Güne daha bilinçli başlama hissi oluşabilir",
+                          "Dağınık anlarda kendini daha hızlı fark edebilirsin",
+                          "Kendine karşı daha yumuşak bir iç ses kurmaya başlayabilirsin",
+                          "Bu kısa deneyim daha uzun bir programa geçmek için hazırlık olabilir"
+                        ]
+                      }
           },
       {
-              
-              "id": "test_2",
-              "name": "Test Programı 2",
-              "difficultyLevel": 1,
-              "difficultyScale": 10,
-              "durationDays": 2,
-              "durationText": "2 gün",
-              "imageName": "auraimg4",
-              "badgeDescription": "Test rozeti kazandın.",
-              "elements": "🔥ATEŞ",
+                       "id": "test_2",
+                       "name": "İki Günlük İçsel Denge",
+                       "difficultyLevel": 2,
+                       "difficultyScale": 10,
+                       "durationDays": 2,
+                       "durationText": "2 gün",
+                       "imageName": "auraimg4",
+                       "badgeDescription": "Kısa bir içsel denge pratiğini tamamladığını gösterir.",
+                       "elements": "🔥ATEŞ 🌍TOPRAK",
 
-              "version": 1,
-              "isActive": true,
-              "badgeId": "badge_test_1",
+                       "version": 1,
+                       "isActive": true,
+                       "badgeId": "badge_test_1",
 
-              "completionRuleType": "strict_daily_threshold",
-              "dailyTaskCompletionThreshold": 0.5,
-              "allowRestart": true,
+                       "completionRuleType": "strict_daily_threshold",
+                       "dailyTaskCompletionThreshold": 0.5,
+                       "allowRestart": true,
 
-              "dailyDurationText": "Test süresi",
+                       "dailyDurationText": "Günlük süre: 10-15 dakika",
 
-              "coreProblems": ["Test"],
-              "oneSentenceSummary": "Bu sadece test programıdır.",
-              "fullText": ["Test programı açıklaması"],
+                       "coreProblems": [
+                         "Güne dağınık başlama",
+                         "Küçük rutinleri sürdürmekte zorlanma"
+                       ],
+                       "oneSentenceSummary": "2 gün boyunca küçük farkındalık adımlarıyla kendini toparlamayı, güne daha bilinçli başlamayı ve iç ritmini nazikçe düzenlemeyi denersin.",
+                       "fullText": [
+                         "🌿 Bu kısa program, yoğun ya da dağınık hissettiğin dönemlerde kendine küçük bir alan açman için hazırlandı.",
+                         "Amaç büyük bir dönüşüm yaratmak değil; iki gün boyunca bedenini, zihnini ve iç sesini daha bilinçli fark etmektir.",
+                         "🔥 İlk gün, güne daha net bir niyetle başlamaya ve gün içinde kendini fark etmeye odaklanırsın.",
+                         "🌍 İkinci gün, bu farkındalığı daha sakin ve düzenli bir iç ritme dönüştürmeye çalışırsın.",
+                         "Bu programda mükemmel uygulama beklenmez. Küçük bir adımı bilinçle tamamlamak bile içsel dengeyi güçlendiren bir başlangıç olabilir."
+                       ],
 
-              "dailyTasks": [
-                {
-                  "id": "morning",
-                  "title": "Sabah Görevi",
-                  "shortDescription": "Test",
-                  "details": ["Test"]
-                },
-                {
-                  "id": "day",
-                  "title": "Gün Görevi",
-                  "shortDescription": "Test",
-                  "details": ["Test"]
-                },
-                {
-                  "id": "evening",
-                  "title": "Akşam Görevi",
-                  "shortDescription": "Test",
-                  "details": ["Test"]
-                },
-                {
-                  "id": "weekly",
-                  "title": "Haftalık Görev",
-                  "shortDescription": "Test",
-                  "details": ["Test"]
-                },
-                {
-                  "id": "extra1",
-                  "title": "Ekstra Görev 1",
-                  "shortDescription": "Test",
-                  "details": ["Test"]
-                },
-                {
-                  "id": "extra2",
-                  "title": "Ekstra Görev 2",
-                  "shortDescription": "Test",
-                  "details": ["Test"]
-                }
-              ],
+                       "dailyTasks": [
+                         {
+                           "id": "morning",
+                           "title": "Sabah Niyet Alanı",
+                           "shortDescription": "Güne küçük bir niyet belirleyerek daha bilinçli başla.",
+                           "details": [
+                             "Güne başlamadan önce 2-3 dakika sessizce dur",
+                             "Kendine sor: “Bugün kendime nasıl yaklaşmak istiyorum?”",
+                             "Kısa bir niyet cümlesi seç",
+                             "Niyeti içinden yavaşça tekrar et",
+                             "Örnek: “Bugün kendime daha sakin davranacağım.”"
+                           ]
+                         },
+                         {
+                           "id": "day",
+                           "title": "Gün İçinde Denge Durakları",
+                           "shortDescription": "Gün içinde kısa duraklar vererek iç ritmini fark et.",
+                           "details": [
+                             "Günde 2 kez kısa bir durak ver",
+                             "Kendine sor: “Şu an bedenimde ne hissediyorum?”",
+                             "Nefesini birkaç saniye takip et",
+                             "Dağınıklık veya acele hissedersen bunu yargılamadan fark et",
+                             "Sadece bir nefeslik alan açman yeterlidir"
+                           ]
+                         },
+                         {
+                           "id": "evening",
+                           "title": "Akşam Kısa Değerlendirme",
+                           "shortDescription": "Günü birkaç cümleyle gözden geçirerek içsel farkındalığını tamamla.",
+                           "details": [
+                             "Bugün kendinle ilgili fark ettiğin bir şeyi yaz",
+                             "Seni zorlayan bir anı kısaca not et",
+                             "Kendine iyi davrandığın bir anı hatırla",
+                             "Günün sonunda bedeninin nasıl hissettiğini fark et",
+                             "Kendini eleştirmeden sadece gözlemle"
+                           ]
+                         },
+                         {
+                           "id": "weekly",
+                           "title": "İki Günlük Mini Bakış",
+                           "shortDescription": "Programın sonunda iki günün sende bıraktığı etkiyi fark et.",
+                           "details": [
+                             "Bu iki günde en çok hangi duygu öne çıktı?",
+                             "Hangi küçük pratik sana daha iyi geldi?",
+                             "Kendine yaklaşımında küçük bir yumuşama oldu mu?",
+                             "Devam etmek istediğin bir alışkanlık var mı?",
+                             "Cevaplarını kısa ve dürüst tut"
+                           ]
+                         },
+                         {
+                           "id": "extra1",
+                           "title": "Mini Topraklanma",
+                           "shortDescription": "Zihnin dağıldığında bedene dönerek sakinleş.",
+                           "details": [
+                             "Ayaklarının yere temasını fark et",
+                             "Omuzlarını yavaşça gevşet",
+                             "3 derin nefes al",
+                             "Bulunduğun ortamda gördüğün 3 şeyi fark et",
+                             "Kendine “Şu an buradayım” de"
+                           ]
+                         },
+                         {
+                           "id": "extra2",
+                           "title": "Kendine Nazik Cümle",
+                           "shortDescription": "Gün içinde kendine destekleyici bir iç ses sun.",
+                           "details": [
+                             "Kendine bugün duymaya ihtiyaç duyduğun bir cümle seç",
+                             "Bu cümleyi acele etmeden içinden tekrar et",
+                             "Cümlenin gerçekçi ve yumuşak olmasına dikkat et",
+                             "Örnek: “Bugün her şeyi mükemmel yapmak zorunda değilim.”",
+                             "Bu cümleyi gün içinde bir kez daha hatırla"
+                           ]
+                         }
+                       ],
 
-              "weeklyReflection": {
-                "title": "Test",
-                "shortDescription": "Test",
-                "details": ["Test"]
-              },
-              "goldenRules": {
-                "title": "Test",
-                "shortDescription": "Test",
-                "details": ["Test"]
-              },
-              "realImpact": {
-                "title": "Test",
-                "shortDescription": "Test",
-                "details": ["Test"]
-              },
-              "dailyPlanSummary": {
-                "title": "Test",
-                "shortDescription": "Test",
-                "details": ["Test"]
-              },
-              "processResult": {
-                "title": "Test",
-                "shortDescription": "Test",
-                "details": ["Test"]
-              }
+                       "weeklyReflection": {
+                         "title": "Kısa İçsel Bakış",
+                         "shortDescription": "İki günlük sürecin sende bıraktığı küçük farkındalıkları gözlemle.",
+                         "details": [
+                           "Bu iki günde iç ritmini nasıl hissettin?",
+                           "Seni en çok hangi pratik destekledi?",
+                           "Hangi anlarda kendine daha nazik yaklaşabildin?",
+                           "Devam ettirmek istediğin küçük bir alışkanlığı seç"
+                         ]
+                       },
+                       "goldenRules": {
+                         "title": "Nazik Başlangıç Kuralları",
+                         "shortDescription": "Bu kısa süreçte kendini zorlamadan ilerle.",
+                         "details": [
+                           "Mükemmel uygulama bekleme",
+                           "Küçük adımların da değerli olduğunu hatırla",
+                           "Dağınık hissettiğin anları başarısızlık gibi görme",
+                           "Kendini düzeltmeye değil, kendini fark etmeye odaklan",
+                           "İki gün kısa görünse de yeni bir ritim için yeterli bir başlangıç olabilir"
+                         ]
+                       },
+                       "realImpact": {
+                         "title": "Küçük Adımın Etkisi",
+                         "shortDescription": "Asıl etki, gün içinde kendine açtığın kısa farkındalık alanlarında oluşur.",
+                         "details": [
+                           "Bir an durmak otomatik tepkiyi yumuşatabilir",
+                           "Niyet belirlemek güne daha bilinçli başlamanı destekler",
+                           "Akşam değerlendirmesi kendini daha net görmeni sağlar",
+                           "Kısa pratikler düzen hissini güçlendirebilir"
+                         ]
+                       },
+                       "dailyPlanSummary": {
+                         "title": "İki Günlük Basit Akış",
+                         "shortDescription": "Gününü kısa, uygulanabilir ve sakin bir içsel düzenle destekle.",
+                         "details": [
+                           "Sabah kısa bir niyet belirle",
+                           "Gün içinde 2 kısa denge durağı ver",
+                           "Akşam birkaç cümlelik değerlendirme yap",
+                           "Gerekirse mini topraklanma pratiğini kullan",
+                           "Kendine nazik bir cümleyle destek ol"
+                         ]
+                       },
+                       "processResult": {
+                         "title": "İki Gün Sonunda",
+                         "shortDescription": "Kısa sürede bile kendine yaklaşımındaki küçük değişimleri fark edebilirsin.",
+                         "details": [
+                           "Güne daha bilinçli başlama hissi oluşabilir",
+                           "Dağınık anlarda kendini daha hızlı fark edebilirsin",
+                           "Kendine karşı daha yumuşak bir iç ses geliştirmeye başlayabilirsin",
+                           "İki günün sonunda daha uzun bir programa geçmek için küçük bir hazırlık oluşabilir"
+                         ]
+                       }
             },
       
     {

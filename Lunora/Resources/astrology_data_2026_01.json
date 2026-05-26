@@ -955,7 +955,7 @@
     "date": "2026-05-19",
     "moon_phase": "Büyüyen Ay",
     "daily_comment": "Yengeç enerjisiyle duygusal bağlar kurma isteği artıyor. Evini düzenlemek veya huzur verecek rutinler başlatmak için uygun.",
-    "celestial_events": [],
+    "celestial_events": ["Merkür Retrosu","Venüs Retrosu"],
     "suitability_score": 7,
     "moon_sign": "Yengeç"
   },
