@@ -19,7 +19,7 @@ final class CompletedProgramsViewController: UIViewController {
         green: 238/255,
         blue: 244/255,
         alpha: 1
-    ) // EKLEDİM
+    )
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -70,14 +70,14 @@ final class CompletedProgramsViewController: UIViewController {
                     
                     self.tableView.reloadData()
                     
-                    let totalPrograms = self.completedItems.count // EKLEDİM
-                    let totalDays = self.completedItems.reduce(0) { $0 + $1.completedDaysCount } // EKLEDİM
+                    let totalPrograms = self.completedItems.count
+                    let totalDays = self.completedItems.reduce(0) { $0 + $1.completedDaysCount }
 
-                    let badgeImages = self.completedItems.map { $0.imageName } // EKLEDİM
+                    let badgeImages = self.completedItems.map { $0.imageName }
 
                     let elementCardViewModel = self.makeElementBalanceCardViewModel(
                         from: self.completedItems
-                    ) // EKLEDİM
+                    )
                     
                     self.enrollmentRepository.fetchLongestFullTaskStreak(
                         userId: userId,
@@ -174,12 +174,11 @@ final class CompletedProgramsViewController: UIViewController {
         )
     }
     
-    private func setupTableView() { // EKLEDİM
+    private func setupTableView() {
         tableView.translatesAutoresizingMaskIntoConstraints = false
-//        tableView.backgroundColor = .clear
-        tableView.backgroundColor = pageBackgroundColor // DÜZELTTİM
-        tableView.backgroundView = UIView() // EKLEDİM
-        tableView.backgroundView?.backgroundColor = pageBackgroundColor // EKLEDİM
+        tableView.backgroundColor = pageBackgroundColor
+        tableView.backgroundView = UIView()
+        tableView.backgroundView?.backgroundColor = pageBackgroundColor 
         tableView.separatorStyle = .none
 
         tableView.dataSource = self

@@ -1,6 +1,7 @@
 
 
 import UIKit
+import FirebaseAuth
 
 enum ProgramDetailSection {
     case text(title: String?, body: String)
@@ -16,7 +17,6 @@ final class ProgramDetailViewController: UIViewController {
     @IBOutlet weak var titleLabel: UILabel!
     
     @IBAction func didTapDetailProgramStartButton(_ sender: UIButton) {
-        // ✅ Eğer açılan detail zaten aktif programa aitse
             if activeEnrollment?.programId == program.id {
                 showSimpleAlert(
                     title: "Bu program zaten aktif",
@@ -25,7 +25,6 @@ final class ProgramDetailViewController: UIViewController {
                 return
             }
 
-            // ✅ Eğer başka bir aktif program varsa
             if activeEnrollment != nil {
                 showSimpleAlert(
                     title: "Zaten aktif programın var",
@@ -48,14 +47,26 @@ final class ProgramDetailViewController: UIViewController {
             popup.onConfirm = { [weak self] in
                 guard let self = self else { return }
 
-                let userId = "testUser"
+                guard let userId = Auth.auth().currentUser?.uid else {
+                    self.showSimpleAlert(
+                        title: "Hata",
+                        message: "Kullanıcı oturumu bulunamadı."
+                    )
+                    return
+                }
 
                 self.enrollmentRepository.startProgram(userId: userId, programId: self.program.id) { result in
                     DispatchQueue.main.async {
                         switch result {
                         case .success(let enrollmentId):
                             print("✅ Detail program başladı:", enrollmentId)
+
+                            UserDefaults.standard.set(true, forKey: "shouldOpenProgressTodayTab")
+
                             self.fetchActiveEnrollmentDetails()
+
+                      //      self.navigationController?.popToRootViewController(animated: false)
+                            self.tabBarController?.selectedIndex = 1
 
                         case .failure(let error):
                             if let customError = error as? EnrollmentStartError,
@@ -84,7 +95,7 @@ final class ProgramDetailViewController: UIViewController {
         present(alert, animated: true)
     }
     // MARK: - Data
-    var program: Program!   // ProgramList’ten push/segue ile set edilecek
+    var program: Program!
     private var sections: [ProgramDetailSection] = []
     private let enrollmentRepository = EnrollmentRepository()
     private var activeEnrollment: ActiveEnrollment?
@@ -103,7 +114,11 @@ final class ProgramDetailViewController: UIViewController {
         }
     
     private func fetchActiveEnrollmentDetails() {
-        let userId = "testUser"
+        guard let userId = Auth.auth().currentUser?.uid else {
+            print("🔴 Detail: userId yok")
+            self.activeEnrollment = nil
+            return
+        }
 
         enrollmentRepository.fetchActiveEnrollment(userId: userId) { [weak self] result in
             DispatchQueue.main.async {
@@ -118,7 +133,6 @@ final class ProgramDetailViewController: UIViewController {
                         print("🟢 Detail enrollmentId:", enrollment.enrollmentId)
                         print("🟢 Detail programId:", enrollment.programId)
 
-                        // 🔥 YENİ EKLENEN KISIM
                         self.enrollmentRepository.getOrCreateTodayLog(
                             userId: userId,
                             enrollment: enrollment
@@ -167,14 +181,18 @@ final class ProgramDetailViewController: UIViewController {
         private func buildSections() {
             sections.removeAll()
             
+//            sections.append(.details(
+//                duration: program.durationText,
+//                difficulty: "\(program.difficultyLevel) / \(program.difficultyScale)",
+//                flexibility: program.elements
+//            ))
+            
             sections.append(.details(
-                duration: program.durationText,
+                duration: makeDurationText(for: program),
                 difficulty: "\(program.difficultyLevel) / \(program.difficultyScale)",
-                flexibility: program.elements
-//                flexibility:"AKASHA ENERGY"
+                flexibility: makeElementText(for: program)
             ))
             
-            // EKLEDİM: Rozet kutucuğu
             sections.append(.badge(
                 title: "Tamamladığında Kazanacağın Rozet",
                 subtitle: program.badgeDescription,
@@ -201,7 +219,6 @@ final class ProgramDetailViewController: UIViewController {
                 let text = item.trimmingCharacters(in: .whitespacesAndNewlines)
                 guard !text.isEmpty else { continue }
 
-                // metni satırlara ayır
                 let parts = text.components(separatedBy: "\n")
 
                 let title = parts.first
@@ -214,6 +231,31 @@ final class ProgramDetailViewController: UIViewController {
             }
             tableView.reloadData()
         }
+    private func makeDurationText(for program: Program) -> String {
+        return "\(program.durationText)\n\(program.dailyDurationText)"
+    }
+
+    private func makeElementText(for program: Program) -> String {
+        if let programElements = program.programElements, !programElements.isEmpty {
+            return programElements
+                .map { "\($0.emoji) \($0.name)" }
+                .joined(separator: "\n")
+        }
+
+        return program.elements
+    }
+
+    private func makeDayRoadmapItems(for program: Program) -> [String] {
+        guard let days = program.days, !days.isEmpty else {
+            return []
+        }
+
+        return days.map { day in
+            "Gün \(day.dayNumber): \(day.title)"
+        }
+    }
+    
+    
     }
  
 extension ProgramDetailViewController: UITableViewDataSource {

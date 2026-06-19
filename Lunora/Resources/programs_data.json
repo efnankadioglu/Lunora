@@ -8,7 +8,7 @@
                       "difficultyScale": 10,
                       "durationDays": 1,
                       "durationText": "1 gün",
-                      "imageName": "auraimg1",
+                      "imageName": "auraimg14",
                       "badgeDescription": "Kendine kısa bir sakinlik alanı açtığını gösterir.",
                       "elements": "🌍TOPRAK",
 
@@ -167,10 +167,10 @@
                        "id": "test_2",
                        "name": "İki Günlük İçsel Denge",
                        "difficultyLevel": 2,
-                       "difficultyScale": 10,
+                       "difficultyScale": 7,
                        "durationDays": 2,
                        "durationText": "2 gün",
-                       "imageName": "auraimg4",
+                       "imageName": "auraimg13",
                        "badgeDescription": "Kısa bir içsel denge pratiğini tamamladığını gösterir.",
                        "elements": "🔥ATEŞ 🌍TOPRAK",
 
@@ -326,1804 +326,623 @@
                        }
             },
       
-    {
-      "id": "1",
-      "name": "Öz Farkındalık Gelişim",
-      "difficultyLevel": 8,
-      "difficultyScale": 10,
-      "durationDays": 40,
-      "durationText": "40 gün",
-      "imageName": "auraimg1",
-      "badgeDescription": "Kendini yargılamadan gözlemleyebildiğini gösterir.",
-      "elements": "✨AKASHA",
-      "version": 1,
-      "isActive": true,
-      "badgeId": "badge_1",
-      "completionRuleType": "strict_daily_threshold",
-      "dailyTaskCompletionThreshold": 0.5,
-      "allowRestart": true,
-      "dailyDurationText": "Günlük süre: esnek",
-      "coreProblems": [
-        "Otomatik tepkilerle hareket etme",
-        "Duyguları ve düşünceleri net fark edememe"
-      ],
-      "oneSentenceSummary": "40 gün boyunca kendini yargılamadan gözlemlemeyi öğrenirsin; tepkilerini, duygularını ve düşüncelerini daha net fark etmeye başlarsın.",
-      "fullText": [
-        "🔬 Bilimsel olarak ne olur?\nAraştırmalar, öz farkındalık geliştiren bireylerin:\n* daha proaktif davrandığını\n* duygu düzenleme becerilerinin arttığını\n* iletişimde ve iş yaşamında daha verimli olduklarını göstermektedir.\nDüzenli farkındalık ve yazma pratikleri, beynin dikkat ve duygu yönetimiyle ilişkili bölgelerini güçlendirir. Bu da kişinin hem iç dünyasında hem günlük yaşamında daha dengeli hissetmesini sağlar.",
-        "🌙 Bu program sana nasıl hissettirir?\nBu bir “kendini düzeltme” programı değildir.\nBu programda:\n🧚🏻‍♀️ Kendini zorlamazsın\n🧚🏻‍♀️ Mükemmel olmak zorunda değilsin\n🧚🏻‍♀️ Sadece kendini fark etmeye başlarsın\nBir süre sonra çoğu kişi şunu söyler:\n“Artık ne yaşadığımı daha net görüyorum.”",
-        "📅 Program boyunca neler yapacaksın?\n🧘 1. Sabah → Zihin Reset (10 dk)\nAmaç: Otomatik pilotu kırmak.\nHer sabah 5–10 dk nefes / beden farkındalığı yaparsın.\nSadece şuna odaklanırsın:\n* Nefes giriyor → çıkıyor\n* Bedeninde ne hissediyorsun\n💡 Kural:\n* Düşünceler gelirse → sadece fark et\n* Yargı yok\n👉 Mini mantra: “Şu an sadece fark ediyorum.”\n\n🧠 2. Gün İçinde → Farkındalık Durakları (2–3 kez)\nBu en kritik kısımdır.\nGün içinde rastgele anlarda:\n📍 Kendine sor:\n* “Şu an ne hissediyorum?”\n* “Bedenimde ne var?”\n* “Otomatik mi davranıyorum?”\n⏱ Süre: 10–20 saniye yeter\n💡 Amaç: Tepki vermeden önce durak oluşturmak\n\n📓 3. Akşam → Günlük (5–10 dk)\nBu programın en güçlü kısmıdır.\nHer akşam yaz:\n* Bugün ne yaşadım?\n* Ne hissettim?\n* Nerede otomatik tepki verdim?\n* Nerede farkında davrandım?\n💡 Kural:\n* Güzel yazmana gerek yok\n* Filtre yok\n* Kendine dürüst ol\n👉 En önemli soru: “Bugün beni en çok ne tetikledi?”\n\n🔁 Haftalık Mini Sistem\n📅 Haftada 1 (15–20 dk)\nKendine sor:\n* Bu hafta verdiğim kararlar gerçekten ben miydim?\n* Yoksa alışkanlık / korku mu?\n👉 Bonus: En çok tekrar eden duyguyu bul (örn: stres, öfke)\n\n⚙️ Altın Kurallar\n1. Mükemmel olma\n* Meditasyon kötü geçebilir → normal\n* Yazmak istemeyebilirsin → normal\n2. Kendini düzeltmeye çalışma\n👉 Amaç: değiştirmek değil, görmek\n3. Sadece fark et\n👉 “Farkındalık = değişimin başlangıcı”\n\n🔥 Gerçek Etkiyi Yaratan Şey\nBu programın olayı meditasyon veya yazı değil.\n⚠️ Asıl şey: Gün içinde yakaladığın anlar\n\n🎯 Net Günlük Plan\n* Sabah 10 dk farkındalık meditasyonu\n* Gün içinde 2–3 kez durak\n* Akşam 5–10 dk günlük\n* Haftada 1 değerlendirme\n\n💥 Süreç Sonucu\n10–15 gün: otomatik tepkileri fark edersin\n30 gün: tepki öncesi durak oluşur\n40 gün: kendini daha net görmeye başlarsın",
-        "🤍 Mükemmel olmak zorunda değilsin\n* Meditasyonun “iyi” geçmeyebilir\n* Yazacak bir şey bulamayabilirsin\n* Bazı günler isteksiz olabilirsin\nBunların hepsi bu sürecin parçası.",
-        "🌙 Program Sonunda Kendinde Neler Fark Edebilirsin?\nBu 40 günün sonunda, kendinde bazı değişiklikler fark etmiş olabilirsin:\n* Duygularını bastırmadan ama onlara kapılmadan gözlemleyebildiğini\n* Tepki vermeden önce kısa bir durak oluştuğunu\n* Kendinle konuşma tonunun yumuşadığını\n* “Neyim var?” sorusuna daha net cevaplar verebildiğini\n* Bazı şeylerin seni eskisi kadar tetiklemediğini\nBelki her şey mükemmel değil.\nBelki hâlâ karışık hissettiğin anlar var.\nAma artık şunu biliyorsun:\nNe yaşadığını fark edebiliyorsun.\nBu farkındalığın ne kadar derinleşeceği,\nbundan sonra nasıl devam etmeyi seçeceğine bağlı.\nBurada durmak da, devam etmek de senin kararın.\nÖnemli olan, artık kendini daha net görmeye başlamış olman."
-      ],
-      "dailyTasks": [
+      {
+        "id": "mercury_cancer_retro_2026",
+        "name": "Merkür Retrosunda İç Sesini Duy",
+        "difficultyLevel": 3,
+        "difficultyScale": 7,
+        "durationDays": 7,
+        "durationText": "7 gün",
+
+        "dailyDurationText": "Günlük süre: 8-12 dakika",
+        "dailyDurationMinMinutes": 8,
+        "dailyDurationMaxMinutes": 12,
+
+        "imageName": "auraimg13",
+        "badgeDescription": "Merkür retrosu sürecinde iç sesini, duygularını ve iletişim tarzını fark ederek ilerlediğini gösterir.",
+
+        "elements": "💧SU 🌬️HAVA 🌍TOPRAK 🔥ATEŞ",
+        "programElements": [
           {
-            "id": "morning",
-            "title": "Sabah Zihin Reset",
-            "shortDescription": "Güne kısa bir farkındalık pratiğiyle başlayarak zihnini sakinleştir.",
-            "details": [
-              "5–10 dakika nefesine odaklan",
-              "Nefesin giriş ve çıkışını takip et",
-              "Bedeninde oluşan hisleri fark et",
-              "Düşünceler gelirse sadece fark et ve bırak",
-              "Mini mantra: “Şu an sadece fark ediyorum.”"
-            ]
+            "key": "water",
+            "name": "Su",
+            "emoji": "💧"
           },
           {
-            "id": "day",
-            "title": "Gün İçinde Farkındalık Durakları",
-            "shortDescription": "Gün içinde kısa duraklar vererek otomatik davranışlarını fark et.",
-            "details": [
-              "Günde 2–3 kez kendine kısa bir durak ver",
-              "“Şu an ne hissediyorum?” diye sor",
-              "“Bedenimde ne var?” diye kontrol et",
-              "“Otomatik mi davranıyorum?” diye fark et",
-              "10–20 saniye yeterli, sadece gözlemle"
-            ]
+            "key": "air",
+            "name": "Hava",
+            "emoji": "🌬️"
           },
           {
-            "id": "evening",
-            "title": "Akşam Günlüğü",
-            "shortDescription": "Günü yargısızca yazarak içsel farkındalığını derinleştir.",
-            "details": [
-              "Bugün yaşadıklarını kısaca yaz",
-              "Hangi duyguları hissettiğini fark et",
-              "Otomatik tepki verdiğin anları not et",
-              "Farkında davrandığın anları yaz",
-              "En önemli soru: “Bugün beni en çok ne tetikledi?”",
-              "Filtreleme yapmadan, kendine dürüst ol"
-            ]
+            "key": "earth",
+            "name": "Toprak",
+            "emoji": "🌍"
           },
           {
-            "id": "weekly",
-            "title": "Haftalık İçsel Değerlendirme",
-            "shortDescription": "Haftada bir durup seçimlerinin kaynağını gözden geçir.",
-            "details": [
-              "15–20 dakika kendine alan aç",
-              "Kararlarının gerçekten sana ait olup olmadığını sorgula",
-              "Alışkanlık mı yoksa korku mu etkiliydi fark et",
-              "En çok tekrar eden duygunu belirle",
-              "Duygularının döngüsünü gözlemle"
-            ]
+            "key": "fire",
+            "name": "Ateş",
+            "emoji": "🔥"
           }
         ],
-        "weeklyReflection": {
-          "title": "İçsel Aynaya Bakış",
-          "shortDescription": "Haftalık olarak davranışlarının kökenini şefkatle gözlemle.",
-          "details": [
-            "Bu hafta en çok hangi duyguyu yaşadığını fark et",
-            "Tepkilerinin altında yatan motivasyonu incele",
-            "Kendine karşı yumuşak ve dürüst ol",
-            "Tekrar eden kalıpları not et"
-          ]
-        },
-        "goldenRules": {
-          "title": "Sürecin Altın Kuralları",
-          "shortDescription": "Bu süreçte kendine nazik davranarak ilerle.",
-          "details": [
-            "Mükemmel olmaya çalışma, dalgalanmalar normaldir",
-            "Meditasyon kötü geçebilir, bu da sürecin parçasıdır",
-            "Yazmak istemediğin günler olabilir, kendini zorlamadan devam et",
-            "Kendini değiştirmeye değil, anlamaya odaklan",
-            "Farkındalık değişimin ilk adımıdır"
-          ]
-        },
-        "realImpact": {
-          "title": "Gerçek Dönüşüm Noktası",
-          "shortDescription": "Asıl değişim, gün içinde yakaladığın küçük farkındalık anlarında oluşur.",
-          "details": [
-            "Meditasyon ve yazı sadece araçtır",
-            "Gün içinde yakaladığın anlar en değerlisidir",
-            "Tepki vermeden önce oluşan kısa durak değişimi başlatır",
-            "Fark ettiğin her an, bilinçli seçimin kapısını açar"
-          ]
-        },
-        "dailyPlanSummary": {
-          "title": "Net Günlük Akış",
-          "shortDescription": "Gününü basit ve sürdürülebilir bir farkındalık rutiniyle düzenle.",
-          "details": [
-            "Sabah 5–10 dakika farkındalık pratiği yap",
-            "Gün içinde 2–3 kısa durak ver",
-            "Akşam 5–10 dakika günlük yaz",
-            "Haftada 1 kez kendini değerlendir"
-          ]
-        },
-        "processResult": {
-          "title": "Süreçte Gözlemleyeceğin Değişim",
-          "shortDescription": "Zamanla otomatik tepkiler yerini bilinçli farkındalığa bırakır.",
-          "details": [
-            "10–15 gün: otomatik tepkilerini fark etmeye başlarsın",
-            "30 gün: tepki öncesi bir durak oluşur",
-            "40 gün: kendini daha net ve derin görmeye başlarsın",
-            "Duygularınla daha temas halinde olursun"
-          ]
-        }
-      
-    },
-    
-    {
-      "id": "2",
-      "name": "Algı Genişletme ",
-      "difficultyLevel": 5,
-      "difficultyScale": 10,
-      "durationDays": 66,
-      "durationText": "66 gün",
-      "imageName": "auraimg2",
-      "badgeDescription": "Hayatındaki iyi olanı daha net fark edebildiğini gösterir.",
-      "elements": "💧SU ✨AKASHA",
-      "version": 1,
-      "isActive": true,
 
-      "badgeId": "badge_2",
+        "version": 2,
+        "isActive": true,
+        "badgeId": "badge_mercury_cancer_retro_2026",
 
-      "completionRuleType": "strict_daily_threshold",
-      "dailyTaskCompletionThreshold": 0.5,
+        "completionRuleType": "strict_daily_threshold",
+        "dailyTaskCompletionThreshold": 0.5,
+        "allowRestart": true,
 
-      "allowRestart": true,
-      "dailyDurationText": "Günlük süre: kısa & esnek",
-      "coreProblems": [
-        "Şikâyet etme otomatikliği",
-        "“Yetmiyor” hissinin baskınlığı"
-      ],
-      "oneSentenceSummary": "66 gün boyunca hayatında zaten var olanı fark etmeye başlarsın; zihnindeki eksiklik sesi yavaş yavaş yumuşar.",
-      "fullText": [
-        "🌼 Hayatı Daha Yumuşak Algılamaya Başla",
-        "66 gün boyunca hayatında zaten var olanı fark etmeye başlarsın.\nZihnindeki eksiklik sesi yavaş yavaş yumuşar.",
-        "🧠 Bu program neyi dönüştürür?\nBu programı uygulayan kişiler zamanla şunları fark eder:\n* Şikâyet etme otomatikliği azalır\n* Küçük anlardan daha fazla tat alır\n* Zihni daha sakin ve dengeli çalışır\n* “Yetmiyor” hissi yumuşar\n* Hayata karşı daha yumuşak bir ilişki kurar",
-        "🔬 Bilimsel olarak ne olur?\nAraştırmalar, düzenli minnettarlık pratiğinin:\n* stres ve kaygıyı azalttığını\n* uyku kalitesini artırdığını\n* duygusal iyi oluşu güçlendirdiğini göstermektedir.\nBu program, beynin doğal olarak odaklandığı “eksik olan” yerine, mevcut olanı fark etme kasını güçlendirir.",
-        "🌙 Bu program sana nasıl hissettirir?\nBu bir “her şeye iyi tarafından bak” programı değildir.\nBu programda:\n* Zorla pozitif olmaya çalışmazsın\n* Olumsuz duyguları bastırmazsın\n* Gerçek olanı olduğu gibi fark edersin\nBir süre sonra çoğu kullanıcı şunu söyler:\n“Artık daha az şikâyet ediyorum.”",
-        "📅 Program boyunca neler yapacaksın?\n🌼Bu programın etkisi küçük ama düzenli tekrarlarla oluşur.\nAmaç hayatında zaten var olanı fark etmeyi öğrenmektir.\n\n💧 Sabah → Algı Ayarı (2–5 dk)\nAmaç: Güne eksiklik değil farkındalıkla başlamak.\nHer sabah kendine şu soruyu sorarsın:\n* “Bugün hayatımda zaten iyi olan ne var?”\nCevap çok büyük olmak zorunda değildir.\nKüçük şeyler yeterlidir.\n👉 Örnekler:\n* Sağlıklıyım\n* Bir kahvem var\n* Yeni bir gün başladı\n💡 Kural:\n* Zorla pozitif olmaya çalışma\n* Sadece olanı fark et\n\n🧠 Gün İçinde → Farkındalık Sorusu (1–2 kez)\nGün içinde kısa bir durak verirsin.\n📍 Kendine sorarsın:\n* “Şu an iyi olan ne var?”\nBu soru zihnini eksikten mevcut olana çevirir.\n⏱ Süre: 10–20 saniye yeter\n💡 Amaç:\n* Otomatik şikâyet döngüsünü fark etmek\n* Algıyı bilinçli şekilde yönlendirmek\n\n📓 3. Akşam → Şükür Yazısı (5 dk)\nHer akşam 3 madde yazarsın:\n* Bugün iyi olan 3 şey\nHer maddenin yanına tek kelimeyle nedenini eklersin.\n👉 Örnek:\n* Kahve – keyif\n* Arkadaşım – destek\n* Yürüyüş – rahatlama\n💡 Kural:\n* Aynı şeyleri yazabilirsin\n* Büyük şeyler olmak zorunda değil\n* Dürüst olman yeterli\n\n🔁  İki Günde Bir → Derinleştirme Sorusu\nHer 2 günde bir kendine tek bir soru sorarsın:\n* Bugün beni rahatlatan neydi?\n* Bugün biri bana nasıl iyi geldi?\n* Bugün bedenim bana nasıl destek oldu?\nAmaç minnettarlığı yüzeyden derine taşımaktır.\n\n⚙️ Altın Kurallar\n1. Zorla iyi hissetmeye çalışma\n* Bu program “pozitif ol” programı değildir\n2. Olumsuz duyguları bastırma\n* Sadece onların yanında iyi olanı da gör\n3. Küçük şeyleri küçümseme\n* Bu programın gücü küçük anlarda\n👉 “Algı değişirse, deneyim değişir.”\n\n🔥 Gerçek Etkiyi Yaratan Şey\nBu programın gücü yazdıklarında değil,\ngün içinde fark ettiğin küçük anlarda oluşur.\nBir şeyi fark ettiğin anda zihnin yön değiştirir.\nBu küçük değişimler zamanla büyük bir algı dönüşümüne dönüşür.\n\n🎯 Net Günlük Plan\n* Sabah 1 soru (iyi olan ne var?)\n* Gün içinde 1–2 farkındalık durakları\n* Akşam 3 şükür maddesi\n* Haftada 1 yazı\n\n💥 Süreç Sonucu\n10–15 gün: küçük şeyleri daha fazla fark etmeye başlarsın\n30 gün: şikâyet ettiğini daha hızlı yakalarsın\n66 gün: “yetmiyor” hissinin azaldığını fark edersin",
-        "🌿 Bu program hangi yaklaşımlara dayanır?\n* Pozitif psikolojide kullanılan minnettarlık yazma pratikleri\n* Dikkat ve algı yönlendirme çalışmaları\n* Gerçekçi farkındalık temelli yöntemler\nHepsi küçük ama düzenli tekrarlarla uygulanır.",
-        "🤍 Mükemmel hissetmek zorunda değilsin\n* Şükredemediğin günler olabilir\n* Aynı şeyleri tekrar yazabilirsin\n* Bazı günler sadece nötr şeyler fark edebilirsin\nBunların hepsi sürecin parçasıdır.",
-        "🌙 Program Sonunda Kendinde Neler Fark Edebilirsin?\nBu 66 günün sonunda, kendinde bazı değişimler fark etmiş olabilirsin:\n* Gün içinde otomatik şikâyetlerin daha çabuk farkına vardığını\n* Küçük anların eskisinden daha görünür hâle geldiğini\n* Zihnindeki “yetmiyor” sesinin eskisi kadar baskın olmadığını\n* Sahip olduklarına karşı daha yumuşak bir bakış geliştirdiğini\n* Hayatla kurduğun ilişkinin biraz daha sakinleştiğini\nBelki her gün şükür dolu hissetmedin.\nBelki bazı günler sadece “nötr” kaldın.\nAma büyük ihtimalle şunu fark ettin:\nAlgın değiştikçe, hislerin de değişmeye başladı.\nBu noktada minnettarlığın hayatındaki yeri,\nbundan sonra nasıl devam etmeyi seçeceğine bağlı.\nBurada durmak da mümkün.\nDerinleştirmek de.\nÖnemli olan, artık hayatına baktığında\ndaha fazla şey görebiliyor olman."
-      ],
-      "dailyTasks": [
-          {
-            "id": "morning",
-            "title": "Sabah Algı Ayarı",
-            "shortDescription": "Güne hayatında zaten iyi olanı fark ederek başla.",
-            "details": [
-              "Kendine şu soruyu sor: “Bugün hayatımda zaten iyi olan ne var?”",
-              "Cevabın küçük olabilir, bu yeterlidir",
-              "Zorla pozitif olmaya çalışma",
-              "Sadece mevcut olanı fark et",
-              "Örnekleri hatırla: sağlık, bir kahve, yeni bir gün"
-            ]
-          },
-          {
-            "id": "day",
-            "title": "Gün İçinde Farkındalık Sorusu",
-            "shortDescription": "Kısa duraklarla zihnini eksikten olana yönlendir.",
-            "details": [
-              "Günde 1–2 kez kısa bir durak ver",
-              "Kendine sor: “Şu an iyi olan ne var?”",
-              "Zihninin odağını fark et",
-              "Şikâyet döngüsünü yumuşakça fark et",
-              "10–20 saniye yeterlidir"
-            ]
-          },
-          {
-            "id": "evening",
-            "title": "Akşam Şükür Yazısı",
-            "shortDescription": "Günü küçük ama anlamlı iyi anları yazarak tamamla.",
-            "details": [
-              "Bugün iyi olan 3 şeyi yaz",
-              "Her birinin yanına tek kelimelik neden ekle",
-              "Aynı şeyleri tekrar yazabilirsin",
-              "Büyük şeyler aramak zorunda değilsin",
-              "Dürüst ve sade olman yeterlidir"
-            ]
-          },
-          {
-            "id": "weekly",
-            "title": "Derinleştirme Soruları",
-            "shortDescription": "Minnettarlığını daha derin bir farkındalığa taşı.",
-            "details": [
-              "Her 2 günde bir kendine tek bir soru sor",
-              "“Bugün beni rahatlatan neydi?”",
-              "“Bugün biri bana nasıl iyi geldi?”",
-              "“Bugün bedenim bana nasıl destek oldu?”",
-              "Cevapları kısa ve içten tut"
-            ]
-          }
+        "coreProblems": [
+          "Duygusal karışıklık yaşamak",
+          "Geçmiş konuların zihinde tekrar etmesi",
+          "İletişimde yanlış anlaşılmalar yaşamak",
+          "Sınır koymakta zorlanmak",
+          "Ev, aile ve güvenlik konularında hassaslaşmak"
         ],
-        "weeklyReflection": {
-          "title": "Derin Şükür Alanı",
-          "shortDescription": "Minnettarlığını yüzeyden derin bir içsel deneyime taşı.",
-          "details": [
-            "Tekrar eden iyi anları fark et",
-            "Duygusal etkisini gözlemle",
-            "Küçük anların sende yarattığı hissi incele",
-            "Şükür duygusunun derinliğini hisset"
-          ]
-        },
-        "goldenRules": {
-          "title": "Sürecin Nazik Kuralları",
-          "shortDescription": "Bu yolculukta kendine yumuşak ve gerçekçi yaklaş.",
-          "details": [
-            "Zorla iyi hissetmeye çalışma",
-            "Bu bir “pozitif ol” programı değildir",
-            "Olumsuz duyguları bastırma",
-            "İyi olanı da onların yanında gör",
-            "Küçük anları küçümseme",
-            "Algı değişirse deneyim değişir"
-          ]
-        },
-        "realImpact": {
-          "title": "Gerçek Değişim Noktası",
-          "shortDescription": "Dönüşüm, gün içinde fark ettiğin küçük anlarda başlar.",
-          "details": [
-            "Yazdıkların kadar fark ettiklerin de önemlidir",
-            "Bir şeyi fark ettiğin anda zihnin yön değiştirir",
-            "Küçük algı değişimleri zamanla büyür",
-            "Bu süreç zihinsel bir yeniden çerçeveleme yaratır"
-          ]
-        },
-        "dailyPlanSummary": {
-          "title": "Günlük Basit Akış",
-          "shortDescription": "Gününü sade ve sürdürülebilir bir farkındalık rutiniyle düzenle.",
-          "details": [
-            "Sabah 1 farkındalık sorusu sor",
-            "Gün içinde 1–2 kısa durak ver",
-            "Akşam 3 şükür maddesi yaz",
-            "Düzenli olarak derinleştirme sorularını kullan"
-          ]
-        },
-        "processResult": {
-          "title": "Zamanla Oluşan Dönüşüm",
-          "shortDescription": "Zihnin eksikten olana yönelerek daha dengeli bir algı geliştirir.",
-          "details": [
-            "10–15 gün: küçük iyi anları daha fazla fark edersin",
-            "30 gün: şikâyet ettiğin anları daha hızlı yakalarsın",
-            "66 gün: “yetmiyor” hissinin azaldığını gözlemlersin",
-            "Genel olarak daha dengeli ve yeterli hissetmeye başlarsın"
-          ]
-        }
-    },
-    {
-      "id": "3",
-      "name": "Olumlu Zihniyet Dönüşüm",
-      "difficultyLevel": 7,
-      "difficultyScale": 10,
-      "durationDays": 45,
-      "durationText": "45 gün",
-      "imageName": "auraimg3",
-      "badgeDescription": "Düşüncelerini daha esnek ve destekleyici yönetebildiğini gösterir.",
-      "elements": "🔥ATEŞ 🌬️HAVA",
-      "version": 1,
-      "isActive": true,
 
-      "badgeId": "badge_3",
+        "oneSentenceSummary": "7 gün boyunca Merkür Yengeç retrosunun duygusal etkilerini fark ederek iletişimini sadeleştirmeyi, geçmişten gelen kalıpları görmeyi ve kendine daha güvenli bir iç alan açmayı denersin.",
 
-      "completionRuleType": "strict_daily_threshold",
-      "dailyTaskCompletionThreshold": 0.5,
-
-      "allowRestart": true,
-      "dailyDurationText": "Günlük süre: kısa & esnek",
-      "coreProblems": [
-        "Otomatik olumsuz düşünceler",
-        "Sert iç konuşma / zihinsel esneklik düşüklüğü"
-      ],
-      "oneSentenceSummary": "45 gün boyunca zihnindeki otomatik olumsuz düşünceleri fark etmeyi öğrenirsin; olan bitene daha esnek ve destekleyici bir yerden bakmaya başlarsın.",
-      "fullText": [
-        "45 gün boyunca zihnindeki otomatik olumsuz düşünceleri fark etmeyi öğrenirsin.\nOlan bitene daha esnek, daha destekleyici bir yerden bakmaya başlarsın.",
-        "🧠 Bu program neyi dönüştürür?\n* Olumsuz düşünceleri daha erken yakalar\n* Kendisiyle kurduğu iç konuşma yumuşar\n* Stresli durumlarda daha sakin kalabilir\n* Problem çözme becerileri güçlenir\n* Zihinsel esneklik artar",
-        "🔬 Bilimsel olarak ne olur?\nAraştırmalar, olumlu zihniyet ve bilişsel yeniden çerçeveleme pratiğinin:\n* stres hormonlarının düzenlenmesine yardımcı olduğunu\n* kaygı ve depresif düşünce kalıplarını zayıflattığını\n* beynin duygu düzenleme ile ilişkili bölgelerini güçlendirdiğini göstermektedir.\nBu program, zihnin otomatik “negatif senaryolar üretme” alışkanlığını yavaşlatır.",
-        "🌙 Bu program sana nasıl hissettirir?\nBu bir “hep pozitif ol” programı değildir.\n* Olumsuz düşünceleri bastırmazsın\n* Gerçekliği inkâr etmezsin\n* Daha destekleyici bir bakış açısı geliştirirsin\n“Artık kendimle daha yapıcı konuşuyorum.”",
-        "📅 Program boyunca neler yapacaksın?\n🌞Bu programın amacı zihnindeki otomatik olumsuz düşünceleri fark etmek ve onları daha destekleyici bir hale dönüştürmektir.\nKüçük ama düzenli uygulamalarla zihinsel esneklik gelişir.\n\n🔥 Sabah → Zihinsel Başlangıç (2–5 dk)\nAmaç: Güne zihinsel yön vererek başlamak.\nHer sabah kısa bir olumlama cümlesi seçersin.\n👉 Örnek:\n“Her düşünceme inanmak zorunda değilim.”\n“Bugün kendimle daha yumuşak konuşacağım.”\nSeçtiğin cümleyi 3 kez tekrar edersin.\n💡 Kural:\nZorla inanmak zorunda değilsin.\nSadece zihnine yeni bir seçenek sunarsın.\n\n🌬️ Gün İçinde → Düşünceyi Yakalama (1–3 kez)\nGün içinde zihninden geçen olumsuz bir düşünceyi fark etmeye çalışırsın.\n📍 Kendine sorarsın:\n“Şu an zihnim bana ne söylüyor?”\nFark ettiğin düşünceyi kısa şekilde zihninde veya not olarak tutarsın.\n💡 Amaç:\nOtomatik düşünceyi görünür hale getirmek.\n\n🔥 Gün İçinde → Yeniden Çerçeveleme (1–3 kez)\nYakaladığın düşünceyi daha destekleyici bir hale dönüştürürsün.\n👉 Örnek:\n“Yine başarısız olacağım” yerine\n“Zorlanabilirim ama denemeye devam edebilirim.”\n💡 Kural:\nGerçekçi ol\nZorla pozitif olma\nSadece daha dengeli bir cümle kur\n\n🌞 Gün İçinde → İç Konuşmayı Fark Etme\nGün içinde kendinle nasıl konuştuğunu fark etmeye çalışırsın.\n📍 Kendine sorarsın:\n“Şu an kendimle nasıl konuşuyorum?”\nEğer ton sertse, cümleyi daha yumuşak hale getirirsin.\n👉 Örnek:\n“Bu ne saçmalık yaptım” yerine\n“Bu sefer olmadı, tekrar deneyebilirim.”\n\n📓 Akşam → Günlük Mini Değerlendirme (5 dk)\nGün sonunda kısa bir değerlendirme yaparsın:\n👉 Bugün yakaladığın bir düşünce\n👉 Onu nasıl dönüştürdüğün\n👉 Gün içinde iyi giden bir şey\nBu yazı uzun olmak zorunda değildir.\nKısa ve dürüst olması yeterlidir.\n\n⚙️ Altın Kurallar\nOlumsuz düşünceler kötü değildir\nOnları bastırmazsın\nSadece fark eder ve dönüştürürsün\nZorla pozitif olmaya çalışma\nGerçekçi ve destekleyici ol\n👉 “Her düşünce gerçek değildir.”\n\n🔥 Gerçek Etkiyi Yaratan Şey\nBu programın gücü yazmakta değil,\ndüşünceyi yakaladığın o anda oluşur.\nBir düşünceyi fark ettiğin anda onun etkisi azalır.\nOnu yeniden çerçevelediğinde ise zihnin yeni bir yol öğrenir.\n\n🎯 Net Günlük Plan\nSabah 1 olumlama\nGün içinde 1–3 düşünce yakalama\nGün içinde 1–3 yeniden çerçeveleme\nGün içinde iç konuşmayı fark etme\nAkşam kısa değerlendirme\n\n💥 Süreç Sonucu\n10–15 gün: olumsuz düşüncelerini daha hızlı fark edersin\n30 gün: iç konuşma tonunun yumuşadığını hissedersin\n45 gün: düşüncelerini daha esnek yönetebildiğini fark edersin",
-        "🌙 Program Sonunda...\nOlumsuz düşünceleri daha erken yakaladığını, tonunun yumuşadığını, daha esnek kalabildiğini ve her düşünceye inanmak zorunda olmadığını fark edebilirsin."
-      ],
-      "dailyTasks": [
-          {
-            "id": "morning",
-            "title": "Sabah Zihinsel Başlangıç",
-            "shortDescription": "Güne zihnine yeni bir yön vererek yumuşak bir başlangıç yap.",
-            "details": [
-              "Kendine kısa bir olumlama cümlesi seç",
-              "Cümleyi 3 kez yavaşça tekrar et",
-              "Zorla inanmak zorunda olmadığını hatırla",
-              "Bu cümleyi zihnine yeni bir seçenek olarak sun",
-              "Örnek: “Her düşünceme inanmak zorunda değilim.”"
-            ]
-          },
-          {
-            "id": "day",
-            "title": "Gün İçinde Düşünceyi Yakalama",
-            "shortDescription": "Zihninden geçen otomatik düşünceleri fark etmeye başla.",
-            "details": [
-              "Günde 1–3 kez kısa bir durak ver",
-              "Kendine sor: “Şu an zihnim bana ne söylüyor?”",
-              "Fark ettiğin düşünceyi zihninde ya da not olarak tut",
-              "Düşünceyi değiştirmeye çalışmadan önce sadece fark et",
-              "Amaç görünür hale getirmek"
-            ]
-          },
-          {
-            "id": "reframe",
-            "title": "Yeniden Çerçeveleme",
-            "shortDescription": "Fark ettiğin düşünceyi daha dengeli bir cümleye dönüştür.",
-            "details": [
-              "Yakaladığın düşünceyi nazikçe yeniden yaz",
-              "Zorla pozitif olmadan daha gerçekçi bir ifade kur",
-              "Kendine destekleyici bir alternatif sun",
-              "Örnek: “Zorlanabilirim ama denemeye devam edebilirim.”",
-              "Amaç düşünceyi yumuşatmak, bastırmak değil"
-            ]
-          },
-          {
-            "id": "awareness",
-            "title": "İç Konuşmayı Fark Etme",
-            "shortDescription": "Kendinle nasıl konuştuğunu fark ederek tonu yumuşat.",
-            "details": [
-              "Gün içinde kendine yönelttiğin cümlelere dikkat et",
-              "Kendine sor: “Şu an kendimle nasıl konuşuyorum?”",
-              "Sert bir ton fark edersen cümleyi yumuşat",
-              "Kendine daha şefkatli bir dil kullan",
-              "Örnek: “Bu sefer olmadı, tekrar deneyebilirim.”"
-            ]
-          },
-          {
-            "id": "evening",
-            "title": "Akşam Mini Değerlendirme",
-            "shortDescription": "Günü kısa bir farkındalık yazısıyla tamamla.",
-            "details": [
-              "Bugün yakaladığın bir düşünceyi yaz",
-              "Onu nasıl dönüştürdüğünü not et",
-              "Gün içinde iyi giden bir şeyi ekle",
-              "Yazının kısa ve dürüst olması yeterlidir",
-              "Kendini yargılamadan gözlemle"
-            ]
-          }
+        "fullText": [
+          "🌙 Bu program, Merkür Yengeç retrosu sürecinde zihninde ve kalbinde tekrar eden konuları daha sakin bir yerden fark etmen için hazırlandı.",
+          "Bu dönemde geçmiş, aile, ev, güvenlik ihtiyacı, eski konuşmalar ve duygusal hassasiyetler daha görünür olabilir.",
+          "Amaç retrodan korkmak değil; bu zamanı yavaşlamak, kendini duymak, iletişimini sadeleştirmek ve içsel dengenle yeniden temas etmek için kullanmaktır.",
+          "Her gün kısa görevlerle duygularını, düşüncelerini, sınırlarını ve kendi yaşam alanını gözlemleyeceksin."
         ],
-        "weeklyReflection": {
-          "title": "Zihinsel Desenleri Görme",
-          "shortDescription": "Düşünce kalıplarını şefkatle fark ederek içsel esneklik geliştir.",
-          "details": [
-            "En sık tekrar eden düşünceyi fark et",
-            "Bu düşüncenin hangi durumlarda ortaya çıktığını gözlemle",
-            "Düşünce ve gerçeklik arasındaki farkı incele",
-            "Kendine karşı daha yumuşak bir dil geliştirdiğin anları fark et"
-          ]
-        },
-        "goldenRules": {
-          "title": "Zihinsel Denge Kuralları",
-          "shortDescription": "Düşüncelerle ilişki kurarken kendine nazik davran.",
-          "details": [
-            "Olumsuz düşünceler kötü değildir",
-            "Onları bastırmaya çalışma",
-            "Sadece fark et ve dönüştür",
-            "Zorla pozitif olmaya çalışma",
-            "Gerçekçi ve destekleyici bir dil kullan",
-            "Her düşünce gerçek değildir"
-          ]
-        },
-        "realImpact": {
-          "title": "Gerçek Dönüşüm Noktası",
-          "shortDescription": "Değişim, düşünceyi fark ettiğin anda başlar.",
-          "details": [
-            "Bir düşünceyi fark ettiğinde etkisi azalır",
-            "Yeniden çerçevelediğinde zihnin yeni bir yol öğrenir",
-            "Bu süreç zihinsel esneklik oluşturur",
-            "Küçük farkındalıklar zamanla büyük değişim yaratır"
-          ]
-        },
-        "dailyPlanSummary": {
-          "title": "Günlük Net Akış",
-          "shortDescription": "Gününü sade ve uygulanabilir bir zihinsel farkındalık rutiniyle düzenle.",
-          "details": [
-            "Sabah 1 olumlama cümlesi seç",
-            "Gün içinde 1–3 düşünce yakala",
-            "Gün içinde 1–3 düşünceyi yeniden çerçevele",
-            "İç konuşmanı gün içinde fark et",
-            "Akşam kısa bir değerlendirme yaz"
-          ]
-        },
-        "processResult": {
-          "title": "Zamanla Oluşan Zihinsel Dönüşüm",
-          "shortDescription": "Zihnin daha esnek ve destekleyici bir yapıya evrilir.",
-          "details": [
-            "10–15 gün: olumsuz düşüncelerini daha hızlı fark edersin",
-            "30 gün: iç konuşma tonunun yumuşadığını hissedersin",
-            "45 gün: düşüncelerini daha esnek yönetebildiğini fark edersin",
-            "Genel olarak kendine karşı daha şefkatli olursun"
-          ]
-        }
-    },
-    {
-      "id": "4",
-      "name": "Manevi Bağımsızlık",
-      "difficultyLevel": 9,
-      "difficultyScale": 10,
-      "durationDays": 60,
-      "durationText": "60 gün",
-      "imageName": "auraimg4",
-      "badgeDescription": "Kontrol etmeden de dengede kalabildiğini gösterir.",
-      "elements": "🌬️HAVA ✨AKASHA",
-      "version": 1,
-      "isActive": true,
 
-      "badgeId": "badge_4",
-
-      "completionRuleType": "strict_daily_threshold",
-      "dailyTaskCompletionThreshold": 0.5,
-
-      "allowRestart": true,
-      "dailyDurationText": "Günlük süre: kısa ama derin",
-      "coreProblems": [
-        "Kontrol etme ihtiyacı",
-        "Aşırı bağlanma / kaybetme korkusu"
-      ],
-      "oneSentenceSummary": "60 gün boyunca kontrol etme ihtiyacını fark etmeyi öğrenirsin; hayatla, duygularla ve beklentilerle daha hafif bir ilişki kurmaya başlarsın.",
-      "fullText": [
-        "🌬️ Hayatı Daha Hafif Taşımaya Başla",
-        "60 gün boyunca kontrol etme ihtiyacını fark etmeyi öğrenirsin.\nHayatla, duygularla ve beklentilerle daha hafif bir ilişki kurmaya başlarsın.",
-        "🧠 Bu program neyi dönüştürür?\n* Kontrol ihtiyacı azalır\n* Duygusal dalgalanmalar hafifler\n* Olaylara verilen tepkiler yumuşar\n* Kaybetme korkusu azalır\n* İçsel özgürlük ve sakinlik artar",
-        "📅 Program boyunca neler yapacaksın?\n🌬️ Günlük Uygulama Sistemi\nBu programın amacı kontrol etme ihtiyacını fark etmek ve bırakmayı öğrenmektir.\nKüçük ama derin farkındalık anlarıyla zihinsel ve duygusal hafiflik oluşur.\n\n🌬️ Sabah → Kabul Başlangıcı (2–5 dk)\nAmaç: Güne kontrol değil kabul ile başlamak.\nHer sabah kendine kısa bir cümle söylersin.\n👉 Örnek:\n“Her şeyi kontrol etmek zorunda değilim.”\n“Hayatın akmasına izin verebilirim.”\nBu cümleyi 2–3 kez tekrar edersin.\n💡 Kural:\nZorla inanmak zorunda değilsin.\nSadece zihnine yeni bir alan açarsın.\n\n✨ Gün İçinde → Kontrolü Fark Etme (1–3 kez)\nGün içinde kontrol etme isteğini fark etmeye çalışırsın.\n📍 Kendine sorarsın:\n“Şu an neyi kontrol etmeye çalışıyorum?”\nBu bir insan, bir durum ya da bir sonuç olabilir.\n💡 Amaç:\nKontrol ihtiyacını görünür hale getirmek.\n\n🌬️ Gün İçinde → Bırakma Anı (1–3 kez)\nFark ettiğin kontrol ihtiyacında kısa bir durak verirsin.\n👉 5–6 derin nefes alıp verirsin.\nNefes verirken içinden şunu söylersin:\n“Bırakıyorum.”\nZorla bırakmaya çalışma.\nSadece gevşemeye izin ver.\n\n🧠 Gün İçinde → Duyguyu Kabul Etme\nKontrol isteğinin altında genelde bir duygu vardır.\n📍 Kendine sorarsın:\n“Şu an aslında ne hissediyorum?”\nKaygı, korku, belirsizlik olabilir.\nBu duyguyu değiştirmeye çalışmadan sadece kabul edersin.\n👉 “Bu da var.” demek yeterlidir.\n\n📓 Akşam → Günlük Farkındalık Yazısı (5 dk)\nGün sonunda kısa bir yazı yazarsın:\n👉 Bugün neyi kontrol etmeye çalıştım?\n👉 Bunun altında hangi duygu vardı?\n👉 Bırakabildiğim bir an oldu mu?\nYazı uzun olmak zorunda değildir.\nDürüst olması yeterlidir.\n\n⚙️ Altın Kurallar\nHer şeyi kontrol etmek zorunda değilsin\nKontrol etmek güven veriyor gibi hissettirebilir ama çoğu zaman yorar\nBırakmak zayıflık değildir\nAksine içsel güçtür\n👉 “Kontrol azaldıkça hafiflik artar.”\n\n🔥 Gerçek Etkiyi Yaratan Şey\nBu programın gücü büyük kararlar değil,\nkontrol etmeye çalıştığın küçük anları fark ettiğinde ortaya çıkar.\nBir anlığına bıraktığında bile zihnin yeni bir deneyim öğrenir.\nBu küçük bırakışlar zamanla içsel özgürlüğe dönüşür.\n\n🎯 Net Günlük Plan\nSabah kısa kabul cümlesi\nGün içinde 1–3 kontrol fark etme\nGün içinde 1–3 bırakma nefesi\nGün içinde duyguyu kabul etme\nAkşam kısa yazı\n\n💥 Süreç Sonucu\n10–15 gün: kontrol ettiğini daha hızlı fark edersin\n30 gün: bazı şeyleri zorlamadan bırakabildiğini hissedersin\n60 gün: hayatla daha hafif bir ilişki kurmaya başlarsın"
-      ],
-      "dailyTasks": [
+        "days": [
           {
-            "id": "morning",
-            "title": "Sabah Kabul Başlangıcı",
-            "shortDescription": "Güne kontrol yerine kabul duygusuyla yumuşak bir başlangıç yap.",
-            "details": [
-              "Kendine kısa bir kabul cümlesi seç",
-              "Cümleyi 2–3 kez sakin bir şekilde tekrar et",
-              "Zorla inanmak zorunda olmadığını hatırla",
-              "Zihninde yeni bir alan açmaya niyet et",
-              "Örnek: “Her şeyi kontrol etmek zorunda değilim.”"
+            "dayNumber": 1,
+            "title": "Yavaşla ve Fark Et",
+            "dailyDurationText": "Bugün yaklaşık 8-12 dakika",
+            "tasks": [
+              {
+                "id": "day1_morning_intention",
+                "title": "Sabah Niyet Alanı",
+                "shortDescription": "Güne aceleyle değil, kendini duyarak başla.",
+                "elementKey": "fire",
+                "elementName": "Ateş",
+                "elementEmoji": "🔥",
+                "timeOfDay": "morning",
+                "estimatedDurationText": "2-3 dakika",
+                "estimatedMinutes": 3,
+                "isRequired": true,
+                "details": [
+                  "2 dakika sessizce dur",
+                  "Bugün zihninde en çok dönen konuyu fark et",
+                  "Kendine sor: Bugün neye hemen tepki vermek istemiyorum?"
+                ]
+              },
+              {
+                "id": "day1_emotion_checkin",
+                "title": "Duygu Check-in",
+                "shortDescription": "Bugünkü baskın duygunu isimlendir.",
+                "elementKey": "water",
+                "elementName": "Su",
+                "elementEmoji": "💧",
+                "timeOfDay": "day",
+                "estimatedDurationText": "2-3 dakika",
+                "estimatedMinutes": 3,
+                "isRequired": true,
+                "details": [
+                  "Şu an baskın duygunu seç",
+                  "Bu duygunun bedeninde nerede hissedildiğini fark et",
+                  "Cümleyi tamamla: Bugün içimde en çok ... var"
+                ]
+              },
+              {
+                "id": "day1_message_pause",
+                "title": "Mesajı Bekletme Pratiği",
+                "shortDescription": "Duygusal bir mesajı hemen göndermeden önce tekrar oku.",
+                "elementKey": "air",
+                "elementName": "Hava",
+                "elementEmoji": "🌬️",
+                "timeOfDay": "day",
+                "estimatedDurationText": "2-3 dakika",
+                "estimatedMinutes": 3,
+                "isRequired": true,
+                "details": [
+                  "Duygusal bir mesajı hemen gönderme",
+                  "Mesajı tekrar oku: sert mi, savunmacı mı, belirsiz mi?",
+                  "Gerekirse daha sade bir cümleyle değiştir"
+                ]
+              },
+              {
+                "id": "day1_personal_chart_area",
+                "title": "Kişisel Harita Alanı",
+                "shortDescription": "Bu retro hayatının hangi alanında yavaşlama istiyor?",
+                "elementKey": "water",
+                "elementName": "Su",
+                "elementEmoji": "💧",
+                "timeOfDay": "evening",
+                "estimatedDurationText": "2-3 dakika",
+                "estimatedMinutes": 3,
+                "isRequired": false,
+                "details": [
+                  "Retronun hangi evine düştüğünü biliyorsan bugünkü soruyu o alana uygula",
+                  "Bilmiyorsan güvenlik ve duygusal ihtiyaçların üzerinden cevapla",
+                  "Kendine sor: Bu alanda aceleyle verdiğim tepkiler neler?"
+                ]
+              }
             ]
           },
           {
-            "id": "notice",
-            "title": "Kontrol İhtiyacını Fark Etme",
-            "shortDescription": "Gün içinde kontrol etme isteğini nazikçe fark et.",
-            "details": [
-              "Günde 1–3 kez kısa bir durak ver",
-              "Kendine sor: “Şu an neyi kontrol etmeye çalışıyorum?”",
-              "Bu bir kişi, durum ya da sonuç olabilir",
-              "Sadece fark et, değiştirmeye çalışma",
-              "Amaç kontrol ihtiyacını görünür hale getirmek"
+            "dayNumber": 2,
+            "title": "Duygunu İsimlendir",
+            "dailyDurationText": "Bugün yaklaşık 8-12 dakika",
+            "tasks": [
+              {
+                "id": "day2_emotion_intention",
+                "title": "Sabah Duygu Niyeti",
+                "shortDescription": "Güne duygunu bastırmadan başla.",
+                "elementKey": "water",
+                "elementName": "Su",
+                "elementEmoji": "💧",
+                "timeOfDay": "morning",
+                "estimatedDurationText": "2-3 dakika",
+                "estimatedMinutes": 3,
+                "isRequired": true,
+                "details": [
+                  "Uyandığında ilk hissettiğin duyguyu fark et",
+                  "Bu duygu sana ne anlatmak istiyor olabilir?",
+                  "Bugün duygumu görmek, ona teslim olmak değildir cümlesini hatırla"
+                ]
+              },
+              {
+                "id": "day2_body_signal",
+                "title": "Beden Sinyali",
+                "shortDescription": "Zihinden önce bedeninin ne söylediğini dinle.",
+                "elementKey": "earth",
+                "elementName": "Toprak",
+                "elementEmoji": "🌍",
+                "timeOfDay": "day",
+                "estimatedDurationText": "2-3 dakika",
+                "estimatedMinutes": 3,
+                "isRequired": true,
+                "details": [
+                  "Omuz, çene, mide ve göğüs bölgeni fark et",
+                  "Nerede gerginlik olduğunu gözlemle",
+                  "Bedeninin bugün senden istediği tek şeyi yaz"
+                ]
+              },
+              {
+                "id": "day2_evening_emotion_note",
+                "title": "Akşam Duygu Notu",
+                "shortDescription": "Günün sonunda içinden geçenleri toparla.",
+                "elementKey": "water",
+                "elementName": "Su",
+                "elementEmoji": "💧",
+                "timeOfDay": "evening",
+                "estimatedDurationText": "3-4 dakika",
+                "estimatedMinutes": 4,
+                "isRequired": true,
+                "details": [
+                  "Bugün en çok hangi duygu geri geldi?",
+                  "Bu duygu sana neyi gösterdi?",
+                  "Bugün kendimle ilgili şunu fark ettim cümlesini tamamla"
+                ]
+              },
+              {
+                "id": "day2_personal_chart_area",
+                "title": "Kişisel Harita Alanı",
+                "shortDescription": "Duygunu kendi retro alanında oku.",
+                "elementKey": "water",
+                "elementName": "Su",
+                "elementEmoji": "💧",
+                "timeOfDay": "evening",
+                "estimatedDurationText": "2-3 dakika",
+                "estimatedMinutes": 3,
+                "isRequired": false,
+                "details": [
+                  "Retron hangi evindeyse bugünkü duygunu o yaşam alanıyla ilişkilendir",
+                  "Kendine sor: Bu alanda hangi duygumu saklıyorum?",
+                  "Bu alandaki bir ihtiyacını yaz"
+                ]
+              }
             ]
           },
           {
-            "id": "release",
-            "title": "Bırakma Nefesi",
-            "shortDescription": "Kontrol ihtiyacını fark ettiğinde nefesle gevşemeye izin ver.",
-            "details": [
-              "5–6 derin nefes alıp ver",
-              "Nefes verirken içinden “Bırakıyorum” de",
-              "Zorla bırakmaya çalışma",
-              "Sadece gevşemeye izin ver",
-              "Bedende oluşan rahatlamayı fark et"
+            "dayNumber": 3,
+            "title": "Geçmişten Gelen Kalıbı Gör",
+            "dailyDurationText": "Bugün yaklaşık 8-12 dakika",
+            "tasks": [
+              {
+                "id": "day3_morning_awareness",
+                "title": "Sabah Farkındalık Alanı",
+                "shortDescription": "Geçmişe suçlamak için değil, anlamak için bak.",
+                "elementKey": "water",
+                "elementName": "Su",
+                "elementEmoji": "💧",
+                "timeOfDay": "morning",
+                "estimatedDurationText": "2-3 dakika",
+                "estimatedMinutes": 3,
+                "isRequired": true,
+                "details": [
+                  "Bugün kendimi geçmişle tanımlamak zorunda değilim niyetiyle başla",
+                  "Aklına sık gelen eski bir konuyu fark et",
+                  "Bu konunun sende uyandırdığı duyguyu yaz"
+                ]
+              },
+              {
+                "id": "day3_pattern_question",
+                "title": "Tekrar Eden Kalıp",
+                "shortDescription": "Hayatında tekrar eden bir duygusal döngüyü fark et.",
+                "elementKey": "air",
+                "elementName": "Hava",
+                "elementEmoji": "🌬️",
+                "timeOfDay": "day",
+                "estimatedDurationText": "3-4 dakika",
+                "estimatedMinutes": 4,
+                "isRequired": true,
+                "details": [
+                  "Son dönemde tekrar eden bir konuyu seç",
+                  "Bu konuda hep verdiğin tepkiyi yaz",
+                  "Kendine sor: Bu tepki beni gerçekten koruyor mu?"
+                ]
+              },
+              {
+                "id": "day3_small_home_order",
+                "title": "Evde Küçük Düzen",
+                "shortDescription": "Güvenli alanında küçük bir sadeleşme yap.",
+                "elementKey": "earth",
+                "elementName": "Toprak",
+                "elementEmoji": "🌍",
+                "timeOfDay": "day",
+                "estimatedDurationText": "3-4 dakika",
+                "estimatedMinutes": 4,
+                "isRequired": true,
+                "details": [
+                  "Evinde küçük bir alan seç",
+                  "Sana iyi gelmeyen bir şeyi kaldır",
+                  "Alanı düzenlerken kendime yer açıyorum diye düşün"
+                ]
+              },
+              {
+                "id": "day3_personal_chart_area",
+                "title": "Kişisel Harita Alanı",
+                "shortDescription": "Eski kalıbı kendi retro alanında bul.",
+                "elementKey": "air",
+                "elementName": "Hava",
+                "elementEmoji": "🌬️",
+                "timeOfDay": "evening",
+                "estimatedDurationText": "2-3 dakika",
+                "estimatedMinutes": 3,
+                "isRequired": false,
+                "details": [
+                  "Retron hangi evindeyse o alanda tekrar eden bir döngüyü yaz",
+                  "Kendine sor: Bu alanda hep aynı şeyi neden yaşıyorum?",
+                  "Bugün sadece fark et, çözmek için kendini zorlama"
+                ]
+              }
             ]
           },
           {
-            "id": "emotion",
-            "title": "Duyguyu Kabul Etme",
-            "shortDescription": "Kontrolün altındaki duyguyu fark ederek olduğu gibi kabul et.",
-            "details": [
-              "Kendine sor: “Şu an aslında ne hissediyorum?”",
-              "Kaygı, korku veya belirsizliği fark et",
-              "Duyguyu değiştirmeye çalışma",
-              "Sadece “Bu da var” diyerek kabul et",
-              "Duyguların gelip geçici olduğunu hatırla"
+            "dayNumber": 4,
+            "title": "İletişimi Sadeleştir",
+            "dailyDurationText": "Bugün yaklaşık 8-12 dakika",
+            "tasks": [
+              {
+                "id": "day4_clarity_intention",
+                "title": "Sabah Netlik Niyeti",
+                "shortDescription": "Bugün uzun açıklamalar yerine sade cümleler seç.",
+                "elementKey": "air",
+                "elementName": "Hava",
+                "elementEmoji": "🌬️",
+                "timeOfDay": "morning",
+                "estimatedDurationText": "2-3 dakika",
+                "estimatedMinutes": 3,
+                "isRequired": true,
+                "details": [
+                  "Bugün net olmak istediğin bir konu seç",
+                  "Kendimi anlatmak için kendimi tüketmek zorunda değilim cümlesini hatırla",
+                  "Bugün daha kısa ve daha açık konuşmayı dene"
+                ]
+              },
+              {
+                "id": "day4_message_cleaning",
+                "title": "Mesaj Temizliği",
+                "shortDescription": "Söylemek istediğini daha sade ve net yaz.",
+                "elementKey": "air",
+                "elementName": "Hava",
+                "elementEmoji": "🌬️",
+                "timeOfDay": "day",
+                "estimatedDurationText": "3-4 dakika",
+                "estimatedMinutes": 4,
+                "isRequired": true,
+                "details": [
+                  "Göndermek istediğin bir mesajı seç",
+                  "Gereksiz açıklamaları çıkar",
+                  "Suçlayıcı kelime varsa daha sade bir ifadeyle değiştir"
+                ]
+              },
+              {
+                "id": "day4_evening_communication_review",
+                "title": "Akşam İletişim Değerlendirmesi",
+                "shortDescription": "Bugün kelimelerin sana ne gösterdi?",
+                "elementKey": "air",
+                "elementName": "Hava",
+                "elementEmoji": "🌬️",
+                "timeOfDay": "evening",
+                "estimatedDurationText": "3-4 dakika",
+                "estimatedMinutes": 4,
+                "isRequired": true,
+                "details": [
+                  "Bugün en çok hangi konuşma aklında kaldı?",
+                  "O konuşmada kendini sakladın mı, fazla mı açıkladın?",
+                  "Yarın için bir iletişim niyeti yaz"
+                ]
+              },
+              {
+                "id": "day4_personal_chart_area",
+                "title": "Kişisel Harita Alanı",
+                "shortDescription": "Kendi retro alanında hangi konuşma sadeleşmeli?",
+                "elementKey": "air",
+                "elementName": "Hava",
+                "elementEmoji": "🌬️",
+                "timeOfDay": "evening",
+                "estimatedDurationText": "2-3 dakika",
+                "estimatedMinutes": 3,
+                "isRequired": false,
+                "details": [
+                  "Retronun düştüğü ev konusunu düşün",
+                  "Bu alanda ertelediğin bir konuşma var mı?",
+                  "Tek cümlelik net ihtiyacını yaz"
+                ]
+              }
             ]
           },
           {
-            "id": "evening",
-            "title": "Akşam Farkındalık Yazısı",
-            "shortDescription": "Günü kısa bir içsel gözlemle tamamla.",
-            "details": [
-              "Bugün neyi kontrol etmeye çalıştığını yaz",
-              "Altındaki duyguyu fark et ve not al",
-              "Bırakabildiğin bir anı hatırla",
-              "Yazının kısa ve dürüst olması yeterlidir",
-              "Kendini yargılamadan gözlemle"
-            ]
-          }
-        ],
-        "weeklyReflection": {
-          "title": "Kontrol Desenlerini Görme",
-          "shortDescription": "Kontrol etme eğilimlerini fark ederek içsel alanını genişlet.",
-          "details": [
-            "En çok hangi durumlarda kontrol etmeye çalıştığını fark et",
-            "Bu durumların altındaki ortak duyguyu gözlemle",
-            "Bırakabildiğin anları hatırla",
-            "Kendine karşı daha yumuşak olduğun anları fark et"
-          ]
-        },
-        "goldenRules": {
-          "title": "Kabulün Temel İlkeleri",
-          "shortDescription": "Kontrol yerine kabulü seçerken kendine nazik davran.",
-          "details": [
-            "Her şeyi kontrol etmek zorunda değilsin",
-            "Kontrol geçici güven hissi yaratabilir ama çoğu zaman yorar",
-            "Bırakmak zayıflık değildir",
-            "Aksine içsel güç ve esneklik getirir",
-            "Kendine izin vermek sürecin en önemli parçasıdır",
-            "Kontrol azaldıkça hafiflik artar"
-          ]
-        },
-        "realImpact": {
-          "title": "Gerçek Hafiflik Noktası",
-          "shortDescription": "Değişim, kontrol etmeye çalıştığın anları fark ettiğinde başlar.",
-          "details": [
-            "Küçük farkındalık anları büyük dönüşüm yaratır",
-            "Bir anlığına bıraktığında zihnin yeni bir deneyim öğrenir",
-            "Kontrol yerine kabul geldikçe içsel alan genişler",
-            "Bu süreç zamanla özgürlük hissi oluşturur"
-          ]
-        },
-        "dailyPlanSummary": {
-          "title": "Günlük Akış Özeti",
-          "shortDescription": "Gününü sade bir kabul ve bırakma pratiğiyle düzenle.",
-          "details": [
-            "Sabah kısa bir kabul cümlesi söyle",
-            "Gün içinde 1–3 kez kontrol ihtiyacını fark et",
-            "Gün içinde 1–3 kez bırakma nefesi yap",
-            "Duygularını gün içinde kabul et",
-            "Akşam kısa bir farkındalık yazısı yaz"
-          ]
-        },
-        "processResult": {
-          "title": "Zamanla Oluşan Hafiflik",
-          "shortDescription": "Kontrol azaldıkça zihinsel ve duygusal hafiflik artar.",
-          "details": [
-            "10–15 gün: kontrol ettiğin anları daha hızlı fark edersin",
-            "30 gün: bazı şeyleri zorlamadan bırakabildiğini hissedersin",
-            "60 gün: hayatla daha akışta ve hafif bir ilişki kurarsın",
-            "Genel olarak daha sakin ve esnek hissedersin"
-          ]
-        }
-    },
-    {
-      "id": "5",
-      "name": "Sabah Ritmi & Bilinçli Uyanış",
-      "difficultyLevel": 8,
-      "difficultyScale": 10,
-      "durationDays": 30,
-      "durationText": "30 gün",
-      "imageName": "auraimg5",
-      "badgeDescription": "Gününe bilinçli ve kararlı başlayabildiğini gösterir.",
-      "elements": "🔥ATEŞ",
-      "version": 1,
-      "isActive": true,
-
-      "badgeId": "badge_5",
-
-      "completionRuleType": "strict_daily_threshold",
-      "dailyTaskCompletionThreshold": 0.5,
-
-      "allowRestart": true,
-      "dailyDurationText": "Hedef: 1 saat 15 saat erken uyanma( Kendine göre süreyi şekillendirebilirsin )",
-      "coreProblems": ["Sabah uyanma direnci", "Alarm erteleme alışkanlığı"],
-      "oneSentenceSummary": "Bu program “erken kalk” demez; seni istediğin saate kademeli olarak taşır.",
-      "fullText": [
-        "🌅 Günü Kendi Ritminde Başlat",
-        "Bu program “erken kalk” demez.\nBu program, seni istediğin saate kademeli olarak taşır.",
-        "⏳ Kademeli Uyanma Sistemi\n1–10. gün: 25 dakika önce\n11–20. gün: 25 dakika önce\n21–30. gün: 25 dakika önce",
-        "📅 Program boyunca neler yapacaksın?\n ✨Bu programın amacı sabah uyanmayı zorlamak değil, bilinçli bir sabah ritmi oluşturmaktır.\nKüçük ama tutarlı adımlarla beden ve zihin yeni düzene uyum sağlar.\n\n🔥 Uyanır Uyanmaz → Yatakla Bağı Kes (1 dk)\nAmaç: Günü ertelemeden başlatmak.\nAlarm çaldığında yatakta kalmazsın.\nHemen oturur veya ayağa kalkarsın.\n📍 Kendine kısa bir cümle söylersin:\n“Bugün kendim için uyanıyorum.”\n💡 Kural:\nSnooze yok\nTek hareketle kalkış\n\n🌞 Sabah → Bedeni Aktifleştirme (2–5 dk)\nUyanır uyanmaz bedenine uyarı verirsin.\n👉 Seçenekler:\nYüzünü yıkamak\nBir bardak su içmek\nPerdeyi açmak\nKısa esneme hareketi\nAmaç bedeni “gün başladı” moduna sokmaktır.\n💡 Kural:\nKüçük ama net bir hareket yeterlidir.\n\n🔥 Sabah → Bilinçli Niyet (1 dk)\nGüne zihinsel yön verirsin.\n📍 Kendine sorarsın:\n“Bugün nasıl bir gün yaşamak istiyorum?”\nKısa bir niyet belirler ve içinden söylersin.\n👉 Örnek:\n“Bugün daha odaklı olacağım.”\n“Bugün kendime iyi davranacağım.”\n\n🌬️ Gün İçinde → Enerji Farkındalığı (1–2 kez)\nGün içinde kısa bir durak verirsin.\n📍 Kendine sorarsın:\n“Enerjim şu an nasıl?”\nYorgunluk, dağınıklık veya düşüş fark edersen küçük bir reset yaparsın.\n👉 Derin nefes, kısa yürüyüş veya su içmek\nAmaç sabah ritmini gün içine taşımaktır.\n\n📓 Akşam → Ertesi Güne Hazırlık (5 dk)\nAkşam kısa bir hazırlık yaparsın.\n👉 Yarın uyanma saatini netleştirirsin\n👉 Alarmını kurarsın\n👉 Sabah giyeceğin veya yapacağın ilk şeyi düşünürsün\n💡 Amaç:\nSabah karar vermemek\nSüreci kolaylaştırmak\n\n⚙️ Altın Kurallar\nMükemmel uyanmak zorunda değilsin\nBazı günler zorlanman normal\nÖnemli olan tekrar kalkabilmek\nDisiplin zorlamak değil, tekrar etmektir\n👉 “Her sabah yeni bir başlangıçtır.”\n\n🔥 Gerçek Etkiyi Yaratan Şey\nBu programın gücü erken kalkmakta değil,\nuyanır uyanmaz verdiğin ilk kararda ortaya çıkar.\nO ilk hareket günün tonunu belirler.\nZamanla bu küçük başlangıçlar güçlü bir sabah kimliğine dönüşür.\n\n🎯 Net Günlük Plan\nUyanır uyanmaz yataktan çık\nKısa bir fiziksel hareket yap\nHer hafta bir önceki haftadan 25 dakika daha erken yatıp 25 dakika daha erken kalkmak\n1 cümle niyet belirle\nGün içinde enerji farkındalığı yap\nAkşam ertesi güne hazırlan\n\n💥 Süreç Sonucu\n7–10 gün: sabah direncinin azaldığını fark edersin\n20 gün: uyanma sürecin daha otomatik hale gelir\n30 gün: gününe daha bilinçli başladığını hissedersin"
-      ],
-      "dailyTasks": [
-          {
-            "id": "wake",
-            "title": "Uyanır Uyanmaz Kalkış",
-            "shortDescription": "Güne ertelemeden başlayarak yatakla bağını nazikçe kes.",
-            "details": [
-              "Alarm çaldığında yatakta kalmadan otur veya ayağa kalk",
-              "Snooze kullanmamaya niyet et",
-              "Tek bir hareketle kalkışı tamamla",
-              "Kendine şunu söyle: “Bugün kendim için uyanıyorum.”",
-              "Kalkışı basit ve net tut"
+            "dayNumber": 5,
+            "title": "Sınır Koy",
+            "dailyDurationText": "Bugün yaklaşık 8-12 dakika",
+            "tasks": [
+              {
+                "id": "day5_boundary_intention",
+                "title": "Sabah Sınır Niyeti",
+                "shortDescription": "Bugün kendini korumayı seç.",
+                "elementKey": "fire",
+                "elementName": "Ateş",
+                "elementEmoji": "🔥",
+                "timeOfDay": "morning",
+                "estimatedDurationText": "2-3 dakika",
+                "estimatedMinutes": 3,
+                "isRequired": true,
+                "details": [
+                  "Hayır demek kötü biri olmak değildir cümlesiyle güne başla",
+                  "Bugün enerjini en çok tüketen şeyi fark et",
+                  "Kendine sor: Neye evet derken kendime hayır diyorum?"
+                ]
+              },
+              {
+                "id": "day5_no_sentence_practice",
+                "title": "Hayır Cümlesi Provası",
+                "shortDescription": "Sınırını kısa ve net bir cümleyle kurmayı dene.",
+                "elementKey": "air",
+                "elementName": "Hava",
+                "elementEmoji": "🌬️",
+                "timeOfDay": "day",
+                "estimatedDurationText": "3-4 dakika",
+                "estimatedMinutes": 4,
+                "isRequired": true,
+                "details": [
+                  "Bugün kullanabileceğin bir sınır cümlesi yaz",
+                  "Örnek: Bugün buna vaktim yok",
+                  "Cümleni uzun açıklamalarla büyütme"
+                ]
+              },
+              {
+                "id": "day5_evening_boundary_note",
+                "title": "Akşam Sınır Notu",
+                "shortDescription": "Bugün kendini nerede koruduğunu fark et.",
+                "elementKey": "earth",
+                "elementName": "Toprak",
+                "elementEmoji": "🌍",
+                "timeOfDay": "evening",
+                "estimatedDurationText": "3-4 dakika",
+                "estimatedMinutes": 4,
+                "isRequired": true,
+                "details": [
+                  "Küçük bile olsa koyduğun bir sınırı yaz",
+                  "Koyamadığın bir sınır varsa nedenini fark et",
+                  "Yarın için daha kolay bir sınır seç"
+                ]
+              },
+              {
+                "id": "day5_personal_chart_area",
+                "title": "Kişisel Harita Alanı",
+                "shortDescription": "Sınırı kendi retro alanında uygula.",
+                "elementKey": "fire",
+                "elementName": "Ateş",
+                "elementEmoji": "🔥",
+                "timeOfDay": "evening",
+                "estimatedDurationText": "2-3 dakika",
+                "estimatedMinutes": 3,
+                "isRequired": false,
+                "details": [
+                  "Retron hangi evindeyse o alanda nerede fazla verdiğini fark et",
+                  "Bu alan için bir sınır cümlesi yaz",
+                  "Bugün o alanda küçük bir geri çekilme seç"
+                ]
+              }
             ]
           },
           {
-            "id": "activate",
-            "title": "Bedeni Aktifleştirme",
-            "shortDescription": "Küçük bir hareketle bedenine günün başladığını hissettir.",
-            "details": [
-              "Yüzünü yıka veya bir bardak su iç",
-              "Perdeyi açarak ışığı içeri al",
-              "Kısa bir esneme hareketi yap",
-              "Bedenine nazik bir uyarı ver",
-              "Küçük ama net bir hareket yeterlidir"
+            "dayNumber": 6,
+            "title": "Evini, Zihnini ve Alanını Düzenle",
+            "dailyDurationText": "Bugün yaklaşık 8-12 dakika",
+            "tasks": [
+              {
+                "id": "day6_space_intention",
+                "title": "Sabah Alan Niyeti",
+                "shortDescription": "Dış alanını sadeleştirirken içini de toparla.",
+                "elementKey": "earth",
+                "elementName": "Toprak",
+                "elementEmoji": "🌍",
+                "timeOfDay": "morning",
+                "estimatedDurationText": "2-3 dakika",
+                "estimatedMinutes": 3,
+                "isRequired": true,
+                "details": [
+                  "Bugün kendime yer açıyorum niyetiyle başla",
+                  "Evinde ya da dijital alanında küçük bir bölge seç",
+                  "Her şeyi değil, tek bir alanı toparlamaya karar ver"
+                ]
+              },
+              {
+                "id": "day6_digital_cleaning",
+                "title": "Dijital Temizlik",
+                "shortDescription": "Zihinsel kalabalığı azaltacak küçük bir temizlik yap.",
+                "elementKey": "earth",
+                "elementName": "Toprak",
+                "elementEmoji": "🌍",
+                "timeOfDay": "day",
+                "estimatedDurationText": "3-4 dakika",
+                "estimatedMinutes": 4,
+                "isRequired": true,
+                "details": [
+                  "Gereksiz 5 fotoğraf ya da ekran görüntüsü sil",
+                  "Kullanmadığın 1 uygulamanın bildirimini kapat",
+                  "Telefon ana ekranını biraz sadeleştir"
+                ]
+              },
+              {
+                "id": "day6_safe_space_question",
+                "title": "Güvenli Alan Sorusu",
+                "shortDescription": "Kendini nerede daha huzurlu hissettiğini fark et.",
+                "elementKey": "water",
+                "elementName": "Su",
+                "elementEmoji": "💧",
+                "timeOfDay": "evening",
+                "estimatedDurationText": "3-4 dakika",
+                "estimatedMinutes": 4,
+                "isRequired": true,
+                "details": [
+                  "Evinde sana iyi gelen bir köşeyi fark et",
+                  "Bu alanı daha sakin hale getirmek için küçük bir şey yap",
+                  "Kendine sor: Güven benim için nasıl bir his?"
+                ]
+              },
+              {
+                "id": "day6_personal_chart_area",
+                "title": "Kişisel Harita Alanı",
+                "shortDescription": "Retro evinde düzen isteyen alanı fark et.",
+                "elementKey": "earth",
+                "elementName": "Toprak",
+                "elementEmoji": "🌍",
+                "timeOfDay": "evening",
+                "estimatedDurationText": "2-3 dakika",
+                "estimatedMinutes": 3,
+                "isRequired": false,
+                "details": [
+                  "Retron hangi evindeyse o alanı temsil eden küçük bir şeyi düzenle",
+                  "Bu alanda sadeleşmeye ihtiyacın olan şeyi yaz",
+                  "Bugün sadece bir küçük düzen adımı at"
+                ]
+              }
             ]
           },
           {
-            "id": "intention",
-            "title": "Bilinçli Niyet Belirleme",
-            "shortDescription": "Güne kısa bir niyetle zihinsel yön ver.",
-            "details": [
-              "Kendine sor: “Bugün nasıl bir gün yaşamak istiyorum?”",
-              "Kısa ve sade bir niyet belirle",
-              "Niyeti içinden 1 kez söyle",
-              "Zorlamadan, yumuşak bir tonla seç",
-              "Örnek: “Bugün kendime iyi davranacağım.”"
-            ]
-          },
-          {
-            "id": "day",
-            "title": "Enerji Farkındalığı",
-            "shortDescription": "Gün içinde enerjini fark ederek küçük resetler yap.",
-            "details": [
-              "Günde 1–2 kez kısa bir durak ver",
-              "Kendine sor: “Enerjim şu an nasıl?”",
-              "Düşüş fark edersen küçük bir hareket yap",
-              "Derin nefes, kısa yürüyüş veya su içmeyi dene",
-              "Sabah ritmini gün içine taşı"
-            ]
-          },
-          {
-            "id": "evening",
-            "title": "Akşam Hazırlığı",
-            "shortDescription": "Ertesi gün için küçük bir hazırlık yaparak sabahını kolaylaştır.",
-            "details": [
-              "Yarın uyanma saatini netleştir",
-              "Alarmını önceden kur",
-              "Sabah giyeceğin veya yapacağın ilk şeyi düşün",
-              "Sabah karar vermemek için ortamı hazırla",
-              "Süreci sade ve destekleyici tut"
-            ]
-          }
-        ],
-        "weeklyReflection": {
-          "title": "Ritim Gözlemi",
-          "shortDescription": "Uyku ve uyanma düzenini nazikçe gözlemleyerek uyumunu artır.",
-          "details": [
-            "Hafta boyunca uyanma saatlerini gözden geçir",
-            "Hangi günlerin daha kolay geçtiğini fark et",
-            "Zorlandığın günleri yargılamadan gözlemle",
-            "Her hafta uyku saatini yaklaşık 25 dakika erkene çekmeyi dene"
-          ]
-        },
-        "goldenRules": {
-          "title": "Sabah Ritminin Temel Kuralları",
-          "shortDescription": "Bu süreçte kendine esnek ve destekleyici bir yaklaşım benimse.",
-          "details": [
-            "Mükemmel uyanmak zorunda değilsin",
-            "Bazı sabahlar zorlanman normaldir",
-            "Önemli olan tekrar kalkabilmektir",
-            "Disiplin zorlamak değil, tekrar etmektir",
-            "Her sabah yeni bir başlangıçtır"
-          ]
-        },
-        "realImpact": {
-          "title": "Günün İlk Anının Gücü",
-          "shortDescription": "Değişim, uyandığın ilk anda verdiğin küçük kararla başlar.",
-          "details": [
-            "İlk hareket günün tonunu belirler",
-            "Küçük başlangıçlar zamanla alışkanlığa dönüşür",
-            "Sabah davranışın günün geri kalanını etkiler",
-            "Bu süreç güçlü bir sabah kimliği oluşturur"
-          ]
-        },
-        "dailyPlanSummary": {
-          "title": "Günlük Akış Özeti",
-          "shortDescription": "Sabahını sade ve sürdürülebilir bir ritimle başlat.",
-          "details": [
-            "Uyanır uyanmaz yataktan çık",
-            "Kısa bir fiziksel hareket yap",
-            "Kendine 1 cümle niyet belirle",
-            "Gün içinde enerji farkındalığı yap",
-            "Akşam ertesi güne hazırlan",
-            "Her hafta uyku ve uyanma saatini kademeli olarak erkene çek"
-          ]
-        },
-        "processResult": {
-          "title": "Zamanla Oluşan Sabah Dönüşümü",
-          "shortDescription": "Sabahların daha akışkan ve bilinçli bir hale gelir.",
-          "details": [
-            "7–10 gün: sabah direncinin azaldığını fark edersin",
-            "20 gün: uyanma sürecin daha otomatik hale gelir",
-            "30 gün: güne daha bilinçli başladığını hissedersin",
-            "Genel olarak daha dengeli bir sabah ritmi oluşur"
-          ]
-        }
-    },
-    {
-      "id": "6",
-      "name": "Meditasyonla Zihinsel Denge",
-      "difficultyLevel": 7,
-      "difficultyScale": 10,
-      "durationDays": 40,
-      "durationText": "40 gün",
-      "imageName": "auraimg6",
-      "badgeDescription": "Zihnini sakinleştirip tepkilerini yavaşlatabildiğini gösterir.",
-      "elements": "🌬️HAVA ✨AKASHA",
-      "version": 1,
-      "isActive": true,
-
-      "badgeId": "badge_6",
-
-      "completionRuleType": "strict_daily_threshold",
-      "dailyTaskCompletionThreshold": 0.5,
-
-      "allowRestart": true,
-      "dailyDurationText": "Günlük süre: 10–20 dk",
-      "coreProblems": [
-        "Zihinsel gürültü / dikkat dağınıklığı",
-        "Stres ve otomatik tepki döngüsü"
-      ],
-      "oneSentenceSummary": "40 gün boyunca zihninin dalgalanmalarını fark etmeyi öğrenirsin; tepkiler yavaşlar, içsel sakinlik belirginleşir.",
-      "fullText": [
-        "🧘 Zihnini Sakinleştirmeyi Öğren",
-        "40 gün boyunca zihninin dalgalanmalarını fark etmeyi öğrenirsin.\nTepkiler yavaşlar, içsel sakinlik belirginleşir.",
-        "📅 Program boyunca neler yapacaksın?\n 🌟Bu programın amacı zihinsel gürültüyü azaltmak ve içsel sakinliği geliştirmektir.\nDüzenli meditasyonla zihnini gözlemlemeyi ve tepkilerini yavaşlatmayı öğrenirsin.\n\n🌬️ Sabah veya Gün İçinde → Meditasyon (10–20 dk)\nAmaç: Zihni sakinleştirmek ve farkındalık oluşturmak.\nSessiz bir ortamda oturursun.\nGözlerini kapatır veya yumuşak bir noktaya odaklanırsın.\n👉 Dikkatini nefesine getirirsin.\nNefes giriyor ve çıkıyor.\nZihin dağıldığında sadece fark eder ve tekrar nefese dönersin.\n💡 Kural:\nZihnin dağılması normaldir.\nHer dönüş bir ilerlemedir.\n\n✨ Meditasyon Sonrası → Zihni Gözlemleme (1–2 dk)\nMeditasyon bittikten sonra kısa bir durak verirsin.\n📍 Kendine sorarsın:\n“Şu an zihnim nasıl?”\nYargılamadan sadece fark edersin.\n👉 Yoğun, sakin, dağınık, yorgun olabilir\nAmaç zihni tanımaktır.\n\n🌬️ Gün İçinde → Nefes Durakları (1–3 kez)\nGün içinde kısa farkındalık anları yaratırsın.\n📍 3–5 derin nefes alıp verirsin.\nTüm dikkatini nefese verirsin.\nBu kısa duraklar zihni resetler.\n💡 Amaç:\nOtomatik tepkiyi yavaşlatmak\n\n🧠 Gün İçinde → Tepkiyi Fark Etme\nBir olay olduğunda hemen tepki vermeden önce durmaya çalışırsın.\n📍 Kendine sorarsın:\n“Şu an tepki mi veriyorum, yoksa seçiyor muyum?”\nBu kısa farkındalık alanı davranışını değiştirir.\n\n📓 Akşam → Kısa Değerlendirme (5 dk)\nGün sonunda kısa bir gözlem yaparsın:\n👉 Bugün zihnim nasıldı?\n👉 Ne zaman daha sakindim?\n👉 Ne zaman otomatik tepki verdim?\nBu yazı kısa ve net olabilir.\nAmaç analiz değil fark etmektir.\n\n⚙️ Altın Kurallar\nZihni susturmak zorunda değilsin\nMeditasyon düşüncesizlik değildir\nAmaç düşünceleri fark etmektir\nZorlanman sürecin bir parçasıdır\n👉 “Zihin sakinleştikçe netlik artar.”\n\n🔥 Gerçek Etkiyi Yaratan Şey\nBu programın gücü sadece meditasyon sırasında değil,\ngün içinde fark ettiğin anlarda oluşur.\nBir an durduğunda ve fark ettiğinde,\nzihin yeni bir alışkanlık öğrenir.\n\n🎯 Net Günlük Plan\nGünlük 10–20 dk meditasyon\nMeditasyon sonrası kısa gözlem\nGün içinde 1–3 nefes durakları\nGün içinde tepki farkındalığı\nAkşam kısa değerlendirme\n\n💥 Süreç Sonucu\n10–15 gün: zihinsel gürültüyü daha erken fark edersin\n30 gün: tepkilerinin yavaşladığını hissedersin\n40 gün: daha sakin ve dengeli bir zihin deneyimi oluşur",
-        "🌿 Meditasyon Konuları \n🧘 Meditasyon Rehberi\nBu bölümde meditasyona yeni başlayan biri olarak zihnini ve duygularını yumuşak bir şekilde fark etmeyi öğrenirsin.\nAmaç bir şeyi değiştirmek değil, sadece fark etmeye başlamaktır.\n\n🧠 1. Düşünce Gözlemleme\nRahat bir şekilde otur.\nGözlerini kapatabilir ya da yumuşak bir noktaya bakabilirsin.\nZihninden geçen düşünceleri fark etmeye başla.\nOnları durdurmaya çalışma.\nSadece şunu fark et:\n“Şu an bir düşünce var.”\nBir düşünce geldiğinde içinden nazikçe söyle:\n“Bu sadece bir düşünce.”\nSonra bırak ve geçmesine izin ver.\nZihnin tekrar dolarsa bu çok normal.\nSadece tekrar fark etmeye dön.\n\n🌊 2. Duygu Farkındalığı\nRahat bir şekilde otur ve birkaç nefes al.\nŞimdi kendine sor:\n“Şu an ne hissediyorum?”\nNet bir cevap gelmeyebilir.\nBu tamamen normal.\nSadece hissetmeye çalış.\nBir duygu fark ettiğinde onu değiştirmeye çalışma.\nSadece isim ver:\n“Bu kaygı.”\n“Bu stres.”\nSonra içinden şunu söyle:\n“Bu duygu şu an burada.”\nOnu itme.\nSadece var olmasına izin ver.\n\n🌬️ 3. Bırakma Meditasyonu\nRahat bir şekilde otur.\nNefesine odaklan.\nDerin bir nefes al.\nVe verirken içinden söyle:\n“Bırakıyorum.”\nBunu birkaç kez tekrar et.\nAklına düşünceler gelirse onları zorla göndermeye çalışma.\nSadece nefes verirken biraz gevşediğini hisset.\nTam bırakamıyorsan sorun değil.\nSadece biraz yumuşamak yeterli.\n\n⚙️ Altın Kurallar\nMeditasyonu doğru yapmak zorunda değilsin\nZihnin dağılması normaldir\nAmaç kontrol etmek değil fark etmektir\n👉 “Fark ettikçe zihin sakinleşir.”\n\n🔥 Gerçek Etkiyi Yaratan Şey\nBu pratiklerin gücü mükemmel yapmanda değil,\nher fark ettiğin anda ortaya çıkar.\nKüçük farkındalık anları zamanla büyük bir değişime dönüşür.\n\n🎯 Net Uygulama\nRahat bir yerde otur\n3–5 dakika bile yeterlidir\nSadece fark etmeye başla\n\n💥 Süreç Sonucu\nİlk günlerde zihninin ne kadar aktif olduğunu fark edersin\nBir süre sonra düşüncelerine daha az kapıldığını hissedersin\nZamanla daha sakin ve dengeli bir zihin oluşur"
-      ],
-      "dailyTasks": [
-          {
-            "id": "meditation",
-            "title": "Günlük Meditasyon",
-            "shortDescription": "Nefesine odaklanarak zihnini yumuşakça gözlemle.",
-            "details": [
-              "10–20 dakika sessiz bir ortamda otur",
-              "Gözlerini kapat veya yumuşak bir noktaya odaklan",
-              "Nefesin giriş ve çıkışını takip et",
-              "Zihnin dağıldığında sadece fark et ve geri dön",
-              "Her dönüşün bir ilerleme olduğunu hatırla"
-            ]
-          },
-          {
-            "id": "postMeditation",
-            "title": "Meditasyon Sonrası Gözlem",
-            "shortDescription": "Meditasyon sonrası zihnini yargısızca gözlemle.",
-            "details": [
-              "1–2 dakika sessizce dur",
-              "Kendine sor: “Şu an zihnim nasıl?”",
-              "Zihnini etiketlemeden fark et",
-              "Yoğunluk, sakinlik veya dağınıklığı gözlemle",
-              "Amaç analiz değil tanımaktır"
-            ]
-          },
-          {
-            "id": "breathBreaks",
-            "title": "Nefes Durakları",
-            "shortDescription": "Gün içinde kısa nefes aralarıyla zihnini resetle.",
-            "details": [
-              "Günde 1–3 kez kısa bir durak ver",
-              "3–5 derin nefes alıp ver",
-              "Tüm dikkatini nefesine getir",
-              "Nefesle birlikte gevşemeye izin ver",
-              "Zihinsel yoğunluğu yumuşat"
-            ]
-          },
-          {
-            "id": "reactionAwareness",
-            "title": "Tepkiyi Fark Etme",
-            "shortDescription": "Tepki vermeden önce kısa bir farkındalık alanı oluştur.",
-            "details": [
-              "Bir olay olduğunda hemen tepki vermeden dur",
-              "Kendine sor: “Tepki mi veriyorum, yoksa seçiyor muyum?”",
-              "Bu kısa boşluğu fark et",
-              "Davranışını bilinçli seçmeye izin ver",
-              "Otomatik tepkiyi yavaşlat"
-            ]
-          },
-          {
-            "id": "evening",
-            "title": "Akşam Kısa Değerlendirme",
-            "shortDescription": "Günü zihinsel farkındalıkla nazikçe gözden geçir.",
-            "details": [
-              "Bugün zihninin genel durumunu yaz",
-              "Ne zaman daha sakin olduğunu fark et",
-              "Ne zaman otomatik tepki verdiğini gözlemle",
-              "Yazıyı kısa ve net tut",
-              "Amaç sadece fark etmektir"
-            ]
-          }
-        ],
-        "weeklyReflection": {
-          "title": "Zihinsel Desenleri Gözlemleme",
-          "shortDescription": "Zihninin akışını fark ederek içsel sakinliği derinleştir.",
-          "details": [
-            "Hangi zamanlarda zihnin daha yoğun oluyor fark et",
-            "Sakin anların hangi koşullarda oluştuğunu gözlemle",
-            "Düşüncelerle olan ilişkini incele",
-            "Kendine karşı daha sabırlı olduğun anları fark et"
-          ]
-        },
-        "goldenRules": {
-          "title": "Meditasyonun Temel Yaklaşımı",
-          "shortDescription": "Zihninle ilişki kurarken kendine nazik davran.",
-          "details": [
-            "Zihni susturmak zorunda değilsin",
-            "Meditasyon düşüncesizlik değildir",
-            "Amaç düşünceleri fark etmektir",
-            "Zihnin dağılması sürecin bir parçasıdır",
-            "Zorlanmak gelişimin doğal bir kısmıdır",
-            "Zihin sakinleştikçe netlik artar"
-          ]
-        },
-        "realImpact": {
-          "title": "Gerçek Sakinlik Noktası",
-          "shortDescription": "Değişim, gün içinde fark ettiğin küçük anlarda oluşur.",
-          "details": [
-            "Meditasyon sadece başlangıçtır",
-            "Asıl etki günlük farkındalık anlarında oluşur",
-            "Durduğun her an zihnin yeni bir alışkanlık öğrenir",
-            "Bu küçük duraklar zamanla derin bir sakinliğe dönüşür"
-          ]
-        },
-        "dailyPlanSummary": {
-          "title": "Günlük Meditasyon Akışı",
-          "shortDescription": "Gününü sade ve sürdürülebilir bir farkındalık rutiniyle düzenle.",
-          "details": [
-            "Günde 10–20 dakika meditasyon yap",
-            "Meditasyon sonrası kısa bir gözlem yap",
-            "Gün içinde 1–3 nefes durakları ver",
-            "Tepki vermeden önce farkındalık oluştur",
-            "Akşam kısa bir değerlendirme yap"
-          ]
-        },
-        "processResult": {
-          "title": "Zamanla Oluşan İçsel Sakinlik",
-          "shortDescription": "Zihnin daha yavaş, dengeli ve gözlemleyici bir hale gelir.",
-          "details": [
-            "10–15 gün: zihinsel gürültüyü daha erken fark edersin",
-            "30 gün: tepkilerinin yavaşladığını hissedersin",
-            "40 gün: daha sakin ve dengeli bir zihin deneyimi oluşur",
-            "Genel olarak düşüncelerle arana mesafe koyabilirsin"
-          ]
-        }
-    },
-    {
-      "id": "7",
-      "name": "Bilinçli Beslenme ",
-      "difficultyLevel": 8,
-      "difficultyScale": 10,
-      "durationDays": 60,
-      "durationText": "60 gün",
-      "imageName": "auraimg7",
-      "badgeDescription": "Bedeninin ihtiyaçlarını daha doğru okuyabildiğini gösterir.",
-      "elements": "🌍TOPRAK 💧SU",
-      "version": 1,
-      "isActive": true,
-
-      "badgeId": "badge_7",
-
-      "completionRuleType": "strict_daily_threshold",
-      "dailyTaskCompletionThreshold": 0.5,
-
-      "allowRestart": true,
-      "dailyDurationText": "Günlük süre: esnek",
-      "coreProblems": [
-        "Yetersiz su tüketimi alışkanlığı",
-        "Paketli ve fast food tüketiminin fazla olması"
-      ],
-      "oneSentenceSummary": "Bu program ne yemen gerektiğini dayatmaz; 60 gün boyunca bedeninin neye ihtiyacı olduğunu fark etmeyi öğretir.",
-      "fullText": [
-        "🥗 Bedenini Dinlemeyi Yeniden Öğren",
-        "Bilinçli Beslenme & Bedensel Denge Programı",
-        "Bu program ne yemen gerektiğini dayatmaz.\n60 gün boyunca bedeninin neye ihtiyacı olduğunu fark etmeyi öğretir.",
-        "📅 Program boyunca neler yapacaksın?\n🥗 Günlük Uygulama Sistemi\nBu programın amacı bir anda değişmek değil,\nbedenini zorlamadan daha sağlıklı seçimlere geçmektir.\nOdak noktası daha fazla su içmek ve paketli gıdaları kademeli olarak azaltmaktır.\n\n💧Sabah → Su ile Başlangıç (1 dk)\nAmaç: Güne bedeni destekleyerek başlamak.\nUyanır uyanmaz 1 bardak su içersin.\n💡 Kural:\nZorlamak yok.\nAlışkanlık oluşturmak yeterli.\n\n🌍Gün İçinde → Su Artırma (kademeli)\nİlk günlerde sadece normalden 1 bardak fazla içersin.\nSonraki günlerde bunu yavaş yavaş artırırsın.\n👉 Örnek ilerleme:\n1–10 gün: +1 bardak\n10–20 gün: +2 bardak\n20–60 gün: hedef seviyeye yaklaşma\nAmaç bir anda çok içmek değil, alışkanlık oluşturmaktır.\n\n🥤Gün İçinde → Otomatik Tüketimi Fark Etme\nPaketli bir şey yemek istediğinde kısa bir durak verirsin.\n📍 Kendine sorarsın:\n“Gerçekten aç mıyım yoksa alışkanlık mı?”\nBu farkındalık bile davranışı değiştirmeye başlar.\n\n🍔 Gün İçinde → Küçük Değişimler\nHer şeyi bir anda kesmezsin.\nSadece küçük değişimler yaparsın.\n👉 Örnek:\nBir paketli ürünü daha doğal bir alternatifle değiştirirsin\nBir öğünde fast food yerine daha basit bir yemek seçersin\nAmaç mükemmel olmak değil, yön değiştirmektir.\n\n🌿Gün İçinde → Seçim Farkındalığı\nYediğin şeylere dikkat edersin.\n📍 Kendine sorarsın:\n“Bu bana iyi hissettirecek mi?”\nBazen yine paketli gıda seçebilirsin.\nBu normaldir.\nÖnemli olan fark ederek seçim yapmandır.\n\n📓 Akşam → Kısa Değerlendirme (5 dk)\nGün sonunda kısa bir gözlem yaparsın:\n👉 Bugün ne kadar su içtim?\n👉 Paketli gıda tükettiğim anlar neydi?\n👉 Daha iyi bir seçim yaptığım bir an oldu mu?\nAmaç kendini suçlamak değil, fark etmektir.\n\n⚙️ Altın Kurallar\nHer şeyi bir anda değiştirmeye çalışma\nKüçük adımlar büyük değişim yaratır\nBazen eski alışkanlıklara dönmek normaldir\nÖnemli olan tekrar denemektir\n👉 “Küçük değişimler zamanla alışkanlığa dönüşür.”\n\n🔥 Gerçek Etkiyi Yaratan Şey\nBu programın gücü yasaklarda değil,\nfarkındalıkla yapılan küçük seçimlerde oluşur.\nHer fark ettiğin an, yeni bir alışkanlık inşa eder.\n\n🎯 Net Günlük Plan\nSabah 1 bardak su\nGün içinde suyu kademeli artırma\nPaketli gıda öncesi durak\nKüçük sağlıklı alternatif seçimi\nAkşam kısa değerlendirme\n\n💥 Süreç Sonucu\n10–15 gün: daha fazla su içtiğini fark edersin\n30 gün: paketli gıdalara olan ihtiyacın azalır\n60 gün: daha dengeli ve bilinçli beslendiğini hissedersin"
-      ],
-      "dailyTasks": [
-          {
-            "id": "morning_water",
-            "title": "Su ile Başlangıç",
-            "shortDescription": "Güne bir bardak su içerek bedenini destekle.",
-            "details": [
-              "Uyanır uyanmaz 1 bardak su iç",
-              "Zorlamadan içmeye odaklan",
-              "Bunu günlük bir ritüel haline getir",
-              "Amaç alışkanlık oluşturmak"
-            ]
-          },
-          {
-            "id": "water_increase",
-            "title": "Suyu Kademeli Artırma",
-            "shortDescription": "Su tüketimini küçük adımlarla artır.",
-            "details": [
-              "İlk günlerde +1 bardak ekle",
-              "Zamanla miktarı artır",
-              "Bir anda fazla içmeye çalışma",
-              "Bedenine uyum sağlaması için zaman tanı"
-            ]
-          },
-          {
-            "id": "pause_before_eating",
-            "title": "Dur ve Fark Et",
-            "shortDescription": "Yemek öncesi kısa bir farkındalık duraklaması yap.",
-            "details": [
-              "Paketli gıda öncesi kısa dur",
-              "“Gerçekten aç mıyım?” diye sor",
-              "Alışkanlık mı ihtiyaç mı ayırt et",
-              "Bu farkındalığı gözlemle"
-            ]
-          },
-          {
-            "id": "small_changes",
-            "title": "Küçük Değişimler",
-            "shortDescription": "Beslenmende küçük ama etkili değişimler yap.",
-            "details": [
-              "Bir öğünde daha doğal bir alternatif seç",
-              "Fast food yerine basit yemek tercih et",
-              "Her şeyi aynı anda değiştirme",
-              "Küçük adımlarla ilerle"
-            ]
-          },
-          {
-            "id": "food_awareness",
-            "title": "Seçim Farkındalığı",
-            "shortDescription": "Yediklerinin bedenine etkisini fark et.",
-            "details": [
-              "“Bu bana iyi hissettirecek mi?” diye sor",
-              "Seçimini bilinçli yap",
-              "Bazen eski alışkanlıklara dönmenin normal olduğunu kabul et",
-              "Yargılamadan gözlemle"
-            ]
-          },
-          {
-            "id": "evening_review",
-            "title": "Akşam Değerlendirmesi",
-            "shortDescription": "Günü kısa bir farkındalıkla gözden geçir.",
-            "details": [
-              "Ne kadar su içtiğini düşün",
-              "Hangi anlarda paketli gıda tükettiğini fark et",
-              "Yaptığın iyi seçimleri hatırla",
-              "Kendini yargılamadan gözlemle"
+            "dayNumber": 7,
+            "title": "Ne Bırakıyorum, Neyi Seçiyorum?",
+            "dailyDurationText": "Bugün yaklaşık 8-12 dakika",
+            "tasks": [
+              {
+                "id": "day7_closing_intention",
+                "title": "Sabah Kapanış Niyeti",
+                "shortDescription": "Bugün kendini yargılamadan süreci tamamla.",
+                "elementKey": "fire",
+                "elementName": "Ateş",
+                "elementEmoji": "🔥",
+                "timeOfDay": "morning",
+                "estimatedDurationText": "2-3 dakika",
+                "estimatedMinutes": 3,
+                "isRequired": true,
+                "details": [
+                  "Tamamlanmak kusursuz olmak değildir cümlesiyle güne başla",
+                  "Bu 7 günde sende en çok ne değiştiğini düşün",
+                  "Bugün için bir kelime seç: sakinlik, netlik, cesaret, şefkat ya da sınır"
+                ]
+              },
+              {
+                "id": "day7_letting_go_list",
+                "title": "Bırakıyorum Listesi",
+                "shortDescription": "Artık taşımak istemediğin yükleri fark et.",
+                "elementKey": "water",
+                "elementName": "Su",
+                "elementEmoji": "💧",
+                "timeOfDay": "day",
+                "estimatedDurationText": "3-4 dakika",
+                "estimatedMinutes": 4,
+                "isRequired": true,
+                "details": [
+                  "Bırakıyorum başlığı aç",
+                  "3 madde yaz",
+                  "Bunları kişi değil, davranış ya da yük olarak ifade et"
+                ]
+              },
+              {
+                "id": "day7_i_choose_sentence",
+                "title": "Seçiyorum Cümlesi",
+                "shortDescription": "Yeni yönünü tek ve gerçekçi bir cümleyle belirle.",
+                "elementKey": "fire",
+                "elementName": "Ateş",
+                "elementEmoji": "🔥",
+                "timeOfDay": "evening",
+                "estimatedDurationText": "3-4 dakika",
+                "estimatedMinutes": 4,
+                "isRequired": true,
+                "details": [
+                  "Bundan sonra ... seçiyorum cümlesini tamamla",
+                  "Cümlen gerçekçi olsun",
+                  "Bugünden başlayabileceğin küçük bir seçim yaz"
+                ]
+              },
+              {
+                "id": "day7_personal_chart_area",
+                "title": "Kişisel Harita Alanı",
+                "shortDescription": "Retro alanında yeni niyetini belirle.",
+                "elementKey": "fire",
+                "elementName": "Ateş",
+                "elementEmoji": "🔥",
+                "timeOfDay": "evening",
+                "estimatedDurationText": "2-3 dakika",
+                "estimatedMinutes": 3,
+                "isRequired": false,
+                "details": [
+                  "Retron hangi evindeyse o yaşam alanı için bir bırakma cümlesi yaz",
+                  "Aynı alan için bir seçim cümlesi yaz",
+                  "Bu alanda nasıl daha sakin ilerlemek istediğini belirt"
+                ]
+              }
             ]
           }
         ],
 
         "weeklyReflection": {
-          "title": "Beslenme Farkındalığını Gözlemleme",
-          "shortDescription": "Yeme alışkanlıklarını fark ederek daha bilinçli seçimler yap.",
+          "title": "Retro Sonu İçsel Bakış",
+          "shortDescription": "7 günlük sürecin sende bıraktığı duygusal, zihinsel ve davranışsal farkındalıkları gözlemle.",
           "details": [
-            "Hangi günler daha iyi beslendiğini fark et",
-            "Su tüketiminin etkisini gözlemle",
-            "Hangi anlarda otomatik yediğini fark et",
-            "Kendine uygun beslenme ritmini keşfet"
+            "Bu program boyunca en sık hangi duygu geri geldi?",
+            "Hangi konuşmayı, düşünceyi ya da kalıbı daha net görmeye başladın?",
+            "Kendini en çok hangi alanda fazla açıklarken ya da fazla taşırken fark ettin?",
+            "Bu süreçten sonra devam ettirmek istediğin küçük bir alışkanlık ne?",
+            "Retronun hangi yaşam alanında seni yavaşlamaya çağırdığını düşünüyorsun?"
           ]
         },
 
         "goldenRules": {
-          "title": "Nazik Beslenme Yaklaşımı",
-          "shortDescription": "Beslenmeyi bir zorunluluk değil, bir farkındalık alanı olarak gör.",
+          "title": "Retroda Kendine Yaklaşma Kuralları",
+          "shortDescription": "Bu süreçte kendini zorlamadan, duygularını bastırmadan ve acele kararlar vermeden ilerle.",
           "details": [
-            "Her şeyi bir anda değiştirmeye çalışma",
-            "Küçük değişimler büyük etki yaratır",
-            "Bazen eski alışkanlıklara dönmek normaldir",
-            "Kendine sabırlı ve nazik yaklaş",
-            "Farkındalık en güçlü değişim aracıdır"
-          ]
-        },
-
-        "realImpact": {
-          "title": "Gerçek Değişim Noktası",
-          "shortDescription": "Değişim yasaklarla değil, farkındalıkla oluşur.",
-          "details": [
-            "Asıl etki seçim anlarında oluşur",
-            "Fark ettiğin her an yeni bir alışkanlık başlatır",
-            "Zamanla otomatik davranışlar azalır",
-            "Bedenin sinyallerini daha iyi anlamaya başlarsın"
-          ]
-        },
-
-        "dailyPlanSummary": {
-          "title": "Günlük Beslenme Akışı",
-          "shortDescription": "Gününü sade ve sürdürülebilir bir beslenme ritmiyle destekle.",
-          "details": [
-            "Sabah su iç",
-            "Gün içinde suyu artır",
-            "Yemek öncesi kısa durak ver",
-            "Küçük sağlıklı alternatifler seç",
-            "Akşam kısa değerlendirme yap"
-          ]
-        },
-
-        "processResult": {
-          "title": "Zamanla Oluşan Denge",
-          "shortDescription": "Farkındalık arttıkça beslenme alışkanlıkların doğal olarak değişir.",
-          "details": [
-            "10–15 gün: su tüketimin arttığını fark edersin",
-            "30 gün: paketli gıdalara olan ihtiyaç azalır",
-            "60 gün: daha dengeli ve bilinçli beslendiğini hissedersin",
-            "Genel olarak bedenine daha uyumlu seçimler yaparsın"
+            "Her şeyi hemen çözmeye çalışma",
+            "Duygusal mesajları göndermeden önce tekrar oku",
+            "Geçmişten gelen konuları suçlamak için değil, anlamak için gözlemle",
+            "Kendini fazla açıklamak zorunda hissettiğinde dur ve sadeleş",
+            "Evini, zihnini ve dijital alanını küçük adımlarla düzenle",
+            "Kendi haritanda retro hangi alana düşüyorsa görevleri o yaşam alanına göre yorumla",
+            "Programı kusursuz tamamlamaya değil, kendini daha iyi duymaya odaklan"
           ]
         }
-      },
-    {
-      "id": "8",
-      "name": "Uyku Ritmi & Derin Dinlenme",
-      "difficultyLevel": 7,
-      "difficultyScale": 10,
-      "durationDays": 30,
-      "durationText": "30 gün",
-      "imageName": "auraimg8",
-      "badgeDescription": "Zihnini dinlendirip daha kaliteli uyuyabildiğini gösterir.",
-      "elements": "💧SU ✨AKASHA",
-      "version": 1,
-      "isActive": true,
-
-      "badgeId": "badge_8",
-
-      "completionRuleType": "strict_daily_threshold",
-      "dailyTaskCompletionThreshold": 0.5,
-
-      "allowRestart": true,
-      "dailyDurationText": "Hedef: daha hızlı uykuya geçiş & daha dinlendirici uyku",
-      "coreProblems": [
-        "Uykuya geçişte zihnin susmaması",
-        "Düzensiz uyku rutini"
-      ],
-      "oneSentenceSummary": "Bu program sadece uyku saatini değil, uykuya giden zihni dönüştürür.",
-      "fullText": [
-        "😴 Derin Dinlenmeyi Yeniden Öğren",
-        "Uyku Ritmi & Derin Dinlenme Programı",
-        "30 gün | Zorluk: 7 / 10 | Hedef: daha hızlı uykuya geçiş & daha dinlendirici uyku",
-        "Bu program sadece uyku saatini değil,\nuykuya giden zihni dönüştürür.",
-        "📅 Program boyunca neler yapacaksın?\nBu programın amacı sadece daha erken uyumak değil,\nuykuya giden zihni sakinleştirerek daha derin dinlenmeyi sağlamaktır.\nKüçük ama tutarlı alışkanlıklarla beden ve zihin uykuya hazırlanır.\n\n💧Akşam → Ekranla Mesafe (30–60 dk önce)\nAmaç: Zihni yavaşlatmak.\nUyumadan önce ekran kullanımını azaltırsın.\nTelefon, tablet veya bilgisayarı bırakmaya çalışırsın.\n💡 Kural:\nBir anda tamamen kesmek zorunda değilsin.\nSüreyi yavaş yavaş azaltman yeterli.\n\n🌙 Akşam → Yavaşlama Ritüeli (5–10 dk)\nUyku öncesi kısa bir rutin oluşturursun.\n👉 Seçenekler:\nIşıkları azaltmak\nSessiz bir ortam oluşturmak\nKısa nefes egzersizi yapmak\nAmaç zihne “gün bitiyor” sinyali vermektir.\n\n🌬️Uyku Öncesi → Nefesle Sakinleşme (2–5 dk)\nYatağa girdiğinde nefesine odaklanırsın.\n👉 Yavaşça nefes alıp verirsin.\nDikkatini sadece nefese getirirsin.\nZihin dağılırsa tekrar nefese dönersin.\n💡 Amaç:\nZihinsel gürültüyü azaltmak.\n\n✨Uyku Öncesi → Zihni Boşaltma (1–2 dk)\nUyumadan önce kısa bir zihinsel boşaltma yaparsın.\n📍 Kendine sorarsın:\n“Şu an aklımda ne var?”\nDüşünceleri bastırmadan fark eder ve bırakırsın.\n👉 “Yarın bakarım.” demek yeterlidir.\n\n🛏️ Her Gün → Sabit Uyku Ritmi\nHer gün mümkün olduğunca aynı saatlerde yatıp kalkmaya çalışırsın.\nKüçük sapmalar normaldir.\nAma genel ritmi korumaya odaklanırsın.\n💡 Amaç:\nBedenin kendi saatini oluşturması.\n\n📓 Sabah → Kısa Uyku Değerlendirmesi (1 dk)\nUyandığında kendine sorarsın:\n👉 Nasıl uyudum?\n👉 Dinlenmiş hissediyor muyum?\nBu farkındalık uyku kaliteni anlamanı sağlar.\n\n⚙️ Altın Kurallar\nHemen mükemmel uyumayı bekleme\nZihnin susmaması normaldir\nUyku zorlanarak değil, hazırlanarak gelir\n👉 “Zihin yavaşladıkça uyku derinleşir.”\n\n🔥 Gerçek Etkiyi Yaratan Şey\nBu programın gücü yatakta değil,\nuykuya gitmeden önceki süreçte oluşur.\nZihni yavaşlattığında beden doğal olarak uykuya geçer.\n\n🎯 Net Günlük Plan\nAkşam ekranı azalt\nKısa uyku ritüeli oluştur\nYatmadan önce nefes çalışması\nZihni boşalt\nAynı saatlerde uyumaya çalış\nSabah kısa değerlendirme\n\n💥 Süreç Sonucu\n7–10 gün: uykuya geçiş sürenin azaldığını fark edersin\n20 gün: daha düzenli bir uyku ritmi oluşur\n30 gün: daha dinlendirici uyuduğunu hissedersin"
-      ],
-      "dailyTasks": [
-          {
-            "id": "evening_screen",
-            "title": "Ekranla Mesafe",
-            "shortDescription": "Uyumadan önce ekranı azaltarak zihnine yavaşlama alanı aç.",
-            "details": [
-              "Uyumadan 30–60 dakika önce ekranı bırakmayı dene",
-              "Telefon, tablet veya bilgisayar kullanımını azalt",
-              "Bir anda kesmek zorunda değilsin, kademeli azalt",
-              "Zihnine dinlenme sinyali vermeye başla"
-            ]
-          },
-          {
-            "id": "evening_ritual",
-            "title": "Yavaşlama Ritüeli",
-            "shortDescription": "Kısa bir rutinle zihnine günün bittiğini hissettir.",
-            "details": [
-              "Işıkları hafifçe azalt",
-              "Sessiz ve sakin bir ortam oluştur",
-              "Kısa bir nefes egzersizi yap",
-              "Bedeni ve zihni yavaşlatmaya niyet et",
-              "Her akşam aynı küçük rutini tekrarla"
-            ]
-          },
-          {
-            "id": "pre_sleep_breath",
-            "title": "Nefesle Sakinleşme",
-            "shortDescription": "Yatağa geçtiğinde nefesine odaklanarak gevşe.",
-            "details": [
-              "2–5 dakika yavaş ve derin nefes alıp ver",
-              "Dikkatini sadece nefesine getir",
-              "Zihnin dağıldığında nazikçe geri dön",
-              "Bedende oluşan gevşemeyi fark et",
-              "Zihinsel gürültünün azalmasına izin ver"
-            ]
-          },
-          {
-            "id": "mind_release",
-            "title": "Zihni Boşaltma",
-            "shortDescription": "Uyumadan önce zihnindeki düşünceleri nazikçe serbest bırak.",
-            "details": [
-              "Kendine sor: “Şu an aklımda ne var?”",
-              "Düşünceleri bastırmadan fark et",
-              "Onları çözmeye çalışma",
-              "İçinden “Yarın bakarım” diyerek bırak",
-              "Zihnin hafiflemesine izin ver"
-            ]
-          },
-          {
-            "id": "routine",
-            "title": "Sabit Uyku Ritmi",
-            "shortDescription": "Her gün benzer saatlerde uyuyarak bedenine düzen kazandır.",
-            "details": [
-              "Mümkün olduğunca aynı saatlerde yat ve kalk",
-              "Küçük sapmaların normal olduğunu kabul et",
-              "Genel ritmi korumaya odaklan",
-              "Beden saatinin oluşmasına izin ver"
-            ]
-          },
-          {
-            "id": "morning_check",
-            "title": "Sabah Uyku Farkındalığı",
-            "shortDescription": "Uyandığında uykunu kısa bir farkındalıkla gözlemle.",
-            "details": [
-              "Kendine sor: “Nasıl uyudum?”",
-              "“Dinlenmiş hissediyor muyum?” diye fark et",
-              "Cevabı yargılamadan kabul et",
-              "Uyku kaliteni anlamaya alan aç"
-            ]
-          }
-        ],
-        "weeklyReflection": {
-          "title": "Uyku Ritmini Gözlemleme",
-          "shortDescription": "Uyku düzenini nazikçe gözlemleyerek daha dengeli bir ritim oluştur.",
-          "details": [
-            "Hangi günler daha rahat uyuduğunu fark et",
-            "Uyku öncesi alışkanlıklarının etkisini gözlemle",
-            "Zihinsel yoğunluk ile uyku kalitesi arasındaki bağı fark et",
-            "Kendine uygun bir akşam ritmi oluşturmaya devam et"
-          ]
-        },
-        "goldenRules": {
-          "title": "Uykuya Nazik Yaklaşım",
-          "shortDescription": "Uyku sürecinde kendine baskı değil destek sun.",
-          "details": [
-            "Hemen mükemmel uyumayı bekleme",
-            "Zihnin susmaması tamamen normaldir",
-            "Uyku zorlanarak değil hazırlanarak gelir",
-            "Kendine yumuşak ve sabırlı yaklaş",
-            "Zihin yavaşladıkça uyku derinleşir"
-          ]
-        },
-        "realImpact": {
-          "title": "Gerçek Dinlenme Noktası",
-          "shortDescription": "Uyku kalitesi, yatmadan önceki küçük hazırlıklarla şekillenir.",
-          "details": [
-            "Asıl etki yatakta değil, öncesindeki süreçte oluşur",
-            "Zihni yavaşlattıkça beden uykuya geçer",
-            "Küçük alışkanlıklar büyük fark yaratır",
-            "Zamanla daha doğal bir uyku akışı oluşur"
-          ]
-        },
-        "dailyPlanSummary": {
-          "title": "Günlük Uyku Akışı",
-          "shortDescription": "Uykuya geçişini sade ve sürdürülebilir bir ritimle destekle.",
-          "details": [
-            "Akşam ekran süresini azalt",
-            "Kısa bir yavaşlama rutini oluştur",
-            "Yatmadan önce nefes çalışması yap",
-            "Zihnini boşalt",
-            "Benzer saatlerde uyumaya çalış",
-            "Sabah kısa bir uyku değerlendirmesi yap"
-          ]
-        },
-        "processResult": {
-          "title": "Zamanla Oluşan Dinlenme",
-          "shortDescription": "Zihnin yavaşladıkça uyku daha doğal ve dinlendirici hale gelir.",
-          "details": [
-            "7–10 gün: uykuya geçiş sürenin azaldığını fark edersin",
-            "20 gün: daha düzenli bir uyku ritmi oluşur",
-            "30 gün: daha dinlendirici uyuduğunu hissedersin",
-            "Genel olarak daha sakin ve dengeli uyanırsın"
-          ]
-        }
-    },
-    {
-      "id": "9",
-      "name": "Bilinçli Dil & Olumlu İletişim",
-      "difficultyLevel": 7,
-      "difficultyScale": 10,
-      "durationDays": 30,
-      "durationText": "30 gün",
-      "imageName": "auraimg9",
-      "badgeDescription": "Konuşmalarında daha bilinçli ve yapıcı olabildiğini gösterir.",
-      "elements": "🌬️HAVA 🔥ATEŞ",
-      "version": 1,
-      "isActive": true,
-
-      "badgeId": "badge_9",
-
-      "completionRuleType": "strict_daily_threshold",
-      "dailyTaskCompletionThreshold": 0.5,
-
-      "allowRestart": true,
-      "dailyDurationText": "Günlük süre: belirtilmemiş",
-      "coreProblems": [
-        "Gıybet / olumsuz konuşma otomatikliği",
-        "İlişkilerde gerginlik yaratan iletişim dili"
-      ],
-      "oneSentenceSummary": "Bu program konuşmayı azaltmayı değil, konuşmanın farkına varmayı öğretir.",
-      "fullText": [
-        "🗣️ Dilini Arındır, İlişkini Hafiflet",
-        "Bilinçli Dil & Olumlu İletişim Programı",
-        "30 gün | Zorluk: 7 / 10",
-        "Bu program konuşmayı azaltmayı değil,\nkonuşmanın farkına varmayı öğretir.",
-        "📅 Program boyunca neler yapacaksın?\nBu programın amacı daha az konuşmak değil,\nkonuşurken daha bilinçli ve yapıcı olmayı öğrenmektir.\nKüçük farkındalıklarla iletişim dilin dönüşmeye başlar.\n\n🌬️ 1. Sabah → İletişim Niyeti (1 dk)\nAmaç: Güne bilinçli bir iletişimle başlamak.\nHer sabah kendine kısa bir cümle söylersin.\n👉 Örnek:\n“Bugün daha dikkatli konuşacağım.”\n“Bugün yapıcı bir dil kullanacağım.”\nBu cümle gün içindeki iletişimini yönlendirir.\n\n🔥 2. Gün İçinde → Konuşma Öncesi Durak (1–3 kez)\nBir şey söylemeden önce kısa bir durak verirsin.\n📍 Kendine sorarsın:\n“Bunu söylemek gerçekten gerekli mi?”\n“Nasıl söylersem daha yapıcı olur?”\nBu küçük durak iletişimi tamamen değiştirir.\n\n🌬️ 3. Gün İçinde → Olumsuz Dili Fark Etme\nGün içinde gıybet, eleştiri veya olumsuz konuşma fark ettiğinde durursun.\n📍 Kendine sorarsın:\n“Şu an ne söylüyorum?”\nİstersen konuşmayı değiştirebilir veya tamamen bırakabilirsin.\n💡 Amaç:\nOtomatik dili görünür hale getirmek.\n\n🔥 4. Gün İçinde → Dili Yumuşatma\nSöylediğin cümleleri daha yumuşak hale getirmeye çalışırsın.\n👉 Örnek:\n“Bu yanlış” yerine\n“Bu farklı olabilir”\n“Bunu sevmiyorum” yerine\n“Bu bana pek uygun gelmedi”\nAmaç kırmadan ifade etmektir.\n\n🤍 5. Gün İçinde → Olumlu İfade (en az 1 kez)\nGün içinde en az bir kişiye samimi bir olumlu geri bildirim verirsin.\n👉 Küçük bir teşekkür\n👉 Kısa bir takdir\n👉 İçten bir cümle\nBu davranış iletişimini dengeler.\n\n📓 6. Akşam → Kısa Değerlendirme (5 dk)\nGün sonunda kendine bakarsın:\n👉 Ne zaman düşünmeden konuştum?\n👉 Ne zaman daha bilinçliydim?\n👉 Söylediğim bir şey birini nasıl etkiledi?\nAmaç kendini yargılamak değil, fark etmektir.\n\n⚙️ Altın Kurallar\nHer düşünceni söylemek zorunda değilsin\nSöylediğin şey kadar nasıl söylediğin de önemlidir\nSessizlik de bir iletişimdir\n👉 “Bilinçli dil, sağlıklı ilişki yaratır.”\n\n🔥 Gerçek Etkiyi Yaratan Şey\nBu programın gücü kelimelerde değil,\nkonuşmadan önce verdiğin o küçük durakta oluşur.\nO anı fark ettiğinde iletişimin tamamen değişir.\n\n🎯 Net Günlük Plan\nSabah iletişim niyeti\nGün içinde konuşma öncesi durak\nOlumsuz dili fark etme\nCümleleri yumuşatma\nEn az 1 olumlu ifade\nAkşam kısa değerlendirme\n\n💥 Süreç Sonucu\n7–10 gün: konuşma alışkanlıklarını fark etmeye başlarsın\n20 gün: daha kontrollü ve yumuşak konuştuğunu hissedersin\n30 gün: iletişiminin daha sağlıklı hale geldiğini fark edersin"
-      ],
-      "dailyTasks": [
-          {
-            "id": "morning",
-            "title": "Sabah İletişim Niyeti",
-            "shortDescription": "Güne bilinçli bir iletişim niyeti belirleyerek başla.",
-            "details": [
-              "Kendine kısa bir niyet cümlesi seç",
-              "Cümleyi içinden 1–2 kez tekrar et",
-              "Gün içinde bu niyeti hatırlamaya çalış",
-              "Örnek: “Bugün daha dikkatli konuşacağım.”",
-              "Niyetini yumuşak ve gerçekçi tut"
-            ]
-          },
-          {
-            "id": "pause",
-            "title": "Konuşma Öncesi Durak",
-            "shortDescription": "Bir şey söylemeden önce kısa bir farkındalık alanı oluştur.",
-            "details": [
-              "Günde 1–3 kez konuşmadan önce dur",
-              "Kendine sor: “Bunu söylemek gerekli mi?”",
-              "“Nasıl söylersem daha yapıcı olur?” diye düşün",
-              "Kısa bir nefes alarak alan yarat",
-              "Otomatik konuşmayı yavaşlat"
-            ]
-          },
-          {
-            "id": "awareness",
-            "title": "Olumsuz Dili Fark Etme",
-            "shortDescription": "Gün içinde kullandığın dili nazikçe gözlemle.",
-            "details": [
-              "Gıybet, eleştiri veya sert bir ifade fark ettiğinde dur",
-              "Kendine sor: “Şu an ne söylüyorum?”",
-              "Cümleyi fark et ve gerekirse bırak",
-              "Dili değiştirme seçeneğini hatırla",
-              "Amaç fark etmek, bastırmak değil"
-            ]
-          },
-          {
-            "id": "soften",
-            "title": "Dili Yumuşatma",
-            "shortDescription": "Cümlelerini daha nazik ve dengeli bir şekilde ifade et.",
-            "details": [
-              "Sert ifadeleri daha yumuşak hale getir",
-              "Gerçekçi ama kırmayan bir dil seç",
-              "Örnek: “Bu yanlış” yerine “Bu farklı olabilir”",
-              "Örnek: “Bunu sevmiyorum” yerine “Bu bana uygun gelmedi”",
-              "İfade ederken empatiyi hatırla"
-            ]
-          },
-          {
-            "id": "positive",
-            "title": "Olumlu İfade",
-            "shortDescription": "Gün içinde en az bir kişiye içten bir olumlu geri bildirim ver.",
-            "details": [
-              "Bir kişiye samimi bir teşekkür et",
-              "Küçük bir takdir cümlesi kur",
-              "İçten ve sade ol",
-              "Zorlamadan, doğal bir şekilde ifade et",
-              "İletişimde dengeyi destekle"
-            ]
-          },
-          {
-            "id": "evening",
-            "title": "Akşam Kısa Değerlendirme",
-            "shortDescription": "Günü iletişim açısından yargısızca gözden geçir.",
-            "details": [
-              "Ne zaman düşünmeden konuştuğunu fark et",
-              "Ne zaman daha bilinçli olduğunu gözlemle",
-              "Sözlerinin başkalarını nasıl etkilediğini düşün",
-              "Kendini yargılamadan değerlendir",
-              "Amaç sadece fark etmektir"
-            ]
-          }
-        ],
-        "weeklyReflection": {
-          "title": "İletişim Desenlerini Gözlemleme",
-          "shortDescription": "Konuşma alışkanlıklarını fark ederek iletişimini derinleştir.",
-          "details": [
-            "En sık kullandığın ifade tarzını fark et",
-            "Hangi durumlarda daha sert konuştuğunu gözlemle",
-            "Yumuşak iletişim kurduğun anları hatırla",
-            "İletişim tarzının ilişkilerine etkisini incele"
-          ]
-        },
-        "goldenRules": {
-          "title": "Bilinçli İletişim İlkeleri",
-          "shortDescription": "Konuşurken kendine ve başkalarına karşı nazik ol.",
-          "details": [
-            "Her düşünceni söylemek zorunda değilsin",
-            "Nasıl söylediğin en az ne söylediğin kadar önemlidir",
-            "Sessizlik de bir iletişimdir",
-            "Kendine ve karşındakine alan tanı",
-            "Bilinçli dil sağlıklı ilişki yaratır"
-          ]
-        },
-        "realImpact": {
-          "title": "Gerçek Değişim Noktası",
-          "shortDescription": "Dönüşüm, konuşmadan önce verdiğin küçük durakta başlar.",
-          "details": [
-            "Durduğun an iletişimin yönü değişir",
-            "Otomatik tepkiler yerini bilinçli ifadeye bırakır",
-            "Küçük farkındalıklar büyük ilişki değişimleri yaratır",
-            "Zamanla daha dengeli bir iletişim oluşur"
-          ]
-        },
-        "dailyPlanSummary": {
-          "title": "Günlük İletişim Akışı",
-          "shortDescription": "Gününü sade ve bilinçli bir iletişim rutiniyle yönlendir.",
-          "details": [
-            "Sabah iletişim niyeti belirle",
-            "Gün içinde konuşma öncesi durak ver",
-            "Olumsuz dili fark et",
-            "Cümlelerini yumuşat",
-            "En az 1 olumlu ifade kullan",
-            "Akşam kısa değerlendirme yap"
-          ]
-        },
-        "processResult": {
-          "title": "Zamanla Oluşan İletişim Dönüşümü",
-          "shortDescription": "Konuşma tarzın daha dengeli, nazik ve etkili hale gelir.",
-          "details": [
-            "7–10 gün: konuşma alışkanlıklarını fark etmeye başlarsın",
-            "20 gün: daha kontrollü ve yumuşak konuştuğunu hissedersin",
-            "30 gün: iletişiminin daha sağlıklı hale geldiğini fark edersin",
-            "Genel olarak daha bilinçli bir ifade tarzı geliştirirsin"
-          ]
-        }
-    },
-    {
-      "id": "10",
-      "name": "Boş Zaman Okuma Rutini",
-      "difficultyLevel": 4,
-      "difficultyScale": 10,
-      "durationDays": 21,
-      "durationText": "21 gün",
-      "imageName": "auraimg10",
-      "badgeDescription": "Okumayı hayatına sürdürülebilir şekilde dahil edebildiğini gösterir.",
-      "elements": "🌬️HAVA ✨AKASHA",
-      "version": 1,
-      "isActive": true,
-
-      "badgeId": "badge_10",
-
-      "completionRuleType": "strict_daily_threshold",
-      "dailyTaskCompletionThreshold": 0.5,
-
-      "allowRestart": true,
-      "dailyDurationText": "Günlük süre: 2–7 dk",
-      "coreProblems": [
-        "Okumaya başlama direnci",
-        "Boş zamanın otomatik telefona kayması"
-      ],
-      "oneSentenceSummary": "Bu program kitap okumayı sevdirmeye çalışmaz; okumayı zaten yaptığın şeylerin arasına sessizce ekler.",
-      "fullText": [
-        "📚 Okumayı Hayatına Ekle",
-        "Bu program kitap okumayı sevdirmeye çalışmaz.\nOkumayı zaten yaptığın şeylerin arasına sessizce ekler.",
-        "📅 Program boyunca neler yapacaksın?\nBu programın amacı uzun süre okumak değil,\nokumayı günlük hayatın içine doğal şekilde yerleştirmektir.\nKüçük ama sürdürülebilir adımlarla okuma alışkanlığı oluşur.\n\n🌬️ 1. Gün İçinde → Mikro Okuma Başlangıcı (2–3 dk)\nAmaç: Başlama direncini kırmak.\nGün içinde küçük bir boşluk yakalarsın.\n👉 Beklerken, otururken, mola anında\nSadece 1–2 sayfa okursun.\n💡 Kural:\nAz okumak sorun değil.\nBaşlamak yeterlidir.\n\n✨ 2. Gün İçinde → Telefona Alternatif An\nTelefonu eline almak üzereyken kısa bir durak verirsin.\n📍 Kendine sorarsın:\n“Şu an 2 dakika okuyabilir miyim?”\nEğer uygunsa telefonu bırakıp kısa bir okuma yaparsın.\nBu küçük değişim alışkanlık oluşturur.\n\n📖 3. Gün İçinde → Okuma Anını Sabitleme\nGün içinde kendine küçük bir sabit an seçersin.\n👉 Örnek:\nKahve içerken\nYemekten sonra\nYatmadan önce\nBu anı okuma ile eşleştirirsin.\n💡 Amaç:\nOkumayı otomatik hale getirmek.\n\n🌿 4. Okuma Sırasında → Baskısız İlerleme\nOkurken kendini zorlamazsın.\nAnlamadığın yerde durabilir veya devam edebilirsin.\n📍 Kendine hatırlatırsın:\n“Bitirmek zorunda değilim.”\nBu yaklaşım okuma direncini azaltır.\n\n🧠 5. Gün İçinde → Küçük Hatırlama\nOkuduğun bir cümle veya fikir üzerine kısa bir düşünürsün.\n👉 “Bu bana ne düşündürdü?”\nAmaç derin analiz değil, bağ kurmaktır.\n\n📓 6. Akşam → Kısa Değerlendirme (2–3 dk)\nGün sonunda kendine bakarsın:\n👉 Bugün okudum mu?\n👉 Ne zaman daha kolay oldu?\n👉 Hangi an okumaya uygundu?\nBu farkındalık alışkanlığı güçlendirir.\n\n⚙️ Altın Kurallar\nAz okumak sorun değildir\nSüre değil süreklilik önemlidir\nZorla okuma alışkanlık oluşturmaz\n👉 “Küçük okumalar büyük alışkanlıklar oluşturur.”\n\n🔥 Gerçek Etkiyi Yaratan Şey\nBu programın gücü uzun okumalar değil,\nher gün yapılan küçük temaslardadır.\nOkuma hayatına sessizce yerleşir.\n\n🎯 Net Günlük Plan\nGün içinde 2–3 dk okuma\nTelefon yerine kısa okuma anı\nSabit bir okuma zamanı belirleme\nBaskısız ilerleme\nKısa düşünme\nAkşam mini değerlendirme\n\n💥 Süreç Sonucu\n5–7 gün: okumaya başlama direncinin azaldığını fark edersin\n14 gün: okuma daha doğal hale gelir\n21 gün: okumayı hayatına eklediğini hissedersin",
-        "💥 Program Sonunda Neler Olur?\nBu programı tamamladığında değişim küçük ama kalıcı şekilde oluşur.\n\n🧠 Bilimsel olarak\nTekrar eden davranışlar beynin alışkanlık ve dikkat sistemlerini güçlendirir.\nBu süreç nöroplastisite olarak bilinir.\nYani beyin, yaptığın şeylere göre yeniden şekillenir.\n\n🌿 Günlük Hayatta\n👉 Otomatik davranışlarını daha kolay fark edersin\n👉 Tepki vermeden önce kısa bir durak oluşur\n👉 Daha bilinçli seçimler yaparsın\n\n🤍 İçsel Etki\n👉 Kendinle daha yumuşak bir ilişki kurarsın\n👉 Zihinsel ve duygusal denge artar\n\n💡 Sonuç\n👉 Küçük ama düzenli değişimler, kalıcı dönüşüm yaratır\n👉 Daha bilinçli yaşamaya başlarsın"
-      ],
-      "dailyTasks": [
-          {
-            "id": "start",
-            "title": "Mikro Okuma Başlangıcı",
-            "shortDescription": "Kısa okuma anlarıyla başlama direncini nazikçe kır.",
-            "details": [
-              "Gün içinde küçük bir boşluk yakala",
-              "1–2 sayfa okumayı hedefle",
-              "Beklerken veya mola anında değerlendir",
-              "Az okumanın yeterli olduğunu hatırla",
-              "Amaç başlamak, tamamlamak değil"
-            ]
-          },
-          {
-            "id": "replace",
-            "title": "Telefon Yerine Okuma",
-            "shortDescription": "Telefon yerine kısa bir okuma anı seç.",
-            "details": [
-              "Telefonu eline almadan önce kısa bir durak ver",
-              "Kendine sor: “2 dakika okuyabilir miyim?”",
-              "Uygunsa telefonu bırak ve okumaya başla",
-              "Bu küçük değişimi nazikçe uygula",
-              "Alışkanlık dönüşümünü fark et"
-            ]
-          },
-          {
-            "id": "anchor",
-            "title": "Okuma Anını Sabitleme",
-            "shortDescription": "Gün içinde sabit bir anı okumayla eşleştir.",
-            "details": [
-              "Kendine bir rutin an seç",
-              "Örnek: kahve içerken veya yatmadan önce",
-              "Bu anı düzenli olarak okumaya ayır",
-              "Aynı zamanı tekrar etmeye çalış",
-              "Okumayı otomatik hale getirmeye izin ver"
-            ]
-          },
-          {
-            "id": "ease",
-            "title": "Baskısız Okuma",
-            "shortDescription": "Okurken kendine esnek ve yumuşak bir alan tanı.",
-            "details": [
-              "Anlamadığın yerde durabilir veya devam edebilirsin",
-              "Kitabı bitirmek zorunda olmadığını hatırla",
-              "Zorlanırsan okumayı kısa tut",
-              "Okumayı keyifli bir alan olarak gör",
-              "Kendine baskı uygulamadan ilerle"
-            ]
-          },
-          {
-            "id": "reflect",
-            "title": "Kısa Hatırlama",
-            "shortDescription": "Okuduğun bir fikirle kısa bir içsel bağ kur.",
-            "details": [
-              "Okuduğun bir cümleyi hatırla",
-              "Kendine sor: “Bu bana ne düşündürdü?”",
-              "Kısa bir içsel bağlantı kur",
-              "Derin analiz yapmana gerek yok",
-              "Sadece fark etmek yeterlidir"
-            ]
-          },
-          {
-            "id": "evening",
-            "title": "Akşam Mini Değerlendirme",
-            "shortDescription": "Günü okuma açısından yargısızca gözden geçir.",
-            "details": [
-              "Bugün okuyup okumadığını fark et",
-              "Hangi anların daha kolay olduğunu gözlemle",
-              "Okumaya uygun zamanları fark et",
-              "Kendini yargılamadan değerlendir",
-              "Amaç alışkanlığı güçlendirmektir"
-            ]
-          }
-        ],
-        "weeklyReflection": {
-          "title": "Okuma Ritmini Gözlemleme",
-          "shortDescription": "Okuma alışkanlığını nazikçe gözlemleyerek sürdürülebilir hale getir.",
-          "details": [
-            "Hangi zamanlarda daha rahat okuduğunu fark et",
-            "Direncin azaldığı anları gözlemle",
-            "Sabit okuma anının oluşup oluşmadığını incele",
-            "Küçük ilerlemeleri takdir et"
-          ]
-        },
-        "goldenRules": {
-          "title": "Okuma Alışkanlığının Temelleri",
-          "shortDescription": "Okuma sürecinde kendine baskı değil alan tanı.",
-          "details": [
-            "Az okumak sorun değildir",
-            "Süre değil süreklilik önemlidir",
-            "Zorla okuma alışkanlık oluşturmaz",
-            "Küçük okumalar büyük alışkanlıklar oluşturur",
-            "Kendine yumuşak ve sabırlı yaklaş"
-          ]
-        },
-        "realImpact": {
-          "title": "Gerçek Alışkanlık Noktası",
-          "shortDescription": "Dönüşüm, her gün kurduğun küçük okuma temaslarında oluşur.",
-          "details": [
-            "Uzun okumalar şart değildir",
-            "Küçük temaslar zamanla alışkanlık oluşturur",
-            "Okuma hayatına doğal şekilde yerleşir",
-            "Zamanla zihinsel odak artar"
-          ]
-        },
-        "dailyPlanSummary": {
-          "title": "Günlük Okuma Akışı",
-          "shortDescription": "Okumayı sade ve sürdürülebilir bir ritimle hayatına dahil et.",
-          "details": [
-            "Gün içinde 2–3 dakika okuma yap",
-            "Telefon yerine kısa okuma anı seç",
-            "Sabit bir okuma zamanı belirle",
-            "Baskısız şekilde ilerle",
-            "Kısa bir düşünme anı ekle",
-            "Akşam mini değerlendirme yap"
-          ]
-        },
-        "processResult": {
-          "title": "Zamanla Oluşan Alışkanlık",
-          "shortDescription": "Okuma, zorunluluktan çıkıp doğal bir günlük davranışa dönüşür.",
-          "details": [
-            "5–7 gün: başlama direncinin azaldığını fark edersin",
-            "14 gün: okuma daha doğal hale gelir",
-            "21 gün: okumayı hayatına eklediğini hissedersin",
-            "Genel olarak daha düzenli bir okuma alışkanlığı oluşur"
-          ]
-        }
-    },
-    {
-      "id": "11",
-      "name": "Cesaret & Bilinçli Genişleme",
-      "difficultyLevel": 8,
-      "difficultyScale": 10,
-      "durationDays": 45,
-      "durationText": "45 gün",
-      "imageName": "auraimg11",
-      "badgeDescription": "Konfor alanının dışına bilinçli adımlar atabildiğini gösterir.",
-      "elements": "🔥ATEŞ 🌬️HAVA",
-      "version": 1,
-      "isActive": true,
-
-      "badgeId": "badge_11",
-
-      "completionRuleType": "strict_daily_threshold",
-      "dailyTaskCompletionThreshold": 0.5,
-
-      "allowRestart": true,
-      "dailyDurationText": "Günlük süre: değişken",
-      "coreProblems": [
-        "Kaçınma davranışları",
-        "Konfor alanında sıkışma / özgüvenin adım atmaya dönüşmemesi"
-      ],
-      "oneSentenceSummary": "Bu program seni konfor alanından itmez; kendi konfor alanını genişletmeye bilinçli olarak davet eder.",
-      "fullText": [
-        "🚀 Genişleme Alanını Seç",
-        "Cesaret & Bilinçli Genişleme Programı",
-        "Bu program seni konfor alanından itmez.\nKendi konfor alanını genişletmeye bilinçli olarak davet eder.",
-        "📅 Program boyunca neler yapacaksın?\nBu programın amacı seni zorla konfor alanından çıkarmak değil,\nkendi sınırlarını bilinçli ve kontrollü şekilde genişletmeni sağlamaktır.\nKüçük ama cesur adımlarla özgüven davranışa dönüşür.\n\n🔥 Sabah → Niyet Belirleme (1 dk)\nAmaç: Güne bilinçli bir genişleme ile başlamak.\nHer sabah kendine sorarsın:\n“Bugün kendimi hangi küçük alanda zorlayabilirim?”\nKüçük ve ulaşılabilir bir adım seçersin.\n👉 Örnek:\nYeni bir şey denemek\nKısa bir konuşma başlatmak\nErtelediğin bir işi başlatmak\n\n🌬️ Gün İçinde → Kaçınmayı Fark Etme\nGün içinde bir şeyden kaçındığını fark etmeye çalışırsın.\n📍 Kendine sorarsın:\n“Şu an neden kaçıyorum?”\nBu farkındalık davranışı değiştirmenin ilk adımıdır.\n\n🔥Gün İçinde → Küçük Cesaret Adımı (1 kez)\nSeçtiğin küçük adımı uygularsın.\nBu büyük bir şey olmak zorunda değildir.\n👉 Ama biraz rahatsız hissettirmelidir.\n💡 Kural:\nKendini zorlamak değil,\nbir adım ileri gitmek.\n\n🌿  Gün İçinde → Duyguyu Kabul Etme\nCesaret gerektiren anlarda bir duygu oluşur.\n📍 Kendine sorarsın:\n“Şu an ne hissediyorum?”\nKaygı, heyecan veya belirsizlik olabilir.\nBu duyguyu değiştirmeye çalışmadan kabul edersin.\n👉 “Bu da sürecin parçası.”\n\n📓 5. Akşam → Kısa Değerlendirme (5 dk)\nGün sonunda kendine bakarsın:\n👉 Bugün hangi küçük adımı attım?\n👉 Nerede kaçındım?\n👉 Ne hissettim?\nAmaç kendini yargılamak değil, fark etmektir.\n\n⚙️ Altın Kurallar\nBüyük adımlar atmak zorunda değilsin\nKüçük adımlar yeterlidir\nRahatsızlık gelişimin parçasıdır\nKaçındığın alanlar büyüme alanındır\n👉 “Cesaret, korkusuzluk değil harekettir.”\n\n🔥 Gerçek Etkiyi Yaratan Şey\nBu programın gücü büyük değişimlerde değil,\nher gün attığın küçük adımlarda oluşur.\nZamanla konfor alanın genişler.\n\n🎯 Net Günlük Plan\nSabah küçük bir genişleme niyeti\nGün içinde kaçınmayı fark etme\n1 küçük cesaret adımı\nDuyguyu kabul etme\nAkşam kısa değerlendirme\n\n💥 Süreç Sonucu\n10–15 gün: kaçınma davranışlarını fark edersin\n30 gün: küçük adımlar atmak daha kolay hale gelir\n45 gün: konfor alanının genişlediğini hissedersin",
-        "💥 Program Sonunda Neler Olur?\nBu programı tamamladığında değişim küçük ama net şekilde hissedilir.\n\n🧠 Zihinsel Değişim\n👉 Kaçınma davranışlarını daha hızlı fark edersin\n👉 “Yapamam” düşüncesinin her zaman gerçek olmadığını görürsün\n👉 Belirsizlikle daha rahat kalabilirsin\n\n🔥 Davranışsal Değişim\n👉 Daha önce ertelediğin küçük adımları atmaya başlarsın\n👉 Konfor alanının yavaş yavaş genişlediğini fark edersin\n👉 Cesaretin düşüncede değil, davranışta oluşur\n\n🤍 İçsel Etki\n👉 Kendine olan güvenin artar\n👉 Zorlayıcı durumlarda daha sakin kalabilirsin\n👉 Rahatsızlık hissine karşı daha dayanıklı olursun\n\n💡 Sonuç\n👉 Küçük cesaret adımları zamanla büyük değişim yaratır\n👉 Artık sadece düşünmez, harekete geçmeye başlarsın"
-      ],
-      "dailyTasks": [
-          {
-            "id": "morning",
-            "title": "Sabah Genişleme Niyeti",
-            "shortDescription": "Güne küçük bir cesaret adımı belirleyerek başla.",
-            "details": [
-              "Kendine sor: “Bugün kendimi hangi küçük alanda zorlayabilirim?”",
-              "Ulaşılabilir ve küçük bir adım seç",
-              "Örnek: kısa bir konuşma başlatmak",
-              "Örnek: ertelediğin bir işe başlamak",
-              "Niyetini sade ve gerçekçi tut"
-            ]
-          },
-          {
-            "id": "avoidance",
-            "title": "Kaçınmayı Fark Etme",
-            "shortDescription": "Gün içinde kaçındığın anları nazikçe fark et.",
-            "details": [
-              "Kaçınma hissi geldiğinde kısa bir durak ver",
-              "Kendine sor: “Şu an neden kaçıyorum?”",
-              "Davranışını yargılamadan gözlemle",
-              "Bu farkındalığın ilk adım olduğunu hatırla",
-              "Kaçınma alanlarını görünür hale getir"
-            ]
-          },
-          {
-            "id": "action",
-            "title": "Küçük Cesaret Adımı",
-            "shortDescription": "Seçtiğin küçük ama zorlayıcı adımı uygula.",
-            "details": [
-              "Gün içinde en az 1 küçük adım at",
-              "Adımın biraz rahatsız hissettirmesine izin ver",
-              "Kendini zorlamak yerine ilerlemeye odaklan",
-              "Küçük hareketin yeterli olduğunu hatırla",
-              "Eylemi tamamladığında fark et"
-            ]
-          },
-          {
-            "id": "emotion",
-            "title": "Duyguyu Kabul Etme",
-            "shortDescription": "Cesaret gerektiren anlarda oluşan duyguları kabul et.",
-            "details": [
-              "Kendine sor: “Şu an ne hissediyorum?”",
-              "Kaygı, heyecan veya belirsizliği fark et",
-              "Duyguyu değiştirmeye çalışma",
-              "İçinden “Bu da sürecin parçası” de",
-              "Duyguyla birlikte kalmaya izin ver"
-            ]
-          },
-          {
-            "id": "evening",
-            "title": "Akşam Kısa Değerlendirme",
-            "shortDescription": "Günü yargısızca gözlemleyerek farkındalığını artır.",
-            "details": [
-              "Bugün attığın küçük adımı hatırla",
-              "Nerede kaçındığını fark et",
-              "Hangi duyguları yaşadığını gözlemle",
-              "Kendini eleştirmeden değerlendirme yap",
-              "Amaç sadece fark etmektir"
-            ]
-          }
-        ],
-        "weeklyReflection": {
-          "title": "Genişleme Alanlarını Gözlemleme",
-          "shortDescription": "Konfor alanının nasıl değiştiğini nazikçe fark et.",
-          "details": [
-            "Hangi durumlarda daha kolay adım attığını fark et",
-            "En çok kaçındığın alanları gözlemle",
-            "Cesaret gösterdiğin anları hatırla",
-            "Kendine olan yaklaşımındaki değişimi fark et"
-          ]
-        },
-        "goldenRules": {
-          "title": "Cesaretin Temel İlkeleri",
-          "shortDescription": "Kendini zorlamadan, nazikçe genişlemeye izin ver.",
-          "details": [
-            "Büyük adımlar atmak zorunda değilsin",
-            "Küçük adımlar yeterlidir",
-            "Rahatsızlık gelişimin doğal bir parçasıdır",
-            "Kaçındığın alanlar büyüme alanındır",
-            "Cesaret, korkusuzluk değil harekettir"
-          ]
-        },
-        "realImpact": {
-          "title": "Gerçek Değişim Noktası",
-          "shortDescription": "Dönüşüm, her gün attığın küçük cesaret adımlarında oluşur.",
-          "details": [
-            "Büyük değişimler küçük adımlarla başlar",
-            "Her hareket konfor alanını genişletir",
-            "Zamanla zor olan daha tanıdık hale gelir",
-            "Davranış değişimi özgüveni besler"
-          ]
-        },
-        "dailyPlanSummary": {
-          "title": "Günlük Genişleme Akışı",
-          "shortDescription": "Gününü küçük ama bilinçli cesaret adımlarıyla yönlendir.",
-          "details": [
-            "Sabah küçük bir niyet belirle",
-            "Gün içinde kaçınmayı fark et",
-            "1 küçük cesaret adımı at",
-            "Duygularını kabul et",
-            "Akşam kısa değerlendirme yap"
-          ]
-        },
-        "processResult": {
-          "title": "Zamanla Oluşan Özgüven",
-          "shortDescription": "Konfor alanın genişledikçe kendine olan güvenin artar.",
-          "details": [
-            "10–15 gün: kaçınma davranışlarını fark edersin",
-            "30 gün: küçük adımlar atmak daha kolay hale gelir",
-            "45 gün: konfor alanının genişlediğini hissedersin",
-            "Daha cesur ve dengeli bir davranış geliştirmeye başlarsın"
-          ]
-        }
-    },
-    {
-      "id": "12",
-      "name": "Bilinçli Ekran Süresi Azaltma",
-      "difficultyLevel": 7,
-      "difficultyScale": 10,
-      "durationDays": 30,
-      "durationText": "30 gün",
-      "imageName": "auraimg12",
-      "badgeDescription": "Ekran kullanımını daha bilinçli yönetebildiğini gösterir.",
-      "elements": "✨AKASHA 🌬️HAVA",
-      "version": 1,
-      "isActive": true,
-
-      "badgeId": "badge_12",
-
-      "completionRuleType": "strict_daily_threshold",
-      "dailyTaskCompletionThreshold": 0.5,
-
-      "allowRestart": true,
-      "dailyDurationText": "Hedef: minimum ama işlevsel ekran kullanımı",
-      "coreProblems": [
-        "Otomatik ekran açma alışkanlığı",
-        "Dijital dikkat dağınıklığı / uykuya geçişin zorlaşması"
-      ],
-      "oneSentenceSummary": "Bu program ekranı hayatından çıkarmayı hedeflemez; ekranın hayatındaki yerini bilinçli hâle getirmeyi amaçlar.",
-      "fullText": [
-        "📱 Ekranla İlişkini Yeniden Kur",
-        "Bu program ekranı hayatından çıkarmayı hedeflemez.\nEkranın hayatındaki yerini bilinçli hâle getirmeyi amaçlar.",
-        "📅 Program boyunca neler yapacaksın?\nBu programın amacı ekranı tamamen bırakmak değil,\nekraan kullanımını bilinçli ve kontrollü hale getirmektir.\nKüçük farkındalıklarla otomatik kullanım azalır.\n\n🌬️Sabah → Ekransız Başlangıç (5–10 dk)\nAmaç: Güne otomatik ekran kullanımıyla başlamamak.\nUyanır uyanmaz telefona bakmazsın.\nKısa bir süre kendinle kalırsın.\n💡 Kural:\nSüre küçük olabilir.\nAma bilinçli olması yeterlidir.\n\n✨Gün İçinde → Otomatik Açma Farkındalığı\nTelefonu eline aldığın anı fark etmeye çalışırsın.\n📍 Kendine sorarsın:\n“Şu an neden açtım?”\nGerçek bir ihtiyaç mı yoksa alışkanlık mı?\nBu soru davranışı değiştirir.\n\n📱Gün İçinde → Bilinçli Kullanım Seçimi\nTelefonu kullanmadan önce ne yapacağını netleştirirsin.\n👉 Mesaj mı?\n👉 Arama mı?\n👉 Kısa bir kontrol mü?\nİşin bitince bırakmaya çalışırsın.\n💡 Amaç:\nAmaçsız kullanımın azalması.\n\n🌿Gün İçinde → Küçük Ekransız Anlar (1–3 kez)\nGün içinde kısa ekran molaları verirsin.\n👉 Yürürken\n👉 Beklerken\n👉 Otururken\nBu anlarda telefonu açmazsın.\nAmaç zihni boş bırakabilmektir.\n\n🌙 Akşam → Ekranı Azaltma (30–60 dk önce)\nUyumadan önce ekran kullanımını azaltırsın.\nTelefonu yavaş yavaş bırakmaya çalışırsın.\n💡 Amaç:\nZihni uykuya hazırlamak.\n\n📓 6. Akşam → Kısa Değerlendirme (3–5 dk)\nGün sonunda kendine bakarsın:\n👉 Ne zaman otomatik açtım?\n👉 Ne zaman bilinçli kullandım?\n👉 Ekransız kaldığım bir an oldu mu?\nAmaç fark etmektir.\n\n⚙️ Altın Kurallar\nEkranı tamamen bırakmak zorunda değilsin\nAmaç azaltmak değil, bilinçli kullanmaktır\nKüçük değişimler yeterlidir\n👉 “Farkındalık arttıkça kullanım değişir.”\n\n🔥 Gerçek Etkiyi Yaratan Şey\nBu programın gücü yasaklarda değil,\nfark ettiğin küçük anlarda oluşur.\nBir an durduğunda otomatik döngü kırılır.\n\n🎯 Net Günlük Plan\nSabah kısa ekran detoksu\nGün içinde açma farkındalığı\nBilinçli kullanım\nEkransız küçük anlar\nAkşam ekranı azaltma\nAkşam kısa değerlendirme\n\n💥 Süreç Sonucu\n7–10 gün: ekran alışkanlıklarını fark edersin\n20 gün: kullanımın daha kontrollü hale gelir\n30 gün: ekranla daha bilinçli bir ilişki kurarsın",
-        "💥 Program Sonunda Neler Olur?\nBu programı tamamladığında ekran kullanımın tamamen bitmez,\nama daha bilinçli hale gelir.\n\n🧠 Zihinsel Değişim\n👉 Telefonu neden açtığını daha hızlı fark edersin\n👉 Otomatik kullanımın azaldığını görürsün\n👉 Dikkatini daha kolay toplarsın\n\n📱 Davranışsal Değişim\n👉 Amaçsız ekran süresi azalır\n👉 Daha kısa ve kontrollü kullanım oluşur\n👉 Ekransız anlar daha doğal hale gelir\n\n🌙 Günlük Hayata Etki\n👉 Uykuya geçişin kolaylaşır\n👉 Zihinsel yorgunluk azalır\n👉 Gün içinde daha net hissedersin\n\n🧪 Bilimsel olarak\nDikkat ve alışkanlık sistemleri tekrarlarla yeniden şekillenir.\nBu süreçte beynin ödül ve odak mekanizmaları dengelenir.\n\n💡 Sonuç\n👉 Ekranı bırakmazsın ama yönetmeye başlarsın\n👉 Daha bilinçli ve dengeli bir kullanım oluşur"
-      ],
-      "dailyTasks": [
-          {
-            "id": "morning",
-            "title": "Ekransız Sabah Başlangıcı",
-            "shortDescription": "Güne telefonsuz başlayarak zihnine sakin bir alan aç.",
-            "details": [
-              "Uyandığında hemen telefona bakma",
-              "5–10 dakika kendinle kal",
-              "Nefesini veya bedenini fark et",
-              "Sürenin kısa olması yeterlidir",
-              "Amaç bilinçli bir başlangıç yapmaktır"
-            ]
-          },
-          {
-            "id": "awareness",
-            "title": "Otomatik Açmayı Fark Etme",
-            "shortDescription": "Telefonu açtığın anın nedenini nazikçe sorgula.",
-            "details": [
-              "Telefonu eline aldığında kısa bir durak ver",
-              "Kendine sor: “Şu an neden açtım?”",
-              "Gerçek ihtiyaç mı alışkanlık mı fark et",
-              "Davranışı yargılamadan gözlemle",
-              "Amaç otomatik döngüyü görünür kılmak"
-            ]
-          },
-          {
-            "id": "intentional",
-            "title": "Bilinçli Kullanım Seçimi",
-            "shortDescription": "Telefonu kullanmadan önce amacını netleştir.",
-            "details": [
-              "Ne yapacağını baştan belirle",
-              "Mesaj, arama veya kısa kontrol olarak sınırla",
-              "İşin bitince telefonu bırak",
-              "Amaçsız gezinmeden kaçın",
-              "Kullanımı kısa ve net tut"
-            ]
-          },
-          {
-            "id": "offline",
-            "title": "Ekransız Anlar",
-            "shortDescription": "Gün içinde kısa sürelerle telefonsuz kalmayı dene.",
-            "details": [
-              "Günde 1–3 kez bilinçli olarak telefonu açma",
-              "Yürürken veya beklerken ekran kullanma",
-              "Boş anları olduğu gibi deneyimle",
-              "Zihnin boş kalmasına izin ver",
-              "Küçük molalar yeterlidir"
-            ]
-          },
-          {
-            "id": "evening",
-            "title": "Akşam Ekranı Azaltma",
-            "shortDescription": "Uyumadan önce ekranı azaltarak zihnini dinlendir.",
-            "details": [
-              "Uyumadan 30–60 dakika önce ekranı azalt",
-              "Telefon kullanımını kademeli olarak düşür",
-              "Zihnine yavaşlama sinyali ver",
-              "Ekran yerine sakin bir aktivite seç",
-              "Uykuya geçişi kolaylaştır"
-            ]
-          },
-          {
-            "id": "reflection",
-            "title": "Akşam Kısa Değerlendirme",
-            "shortDescription": "Günü ekran kullanımın açısından yargısızca gözden geçir.",
-            "details": [
-              "Ne zaman telefonu otomatik açtığını fark et",
-              "Ne zaman bilinçli kullandığını gözlemle",
-              "Ekransız kaldığın anları hatırla",
-              "Kendini yargılamadan değerlendirme yap",
-              "Amaç farkındalık kazanmaktır"
-            ]
-          }
-        ],
-        "weeklyReflection": {
-          "title": "Ekran Alışkanlıklarını Gözlemleme",
-          "shortDescription": "Ekran kullanımındaki kalıpları fark ederek denge oluştur.",
-          "details": [
-            "En sık hangi anlarda telefonu açtığını fark et",
-            "Alışkanlıkla kullandığın zamanları gözlemle",
-            "Ekransız kaldığın anların etkisini fark et",
-            "Kullanımındaki değişimi nazikçe takip et"
-          ]
-        },
-        "goldenRules": {
-          "title": "Bilinçli Kullanım İlkeleri",
-          "shortDescription": "Ekranla ilişkini dengelemek için kendine nazik yaklaş.",
-          "details": [
-            "Ekranı tamamen bırakmak zorunda değilsin",
-            "Amaç azaltmak değil, bilinçli kullanmaktır",
-            "Küçük değişimler yeterlidir",
-            "Kendine baskı uygulamadan ilerle",
-            "Farkındalık arttıkça kullanım değişir"
-          ]
-        },
-        "realImpact": {
-          "title": "Gerçek Dönüşüm Noktası",
-          "shortDescription": "Değişim, ekranı açmadan önce verdiğin küçük durakta başlar.",
-          "details": [
-            "Yasaklar yerine farkındalık etki yaratır",
-            "Bir an durduğunda otomatik döngü kırılır",
-            "Küçük seçimler zamanla alışkanlığı değiştirir",
-            "Zamanla daha dengeli bir kullanım oluşur"
-          ]
-        },
-        "dailyPlanSummary": {
-          "title": "Günlük Ekran Dengesi",
-          "shortDescription": "Ekran kullanımını sade ve bilinçli bir şekilde yönet.",
-          "details": [
-            "Sabah kısa bir ekran detoksu yap",
-            "Gün içinde açma farkındalığı geliştir",
-            "Telefonu bilinçli kullan",
-            "Ekransız küçük anlar oluştur",
-            "Akşam ekranı azalt",
-            "Günü kısa bir değerlendirme ile tamamla"
-          ]
-        },
-        "processResult": {
-          "title": "Zamanla Oluşan Denge",
-          "shortDescription": "Ekranla ilişkin daha bilinçli ve dengeli hale gelir.",
-          "details": [
-            "7–10 gün: ekran alışkanlıklarını fark edersin",
-            "20 gün: kullanımın daha kontrollü hale gelir",
-            "30 gün: ekranla daha bilinçli bir ilişki kurarsın",
-            "Genel olarak daha odaklı ve dengeli hissedersin"
-          ]
-        }
-    }
+      }
   ]
 }

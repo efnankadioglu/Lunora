@@ -43,7 +43,6 @@ final class ProgramCompletionViewController: UIViewController, UITextViewDelegat
     
     private func setupUI() {
         
-        // 🎨 Background (#FFE8F4)
         view.backgroundColor = UIColor(
             red: 255/255,
             green: 232/255,
@@ -129,13 +128,11 @@ final class ProgramCompletionViewController: UIViewController, UITextViewDelegat
         imageView.layer.cornerRadius = 100
         imageView.clipsToBounds = true
         imageView.contentMode = .scaleAspectFill
-        
-        // 🔥 ROZET GÖRSELİ
+
         if let name = programImageName {
             imageView.image = UIImage(named: name)
         }
-        
-        // 🎯 DAHA GÜZEL GÖRÜNÜM
+
         imageView.backgroundColor = .white
         imageView.layer.borderWidth = 4
         imageView.layer.borderColor = UIColor.white.cgColor

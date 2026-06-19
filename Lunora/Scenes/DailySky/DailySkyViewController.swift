@@ -59,7 +59,7 @@ final class DailySkyViewController: UIViewController {
         ])
     }
 
-        private func setupContent() {
+    private func setupContent() {
         stackView.translatesAutoresizingMaskIntoConstraints = false
         stackView.axis = .vertical
         stackView.spacing = 14
@@ -76,13 +76,16 @@ final class DailySkyViewController: UIViewController {
 
         addHeaderView()
         addHeroCard()
-        addDailyCommentCard()
-        addMoonSignCard()
-        addActionsCard()
-        addAvoidCard()
-        addRitualCard()
+        addMoonTransitionCard()
+        addEnergyCard()
+        addGoodForYouCard()
+        addDoTodayCard()
         addBeautyCard()
-        addExtraEvents()
+        addHealthDisclaimerCard()
+        addRelationshipsCard()
+        addAvoidCard()
+        addWritingCard()
+        // addExtraEvents()
     }
     
     private func addHeaderView() {
@@ -158,7 +161,7 @@ final class DailySkyViewController: UIViewController {
         ])
 
         let titleLabel = UILabel()
-        titleLabel.text = "Ay \(daily.moonSign) burcunda"
+        titleLabel.text = "Ay \(daily.moonSignDisplay) burcunda"
         titleLabel.font = .systemFont(ofSize: 22, weight: .bold)
         titleLabel.textColor = UIColor(hex: "#2D2430")
         titleLabel.numberOfLines = 0
@@ -217,46 +220,141 @@ final class DailySkyViewController: UIViewController {
     
     
 
-    private func addDailyCommentCard() {
+//    private func addDailyCommentCard() {
+//        let daily = displayData.dailyAstrology
+//
+//        stackView.addArrangedSubview(
+//            makeIconCard(
+//                icon: "✦",
+//                iconBackgroundColor: UIColor(hex: "#F58AC5"),
+//                title: "Günün Mesajı",
+//                subtitle: "Kısa gökyüzü yorumu",
+//                body: daily.dailyComment,
+//                backgroundColor: UIColor.white.withAlphaComponent(0.82),
+//                bulletItems: nil,
+//                bulletColor: nil
+//            )
+//        )
+//    }
+//    private func addMoonSignCard() {
+//        guard let insight = displayData.moonSignInsight else {
+//            stackView.addArrangedSubview(
+//                makeIconCard(
+//                    icon: "☾",
+//                    iconBackgroundColor: UIColor(hex: "#C89AF5"),
+//                    title: "Ay Burcu Yorumu",
+//                    subtitle: "Bugünün ay burcu için yorum hazırlanıyor.",
+//                    body: "Ay burcu verisi var ancak detay yorumu eşleşmedi.",
+//                    backgroundColor: UIColor.white.withAlphaComponent(0.82),
+//                    bulletItems: nil,
+//                    bulletColor: nil
+//                )
+//            )
+//            return
+//        }
+//
+//        stackView.addArrangedSubview(
+//            makeIconCard(
+//                icon: moonSymbol(for: displayData.dailyAstrology.moonSign),
+//                iconBackgroundColor: UIColor(hex: "#C89AF5"),
+//                title: insight.title,
+//                subtitle: insight.subtitle,
+//                body: insight.content.feeling,
+//                backgroundColor: UIColor.white.withAlphaComponent(0.82),
+//                bulletItems: nil,
+//                bulletColor: nil
+//            )
+//        )
+//    }
+//
+//
+//private func addActionsCard() {
+//    guard let insight = displayData.moonSignInsight else { return }
+//
+//    stackView.addArrangedSubview(
+//        makeIconCard(
+//            icon: "♡",
+//            iconBackgroundColor: UIColor(hex: "#F58AC5"),
+//            title: "Bugün sana iyi gelebilecekler",
+//            subtitle: nil,
+//            body: nil,
+//            backgroundColor: UIColor(hex: "#FFF2FA"),
+//            bulletItems: insight.content.actions,
+//            bulletColor: UIColor(hex: "#ED4AA7")
+//        )
+//    )
+//}
+//    private func addAvoidCard() {
+//        guard let insight = displayData.moonSignInsight else { return }
+//
+//        stackView.addArrangedSubview(
+//            makeIconCard(
+//                icon: "☁︎",
+//                iconBackgroundColor: UIColor(hex: "#C89AF5"),
+//                title: "Bugün uzak durman iyi olur",
+//                subtitle: nil,
+//                body: nil,
+//                backgroundColor: UIColor(hex: "#F7EFFF"),
+//                bulletItems: insight.content.avoid,
+//                bulletColor: UIColor(hex: "#A76DE0")
+//            )
+//        )
+//    }
+//    private func addRitualCard() {
+//        guard let insight = displayData.moonSignInsight else { return }
+//
+//        stackView.addArrangedSubview(
+//            makeIconCard(
+//                icon: "✦",
+//                iconBackgroundColor: UIColor(hex: "#F58AC5"),
+//                title: "Mini ritüel",
+//                subtitle: nil,
+//                body: insight.content.ritual,
+//                backgroundColor: UIColor(hex: "#FFF0F7"),
+//                bulletItems: nil,
+//                bulletColor: nil
+//            )
+//        )
+//    }
+//    private func addBeautyCard() {
+//        guard let insight = displayData.moonSignInsight else { return }
+//
+//        let beautyText = insight.content.beauty.trimmingCharacters(in: .whitespacesAndNewlines)
+//
+//        guard !beautyText.isEmpty else { return }
+//
+//        stackView.addArrangedSubview(
+//            makeIconCard(
+//                icon: "✿",
+//                iconBackgroundColor: UIColor(hex: "#F58AC5"),
+//                title: "Güzellik önerisi",
+//                subtitle: nil,
+//                body: beautyText,
+//                backgroundColor: UIColor.white.withAlphaComponent(0.82),
+//                bulletItems: nil,
+//                bulletColor: nil
+//            )
+//        )
+//    }
+    
+    
+    
+    private func addMoonTransitionCard() {
         let daily = displayData.dailyAstrology
 
-        stackView.addArrangedSubview(
-            makeIconCard(
-                icon: "✦",
-                iconBackgroundColor: UIColor(hex: "#F58AC5"),
-                title: "Günün Mesajı",
-                subtitle: "Kısa gökyüzü yorumu",
-                body: daily.dailyComment,
-                backgroundColor: UIColor.white.withAlphaComponent(0.82),
-                bulletItems: nil,
-                bulletColor: nil
-            )
-        )
-    }
-    private func addMoonSignCard() {
-        guard let insight = displayData.moonSignInsight else {
-            stackView.addArrangedSubview(
-                makeIconCard(
-                    icon: "☾",
-                    iconBackgroundColor: UIColor(hex: "#C89AF5"),
-                    title: "Ay Burcu Yorumu",
-                    subtitle: "Bugünün ay burcu için yorum hazırlanıyor.",
-                    body: "Ay burcu verisi var ancak detay yorumu eşleşmedi.",
-                    backgroundColor: UIColor.white.withAlphaComponent(0.82),
-                    bulletItems: nil,
-                    bulletColor: nil
-                )
-            )
+        guard daily.hasMoonTransition,
+              !daily.moonTransitionText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+        else {
             return
         }
 
         stackView.addArrangedSubview(
             makeIconCard(
-                icon: moonSymbol(for: displayData.dailyAstrology.moonSign),
+                icon: "☾",
                 iconBackgroundColor: UIColor(hex: "#C89AF5"),
-                title: insight.title,
-                subtitle: insight.subtitle,
-                body: insight.content.feeling,
+                title: "Ay Geçişi",
+                subtitle: daily.moonSignDisplay,
+                body: daily.moonTransitionText,
                 backgroundColor: UIColor.white.withAlphaComponent(0.82),
                 bulletItems: nil,
                 bulletColor: nil
@@ -264,69 +362,171 @@ final class DailySkyViewController: UIViewController {
         )
     }
 
+    private func addEnergyCard() {
+        let sections = displayData.dailyAstrology.sections
 
-private func addActionsCard() {
-    guard let insight = displayData.moonSignInsight else { return }
-
-    stackView.addArrangedSubview(
-        makeIconCard(
-            icon: "♡",
-            iconBackgroundColor: UIColor(hex: "#F58AC5"),
-            title: "Bugün sana iyi gelebilecekler",
-            subtitle: nil,
-            body: nil,
-            backgroundColor: UIColor(hex: "#FFF2FA"),
-            bulletItems: insight.content.actions,
-            bulletColor: UIColor(hex: "#ED4AA7")
-        )
-    )
-}
-    private func addAvoidCard() {
-        guard let insight = displayData.moonSignInsight else { return }
-
-        stackView.addArrangedSubview(
-            makeIconCard(
-                icon: "☁︎",
-                iconBackgroundColor: UIColor(hex: "#C89AF5"),
-                title: "Bugün uzak durman iyi olur",
-                subtitle: nil,
-                body: nil,
-                backgroundColor: UIColor(hex: "#F7EFFF"),
-                bulletItems: insight.content.avoid,
-                bulletColor: UIColor(hex: "#A76DE0")
-            )
-        )
-    }
-    private func addRitualCard() {
-        guard let insight = displayData.moonSignInsight else { return }
+        guard !sections.bugununEnerjisi.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty else {
+            return
+        }
 
         stackView.addArrangedSubview(
             makeIconCard(
                 icon: "✦",
                 iconBackgroundColor: UIColor(hex: "#F58AC5"),
-                title: "Mini ritüel",
+                title: "Bugünün Enerjisi",
                 subtitle: nil,
-                body: insight.content.ritual,
+                body: sections.bugununEnerjisi,
+                backgroundColor: UIColor.white.withAlphaComponent(0.82),
+                bulletItems: nil,
+                bulletColor: nil
+            )
+        )
+    }
+
+    private func addGoodForYouCard() {
+        let sections = displayData.dailyAstrology.sections
+
+        guard !sections.bugunSanaIyiGelebilecekSeyler.isEmpty else {
+            return
+        }
+
+        stackView.addArrangedSubview(
+            makeIconCard(
+                icon: "♡",
+                iconBackgroundColor: UIColor(hex: "#F58AC5"),
+                title: "Bugün sana iyi gelebilecekler",
+                subtitle: nil,
+                body: nil,
+                backgroundColor: UIColor(hex: "#FFF2FA"),
+                bulletItems: sections.bugunSanaIyiGelebilecekSeyler,
+                bulletColor: UIColor(hex: "#ED4AA7")
+            )
+        )
+    }
+
+    private func addDoTodayCard() {
+        let sections = displayData.dailyAstrology.sections
+
+        guard !sections.bugunBunlariYapabilirsin.isEmpty else {
+            return
+        }
+
+        stackView.addArrangedSubview(
+            makeIconCard(
+                icon: "☀︎",
+                iconBackgroundColor: UIColor(hex: "#F58AC5"),
+                title: "Bugün bunları yapabilirsin",
+                subtitle: nil,
+                body: nil,
+                backgroundColor: UIColor.white.withAlphaComponent(0.82),
+                bulletItems: sections.bugunBunlariYapabilirsin,
+                bulletColor: UIColor(hex: "#ED4AA7")
+            )
+        )
+    }
+
+    private func addBeautyCard() {
+        let beautyText = displayData.dailyAstrology.sections.guzellikBakimOnerisi
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+
+        guard !beautyText.isEmpty else {
+            return
+        }
+
+        stackView.addArrangedSubview(
+            makeIconCard(
+                icon: "✿",
+                iconBackgroundColor: UIColor(hex: "#F58AC5"),
+                title: "Güzellik & Bakım Önerisi",
+                subtitle: nil,
+                body: beautyText,
+                backgroundColor: UIColor.white.withAlphaComponent(0.82),
+                bulletItems: nil,
+                bulletColor: nil
+            )
+        )
+    }
+
+    private func addRelationshipsCard() {
+        let relationText = displayData.dailyAstrology.sections.iliskilerdeBugun
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+
+        guard !relationText.isEmpty else {
+            return
+        }
+
+        stackView.addArrangedSubview(
+            makeIconCard(
+                icon: "☽",
+                iconBackgroundColor: UIColor(hex: "#C89AF5"),
+                title: "İlişkilerde Bugün",
+                subtitle: nil,
+                body: relationText,
+                backgroundColor: UIColor(hex: "#F7EFFF"),
+                bulletItems: nil,
+                bulletColor: nil
+            )
+        )
+    }
+
+    private func addAvoidCard() {
+        let sections = displayData.dailyAstrology.sections
+
+        guard !sections.uzakDurmanGerekenSeyler.isEmpty else {
+            return
+        }
+
+        stackView.addArrangedSubview(
+            makeIconCard(
+                icon: "☁︎",
+                iconBackgroundColor: UIColor(hex: "#C89AF5"),
+                title: "Uzak durman gereken şeyler",
+                subtitle: nil,
+                body: nil,
+                backgroundColor: UIColor(hex: "#F7EFFF"),
+                bulletItems: sections.uzakDurmanGerekenSeyler,
+                bulletColor: UIColor(hex: "#A76DE0")
+            )
+        )
+    }
+
+    private func addWritingCard() {
+        let writingText = displayData.dailyAstrology.sections.yazmaCalismasi
+            .trimmingCharacters(in: .whitespacesAndNewlines)
+
+        guard !writingText.isEmpty else {
+            return
+        }
+
+        stackView.addArrangedSubview(
+            makeIconCard(
+                icon: "✎",
+                iconBackgroundColor: UIColor(hex: "#F58AC5"),
+                title: "Yazma Çalışması",
+                subtitle: nil,
+                body: writingText,
                 backgroundColor: UIColor(hex: "#FFF0F7"),
                 bulletItems: nil,
                 bulletColor: nil
             )
         )
     }
-    private func addBeautyCard() {
-        guard let insight = displayData.moonSignInsight else { return }
 
-        let beautyText = insight.content.beauty.trimmingCharacters(in: .whitespacesAndNewlines)
+    private func addHealthDisclaimerCard() {
+        let disclaimer = displayData.dailyAstrology.healthDisclaimer
+            .trimmingCharacters(in: .whitespacesAndNewlines)
 
-        guard !beautyText.isEmpty else { return }
+        guard !disclaimer.isEmpty else {
+            return
+        }
 
         stackView.addArrangedSubview(
             makeIconCard(
-                icon: "✿",
-                iconBackgroundColor: UIColor(hex: "#F58AC5"),
-                title: "Güzellik önerisi",
+                icon: "!",
+                iconBackgroundColor: UIColor(hex: "#C89AF5"),
+                title: "Sağlık Notu",
                 subtitle: nil,
-                body: beautyText,
+                body: disclaimer,
                 backgroundColor: UIColor.white.withAlphaComponent(0.82),
                 bulletItems: nil,
                 bulletColor: nil
@@ -419,18 +619,18 @@ private func addActionsCard() {
             )
         )
 
-        stackView.addArrangedSubview(
-            makeIconCard(
-                icon: "✦",
-                iconBackgroundColor: UIColor(hex: "#F58AC5"),
-                title: "Mini ritüel",
-                subtitle: nil,
-                body: event.content.ritual,
-                backgroundColor: UIColor(hex: "#FFF0F7"),
-                bulletItems: nil,
-                bulletColor: nil
-            )
-        )
+//        stackView.addArrangedSubview(
+//            makeIconCard(
+//                icon: "✦",
+//                iconBackgroundColor: UIColor(hex: "#F58AC5"),
+//                title: "Mini ritüel",
+//                subtitle: nil,
+//                body: event.content.ritual,
+//                backgroundColor: UIColor(hex: "#FFF0F7"),
+//                bulletItems: nil,
+//                bulletColor: nil
+//            )
+//        )
 
         let beautyText = event.content.beauty.trimmingCharacters(in: .whitespacesAndNewlines)
 

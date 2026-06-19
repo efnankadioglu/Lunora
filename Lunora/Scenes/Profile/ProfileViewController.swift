@@ -42,6 +42,7 @@ final class ProfileViewController: UIViewController {
     private let nameLabel = UILabel()
     private let usernameLabel = UILabel()
     private let motivationLabel = UILabel()
+    private let settingsButton = UIButton(type: .system)
 
     private let statsStackView = UIStackView()
     private let completedProgramsValueLabel = UILabel()
@@ -70,8 +71,6 @@ final class ProfileViewController: UIViewController {
     private let insightTitleLabel = UILabel()
     private let insightSubtitleLabel = UILabel()
     private let insightBodyLabel = UILabel()
-
-    private let settingsCardView = UIView()
 
     // MARK: - Lifecycle
 
@@ -111,7 +110,6 @@ final class ProfileViewController: UIViewController {
         setupAchievementsCard()
         setupElementCard()
         setupInsightCard()
-        setupSettingsCard()
     }
 
     private func setupScrollView() {
@@ -128,7 +126,7 @@ final class ProfileViewController: UIViewController {
         scrollView.addSubview(contentView)
 
         NSLayoutConstraint.activate([
-            scrollView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
+            scrollView.topAnchor.constraint(equalTo: view.topAnchor),
             scrollView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             scrollView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             scrollView.bottomAnchor.constraint(equalTo: view.bottomAnchor),
@@ -150,7 +148,7 @@ final class ProfileViewController: UIViewController {
         contentView.addSubview(mainStackView)
 
         NSLayoutConstraint.activate([
-            mainStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
+            mainStackView.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 96),
             mainStackView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 20),
             mainStackView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -20),
             mainStackView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -120)
@@ -166,6 +164,30 @@ final class ProfileViewController: UIViewController {
         headerContainerView.layer.shadowRadius = 10
         headerContainerView.layer.shadowOffset = CGSize(width: 0, height: 5)
         headerContainerView.clipsToBounds = false
+        
+        settingsButton.translatesAutoresizingMaskIntoConstraints = false
+
+        let symbolConfig = UIImage.SymbolConfiguration(pointSize: 18, weight: .bold)
+        settingsButton.setImage(
+            UIImage(systemName: "gearshape.fill", withConfiguration: symbolConfig),
+            for: .normal
+        )
+
+        settingsButton.tintColor = UIColor(hex: "#E85A9F")
+        settingsButton.backgroundColor = UIColor(hex: "#FFF4FA")
+        settingsButton.layer.cornerRadius = 19
+        settingsButton.clipsToBounds = true
+
+        settingsButton.accessibilityLabel = "Ayarlar"
+        settingsButton.accessibilityHint = "Ayarlar sayfasını açar"
+
+        settingsButton.addTarget(
+            self,
+            action: #selector(didTapSettings),
+            for: .touchUpInside
+        )
+
+        headerContainerView.addSubview(settingsButton)
 
         avatarContainerView.translatesAutoresizingMaskIntoConstraints = false
         avatarContainerView.backgroundColor = UIColor(hex: "#FFF4FA")
@@ -199,6 +221,7 @@ final class ProfileViewController: UIViewController {
 
             avatarPlaceholderLabel.centerXAnchor.constraint(equalTo: avatarContainerView.centerXAnchor),
             avatarPlaceholderLabel.centerYAnchor.constraint(equalTo: avatarContainerView.centerYAnchor)
+            
         ])
 
         nameLabel.text = "Lunora Soul"
@@ -231,9 +254,15 @@ final class ProfileViewController: UIViewController {
         headerStack.spacing = 6
 
         headerContainerView.addSubview(headerStack)
+        headerContainerView.bringSubviewToFront(settingsButton)
 
         NSLayoutConstraint.activate([
             headerContainerView.heightAnchor.constraint(greaterThanOrEqualToConstant: 170),
+
+            settingsButton.topAnchor.constraint(equalTo: headerContainerView.topAnchor, constant: 14),
+            settingsButton.trailingAnchor.constraint(equalTo: headerContainerView.trailingAnchor, constant: -14),
+            settingsButton.widthAnchor.constraint(equalToConstant: 38),
+            settingsButton.heightAnchor.constraint(equalToConstant: 38),
 
             headerStack.topAnchor.constraint(equalTo: headerContainerView.topAnchor, constant: 20),
             headerStack.leadingAnchor.constraint(equalTo: headerContainerView.leadingAnchor, constant: 24),
@@ -252,7 +281,7 @@ final class ProfileViewController: UIViewController {
         let completedCard = makeStatCard(
             valueLabel: completedProgramsValueLabel,
             initialValue: "0",
-            title: "Completed",
+            title: "Tamamlanan Program",
             icon: "🏆",
             iconBackgroundColor: UIColor(hex: "#FFF1CC")
         )
@@ -260,7 +289,7 @@ final class ProfileViewController: UIViewController {
         let activeDaysCard = makeStatCard(
             valueLabel: activeDaysValueLabel,
             initialValue: "0",
-            title: "Active Days",
+            title: "Toplam Günler",
             icon: "📅",
             iconBackgroundColor: UIColor(hex: "#EDE3FF")
         )
@@ -268,7 +297,7 @@ final class ProfileViewController: UIViewController {
         let streakCard = makeStatCard(
             valueLabel: dayStreakValueLabel,
             initialValue: "0",
-            title: "Day Streak",
+            title: "Streak",
             icon: "🔥",
             iconBackgroundColor: UIColor(hex: "#FFD6EA")
         )
@@ -288,16 +317,16 @@ final class ProfileViewController: UIViewController {
         currentJourneyCardView.layer.shadowRadius = 14
         currentJourneyCardView.layer.shadowOffset = CGSize(width: 0, height: 8)
 
-        currentJourneyTitleLabel.text = "Current Journey"
+        currentJourneyTitleLabel.text = "Mevcut Yolculuk"
         currentJourneyTitleLabel.font = .systemFont(ofSize: 18, weight: .bold)
         currentJourneyTitleLabel.textColor = UIColor(hex: "#2D2430")
 
-        currentJourneyProgramLabel.text = "No active journey yet"
+        currentJourneyProgramLabel.text = "Henüz aktif yolculuğun yok"
         currentJourneyProgramLabel.font = .systemFont(ofSize: 16, weight: .semibold)
         currentJourneyProgramLabel.textColor = UIColor(hex: "#4A3B4F")
         currentJourneyProgramLabel.numberOfLines = 2
 
-        currentJourneyDayLabel.text = "Start a program when you feel ready."
+        currentJourneyDayLabel.text = "Hazır hissettiğinde bir programa başlayabilirsin."
         currentJourneyDayLabel.font = .systemFont(ofSize: 13, weight: .medium)
         currentJourneyDayLabel.textColor = UIColor(hex: "#9A7FA3")
         currentJourneyDayLabel.numberOfLines = 2
@@ -308,7 +337,7 @@ final class ProfileViewController: UIViewController {
         currentJourneyProgressView.layer.cornerRadius = 4
         currentJourneyProgressView.clipsToBounds = true
 
-        continueButton.setTitle("Choose a Program", for: .normal)
+        continueButton.setTitle("Program Seç", for: .normal)
         continueButton.titleLabel?.font = .systemFont(ofSize: 15, weight: .bold)
         continueButton.setTitleColor(.white, for: .normal)
         continueButton.contentEdgeInsets = UIEdgeInsets(top: 12, left: 18, bottom: 12, right: 18)
@@ -348,11 +377,11 @@ final class ProfileViewController: UIViewController {
         achievementsCardView.layer.shadowOffset = CGSize(width: 0, height: 8)
 
         let titleLabel = UILabel()
-        titleLabel.text = "Achievements"
+        titleLabel.text = "Kazanılan Rozetler"
         titleLabel.font = .systemFont(ofSize: 18, weight: .bold)
         titleLabel.textColor = UIColor(hex: "#2D2430")
 
-        achievementsSubtitleLabel.text = "Your earned badges will bloom here."
+        achievementsSubtitleLabel.text = "Tamamladığın yolculuklar burada çiçeklenir."
         achievementsSubtitleLabel.font = .systemFont(ofSize: 13, weight: .medium)
         achievementsSubtitleLabel.textColor = UIColor(hex: "#9A7FA3")
         achievementsSubtitleLabel.numberOfLines = 2
@@ -448,7 +477,7 @@ final class ProfileViewController: UIViewController {
         insightCardView.layer.shadowRadius = 14
         insightCardView.layer.shadowOffset = CGSize(width: 0, height: 8)
 
-        insightSectionTitleLabel.text = "Bugünün İçgörüsü"
+        insightSectionTitleLabel.text = "🤖 Bugünün İçgörüsü"
         insightSectionTitleLabel.font = .systemFont(ofSize: 18, weight: .bold)
         insightSectionTitleLabel.textColor = UIColor(hex: "#2D2430")
         insightSectionTitleLabel.numberOfLines = 1
@@ -490,49 +519,6 @@ final class ProfileViewController: UIViewController {
 
         mainStackView.addArrangedSubview(insightCardView)
     }
-    
-    
-
-    private func setupSettingsCard() {
-        settingsCardView.backgroundColor = .white
-        settingsCardView.layer.cornerRadius = 26
-        settingsCardView.layer.shadowColor = UIColor.black.cgColor
-        settingsCardView.layer.shadowOpacity = 0.06
-        settingsCardView.layer.shadowRadius = 14
-        settingsCardView.layer.shadowOffset = CGSize(width: 0, height: 8)
-
-        let titleLabel = UILabel()
-        titleLabel.text = "Settings"
-        titleLabel.font = .systemFont(ofSize: 18, weight: .bold)
-        titleLabel.textColor = UIColor(hex: "#2D2430")
-
-        let editProfile = makeSettingsRow(icon: "person.crop.circle", title: "Edit Profile")
-        let notifications = makeSettingsRow(icon: "bell", title: "Notifications")
-        let language = makeSettingsRow(icon: "globe", title: "Language")
-        let logout = makeSettingsRow(icon: "rectangle.portrait.and.arrow.right", title: "Log Out", isDestructive: true)
-
-        let stack = UIStackView(arrangedSubviews: [
-            titleLabel,
-            editProfile,
-            notifications,
-            language,
-            logout
-        ])
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        stack.axis = .vertical
-        stack.spacing = 14
-
-        settingsCardView.addSubview(stack)
-
-        NSLayoutConstraint.activate([
-            stack.topAnchor.constraint(equalTo: settingsCardView.topAnchor, constant: 20),
-            stack.leadingAnchor.constraint(equalTo: settingsCardView.leadingAnchor, constant: 20),
-            stack.trailingAnchor.constraint(equalTo: settingsCardView.trailingAnchor, constant: -20),
-            stack.bottomAnchor.constraint(equalTo: settingsCardView.bottomAnchor, constant: -20)
-        ])
-
-        mainStackView.addArrangedSubview(settingsCardView)
-    }
 
     // MARK: - Firestore Profile Data
 
@@ -541,6 +527,8 @@ final class ProfileViewController: UIViewController {
             print("🔴 Profile: userId yok")
             return
         }
+        
+        print("🟣 CURRENT AUTH USER ID:", userId)
 
         db.collection("profiles").document(userId).getDocument { [weak self] snapshot, error in
             DispatchQueue.main.async {
@@ -557,6 +545,8 @@ final class ProfileViewController: UIViewController {
                     self.loadLocalProfileFallback(uid: userId)
                     return
                 }
+                
+                print("🟣 FIRESTORE PROFILE DATA:", data)
 
                 let name = data["name"] as? String
                 let username = data["username"] as? String
@@ -929,11 +919,11 @@ final class ProfileViewController: UIViewController {
     }
 
     private func configureNoActiveJourney() {
-        currentJourneyProgramLabel.text = "No active journey yet"
-        currentJourneyDayLabel.text = "Start a program when you feel ready."
+        currentJourneyProgramLabel.text = "Henüz aktif yolculuğun yok"
+        currentJourneyDayLabel.text = "Hazır hissettiğinde bir programa başlayabilirsin."
         currentJourneyProgressView.setProgress(0.0, animated: true)
 
-        continueButton.setTitle("Choose a Program", for: .normal)
+        continueButton.setTitle("Program Seç", for: .normal)
         continueButton.isEnabled = true
         continueButton.alpha = 1.0
     }
@@ -945,12 +935,12 @@ final class ProfileViewController: UIViewController {
         }
 
         if badgeImageNames.isEmpty {
-            achievementsSubtitleLabel.text = "Your earned badges will bloom here."
+            achievementsSubtitleLabel.text = "Kazandığın rozetler burada görünecek."
             achievementsStackView.addArrangedSubview(makeEmptyBadgeIcon())
             return
         }
 
-        achievementsSubtitleLabel.text = "Your completed journeys are blooming here."
+        achievementsSubtitleLabel.text = "Tamamladığın yolculuklar burada çiçeklenir."
 
         for imageName in badgeImageNames {
             achievementsStackView.addArrangedSubview(makeBadgeIcon(imageName: imageName))
@@ -1034,6 +1024,13 @@ final class ProfileViewController: UIViewController {
     }
 
     // MARK: - Actions
+    
+    @objc private func didTapSettings() {
+        let settingsViewController = SettingsViewController()
+        settingsViewController.hidesBottomBarWhenPushed = true
+
+        navigationController?.pushViewController(settingsViewController, animated: true)
+    }
 
     @objc private func didTapContinueJourney() {
         if hasActiveJourney {
@@ -1042,6 +1039,64 @@ final class ProfileViewController: UIViewController {
             tabBarController?.selectedIndex = 0
         }
     }
+
+    @objc private func didTapLogout() {
+        let alert = UIAlertController(
+            title: "Çıkış Yap",
+            message: "Hesabından çıkış yapmak istediğine emin misin?",
+            preferredStyle: .alert
+        )
+
+        alert.addAction(UIAlertAction(title: "Vazgeç", style: .cancel))
+
+        alert.addAction(UIAlertAction(title: "Çıkış Yap", style: .destructive) { [weak self] _ in
+            self?.performLogout()
+        })
+
+        present(alert, animated: true)
+    }
+
+    private func performLogout() {
+        do {
+            try Auth.auth().signOut()
+            navigateToLoginScreen()
+        } catch {
+            print("🔴 Logout başarısız:", error.localizedDescription)
+
+            let alert = UIAlertController(
+                title: "Logout Failed",
+                message: "Something went wrong while logging out. Please try again.",
+                preferredStyle: .alert
+            )
+
+            alert.addAction(UIAlertAction(title: "OK", style: .default))
+            present(alert, animated: true)
+        }
+    }
+
+    private func navigateToLoginScreen() {
+        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+
+        guard let loginViewController = storyboard.instantiateViewController(
+            withIdentifier: "LoginViewController"
+        ) as? LoginViewController else {
+            print("🔴 LoginViewController bulunamadı. Storyboard ID kontrol edilmeli.")
+            return
+        }
+
+        let navigationController = UINavigationController(rootViewController: loginViewController)
+        navigationController.setNavigationBarHidden(true, animated: false)
+
+        if let sceneDelegate = view.window?.windowScene?.delegate as? SceneDelegate,
+           let window = sceneDelegate.window {
+            window.rootViewController = navigationController
+            window.makeKeyAndVisible()
+        } else {
+            view.window?.rootViewController = navigationController
+            view.window?.makeKeyAndVisible()
+        }
+    }
+    
 
     // MARK: - Reusable Views
 
@@ -1238,6 +1293,7 @@ final class ProfileViewController: UIViewController {
 
         return rowView
     }
+    
 }
 private extension UILabel {
     func setLineSpacing(_ spacing: CGFloat) {

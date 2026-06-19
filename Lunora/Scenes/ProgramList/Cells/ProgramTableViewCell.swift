@@ -70,10 +70,6 @@ class ProgramTableViewCell: UITableViewCell {
             programName.font = .systemFont(ofSize: 22, weight: .semibold)
             programName.textColor = UIColor.label.withAlphaComponent(0.95)
             
-            // Süre
-           // programDuration.titleLabel?.font = .systemFont(ofSize: 13, weight: .semibold)
-          //  programDuration.setTitleColor(.systemPink, for: .normal)
-            
             // Açıklama
             oneSentence.numberOfLines = 6
             oneSentence.font = .systemFont(ofSize: 16, weight: .regular)

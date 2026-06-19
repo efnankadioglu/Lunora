@@ -141,18 +141,6 @@ final class ProgramProgressCardView: UIView {
         progressFillWidthConstraint?.constant = progressTrackView.bounds.width * currentProgressMultiplier
     }
 
-//    override func layoutSubviews() {
-//        super.layoutSubviews()
-//
-//        if progressFillWidthConstraint == nil {
-//            progressFillWidthConstraint = progressFillView.widthAnchor.constraint(
-//                equalTo: progressTrackView.widthAnchor,
-//                multiplier: 0.48
-//            )
-//            progressFillWidthConstraint?.isActive = true
-//        }
-//    }
-    
     func configure(with data: ProgramProgressCardData) {
         dayLabel.text = "Gün \(data.currentDay) / \(data.totalDays)"
         percentLabel.text = "\(data.progressPercent)%"
@@ -248,21 +236,6 @@ final class ProgramProgressCardView: UIView {
         }
     }
     
-//    private func updateProgressFill(multiplier: CGFloat) {
-//        let clampedValue = max(0, min(1, multiplier))
-//
-//        if let progressFillWidthConstraint = progressFillWidthConstraint {
-//            progressFillWidthConstraint.isActive = false
-//        }
-//
-//        progressFillWidthConstraint = progressFillView.widthAnchor.constraint(
-//            equalTo: progressTrackView.widthAnchor,
-//            multiplier: clampedValue
-//        )
-//        progressFillWidthConstraint?.isActive = true
-//
-//        layoutIfNeeded()
-//    }
     private func updateProgressFill(multiplier: CGFloat) {
         currentProgressMultiplier = max(0, min(1, multiplier))
         progressFillWidthConstraint?.constant = progressTrackView.bounds.width * currentProgressMultiplier
@@ -316,7 +289,6 @@ final class ProgramProgressCardView: UIView {
 
             legendStackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -24),
 
-//            dividerView.topAnchor.constraint(equalTo: donutChartView.bottomAnchor, constant: 24),
             dividerView.topAnchor.constraint(equalTo: legendStackView.bottomAnchor, constant: 20),
             dividerView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 24),
             dividerView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -24),

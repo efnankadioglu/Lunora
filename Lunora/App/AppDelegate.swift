@@ -34,15 +34,12 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication,
                      didDiscardSceneSessions sceneSessions: Set<UISceneSession>) {
-        // Şu an burada özel bir şey yapmana gerek yok
     }
     // MARK: - Core Data stack  ✅ (Yeni eklediğimiz kısım)
     lazy var persistentContainer: NSPersistentContainer = {
-        // Buradaki isim .xcdatamodeld dosyanın adıyla AYNI olmalı (sende "Lunora")
         let container = NSPersistentContainer(name: "Lunora")
         container.loadPersistentStores(completionHandler: { (storeDescription, error) in
             if let error = error as NSError? {
-                // Geliştirme aşamasında fatalError kabul edilebilir
                 fatalError("Unresolved error \(error), \(error.userInfo)")
             }
             container.viewContext.mergePolicy = NSMergeByPropertyObjectTrumpMergePolicy
@@ -50,7 +47,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         })
         return container
     }()
-    // MARK: - Core Data Saving support  ✅
+    // MARK: - Core Data Saving support
 
     func saveContext () {
         let context = persistentContainer.viewContext
@@ -63,7 +60,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
             }
         }
     }
-    // MARK: - Google Sign-In URL handling (sende zaten vardı)
+    // MARK: - Google Sign-In URL handling
 
     func application(_ app: UIApplication,
                      open url: URL,

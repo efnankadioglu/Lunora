@@ -69,25 +69,6 @@ final class EarnedBadgeService {
                     return
                 }
 
-              
-//                    let badges: [EarnedBadge] = try documents.compactMap { document in
-//                        let data = document.data()
-//
-//                        guard
-//                            let programId = data["programId"] as? String,
-//                            let earnedAtTimestamp = data["earnedAt"] as? Timestamp,
-//                            let isSeen = data["isSeen"] as? Bool,
-//                            let isFeatured = data["isFeatured"] as? Bool
-//                        else {
-//                            return nil
-//                        }
-//
-//                        return EarnedBadge(
-//                            programId: programId,
-//                            earnedAt: earnedAtTimestamp.dateValue(),
-//                            isSeen: isSeen,
-//                            isFeatured: isFeatured
-//                        )
                     let badges: [EarnedBadge] = documents.compactMap { document in
                         let data = document.data()
 

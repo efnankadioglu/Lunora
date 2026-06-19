@@ -22,19 +22,12 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         let rootVC: UIViewController
 
-        // 👇 3. Senaryo: Kullanıcının oturumu açık VE localde profili var
-        // -> Uygulama açılır açılmaz direkt ana ekrana (tab bar) gider
         if let uid = Auth.auth().currentUser?.uid,
            ProfileStore.shared.fetchProfile(uid: uid) != nil {
 
             rootVC = buildMainTabBar()
 
         } else {
-            // 👇 1. + 2. Senaryo başlangıcı:
-            // - Hiç login olmamış (currentUser yok)
-            // - Veya login var ama local profil yok (yine login’e zorlayacağız)
-            //
-            // Bu durumda her zaman Login storyboard’daki initial VC kök olur.
             rootVC = UIStoryboard(name: "Main", bundle: nil)
                 .instantiateInitialViewController()!
         }
@@ -44,11 +37,8 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     }
     
     func buildMainTabBar() -> UITabBarController {
-        // 1. Renkleri tanımlayalım
         let pembe = UIColor(red: 242/255, green: 92/255, blue: 184/255, alpha: 1)
         let sari = UIColor(red: 224/255, green: 210/255, blue: 54/255, alpha: 1)
-        
-        // 2. Sayfaları ve İkonları Hazırlayalım (Render Mode: alwaysOriginal çok önemli!)
         let programList = UIStoryboard(name: "ProgramList", bundle: nil).instantiateViewController(withIdentifier: "ProgramListNav")
         programList.tabBarItem = UITabBarItem(
             title: "Programs",
@@ -76,8 +66,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
             image: UIImage(systemName: "person.circle")?.withTintColor(pembe, renderingMode: .alwaysOriginal),
             selectedImage: UIImage(systemName: "person.circle")?.withTintColor(pembe, renderingMode: .alwaysOriginal)
         )
-
-        // 3. Yazı Renklerini Zorlayalım
         let controllers = [programList, progress, completed, profile]
         for controller in controllers {
             controller.tabBarItem.setTitleTextAttributes([.foregroundColor: UIColor.black], for: .normal)
@@ -86,8 +74,6 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
         let tab = UITabBarController()
         tab.viewControllers = controllers
-        
-        // 4. Son Garanti (Global Ayarlar)
         tab.tabBar.unselectedItemTintColor = pembe
         tab.tabBar.tintColor = sari
 

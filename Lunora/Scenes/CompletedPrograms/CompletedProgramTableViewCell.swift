@@ -8,7 +8,7 @@ import UIKit
 
 final class CompletedProgramTableViewCell: UITableViewCell {
 
-    static let identifier = "CompletedProgramTableViewCell" // EKLEDİM
+    static let identifier = "CompletedProgramTableViewCell"
 
     private let cardView = UIView()
     private let badgeImageView = UIImageView()
@@ -20,7 +20,7 @@ final class CompletedProgramTableViewCell: UITableViewCell {
 
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
-        setupUI() // EKLEDİM
+        setupUI() 
     }
 
     required init?(coder: NSCoder) {

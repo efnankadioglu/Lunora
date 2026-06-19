@@ -39,7 +39,7 @@ final class DetailsCardCell: UITableViewCell {
         flexibilityValueLabel.textAlignment = .center
         flexibilityValueLabel.setContentHuggingPriority(.required, for: .vertical)
         flexibilityValueLabel.setContentCompressionResistancePriority(.required, for: .vertical)
-       flexibilityValueLabel.text = flexibility.replacingOccurrences(of: " ", with: "\n")
+//       flexibilityValueLabel.text = flexibility.replacingOccurrences(of: " ", with: "\n")
     
     }
 

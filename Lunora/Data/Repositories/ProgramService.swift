@@ -17,42 +17,60 @@ final class ProgramService {
     
     // MARK: - Firestore'dan Programları Çek
     func fetchPrograms(completion: @escaping ([Program]) -> Void) {
-        db.collection("programs").getDocuments { snapshot, error in
-            
-            if let error = error {
-                print("❌ Firestore hata: \(error.localizedDescription)")
-                completion([])
-                return
-            }
-            
-            guard let documents = snapshot?.documents else {
-                print("❌ Firestore document bulunamadı")
-                completion([])
-                return
-            }
-            
-            let programs: [Program] = documents.compactMap { document in
-                do {
-                    var data = document.data()
-                    
-                    // Eğer Firestore içinde id field'ı yoksa, document id'yi kullan
-                    if data["id"] == nil {
-                        data["id"] = document.documentID
-                    }
-                    
-                    let jsonData = try JSONSerialization.data(withJSONObject: data, options: [])
-                    let program = try JSONDecoder().decode(Program.self, from: jsonData)
-                    return program.formatted()
-                } catch {
-                    print("❌ Program decode edilemedi: \(document.documentID) / \(error)")
-                    return nil
+        db.collection("programs")
+            .getDocuments { snapshot, error in
+                
+                if let error = error {
+                    print("❌ Firestore program okuma hatası: \(error.localizedDescription)")
+                    completion([])
+                    return
                 }
+                
+                guard let documents = snapshot?.documents else {
+                    print("❌ Firestore program document bulunamadı")
+                    completion([])
+                    return
+                }
+                
+                print("🧪 Firestore toplam document sayısı:", documents.count)
+                
+                let decodedPrograms: [(sortOrder: Int, program: Program)] = documents.compactMap { document in
+                    do {
+                        var data = document.data()
+                        
+                        if data["id"] == nil {
+                            data["id"] = document.documentID
+                        }
+                        
+                        data.removeValue(forKey: "updatedAt")
+                        data.removeValue(forKey: "createdAt")
+                        
+                        let sortOrder = data["sortOrder"] as? Int ?? 999
+                        
+                        let jsonData = try JSONSerialization.data(withJSONObject: data, options: [])
+                        let program = try JSONDecoder().decode(Program.self, from: jsonData).formatted()
+                        
+                        return (sortOrder: sortOrder, program: program)
+                        
+                    } catch {
+                        print("❌ Program decode edilemedi")
+                        print("❌ Document ID:", document.documentID)
+                        print("❌ Error:", error.localizedDescription)
+                        print("❌ Raw data:", document.data())
+                        return nil
+                    }
+                }
+                
+                let activePrograms = decodedPrograms
+                    .filter { $0.program.isActive == true }
+                    .sorted { $0.sortOrder < $1.sortOrder }
+                    .map { $0.program }
+                
+                print("✅ Firestore aktif program sayısı:", activePrograms.count)
+                completion(activePrograms)
             }
-            
-            print("✅ Firestore program sayısı: \(programs.count)")
-            completion(programs)
-        }
     }
+ 
     
     // MARK: - Program Başlatma (14 Gün Kontrolü Dahil)
     func canStartProgram(programId: String, completion: @escaping (Bool, String?) -> Void) {

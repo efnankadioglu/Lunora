@@ -12,4 +12,16 @@ struct DailyTask: Codable {
     let title: String
     let shortDescription: String
     let details: [String]
+    
+    // Yeni alanlar
+    let elementKey: String?
+    let elementName: String?
+    let elementEmoji: String?
+    
+    let timeOfDay: String?
+    let estimatedDurationText: String?
+    let estimatedMinutes: Int?
+    
+    // Kişisel harita görevi gibi opsiyonel görevler için
+    let isRequired: Bool?
 }

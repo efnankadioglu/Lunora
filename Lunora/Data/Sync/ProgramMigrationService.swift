@@ -18,18 +18,15 @@ final class ProgramMigrationService {
 
         let programs = ProgramLoader.loadPrograms()
 
-        // ✅ EKLENDİ → kaç program geliyor gör
         print("📦 Toplam program:", programs.count)
 
         let batch = db.batch()
 
         for program in programs {
 
-            // ✅ EKLENDİ → hangi program yükleniyor gör
             print("⬆️ Yükleniyor:", program.id)
 
-            // Firestore document ID string olmalı
-            let docRef = db.collection("programs").document(program.id) // 🔥 "\( )" kaldırıldı (zaten String)
+            let docRef = db.collection("programs").document(program.id)
 
             let data: [String: Any] = [
                 "id": program.id,
@@ -95,16 +92,15 @@ final class ProgramMigrationService {
                 ]
             ]
 
-            // 🔥 ÖNEMLİ: merge false yapıyoruz (temiz yazsın)
-            batch.setData(data, forDocument: docRef, merge: false) // ✅ DEĞİŞTİRİLDİ
+            batch.setData(data, forDocument: docRef, merge: false)
         }
 
         batch.commit { error in
             if let error = error {
-                print("❌ Batch commit error:", error) // ✅ EKLENDİ
+                print("❌ Batch commit error:", error)
                 completion(.failure(error))
             } else {
-                print("✅ Tüm programlar Firestore'a yüklendi") // ✅ EKLENDİ
+                print("✅ Tüm programlar Firestore'a yüklendi")
                 completion(.success(()))
             }
         }

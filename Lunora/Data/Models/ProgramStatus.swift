@@ -16,7 +16,6 @@ enum ProgramStatus: String {
     case notStarted          // Henüz hiç başlanmadı
 }
 
-// Görsel ipuçları için küçük bir yardımcı yapı
 struct StatusTheme {
     let colorName: String
     let iconName: String

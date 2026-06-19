@@ -28,12 +28,10 @@ class CreateProfileViewController: UIViewController,
         override func viewDidLoad() {
             super.viewDidLoad()
 
-            // Image Picker
             imagePicker.delegate = self
             imagePicker.sourceType = .photoLibrary
-            imagePicker.allowsEditing = false // kırpma işini biz yapıyoruz (TOCrop)
+            imagePicker.allowsEditing = false
 
-            // Avatar görünümü
             avatarImageView.contentMode = .scaleAspectFill
             avatarImageView.clipsToBounds = true
             avatarImageView.layer.borderWidth = 0
@@ -42,7 +40,6 @@ class CreateProfileViewController: UIViewController,
 
         override func viewDidLayoutSubviews() {
             super.viewDidLayoutSubviews()
-            // Kare imageView'i daire yap
             avatarImageView.layer.cornerRadius = avatarImageView.bounds.width / 2
         }
 
@@ -56,11 +53,9 @@ class CreateProfileViewController: UIViewController,
         let username = (usernameTextField.text ?? "").trimmingCharacters(in: .whitespacesAndNewlines)
         let motivation = (motivationTextField.text ?? "").trimmingCharacters(in: .whitespacesAndNewlines)
         
-        // UI: işlem süresince tekrar tıklamayı önle
         view.isUserInteractionEnabled = false
         defer { view.isUserInteractionEnabled = true }
         
-        // 0) Zorunlu alanlar
         guard !name.isEmpty else {
             showAlert(title: "Name Required", message: "Please enter your name.")
             nameTextField.becomeFirstResponder()
@@ -73,7 +68,6 @@ class CreateProfileViewController: UIViewController,
             return
         }
         
-        // 1) Username formatı
         guard isValidUsername(username) else {
             showAlert(title: "Invalid Username",
                       message: "Username must be 3–20 characters and contain only letters and numbers.")
@@ -81,13 +75,11 @@ class CreateProfileViewController: UIViewController,
             return
         }
         
-        // 2) Aktif kullanıcı
         guard let uid = Auth.auth().currentUser?.uid else {
             showAlert(title: "Oops", message: "User session not found.")
             return
         }
         
-        // 3) Benzersizlik (kendi kaydını hariç tut)
         guard ProfileStore.shared.isUsernameAvailable(username, excluding: uid) else {
             showAlert(title: "Username Taken",
                       message: "This username is already in use. Please choose another one.")
@@ -95,7 +87,6 @@ class CreateProfileViewController: UIViewController,
             return
         }
         
-        // 4) Yerel kaydet (avatar seçilmediyse store defaultAvatar kullanır)
         let avatar = hasCustomAvatar ? avatarImageView.image : nil
         do {
             _ = try ProfileStore.shared.saveProfile(
@@ -111,7 +102,6 @@ class CreateProfileViewController: UIViewController,
             return
         }
         
-        // 4.5) Uzağa senkronizasyon (async; başarısızlık navigasyonu engellemez)
         ProfileSyncService.shared.pushProfileToRemote(
             uid: uid,
             name: name,
@@ -122,12 +112,10 @@ class CreateProfileViewController: UIViewController,
             DispatchQueue.main.async {
                 if let err = err {
                     print("Remote push error:", err)
-                    // Hata varsa kullanıcıya gösterelim ki neden gitmediğini anlasın
                     self?.showAlert(title: "Sync Error", message: "Photo could not be uploaded, but profile saved locally.")
-                    self?.view.isUserInteractionEnabled = true // Butonu tekrar aktif et
+                    self?.view.isUserInteractionEnabled = true
                 } else {
                     print("Firebase kaydı ve fotoğraf yüklemesi başarılı! ✅")
-                    // SADECE BAŞARILIYSA veya HATA YÖNETİMİNDEN SONRA SAYFA DEĞİŞTİR
                     self?.routeToProgramList()
                 }
             }
@@ -136,25 +124,22 @@ class CreateProfileViewController: UIViewController,
     }
                 
                 private func routeToProgramList() {
-                    // Önce tab bar’ı root yapmayı dene (SceneDelegate üzerinden)      // ?????
-                    if                                                                // ?????
-                        let scene = view.window?.windowScene,                         // ?????
-                        let sceneDelegate = scene.delegate as? SceneDelegate          // ?????
-                    {                                                                 // ?????
-                        let tab = sceneDelegate.buildMainTabBar()                     // ?????
-                        sceneDelegate.setRoot(tab, animated: true)                    // ?????
-                        return                                                        // ?????
+                    if
+                        let scene = view.window?.windowScene,
+                        let sceneDelegate = scene.delegate as? SceneDelegate
+                    {
+                        let tab = sceneDelegate.buildMainTabBar()
+                        sceneDelegate.setRoot(tab, animated: true)
+                        return
                     }
 
-                    // Fallback: Her ihtimale karşı sadece ProgramList ekranını aç
                     let sb = UIStoryboard(name: "ProgramList", bundle: nil)
                     let vc = sb.instantiateViewController(withIdentifier: "ProgramListVC")
 
                     if let nav = self.navigationController {
-                        // Geri butonunu engellemek için stack’i tek ekrana indir.
                         nav.setViewControllers([vc], animated: true)
                     } else {
-                        // Bu VC bir NavigationController içinde değilse fallback olarak modal aç.
+
                         present(vc, animated: true)
                     }
                 }

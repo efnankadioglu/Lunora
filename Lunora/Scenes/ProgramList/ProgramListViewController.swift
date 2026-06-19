@@ -48,16 +48,7 @@ class ProgramListViewController: UIViewController {
             fetchTodayAstrology()
             fetchProgramsFromSource()
             fetchActiveEnrollmentDetails()
-            
-            ProgramMigrationService.shared.uploadAllProgramsFromLocalJSON { result in
-                switch result {
-                case .success:
-                    print("✅ Tüm programlar Firestore'a yüklendi")
-                case .failure(let error):
-                    print("❌ Migration hatası: \(error.localizedDescription)")
-                }
-            }
-            
+        
             EarnedBadgeService.shared.fetchEarnedBadges { result in
                 print(">>> fetchEarnedBadges callback geldi")
 
@@ -132,24 +123,23 @@ class ProgramListViewController: UIViewController {
     
         
         // MARK: - Hibrit veri çekme
-        private func fetchProgramsFromSource() {
-            programService.fetchPrograms { [weak self] firestorePrograms in
-                guard let self = self else { return }
-                
-                DispatchQueue.main.async {
-                    if firestorePrograms.isEmpty {
-                        print("⚠️ Firestore boş/hatalı, JSON kullanılacak")
-                        self.programs = ProgramLoader.loadPrograms()
-                    } else {
-                        print("🔥 Firestore verisi kullanılıyor")
-                        self.programs = firestorePrograms
-                    }
-                    
-                    print(">>> Ekrana basılan program sayısı: \(self.programs.count)")
-                    self.programsTableView.reloadData()
-                }
+private func fetchProgramsFromSource() {
+    programService.fetchPrograms { [weak self] firestorePrograms in
+        guard let self = self else { return }
+        
+        DispatchQueue.main.async {
+            self.programs = firestorePrograms
+            
+            print("🔥 Firestore'dan gelen program sayısı:", firestorePrograms.count)
+            
+            if firestorePrograms.isEmpty {
+                print("⚠️ Firestore'da hiç program yok. JSON fallback kapalı.")
             }
+            
+            self.programsTableView.reloadData()
         }
+    }
+}
         
         func testFirebaseConnection() {
             let ref = Database.database().reference()
@@ -177,28 +167,6 @@ class ProgramListViewController: UIViewController {
 
         astrologyCard.addGestureRecognizer(tapGesture)
     }
-//    @objc private func didTapAstrologyCard() {
-//        guard let todaySkyData = todaySkyData else {
-//            showSimpleAlert(
-//                title: "Gökyüzü bilgisi hazır değil",
-//                message: "Bugünün astroloji verisi henüz yüklenmedi."
-//            )
-//            return
-//        }
-//
-//        let displayData = DailySkyService.shared.makeDisplayData(from: todaySkyData)
-//
-//        let vc = DailySkyViewController(displayData: displayData)
-//        vc.hidesBottomBarWhenPushed = true
-//
-//        if let navigationController = navigationController {
-//            navigationController.pushViewController(vc, animated: true)
-//        } else {
-//            vc.modalPresentationStyle = .fullScreen
-//            present(vc, animated: true)
-//        }
-//    }
-    
     
     @objc private func didTapAstrologyCard() {
         guard let todaySkyData = todaySkyData else {
@@ -244,10 +212,10 @@ class ProgramListViewController: UIViewController {
             )
         }
         
-        private func loadPrograms() {
-            programs = ProgramLoader.loadPrograms()
-            programsTableView.reloadData()
-        }
+//        private func loadPrograms() {
+//            programs = ProgramLoader.loadPrograms()
+//            programsTableView.reloadData()
+//        }
         
         private func fetchTodayAstrology() {
             let db = Firestore.firestore()
@@ -277,48 +245,36 @@ class ProgramListViewController: UIViewController {
             formatter.dateFormat = "yyyy-MM-dd"
             return formatter.string(from: Date())
         }
-        
-//        private func updateAstrologyUI(data: [String: Any]) {
-//            let moonSign = data["moon_sign"] as? String ?? "Ay Burcu"
-//            let events = data["celestial_events"] as? [String] ?? []
-//            let score = data["suitability_score"] as? Int ?? 0
-//            let date = data["date"] as? String ?? ""
-//
-//            moonSignLabel.text = "🌕 \(moonSign)"
-//            suitabilityProgressView.progress = Float(score) / 10.0
-//
-//            let percentage = generateStablePercentage(score: score, date: date)
-//            suitabilityLabel.text = "Bugünün enerjisi %\(percentage) seninle"
-//
-//            updateEventButtons(events: events)
-//        }
     
     private func updateAstrologyUI(data: [String: Any]) {
-        let moonSign = data["moon_sign"] as? String ?? "Ay Burcu"
-        let moonPhase = data["moon_phase"] as? String ?? "Ay fazı"
-        let dailyComment = data["daily_comment"] as? String ?? "Bugünün gökyüzü yorumu hazırlanıyor."
-        let events = data["celestial_events"] as? [String] ?? []
-        let score = data["suitability_score"] as? Int ?? 0
-        let date = data["date"] as? String ?? getTodayDateString()
+        var normalizedData = data
 
-        let dailyAstrology = DailyAstrology(
-            date: date,
-            moonPhase: moonPhase,
-            dailyComment: dailyComment,
-            celestialEvents: events,
-            suitabilityScore: score,
-            moonSign: moonSign
-        )
+        if normalizedData["date"] == nil {
+            normalizedData["date"] = getTodayDateString()
+        }
+
+        guard let dailyAstrology = DailyAstrology(firestoreData: normalizedData) else {
+            print("🔴 updateAstrologyUI: Firestore verisi DailyAstrology modeline çevrilemedi.")
+            return
+        }
 
         self.todaySkyData = dailyAstrology
 
-        moonSignLabel.text = "🌕 \(moonSign)"
-        suitabilityProgressView.progress = Float(score) / 10.0
+        print("🌙 ProgramList moonSign:", dailyAstrology.moonSign)
+        print("🌙 ProgramList moonSignDisplay:", dailyAstrology.moonSignDisplay)
+        print("🌙 ProgramList sections energy:", dailyAstrology.sections.bugununEnerjisi)
 
-        let percentage = generateStablePercentage(score: score, date: date)
+        moonSignLabel.text = "🌕 \(dailyAstrology.moonSignDisplay)"
+        suitabilityProgressView.progress = Float(dailyAstrology.suitabilityScore) / 10.0
+
+        let percentage = generateStablePercentage(
+            score: dailyAstrology.suitabilityScore,
+            date: dailyAstrology.date
+        )
+
         suitabilityLabel.text = "Bugünün enerjisi %\(percentage) seninle"
 
-        updateEventButtons(events: events)
+        updateEventButtons(events: dailyAstrology.celestialEvents)
     }
         
         private func generateStablePercentage(score: Int, date: String) -> Int {

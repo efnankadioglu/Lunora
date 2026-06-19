@@ -46,19 +46,16 @@ final class GradientPrimaryButton: UIButton {
         setTitleColor(.white, for: .normal)
         titleLabel?.font = .systemFont(ofSize: 20, weight: .semibold)
 
-        // Buton yazısı gradient'in üstünde kalsın
         bringSubviewToFront(titleLabel ?? UIView())
 
     }
 
     private func setupGradient() {
-        // Soldan sağa pembe geçiş
+
         gradientLayer.colors = [
             UIColor(red: 250/255, green: 185/255, blue: 219/255, alpha: 1).cgColor,
             UIColor(red: 245/255, green: 56/255, blue: 154/255, alpha: 1).cgColor
             
-//            UIColor(red: 255/255, green: 140/255, blue: 200/255, alpha: 1),
-//            UIColor(red: 255/255, green: 40/255, blue: 130/255, alpha: 1)
         ]
         gradientLayer.startPoint = CGPoint(x: 0.0, y: 0.5)
         gradientLayer.endPoint = CGPoint(x: 1.0, y: 0.5)

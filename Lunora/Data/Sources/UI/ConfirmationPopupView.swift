@@ -40,7 +40,6 @@ final class ConfirmationPopupView: UIView {
     private let messageLabel = UILabel()
     private let cancelButton = UIButton(type: .system)
     private let confirmButton = GradientPrimaryButton(type: .system)
-//    private let confirmButton = UIButton(type: .system)
 
     // MARK: - INIT
     
@@ -68,7 +67,6 @@ final class ConfirmationPopupView: UIView {
     // MARK: - PRESENT
     
     func present(in parentView: UIView) {
-        // ✅ YENİ (AutoLayout kullanıyoruz)
         translatesAutoresizingMaskIntoConstraints = false
 
         parentView.addSubview(self)
@@ -80,7 +78,7 @@ final class ConfirmationPopupView: UIView {
             self.bottomAnchor.constraint(equalTo: parentView.bottomAnchor)
         ])
 
-        applyContent() // 🔥 burada set ediliyor
+        applyContent()
 
         alpha = 0
         containerView.transform = CGAffineTransform(scaleX: 0.94, y: 0.94)
@@ -115,7 +113,6 @@ final class ConfirmationPopupView: UIView {
             containerView.addSubview($0)
         }
 
-        // LABEL STYLE
         titleLabel.font = .systemFont(ofSize: 20, weight: .semibold)
         titleLabel.textAlignment = .center
         titleLabel.numberOfLines = 0
@@ -125,16 +122,14 @@ final class ConfirmationPopupView: UIView {
         messageLabel.numberOfLines = 0
         messageLabel.textColor = .darkGray
 
-        // BUTTON STYLE
         cancelButton.layer.cornerRadius = 22
         cancelButton.backgroundColor = UIColor(white: 0.9, alpha: 1)
         cancelButton.setTitleColor(.black, for: .normal)
 
         confirmButton.layer.cornerRadius = 22
-        confirmButton.backgroundColor = UIColor.appAccentPink // 🔥 PEMBE
+        confirmButton.backgroundColor = UIColor.appAccentPink
         confirmButton.setTitleColor(.white, for: .normal)
 
-        // CONSTRAINTS
         NSLayoutConstraint.activate([
             dimView.topAnchor.constraint(equalTo: topAnchor),
             dimView.leadingAnchor.constraint(equalTo: leadingAnchor),

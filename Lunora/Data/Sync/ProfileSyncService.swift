@@ -8,54 +8,47 @@
 import Foundation
 import UIKit
 import FirebaseFirestore
-import FirebaseStorage // ???? Yeni ekledik: Fotoğraf yüklemek için şart
+import FirebaseStorage
 
 final class ProfileSyncService {
     static let shared = ProfileSyncService()
     private init() {}
 
     private let db = Firestore.firestore()
-    private let storage = Storage.storage() // ???? Yeni ekledik: Storage referansı
+    private let storage = Storage.storage()
 
     // MARK: - PUSH (local -> remote)
     func pushProfileToRemote(uid: String,
                              name: String,
                              username: String,
                              motivation: String,
-                             avatar: UIImage?, // ???? Artık bunu sadece yerelde değil, uzak sunucuda da tutacağız
+                             avatar: UIImage?,
                              completion: @escaping (Error?) -> Void) {
 
-        // 1. Önce fotoğraf var mı kontrol edelim ????
         if let image = avatar, let imageData = image.jpegData(compressionQuality: 0.6) {
-            
-            // Storage üzerinde "profile_images/kullanici_id.jpg" yolunu oluşturuyoruz ????
+
             let storageRef = storage.reference().child("profile_images/\(uid).jpg")
-            
-            // Fotoğrafı yüklüyoruz ????
+
             storageRef.putData(imageData, metadata: nil) { [weak self] _, error in
                 if let error = error {
                     completion(error)
                     return
                 }
-                
-                // Fotoğraf yüklendi, şimdi linkini (URL) alıyoruz ????
+
                 storageRef.downloadURL { url, error in
                     guard let imageURL = url?.absoluteString else {
                         completion(error)
                         return
                     }
-                    
-                    // 2. Fotoğraf linkini de alarak Firestore'a kaydediyoruz ????
+ 
                     self?.saveToFirestore(uid: uid, name: name, username: username, motivation: motivation, imageURL: imageURL, completion: completion)
                 }
             }
         } else {
-            // Fotoğraf seçilmediyse veya hata varsa sadece metinleri kaydet ????
             saveToFirestore(uid: uid, name: name, username: username, motivation: motivation, imageURL: nil, completion: completion)
         }
     }
 
-    // Firestore kayıt işlemini tekrar etmemek için yardımcı fonksiyon ????
     private func saveToFirestore(uid: String, name: String, username: String, motivation: String, imageURL: String?, completion: @escaping (Error?) -> Void) {
         
         var data: [String: Any] = [
@@ -66,7 +59,6 @@ final class ProfileSyncService {
             "updatedAt": FieldValue.serverTimestamp()
         ]
         
-        // Eğer fotoğraf URL'si varsa veriye ekle ????
         if let url = imageURL {
             data["profileImageURL"] = url
         }
@@ -100,8 +92,6 @@ final class ProfileSyncService {
             let name = data["name"] as? String ?? ""
             let username = data["username"] as? String ?? ""
             let motivation = data["motivation"] as? String ?? ""
-            // Not: İstersen burada imageURL'i de çekip yerel Core Data'na kaydedebilirsin ????
-
             do {
                 let profile = try ProfileStore.shared.saveProfile(
                     uid: uid,

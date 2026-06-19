@@ -14,9 +14,6 @@ class LoginViewController: UIViewController {
 
     @IBOutlet weak var signinWithGoogleButton: UIButton!
     
-//    @IBOutlet weak var signinWithGoogleButton: UIButton!
-    
-//    @IBOutlet weak var signinWithGoogleButton: UIButton!
     private weak var delegate: LoginDelegate?
 
     override func viewDidLoad() {
@@ -67,7 +64,6 @@ class LoginViewController: UIViewController {
                        return
                    }
 
-                   // Login başarıyla bitti → senaryolara göre yönlendir
                    self.delegate?.navigateToHome()
                }
            }
@@ -80,21 +76,17 @@ class LoginViewController: UIViewController {
        func navigateToHome() {
            guard let uid = Auth.auth().currentUser?.uid else { return }
 
-           // 1) Hızlı yol: Local Core Data'da profil varsa direkt ana uygulama
            if ProfileStore.shared.fetchProfile(uid: uid) != nil {
                routeToMainApp()
                return
            }
 
-           // 2) Local yoksa: uzaktan profili çekmeyi dene
            ProfileSyncService.shared.pullProfileIfExists(uid: uid) { [weak self] profile in
                guard let self = self else { return }
 
                if profile != nil {
-                   // Firestore’dan geldi ve Core Data’ya yazıldı → ana uygulama
                    self.routeToMainApp()
                } else {
-                   // Uzakta da profil yok → yeni kullanıcı → CreateProfile
                    self.routeToCreateProfile()
                }
            }
@@ -102,9 +94,7 @@ class LoginViewController: UIViewController {
 
        // MARK: - Routing helpers
 
-       /// Ana uygulamaya (tab bar) geçiş
        private func routeToMainApp() {
-           // SceneDelegate üzerinden root’u tab bar yapıyoruz
            if
                let scene = view.window?.windowScene,
                let sceneDelegate = scene.delegate as? SceneDelegate
@@ -112,14 +102,11 @@ class LoginViewController: UIViewController {
                let tab = sceneDelegate.buildMainTabBar()
                sceneDelegate.setRoot(tab, animated: true)
            } else {
-               // Fallback: sadece ProgramList aç (her ihtimale karşı)
                let sb = UIStoryboard(name: "ProgramList", bundle: nil)
                let vc = sb.instantiateViewController(withIdentifier: "ProgramListVC")
                navigationController?.setViewControllers([vc], animated: true)
            }
        }
-
-       /// Profil oluşturma ekranına geçiş
        private func routeToCreateProfile() {
            let sb = UIStoryboard(name: "CreateProfile", bundle: nil)
            let vc = sb.instantiateViewController(withIdentifier: "CreateProfileVC")

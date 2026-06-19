@@ -276,7 +276,6 @@ final class ProgramBadgeCardView: UIView {
         layoutIfNeeded()
     }
     
-    // 🔥 Progress'e göre yazıyı belirler
     private func message(for percentage: Int) -> String {
         switch percentage {
         case 0...30:
@@ -292,8 +291,6 @@ final class ProgramBadgeCardView: UIView {
         }
     }
     
-    
-    // 🔥 Progress'e göre rozet görünürlüğünü belirler
     private func imageAlpha(for percentage: Int) -> CGFloat {
         switch percentage {
         case 0...30:

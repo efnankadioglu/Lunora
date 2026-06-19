@@ -31,12 +31,12 @@ final class CompletedSummaryHeaderView: UIView {
 
     override init(frame: CGRect) {
         super.init(frame: frame)
-        setupUI() // EKLEDİM
+        setupUI()
     }
 
     required init?(coder: NSCoder) {
         super.init(coder: coder)
-        setupUI() // EKLEDİM
+        setupUI()
     }
 
     private func setupUI() {
@@ -64,7 +64,7 @@ final class CompletedSummaryHeaderView: UIView {
         // Title
         titleLabel.text = "Başarı Koleksiyonum"
         titleLabel.font = .systemFont(ofSize: 26, weight: .bold)
-        titleLabel.textColor = UIColor(red: 35/255, green: 45/255, blue: 63/255, alpha: 1) // DÜZELTTİM
+        titleLabel.textColor = UIColor(red: 35/255, green: 45/255, blue: 63/255, alpha: 1)
 
         subtitleLabel.text = "Harikasın! Her adım bir zafer ✨"
         subtitleLabel.font = .systemFont(ofSize: 15, weight: .medium)
@@ -101,9 +101,9 @@ final class CompletedSummaryHeaderView: UIView {
         badgesStackView.distribution = .fill
         badgesStackView.alignment = .center
 
-        badgesScrollView.addSubview(badgesStackView) // EKLEDİM
+        badgesScrollView.addSubview(badgesStackView)
 
-        let badgesInnerStack = UIStackView(arrangedSubviews: [badgesTitle, badgesScrollView]) // DÜZELTTİM
+        let badgesInnerStack = UIStackView(arrangedSubviews: [badgesTitle, badgesScrollView])
         badgesInnerStack.axis = .vertical
         badgesInnerStack.spacing = 12
         badgesInnerStack.translatesAutoresizingMaskIntoConstraints = false
@@ -116,13 +116,13 @@ final class CompletedSummaryHeaderView: UIView {
             badgesInnerStack.trailingAnchor.constraint(equalTo: badgesContainerView.trailingAnchor, constant: -16),
             badgesInnerStack.bottomAnchor.constraint(equalTo: badgesContainerView.bottomAnchor, constant: -16),
 
-            badgesScrollView.heightAnchor.constraint(equalToConstant: 64), // EKLEDİM
+            badgesScrollView.heightAnchor.constraint(equalToConstant: 64),
 
-            badgesStackView.topAnchor.constraint(equalTo: badgesScrollView.contentLayoutGuide.topAnchor), // EKLEDİM
-            badgesStackView.leadingAnchor.constraint(equalTo: badgesScrollView.contentLayoutGuide.leadingAnchor), // EKLEDİM
-            badgesStackView.trailingAnchor.constraint(equalTo: badgesScrollView.contentLayoutGuide.trailingAnchor), // EKLEDİM
-            badgesStackView.bottomAnchor.constraint(equalTo: badgesScrollView.contentLayoutGuide.bottomAnchor), // EKLEDİM
-            badgesStackView.heightAnchor.constraint(equalTo: badgesScrollView.frameLayoutGuide.heightAnchor) // EKLEDİM
+            badgesStackView.topAnchor.constraint(equalTo: badgesScrollView.contentLayoutGuide.topAnchor),
+            badgesStackView.leadingAnchor.constraint(equalTo: badgesScrollView.contentLayoutGuide.leadingAnchor),
+            badgesStackView.trailingAnchor.constraint(equalTo: badgesScrollView.contentLayoutGuide.trailingAnchor),
+            badgesStackView.bottomAnchor.constraint(equalTo: badgesScrollView.contentLayoutGuide.bottomAnchor),
+            badgesStackView.heightAnchor.constraint(equalTo: badgesScrollView.frameLayoutGuide.heightAnchor)
         ])
         
 
@@ -147,9 +147,9 @@ final class CompletedSummaryHeaderView: UIView {
         elementLabel.adjustsFontSizeToFitWidth = true
         elementLabel.minimumScaleFactor = 0.85
 
-        elementDescriptionLabel.font = .systemFont(ofSize: 13, weight: .semibold) // DÜZELTTİM
-        elementDescriptionLabel.adjustsFontSizeToFitWidth = true // EKLEDİM
-        elementDescriptionLabel.minimumScaleFactor = 0.85 // EKLEDİM
+        elementDescriptionLabel.font = .systemFont(ofSize: 13, weight: .semibold)
+        elementDescriptionLabel.adjustsFontSizeToFitWidth = true
+        elementDescriptionLabel.minimumScaleFactor = 0.85
         elementDescriptionLabel.textColor = UIColor(hex: "#77AEEB")
         elementDescriptionLabel.numberOfLines = 2
 
@@ -175,7 +175,7 @@ final class CompletedSummaryHeaderView: UIView {
         mainStack.addArrangedSubview(elementCardView)
     }
 
-    func configure(with data: CompletedSummaryHeaderData) { // EKLEDİM
+    func configure(with data: CompletedSummaryHeaderData) {
         
         cardsStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
 
@@ -255,14 +255,14 @@ final class CompletedSummaryHeaderView: UIView {
         gradientLayer.cornerRadius = 20
         view.layer.insertSublayer(gradientLayer, at: 0)
 
-        let iconCircleView = UIView() // EKLEDİM
+        let iconCircleView = UIView()
         iconCircleView.translatesAutoresizingMaskIntoConstraints = false
         iconCircleView.backgroundColor = UIColor.white.withAlphaComponent(0.25)
         iconCircleView.layer.cornerRadius = 26
         iconCircleView.widthAnchor.constraint(equalToConstant: 52).isActive = true
         iconCircleView.heightAnchor.constraint(equalToConstant: 52).isActive = true
 
-        let iconLabel = UILabel() // EKLEDİM
+        let iconLabel = UILabel() 
         iconLabel.translatesAutoresizingMaskIntoConstraints = false
         iconLabel.text = title == "Tamamlanan Program" ? "😊" : (title == "Toplam Günler" ? "🔥" : "⭐️")
         iconLabel.font = .systemFont(ofSize: 24)

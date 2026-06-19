@@ -24,6 +24,10 @@ final class DailySkyService {
         }
 
         let extraInsights: [AstroInsightEvent] = dailyAstrology.celestialEvents.compactMap { eventName in
+            if shouldSkipEventInsightLookup(for: eventName) {
+                return nil
+            }
+
             guard let id = eventInsightId(for: eventName) else {
                 print("🟡 Astro event eşleşmedi:", eventName)
                 return nil
@@ -85,6 +89,36 @@ final class DailySkyService {
         ]
 
         return map[key]
+    }
+    
+    private func shouldSkipEventInsightLookup(for eventName: String) -> Bool {
+        let key = eventName.trimmingCharacters(in: .whitespacesAndNewlines)
+
+        if key.isEmpty {
+            return true
+        }
+
+        // Günlük datada bilgi amaçlı duran ama AstroInsightDetail içinde ayrı kartı olmayan eventler
+        if key == "Merkür Retro Gölgesi" {
+            return true
+        }
+
+        // Örn: "Başak Ay Etkisi", "Aslan Ay Etkisi"
+        if key.hasSuffix("Ay Etkisi") {
+            return true
+        }
+
+        // Örn: "Aslan → Başak Ay Geçişi"
+        if key.contains("→") && key.contains("Ay Geçişi") {
+            return true
+        }
+
+        // Örn: "Yay Ay / Öğrenme Teması", "Terazi Ay / Venüs Teması"
+        if key.contains("Ay /") {
+            return true
+        }
+
+        return false
     }
 
     private func eventInsightId(for eventName: String) -> String? {
