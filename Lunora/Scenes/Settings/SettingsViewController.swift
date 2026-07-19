@@ -300,7 +300,7 @@ final class SettingsViewController: UIViewController {
 
         switch title {
         case "Profili Düzenle":
-            showComingSoonAlert(title: "Profili Düzenle")
+            navigateToEditProfile()
 
         case "Bildirimler":
             showComingSoonAlert(title: "Bildirimler")
@@ -341,6 +341,17 @@ final class SettingsViewController: UIViewController {
         default:
             showComingSoonAlert(title: title)
         }
+    }
+    
+    // MARK: - Navigation
+
+    private func navigateToEditProfile() {
+        let editProfileViewController = EditProfileViewController()
+
+        navigationController?.pushViewController(
+            editProfileViewController,
+            animated: true
+        )
     }
     
     private func showComingSoonAlert(title: String) {

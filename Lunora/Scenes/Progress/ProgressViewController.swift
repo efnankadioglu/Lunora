@@ -36,26 +36,6 @@ class ProgressViewController: UIViewController {
     private var activeEnrollment: ActiveEnrollment?
     private var todayLog: DailyLog?
     private var allDailyLogs: [DailyLog] = []
-
-//    override func viewDidLoad() {
-//        super.viewDidLoad()
-//        setupScreen()
-//        setupContentStack()
-//        bindTaskActions()
-//        setupBottomSummaryCard()
-//        setupSegmentControl()
-//        showTodayContent()
-//        loadProfileImage()
-//        loadProgressFromCache()
-//        fetchActiveEnrollmentAndLog()
-//        updateHeaderUI()
-//        
-//        endJourneyButton.addTarget(self, action: #selector(didTapEndJourney), for: .touchUpInside)
-//        
-//        NetworkMonitor.shared.onConnectionRestored = { [weak self] in
-//            self?.syncPendingProgressActions()
-//        }
-//    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -303,6 +283,7 @@ class ProgressViewController: UIViewController {
     private func completedTaskIdsAcrossProgram() -> Set<String> {
         return Set(allDailyLogs.flatMap { $0.completedTaskIds })
     }
+    
 
     private func programElementsToShow(for program: Program, allTasks: [DailyTask]) -> [ProgramElement] {
         if let elements = program.programElements, !elements.isEmpty {
@@ -366,6 +347,8 @@ class ProgressViewController: UIViewController {
             return UIColor(red: 156/255, green: 77/255, blue: 255/255, alpha: 1)
         case "earth":
             return UIColor(red: 80/255, green: 190/255, blue: 150/255, alpha: 1)
+        case "general":
+            return UIColor(red: 222/255, green: 120/255, blue: 174/255, alpha: 1)
         default:
             return UIColor.systemGray
         }
@@ -482,20 +465,54 @@ class ProgressViewController: UIViewController {
             completedTaskIds: completedTaskIds
         )
 
+//        let legendItems: [ProgramProgressCardLegendItem] = elementItems.map { item in
+//            let chartValue: CGFloat
+//
+//            if totalRequiredTaskCount > 0 {
+//                let requiredElementTasks = allTasks.filter {
+//                    ($0.elementKey ?? "general") == item.key && $0.isRequired != false
+//                }
+//
+//                let requiredElementTaskIds = Set(requiredElementTasks.map { $0.id })
+//
+//                let completedRequiredElementCount = completedTaskIds.filter {
+//                    requiredElementTaskIds.contains($0)
+//                }.count
+//
+//                chartValue = CGFloat(completedRequiredElementCount) / CGFloat(totalRequiredTaskCount)
+//            } else {
+//                chartValue = 0
+//            }
+//
+//            return ProgramProgressCardLegendItem(
+//                color: colorForElementKey(item.key),
+//                title: "\(item.emoji) \(item.name)",
+//                valueText: "\(item.percentage)%",
+//                chartValue: chartValue
+//            )
+//        }
+        
         let legendItems: [ProgramProgressCardLegendItem] = elementItems.map { item in
+
+            let requiredElementTasks = allTasks.filter {
+                ($0.elementKey ?? "general") == item.key && $0.isRequired != false
+            }
+
+            let requiredElementTaskIds = Set(requiredElementTasks.map { $0.id })
+
+            let completedRequiredElementCount = completedTaskIds.filter {
+                requiredElementTaskIds.contains($0)
+            }.count
+
+            let elementPercent: Int
+            if requiredElementTasks.isEmpty {
+                elementPercent = 0
+            } else {
+                elementPercent = Int((Double(completedRequiredElementCount) / Double(requiredElementTasks.count) * 100).rounded())
+            }
+
             let chartValue: CGFloat
-
             if totalRequiredTaskCount > 0 {
-                let requiredElementTasks = allTasks.filter {
-                    ($0.elementKey ?? "general") == item.key && $0.isRequired != false
-                }
-
-                let requiredElementTaskIds = Set(requiredElementTasks.map { $0.id })
-
-                let completedRequiredElementCount = completedTaskIds.filter {
-                    requiredElementTaskIds.contains($0)
-                }.count
-
                 chartValue = CGFloat(completedRequiredElementCount) / CGFloat(totalRequiredTaskCount)
             } else {
                 chartValue = 0
@@ -504,10 +521,12 @@ class ProgressViewController: UIViewController {
             return ProgramProgressCardLegendItem(
                 color: colorForElementKey(item.key),
                 title: "\(item.emoji) \(item.name)",
-                valueText: "\(item.percentage)%",
+                valueText: "\(elementPercent)%",
                 chartValue: chartValue
             )
         }
+
+        print("🧩 legendItems:", legendItems.map { "\($0.title) value:\($0.valueText) chart:\($0.chartValue)" })
 
         print("🟣 totalDays:", totalDays)
         print("🟣 allTasks:", allTasks.count)
