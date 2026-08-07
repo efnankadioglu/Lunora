@@ -39,7 +39,11 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
     func buildMainTabBar() -> UITabBarController {
         let pembe = UIColor(red: 242/255, green: 92/255, blue: 184/255, alpha: 1)
         let sari = UIColor(red: 224/255, green: 210/255, blue: 54/255, alpha: 1)
-        let programList = UIStoryboard(name: "ProgramList", bundle: nil).instantiateViewController(withIdentifier: "ProgramListNav")
+        let programListViewController = ProgramListViewController()
+
+        let programList = UINavigationController(
+            rootViewController: programListViewController
+        )
         programList.tabBarItem = UITabBarItem(
             title: "Programs",
             image: UIImage(systemName: "square.grid.2x2")?.withTintColor(pembe, renderingMode: .alwaysOriginal),

@@ -443,7 +443,7 @@ final class ProfileViewController: UIViewController {
         elementMainLabel.textColor = UIColor(hex: "#5B3A66")
         elementMainLabel.numberOfLines = 2
 
-        elementDescriptionLabel.text = "Complete your first program and your inner pattern will gently appear here."
+        elementDescriptionLabel.text = "İlk programını tamamladığında burada sana özel bir iz oluşacak."
         elementDescriptionLabel.font = .systemFont(ofSize: 14, weight: .semibold)
         elementDescriptionLabel.textColor = UIColor(hex: "#A47BB7")
         elementDescriptionLabel.numberOfLines = 3
@@ -970,13 +970,13 @@ final class ProfileViewController: UIViewController {
     private func configureElementEmptyState() {
         elementCardView.backgroundColor = UIColor(hex: "#F4ECF7")
 
-        elementTitleLabel.text = "Your Element"
+        elementTitleLabel.text = "Element Dengesi"
         elementTitleLabel.textColor = UIColor(hex: "#5B3A66")
 
-        elementMainLabel.text = "Element journey begins ✨"
+        elementMainLabel.text = "Element yolculuğun başlıyor ✨"
         elementMainLabel.textColor = UIColor(hex: "#5B3A66")
 
-        elementDescriptionLabel.text = "Complete your first program and your inner pattern will gently appear here."
+        elementDescriptionLabel.text = "İlk programını tamamladığında burada sana özel bir iz oluşacak."
         elementDescriptionLabel.textColor = UIColor(hex: "#A47BB7")
     }
 

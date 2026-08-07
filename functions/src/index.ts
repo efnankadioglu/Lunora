@@ -588,3 +588,4 @@ async function buildRecommendedProgramsSummary(): Promise<string> {
         })
         .join("\n");
 }
+export { deleteUserAccount } from "./deleteUserAccount";

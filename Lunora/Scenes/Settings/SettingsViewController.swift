@@ -371,18 +371,52 @@ final class SettingsViewController: UIViewController {
         alert.addAction(UIAlertAction(title: "Tamam", style: .default))
         present(alert, animated: true)
     }
-
+    
     private func showDeleteAccountWarning() {
         let alert = UIAlertController(
-            title: "Hesabımı Sil",
-            message: "Bu işlem ileride hesabını ve Lunora’daki kişisel verilerini kalıcı olarak silmek için kullanılacak. Şu anda bu alan hazırlık aşamasında.",
+            title: "Hesabını kalıcı olarak sil?",
+            message: """
+            Hesabın ve hesabına bağlı profil bilgilerin, program ilerlemelerin, günlük kayıtların, kazandığın rozetler ve profil fotoğrafın kalıcı olarak silinecektir. 
+            Bu işlem geri alınamaz.
+            """,
             preferredStyle: .alert
         )
 
-        alert.addAction(UIAlertAction(title: "Vazgeç", style: .cancel))
-        alert.addAction(UIAlertAction(title: "Anladım", style: .destructive))
+        alert.addAction(
+            UIAlertAction(
+                title: "Vazgeç",
+                style: .cancel
+            )
+        )
+
+        alert.addAction(
+            UIAlertAction(
+                title: "Hesabımı Sil",
+                style: .destructive,
+                handler: { [weak self] _ in
+                    self?.deleteAccount()
+                }
+            )
+        )
 
         present(alert, animated: true)
+    }
+    
+    private func deleteAccount() {
+        AccountDeletionService.shared.deleteAccount { [weak self] result in
+            DispatchQueue.main.async {
+                switch result {
+                case .success:
+                    self?.navigateToLoginScreen()
+
+                case .failure(let error):
+                    self?.showInfoAlert(
+                        title: "Hesap silinemedi",
+                        message: error.localizedDescription
+                    )
+                }
+            }
+        }
     }
 
     private func showLogoutConfirmation() {
