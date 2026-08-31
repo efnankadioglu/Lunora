@@ -1,0 +1,4179 @@
+{
+  "meta": {
+      "name": "Lunora Astro Rules",
+
+      "schema_version": "1.0.0-draft",
+
+      "purpose": "Central rulebook that scores normalized activity tags against daily astrological conditions and ranks the activity catalog accordingly.",
+
+      "source_basis": "Lunora_Astrolojik_Aktivite_Oneri_Motoru(1).pdf + current normalized activity catalog.",
+
+      "important_note": "Numeric weights are Lunora-specific product-model implementation weights derived from the stated astrological framework. They are not scientific measurements, empirical effect sizes, or universal astrology standards.",
+
+      "canonical_vocabulary": {
+        "actions": [
+          "apply",
+          "beauty_care",
+          "clarify",
+          "commit",
+          "communicate",
+          "compare",
+          "connect",
+          "continue",
+          "create",
+          "exercise",
+          "explore",
+          "express",
+          "focus",
+          "mindfulness",
+          "movement",
+          "organize",
+          "plan",
+          "purchase",
+          "reconnect",
+          "reflect",
+          "research",
+          "rest",
+          "review",
+          "set_boundary",
+          "socialize",
+          "start_new",
+          "write"
+        ],
+
+        "topics": [
+          "beauty",
+          "career",
+          "creativity",
+          "finance",
+          "home",
+          "learning",
+          "personal_growth",
+          "productivity",
+          "relationship",
+          "self_reflection",
+          "social",
+          "wellbeing"
+        ],
+
+        "contexts": [
+          "existing",
+          "new",
+          "past",
+          "unfinished"
+        ],
+
+        "relationship_modes": [
+          "boundaries",
+          "communication",
+          "conflict_resolution",
+          "emotional_intimacy",
+          "quality_time",
+          "reconnection",
+          "romance",
+          "social_fun"
+        ],
+
+        "intensity": [
+          "low",
+          "medium",
+          "high"
+        ]
+      },
+
+      "reserved_future_vocabulary": {
+        "actions": [
+          "complete"
+        ],
+
+        "relationship_modes": [
+          "commitment"
+        ],
+
+        "note": "These concepts are reserved for future use because the current normalized activity catalog does not use them as active tags. They must not be used as modifier targets until they are added to the activity catalog and supported by the scoring rules."
+      },
+
+      "source_term_normalization": {
+        "practice": "Do not map 'practice' by word alone. Map the actual behavior: physical practice -> exercise and/or movement; meditative or breath-based practice -> mindfulness and, when applicable, rest; skill practice -> focus and/or continue. Use start_new only when the activity genuinely begins a new practice.",
+
+        "workout": "Map workout to exercise. Add movement only when the activity itself is meaningfully movement-based; do not automatically assign both tags.",
+
+        "journal": "Map journal to write + reflect.",
+
+        "challenge": "Map by the actual structure of the challenge: start_new when beginning a new challenge; commit when it creates an ongoing commitment; plan when the challenge is being designed; continue when an existing challenge is being resumed or continued. Add exercise and/or movement only when the challenge is physical.",
+
+        "self_care": "Map by actual behavior: beauty_care for grooming or cosmetic care; rest for deliberate recovery; mindfulness for attention-based calming practices. Add other action tags only when the activity explicitly contains those behaviors.",
+
+        "release": "Do not use release as a generic action. Map it to review, organize, set_boundary, reflect, clarify, or another existing canonical action only when that behavior is explicitly present in the activity.",
+
+        "complete": "Reserved. Do not emit complete as an active action until the activity catalog contains the tag and the scoring rules explicitly support it."
+      }
+    },
+    "scoring_policy": {
+      "base_score": 5,
+
+      "final_score_range": [
+        0,
+        10
+      ],
+
+      "score_precision_decimals": 2,
+
+      "modifier_scale": {
+        "3": "VERY_SUPPORTIVE",
+        "2": "SUPPORTIVE",
+        "1": "SOFT_SUPPORT",
+        "0": "NEUTRAL",
+        "-1": "SOFT_FRICTION",
+        "-2": "DISCOURAGING",
+        "-3": "STRONG_DISCOURAGEMENT",
+        "-4": "SUPPRESS_ACTIVITY"
+      },
+
+      "suppression_semantics": {
+        "value": -4,
+        "meaning": "Hard suppression control signal.",
+        "arithmetic_behavior": "Do not add -4 to tag scores or to the final astro-fit score.",
+        "eligibility_behavior": "A matched -4 conditional activity modifier marks the activity as ineligible for recommendation.",
+        "score_behavior": "The astro-fit score may still be calculated for diagnostics, but eligibility is false.",
+        "scope": "Use -4 only for explicit activity-level suppression rules, never as a normal tag modifier."
+      },
+
+      "aggregation": {
+        "evaluation_order": [
+          "resolve_rule_replacements",
+          "collect_applicable_rules",
+          "calculate_tag_scores",
+          "apply_category_caps",
+          "calculate_dimension_means",
+          "calculate_weighted_astro_fit_score",
+          "apply_non_suppressive_conditional_activity_modifiers",
+          "evaluate_hard_suppression_rules",
+          "evaluate_intensity_and_relationship_gates",
+          "clamp_and_round_score",
+          "rank_eligible_activities"
+        ],
+
+        "tag_score_rule": "For every canonical tag actually carried by the activity, start at base_score 5, add all applicable modifiers, apply the relevant category caps, then clamp that tag score to 0..10.",
+
+        "aspect_total_cap_per_tag": [
+          -3,
+          3
+        ],
+
+        "secondary_total_cap_per_tag": [
+          -2,
+          2
+        ],
+
+        "planet_status_total_cap_per_tag": [
+          -3,
+          3
+        ],
+
+        "direct_status_total_bonus_cap_per_activity": 1,
+
+        "conditional_activity_modifier_total_cap": [
+          -3,
+          3
+        ],
+
+        "conditional_activity_modifier_policy": {
+          "application_stage": "Apply after the weighted tag-based astro-fit score is calculated.",
+          "non_suppressive_values": "Add matched conditional activity modifiers other than -4 to the activity-level astro-fit score, subject to conditional_activity_modifier_total_cap.",
+          "suppression_value": -4,
+          "suppression_value_bypasses_cap": true,
+          "multiple_suppressors": "One matched -4 is sufficient to make the activity ineligible. Preserve every matched suppressing rule ID as a diagnostic reason.",
+          "hard_block_allowed_false_scope": "hard_block_allowed=false prevents that specific rule or conditional branch from hard-suppressing the activity. It does not cancel an independent suppressor from another rule."
+        },
+
+        "deduplicate_replaced_rules": true,
+
+        "replacement_rules": {
+          "solar_eclipse_window": [
+            "new_moon"
+          ],
+          "lunar_eclipse_window": [
+            "full_moon"
+          ]
+        },
+
+        "all_activity_actions_are_required": false,
+
+        "critical_actions": [
+          "start_new",
+          "commit",
+          "apply",
+          "purchase"
+        ],
+
+        "critical_action_gate_by_intensity": {
+          "low": {
+            "mode": "ranking_only",
+            "minimum_score": null,
+            "rule": "Do not hide a low-intensity activity solely because a critical action is neutral or mildly discouraged. Explicit -4 suppression still applies."
+          },
+
+          "medium": {
+            "mode": "minimum_score",
+            "minimum_score": 4,
+            "rule": "Every critical action carried by a medium-intensity activity must score at least 4. A score of 3 or lower makes the activity ineligible."
+          },
+
+          "high": {
+            "mode": "minimum_score",
+            "minimum_score": 6,
+            "rule": "Every critical action carried by a high-intensity activity must score at least 6. High-stakes critical actions should be actively supported rather than merely neutral."
+          }
+        },
+
+        "noncritical_action_policy": {
+          "individual_minimum_score": null,
+          "rule": "Noncritical action tags contribute to ranking through their mean score and do not individually veto an activity. Suppression can still occur through explicit -4 rules, relationship-mode gates, or intensity rules based on converging strong primary negatives."
+        },
+
+        "topic_scores_never_hard_veto": true,
+
+        "context_scores_never_hard_veto": true,
+
+        "strong_negative_policy": {
+          "count_unit": "distinct_primary_rule_id",
+
+          "qualifies_when": "A primary rule directly applies a modifier of -2 or lower to at least one action or required relationship_mode carried by the activity, or a matched conditional activity rule applies an activity_modifier of -2 or lower.",
+
+          "does_not_qualify": [
+            "secondary rules",
+            "topic-only negative modifiers",
+            "context-only negative modifiers",
+            "soft -1 modifiers",
+            "a replaced rule that has been deduplicated",
+            "a rule branch whose hard_block_allowed value is false"
+          ],
+
+          "duplicate_modifier_behavior": "Multiple -2 modifiers produced by the same primary rule count as one strong negative signal, not multiple signals.",
+
+          "relevance_requirement": "A strong negative signal counts only when it actually touches the activity through one of its actions, required relationship_modes, or a matched conditional activity rule."
+        },
+
+        "relationship_mode_gate": {
+          "low": {
+            "mode": "ranking_only",
+            "rule": "Relationship-mode scores affect ranking only. Do not hide a low-intensity relationship activity unless an explicit -4 suppression rule independently applies."
+          },
+
+          "medium": {
+            "mode": "conditional_gate",
+            "relationship_mode_threshold": 3,
+            "rule": "Hide the activity when any required relationship_mode scores 3 or lower and at least one relevant strong primary negative signal applies to the activity."
+          },
+
+          "high": {
+            "mode": "conditional_gate",
+            "relationship_mode_threshold": 4,
+            "rule": "Hide the activity when any required relationship_mode scores 4 or lower and at least one relevant strong primary negative signal applies to the activity."
+          }
+        },
+
+        "intensity_policy": {
+          "low": {
+            "rule": "Low-risk everyday activities are ranking-first. Do not hard-suppress them because of ordinary negative scoring or converging strong negatives. Suppress only when a matched rule explicitly produces -4 and does not prohibit hard blocking."
+          },
+
+          "medium": {
+            "rule": "Suppress on an explicit -4, when two or more distinct relevant strong primary negative rules converge on the activity, or when a medium-intensity critical action fails its minimum-score gate."
+          },
+
+          "high": {
+            "rule": "Suppress on an explicit -4, when two or more distinct relevant strong primary negative rules converge on the activity, when a high-intensity critical action fails its minimum-score gate, or when the high-intensity relationship-mode gate fails."
+          }
+        },
+
+        "ranking_formula": {
+          "relationship_formula_applies_when": "Use the relationship formula when relationship_modes is non-empty.",
+
+          "dimension_score_rule": "The score of each dimension is the arithmetic mean of the final scores of the activity tags present in that dimension.",
+
+          "missing_dimension_policy": "If an activity contains no tags for a weighted dimension, omit that dimension rather than assigning an artificial neutral score, then proportionally renormalize the remaining dimension weights to sum to 1.",
+
+          "non_relationship": {
+            "actions": 0.60,
+            "topics": 0.30,
+            "contexts": 0.10
+          },
+
+          "relationship": {
+            "actions": 0.45,
+            "topics": 0.20,
+            "contexts": 0.10,
+            "relationship_modes": 0.25
+          }
+        },
+
+        "non_astrological_tie_breakers": {
+          "included_in_astro_fit_score": false,
+          "examples": [
+            "diversity",
+            "recency",
+            "recently_shown_penalty",
+            "user_history"
+          ],
+          "rule": "Apply recommendation-system tie-breakers only after astrological eligibility and astro-fit scoring. They must not alter the meaning of the astrological score."
+        },
+
+        "output_contract": {
+          "astro_fit_score": "Number from 0 to 10 after clamping and rounding.",
+          "eligible": "Boolean indicating whether the activity may be recommended.",
+          "suppression_reasons": "Array of matched rule IDs that caused hard suppression or a failed gate.",
+          "strong_negative_rule_ids": "Distinct relevant primary rule IDs counted as strong negative signals."
+        }
+      }
+  },
+  "planet_profiles": {
+    "sun": {
+      "actions": [
+        "express",
+        "start_new",
+        "focus",
+        "create"
+      ],
+      "topics": [
+        "personal_growth",
+        "career",
+        "creativity"
+      ],
+      "relationship_modes": []
+    },
+
+    "mercury": {
+      "actions": [
+        "research",
+        "compare",
+        "write",
+        "communicate",
+        "clarify",
+        "organize",
+        "review"
+      ],
+      "topics": [
+        "learning",
+        "career",
+        "productivity"
+      ],
+      "relationship_modes": [
+        "communication"
+      ]
+    },
+
+    "venus": {
+      "actions": [
+        "connect",
+        "reconnect",
+        "socialize",
+        "express",
+        "beauty_care",
+        "create",
+        "purchase"
+      ],
+      "topics": [
+        "relationship",
+        "social",
+        "beauty",
+        "creativity"
+      ],
+      "relationship_modes": [
+        "romance",
+        "quality_time",
+        "reconnection",
+        "social_fun"
+      ]
+    },
+
+    "mars": {
+      "actions": [
+        "start_new",
+        "exercise",
+        "movement",
+        "focus",
+        "set_boundary",
+        "apply"
+      ],
+      "topics": [],
+      "relationship_modes": [
+        "boundaries"
+      ]
+    },
+
+    "jupiter": {
+      "actions": [
+        "explore",
+        "plan",
+        "start_new",
+        "socialize",
+        "apply"
+      ],
+      "topics": [
+        "learning",
+        "personal_growth",
+        "career",
+        "social"
+      ],
+      "relationship_modes": [
+        "social_fun"
+      ]
+    },
+
+    "saturn": {
+      "actions": [
+        "plan",
+        "organize",
+        "review",
+        "continue",
+        "focus",
+        "commit",
+        "set_boundary"
+      ],
+      "topics": [
+        "career",
+        "productivity"
+      ],
+      "relationship_modes": [
+        "boundaries"
+      ]
+    },
+
+    "uranus": {
+      "actions": [
+        "explore",
+        "start_new",
+        "create",
+        "research",
+        "express",
+        "socialize"
+      ],
+      "topics": [
+        "creativity",
+        "personal_growth",
+        "social",
+        "learning"
+      ],
+      "relationship_modes": [
+        "social_fun"
+      ]
+    },
+
+    "neptune": {
+      "actions": [
+        "rest",
+        "mindfulness",
+        "reflect",
+        "create"
+      ],
+      "topics": [
+        "creativity",
+        "wellbeing",
+        "self_reflection"
+      ],
+      "relationship_modes": [
+        "emotional_intimacy",
+        "romance"
+      ]
+    },
+
+    "pluto": {
+      "actions": [
+        "reflect",
+        "clarify",
+        "set_boundary",
+        "focus",
+        "review"
+      ],
+      "topics": [
+        "self_reflection",
+        "personal_growth"
+      ],
+      "relationship_modes": [
+        "emotional_intimacy",
+        "boundaries"
+      ]
+    }
+  },
+  "rules": [
+      {
+        "id": "moon_void_of_course",
+        "category": "global_condition",
+        "role": "primary",
+
+        "match": {
+          "condition": "moon_void_of_course"
+        },
+
+        "modifiers": {
+          "actions": {
+            "start_new": -1,
+            "commit": -1,
+            "apply": -1,
+            "purchase": -1
+          },
+
+          "topics": {},
+
+          "contexts": {},
+
+          "relationship_modes": {}
+        },
+
+        "notes": [
+          "Ay boşlukta kuralı genel bir yasak değildir; özellikle sonucu dış dünyada gerçekleşmesi gereken başlangıç, taahhüt, başvuru ve önemli satın alma eylemlerini bir miktar aşağı sıralar.",
+          "Bu kural düşük ve orta yoğunluklu gündelik aktiviteleri tek başına hard-suppress etmemelidir.",
+          "VOC etkisi doğrudan 'new' context etiketine ayrıca uygulanmaz; aksi halde start_new gibi eylemler gereksiz şekilde çift cezalandırılabilir.",
+          "moon_void_of_course girdisinin hesaplanma yöntemi sky-data katmanında tek ve tutarlı bir tanıma bağlanmalıdır; scoring katmanı VOC astronomik hesabını yeniden yapmamalıdır."
+        ]
+      },
+      {
+        "id": "solar_eclipse_window",
+        "category": "eclipse",
+        "role": "primary",
+
+        "match": {
+          "event": "solar_eclipse",
+          "window": "configured_eclipse_window"
+        },
+
+        "modifiers": {
+          "actions": {
+            "start_new": -1,
+            "commit": -1,
+            "apply": -1,
+            "purchase": -1
+          },
+
+          "topics": {},
+
+          "contexts": {},
+
+          "relationship_modes": {}
+        },
+
+        "conditional_activity_rules": [
+          {
+            "when": {
+              "intensity": [
+                "high"
+              ],
+
+              "any_actions": [
+                "start_new",
+                "commit",
+                "apply",
+                "purchase"
+              ]
+            },
+
+            "activity_modifier": -4,
+
+            "reason": "Güneş tutulması penceresinde yüksek etkili, sonucu dış dünyada kalıcı biçimde başlatan veya bağlayıcı nitelikteki eylemler seçimsel olarak önerilmez."
+          }
+        ],
+
+        "notes": [
+          "Güneş tutulması normal new_moon kuralının yerine geçer; iki kural aynı olay için birlikte uygulanmamalıdır.",
+          "Tutulma tek başına reflect veya create gibi aktiviteleri otomatik olarak destekleyen bir gösterge olarak kullanılmaz.",
+          "Düşük ve orta yoğunluklu aktiviteler yalnızca yumuşak biçimde aşağı sıralanır; tutulma bütün gündelik yaşamı durduran bir hard filter değildir.",
+          "configured_eclipse_window süresi astroRules içinde keyfi olarak tanımlanmamalıdır; sky-data veya ayrı astro calculation policy katmanında tek bir standart olarak belirlenmelidir."
+        ],
+
+        "replaces": [
+          "new_moon"
+        ]
+      },
+      {
+        "id": "lunar_eclipse_window",
+        "category": "eclipse",
+        "role": "primary",
+
+        "match": {
+          "event": "lunar_eclipse",
+          "window": "configured_eclipse_window"
+        },
+
+        "modifiers": {
+          "actions": {
+            "start_new": -1,
+            "commit": -1,
+            "apply": -1,
+            "purchase": -1
+          },
+
+          "topics": {},
+
+          "contexts": {},
+
+          "relationship_modes": {}
+        },
+
+        "conditional_activity_rules": [
+          {
+            "when": {
+              "intensity": [
+                "high"
+              ],
+
+              "any_actions": [
+                "start_new",
+                "commit",
+                "apply",
+                "purchase"
+              ]
+            },
+
+            "activity_modifier": -4,
+
+            "reason": "Ay tutulması penceresinde yüksek etkili, sonucu dış dünyada kalıcı biçimde başlatan veya bağlayıcı nitelikteki eylemler seçimsel olarak önerilmez."
+          }
+        ],
+
+        "notes": [
+          "Ay tutulması normal full_moon kuralının yerine geçer; iki kural aynı olay için birlikte uygulanmamalıdır.",
+          "Tutulma otomatik olarak review, reflect, set_boundary, past veya unfinished aktivitelerini destekleyen bir gösterge olarak kullanılmaz; bu tür temalar başka bağımsız astrolojik göstergeler tarafından puanlanmalıdır.",
+          "Düşük ve orta yoğunluklu aktiviteler yalnızca yumuşak biçimde aşağı sıralanır; tutulma bütün gündelik yaşamı durduran bir hard filter değildir.",
+          "configured_eclipse_window süresi astroRules içinde keyfi olarak tanımlanmamalıdır; sky-data veya ayrı astro calculation policy katmanında tek bir standart olarak belirlenmelidir."
+        ],
+
+        "replaces": [
+          "full_moon"
+        ]
+      },
+      {
+        "id": "moon_next_aspect_benefic",
+        "category": "lunar_next_aspect",
+        "role": "primary",
+
+        "match": {
+          "moon_next_aspect": "benefic_supportive"
+        },
+
+        "modifiers": {
+          "actions": {
+            "start_new": 1,
+            "continue": 1,
+            "commit": 1,
+            "apply": 1
+          },
+
+          "topics": {},
+
+          "contexts": {},
+
+          "relationship_modes": {}
+        },
+
+        "notes": [
+          "This rule represents the Moon's next applying major aspect when that application is genuinely supportive.",
+          "benefic_supportive should be calculated upstream from the actual applying aspect; it should not mean merely that Venus or Jupiter is somewhere in aspect to the Moon.",
+          "For the final calculation policy, prioritize a close applying conjunction, sextile, or trine from the Moon to Venus or Jupiter. Wider or geometrically difficult benefic contacts should not automatically receive this classification.",
+          "The Moon's next applying aspect is an important electional factor, but Lunora uses it as moderate outcome support rather than as a universal guarantee of success.",
+          "Do not apply this rule when the Moon has no qualifying next applying aspect within the configured lunar application window."
+        ]
+      },
+      {
+        "id": "moon_next_aspect_malefic_hard",
+        "category": "lunar_next_aspect",
+        "role": "primary",
+
+        "match": {
+          "moon_next_aspect": "malefic_hard"
+        },
+
+        "modifiers": {
+          "actions": {
+            "start_new": -1,
+            "continue": -1,
+            "commit": -1,
+            "apply": -1
+          },
+
+          "topics": {},
+
+          "contexts": {},
+
+          "relationship_modes": {}
+        },
+
+        "notes": [
+          "This rule represents a close applying conjunction, square, or opposition from the Moon to Mars or Saturn.",
+          "The classification must be based on an actual applying aspect; separating aspects do not qualify as moon_next_aspect.",
+          "This is a general electional friction signal, not a blanket prohibition.",
+          "Lunora keeps the modifier at -1 because a full electional judgement would also require planetary condition, reception, sect, house placement, the ruler of the Ascendant, and the nature of the undertaking.",
+          "This rule does not become a strong negative signal by itself under Lunora's scoring policy."
+        ]
+      },
+      {
+        "id": "new_moon",
+        "category": "moon_phase",
+        "role": "primary",
+
+        "match": {
+          "moon_phase": "new_moon"
+        },
+
+        "modifiers": {
+          "actions": {
+            "reflect": 1,
+            "write": 1,
+            "plan": 1,
+            "create": 1
+          },
+
+          "topics": {},
+
+          "contexts": {},
+
+          "relationship_modes": {}
+        },
+
+        "conditional_activity_rules": [
+          {
+            "when": {
+              "intensity": [
+                "high"
+              ],
+
+              "any_actions": [
+                "start_new",
+                "commit",
+                "apply",
+                "purchase"
+              ]
+            },
+
+            "activity_modifier": -1,
+
+            "reason": "Yeni Ay fazı hazırlık ve yön belirleme için kullanılabilir; ancak yüksek etkili başlangıçları yalnızca bu faza dayanarak güçlü biçimde desteklemek doğru değildir."
+          }
+        ],
+
+        "notes": [
+          "Do not stack this rule with solar_eclipse_window.",
+          "The reflective, planning and creative bonuses are Lunora's symbolic lunation-layer interpretation; they should not be presented as universal traditional electional rules.",
+          "New Moon does not receive a direct start_new bonus.",
+          "The Moon's proximity to the Sun is a separate technical consideration. Exact conjunction, combustion or under-the-beams conditions should not be inferred solely from the eight-phase label.",
+          "A low- or medium-intensity new activity is not prohibited by this rule; it simply receives no automatic electional bonus for being new."
+        ]
+      },
+      {
+        "id": "waxing_crescent",
+        "category": "moon_phase",
+        "role": "primary",
+
+        "match": {
+          "moon_phase": "waxing_crescent"
+        },
+
+        "modifiers": {
+          "actions": {
+            "start_new": 1,
+            "continue": 1
+          },
+
+          "topics": {},
+
+          "contexts": {},
+
+          "relationship_modes": {}
+        },
+
+        "notes": [
+          "The core rationale is increase in lunar light: activities intended to begin, grow or gain momentum receive modest support.",
+          "Do not assign generic research, exercise, movement or exploration bonuses solely from the waxing crescent phase.",
+          "Do not also score the new context simply for carrying the same beginning rationale; this avoids double counting start_new plus new.",
+          "Other factors such as the Moon's sign, next applying aspect, planetary condition and relevant aspects determine what kind of beginning is actually favored."
+        ]
+      },
+      {
+        "id": "first_quarter",
+        "category": "moon_phase",
+        "role": "primary",
+
+        "match": {
+          "moon_phase": "first_quarter"
+        },
+
+        "modifiers": {
+          "actions": {
+            "start_new": 1,
+            "continue": 1,
+            "focus": 1,
+            "commit": 1
+          },
+
+          "topics": {},
+
+          "contexts": {},
+
+          "relationship_modes": {}
+        },
+
+        "notes": [
+          "The Moon remains increasing in light, so growth-oriented and forward-moving activity can receive modest support.",
+          "First Quarter does not automatically signify physical exercise or movement; those bonuses require independent Mars, Moon-sign, house or aspect support.",
+          "The focus and commitment bonuses represent the action-oriented symbolic phase model and are intentionally kept at +1 rather than treated as strong universal electional doctrine.",
+          "Do not add a separate new-context bonus when start_new is already being rewarded for the same lunar-phase rationale."
+        ]
+      },
+      {
+        "id": "waxing_gibbous",
+        "category": "moon_phase",
+        "role": "primary",
+
+        "match": {
+          "moon_phase": "waxing_gibbous"
+        },
+
+        "modifiers": {
+          "actions": {
+            "continue": 1,
+            "focus": 1,
+            "review": 1
+          },
+
+          "topics": {},
+
+          "contexts": {},
+
+          "relationship_modes": {}
+        },
+
+        "notes": [
+          "Ay hâlâ ışığını artırdığı için büyütülmekte veya ilerletilmekte olan işlere mütevazı destek verir.",
+          "Bu faz yeni bir şey başlatmaktan çok mevcut bir süreci geliştirme, sürdürme ve iyileştirme yönünde kullanılır.",
+          "Organize gibi belirli davranışlar yalnızca bu faz nedeniyle otomatik bonus almaz.",
+          "Existing veya unfinished context etiketlerine ayrıca bonus verilmez; continue ve review üzerinden aynı gerekçenin iki kez puanlanması engellenir."
+        ]
+      },
+      {
+        "id": "full_moon",
+        "category": "moon_phase",
+        "role": "primary",
+
+        "match": {
+          "moon_phase": "full_moon"
+        },
+
+        "modifiers": {
+          "actions": {
+            "review": 1,
+            "reflect": 1,
+            "express": 1,
+            "start_new": -1
+          },
+
+          "topics": {},
+
+          "contexts": {},
+
+          "relationship_modes": {}
+        },
+
+        "notes": [
+          "Dolunay Ay'ın ışığının doruk noktasıdır ve ardından azalan faz başlar; bu nedenle başlangıçtan çok görünür hale gelmiş bir süreci değerlendirme ve fark etme yönünde kullanılır.",
+          "Express bonusu Lunora'nın sembolik görünürlük katmanıdır ve evrensel bir geleneksel electional kural olarak yorumlanmamalıdır.",
+          "Dolunay tek başına romance veya social_fun aktivitelerini destekleyen bir gösterge değildir.",
+          "İlişki konuşmaları, ultimatomlar veya hassas kararlar yalnızca Dolunay olduğu için otomatik olarak negatif puanlanmaz; bunların uygunluğu Merkür, Venüs, Mars, Ay'ın açıları ve diğer ilgili göstergeler tarafından belirlenmelidir.",
+          "Bu kural lunar_eclipse_window ile birlikte uygulanmaz."
+        ]
+      },
+      {
+        "id": "waning_gibbous",
+        "category": "moon_phase",
+        "role": "primary",
+
+        "match": {
+          "moon_phase": "waning_gibbous"
+        },
+
+        "modifiers": {
+          "actions": {
+            "review": 1,
+            "reflect": 1,
+            "communicate": 1,
+            "start_new": -1
+          },
+
+          "topics": {},
+
+          "contexts": {},
+
+          "relationship_modes": {}
+        },
+
+        "notes": [
+          "Ay artık ışığını azalttığı için yeni bir şeyi büyütmekten çok mevcut deneyimi değerlendirme ve anlamlandırma yönünde kullanılır.",
+          "Communicate bonusu sekiz fazlı modern sembolik modelde deneyimi paylaşma ve aktarma temasını temsil eder; geleneksel waxing-waning kuralından doğrudan türetilmiş değildir.",
+          "Write genel bir action olduğu için yalnızca bu faz nedeniyle bonus almaz; yazma aktivitesi gerçekten reflection veya communication içeriyorsa ilgili etiketlerden desteklenir.",
+          "Past veya existing context etiketleri ayrıca puanlanmaz; faz geçmişte olan her şeyi otomatik olarak desteklemez."
+        ]
+      },
+      {
+        "id": "last_quarter",
+        "category": "moon_phase",
+        "role": "primary",
+
+        "match": {
+          "moon_phase": "last_quarter"
+        },
+
+        "modifiers": {
+          "actions": {
+            "review": 1,
+            "organize": 1,
+            "reflect": 1,
+            "start_new": -1
+          },
+
+          "topics": {},
+
+          "contexts": {},
+
+          "relationship_modes": {}
+        },
+
+        "notes": [
+          "Azalan ışık nedeniyle mevcut süreçleri değerlendirmek, azaltmak ve düzenlemek başlangıç odaklı eylemlerden daha uyumludur.",
+          "Set_boundary yalnızca Son Dördün nedeniyle otomatik bonus almaz; sınır koyma için Mars, Satürn, Plüton veya ilgili ilişki göstergelerinden bağımsız destek aranmalıdır.",
+          "Existing ve unfinished context etiketlerine ayrıca bonus verilmez; review ve organize üzerinden aynı gerekçenin iki kez puanlanması engellenir.",
+          "Start_new için verilen -1 yumuşak electional sürtünmedir ve tek başına gündelik düşük riskli bir başlangıcı hard-suppress etmez."
+        ]
+      },
+      {
+        "id": "balsamic_moon",
+        "category": "moon_phase",
+        "role": "primary",
+
+        "match": {
+          "moon_phase": "balsamic"
+        },
+
+        "modifiers": {
+          "actions": {
+            "rest": 1,
+            "mindfulness": 1,
+            "reflect": 1,
+            "review": 1,
+            "start_new": -1,
+            "commit": -1,
+            "apply": -1
+          },
+
+          "topics": {},
+
+          "contexts": {},
+
+          "relationship_modes": {}
+        },
+
+        "notes": [
+          "Balsamic faz geç azalan Ay dönemidir; büyütülmesi amaçlanan yeni girişimler yerine azaltma, değerlendirme ve kapanış yönünde kullanılır.",
+          "Rest, mindfulness ve reflect bonusları Lunora'nın kişisel gelişim odaklı sembolik katmanıdır ve kasıtlı olarak yalnızca +1 tutulur.",
+          "Balsamic faz tek başına past, unfinished veya reconnection aktivitelerini otomatik olarak desteklemez.",
+          "Start_new, commit ve apply için -1 yeterlidir; daha güçlü electional sorunlar Ay'ın Güneş'e gerçek açısal uzaklığı, under-the-beams durumu, sonraki açısı ve diğer bağımsız göstergeler tarafından ayrıca değerlendirilmelidir.",
+          "Balsamic fazın kendisi hard-suppression veya strong-negative sinyali değildir."
+        ]
+      },
+      {
+        "id": "moon_aries",
+        "category": "moon_sign",
+        "role": "secondary",
+
+        "match": {
+          "moon_sign": "aries"
+        },
+
+        "modifiers": {
+          "actions": {
+            "start_new": 1,
+            "exercise": 1,
+            "movement": 1
+          },
+
+          "topics": {},
+
+          "contexts": {},
+
+          "relationship_modes": {}
+        },
+
+        "notes": [
+          "Koç'un Mars tarafından yönetilen, hareketli ve başlatıcı niteliği eylem, fiziksel hareket ve inisiyatife küçük bir sıralama bonusu verir.",
+          "Explore yalnızca Koç Ayı nedeniyle bonus almaz; keşif ve genişleme için Yay, Jüpiter veya ilgili diğer göstergeler daha doğrudan dayanak sağlar.",
+          "Conflict_resolution negatif puanlanmaz. Çatışma eğilimi ile çatışmayı yapıcı biçimde çözme eylemi aynı şey değildir.",
+          "Moon-sign kuralları yalnızca secondary ranking sinyalidir ve negatif hard-gate üretmemelidir."
+        ]
+      },
+      {
+        "id": "moon_taurus",
+        "category": "moon_sign",
+        "role": "secondary",
+
+        "match": {
+          "moon_sign": "taurus"
+        },
+
+        "modifiers": {
+          "actions": {
+            "beauty_care": 1,
+            "rest": 1,
+            "create": 1,
+            "continue": 1
+          },
+
+          "topics": {
+            "beauty": 1,
+            "wellbeing": 1,
+            "creativity": 1
+          },
+
+          "contexts": {},
+
+          "relationship_modes": {
+            "quality_time": 1
+          }
+        },
+
+        "notes": [
+          "Boğa'nın Venüs tarafından yönetilmesi güzellik, hoş deneyimler ve yaratıcı-estetik faaliyetler için küçük bir bonus verir.",
+          "Boğa'nın sabit niteliği mevcut bir şeyi sürdürme ve devam ettirme yönünü destekler.",
+          "Finance bonusu kaldırılmıştır; Boğa'nın modern doğal ikinci ev eşleştirmesi genel finans aktivitelerini puanlamak için yeterli bir gerekçe değildir.",
+          "Review Boğa'nın doğrudan çekirdek işlevi olmadığı için otomatik bonus almaz.",
+          "Ay'ın Boğa'daki exaltation durumu bu rule içinde ayrıca puanlanmaz; lunar dignity bağımsız bir teknik katmanda değerlendirilmelidir."
+        ]
+      },
+      {
+        "id": "moon_gemini",
+        "category": "moon_sign",
+        "role": "secondary",
+
+        "match": {
+          "moon_sign": "gemini"
+        },
+
+        "modifiers": {
+          "actions": {
+            "research": 1,
+            "compare": 1,
+            "communicate": 1,
+            "write": 1,
+            "socialize": 1
+          },
+
+          "topics": {
+            "learning": 1,
+            "social": 1
+          },
+
+          "contexts": {},
+
+          "relationship_modes": {
+            "communication": 1,
+            "social_fun": 1
+          }
+        },
+
+        "notes": [
+          "İkizler'in Merkür tarafından yönetilmesi bilgi toplama, karşılaştırma, yazma ve iletişim davranışlarına küçük bir bonus verir.",
+          "Explore bonusu kaldırılmıştır; meraklılık tek başına her keşif aktivitesini Mercurial yapmaz.",
+          "Commit negatif puanlanmaz. İkizler'in değişken niteliği uzun süreli sabitlik için güçlü bir electional tercih olmayabilir ancak secondary Moon-sign rule'unun genel taahhütleri cezalandırması gereğinden sert olur.",
+          "Bu rule yalnızca sıralamayı iyileştirir ve kendi başına bir aktiviteyi engellemez."
+        ]
+      },
+      {
+        "id": "moon_cancer",
+        "category": "moon_sign",
+        "role": "secondary",
+
+        "match": {
+          "moon_sign": "cancer"
+        },
+
+        "modifiers": {
+          "actions": {
+            "connect": 1,
+            "rest": 1,
+            "reflect": 1
+          },
+
+          "topics": {
+            "home": 1,
+            "relationship": 1,
+            "wellbeing": 1
+          },
+
+          "contexts": {},
+
+          "relationship_modes": {
+            "quality_time": 1,
+            "emotional_intimacy": 1
+          }
+        },
+
+        "notes": [
+          "Yengeç Ay tarafından yönetildiği için bakım, güvenlik, ev, yakın bağlar ve içsel ihtiyaçlarla ilişkili faaliyetlere küçük bir sıralama bonusu verir.",
+          "Beauty_care kaldırılmıştır; bakım kavramının tamamını kozmetik veya güzellik bakımıyla eşitlemek doğru değildir.",
+          "Past context kaldırılmıştır; Yengeç'in hafıza ve geçmişle sembolik bağlantısı her geçmiş odaklı aktiviteyi otomatik olarak desteklemek için yeterli değildir.",
+          "Ay'ın Yengeç'teki domicile gücü bu rule içinde ekstra bonus üretmez; lunar dignity bağımsız katmanda değerlendirilmelidir."
+        ]
+      },
+      {
+        "id": "moon_leo",
+        "category": "moon_sign",
+        "role": "secondary",
+
+        "match": {
+          "moon_sign": "leo"
+        },
+
+        "modifiers": {
+          "actions": {
+            "express": 1,
+            "create": 1,
+            "socialize": 1,
+            "continue": 1
+          },
+
+          "topics": {
+            "creativity": 1,
+            "social": 1
+          },
+
+          "contexts": {},
+
+          "relationship_modes": {
+            "romance": 1,
+            "social_fun": 1
+          }
+        },
+
+        "notes": [
+          "Aslan'ın Güneş tarafından yönetilen görünür, yaratıcı ve ifade odaklı sembolizmi expression, creativity ve sosyal görünürlüğe küçük bir bonus verir.",
+          "Aslan'ın sabit niteliği mevcut bir faaliyeti sürdürmeye küçük bir continue bonusu sağlar.",
+          "Beauty genel topic bonusu kaldırılmıştır; görünürlük ve kendini ifade etmek ile güzellik bakımının kendisi aynı kavram değildir.",
+          "Existing context ayrıca puanlanmaz; fixed-sign süreklilik gerekçesi continue üzerinden zaten temsil edilmektedir.",
+          "Romance ve social_fun yalnızca +1 secondary ranking etkisidir; Ay Aslan'dayken bütün ilişki aktivitelerinin otomatik olarak uygun olduğu anlamına gelmez."
+        ]
+      },
+      {
+        "id": "moon_virgo",
+        "category": "moon_sign",
+        "role": "secondary",
+
+        "match": {
+          "moon_sign": "virgo"
+        },
+
+        "modifiers": {
+          "actions": {
+            "organize": 1,
+            "review": 1,
+            "research": 1,
+            "compare": 1,
+            "clarify": 1
+          },
+
+          "topics": {
+            "productivity": 1,
+            "learning": 1
+          },
+
+          "contexts": {},
+
+          "relationship_modes": {}
+        },
+
+        "notes": [
+          "Başak'ın Merkür tarafından yönetilen, değişken ve toprak niteliği bilgi ayıklama, düzenleme, kontrol etme ve pratik iyileştirme davranışlarına küçük bir sıralama bonusu verir.",
+          "Beauty_care otomatik bonus almaz; bakım ve sağlık çağrışımlarını doğrudan kozmetik bakımla eşitlemek doğru değildir.",
+          "Finance ve career genel topic bonusları kaldırılmıştır; Başak'ın doğal altıncı ev veya iş temalarıyla özdeşleştirilmesi bu motor için yeterli teknik gerekçe değildir.",
+          "Plansız veya spontane aktiviteler cezalandırılmaz; yalnızca Başak'a özgü bonus almaz."
+        ]
+      },
+      {
+        "id": "moon_libra",
+        "category": "moon_sign",
+        "role": "secondary",
+
+        "match": {
+          "moon_sign": "libra"
+        },
+
+        "modifiers": {
+          "actions": {
+            "connect": 1,
+            "socialize": 1,
+            "communicate": 1,
+            "create": 1,
+            "beauty_care": 1
+          },
+
+          "topics": {
+            "relationship": 1,
+            "social": 1,
+            "beauty": 1,
+            "creativity": 1
+          },
+
+          "contexts": {},
+
+          "relationship_modes": {
+            "romance": 1,
+            "quality_time": 1,
+            "communication": 1,
+            "conflict_resolution": 1
+          }
+        },
+
+        "notes": [
+          "Terazi'nin Venüs tarafından yönetilmesi ilişki, uyum, estetik, sosyal bağ ve yaratıcı faaliyetlere küçük bir sıralama bonusu verir.",
+          "Conflict_resolution bonusu yalnızca uzlaşmacı ve diplomatik çözüm davranışlarını temsil eder; sert yüzleşmelerin otomatik olarak desteklendiği anlamına gelmez.",
+          "Compare kaldırılmıştır; Terazi sembolündeki denge ve tartma fikrini doğrudan bütün karşılaştırma aktivitelerine dönüştürmek fazla literal bir eşleştirme olur.",
+          "Ay burcu secondary olduğu için bu bonusların hiçbiri tek başına ilişki kararlarının uygunluğunu belirlemez."
+        ]
+      },
+      {
+        "id": "moon_scorpio",
+        "category": "moon_sign",
+        "role": "secondary",
+
+        "match": {
+          "moon_sign": "scorpio"
+        },
+
+        "modifiers": {
+          "actions": {
+            "reflect": 1,
+            "set_boundary": 1,
+            "clarify": 1,
+            "focus": 1,
+            "continue": 1
+          },
+
+          "topics": {
+            "self_reflection": 1
+          },
+
+          "contexts": {},
+
+          "relationship_modes": {
+            "emotional_intimacy": 1,
+            "boundaries": 1
+          }
+        },
+
+        "notes": [
+          "Akrep'in Mars tarafından yönetilen, sabit ve su niteliği yoğunlaşma, derinleşme, içsel inceleme ve sınır davranışlarına küçük bir bonus verir.",
+          "Fixed-sign sürekliliği continue üzerinden temsil edilir; existing context ayrıca puanlanmaz.",
+          "Finance kaldırılmıştır; Akrep'i doğal sekizinci ev ile eşitleyerek bütün finans faaliyetlerine bonus vermek kullanılmaz.",
+          "Past context ve conflict_resolution otomatik bonus almaz; geçmişe dönmek veya çatışmayı çözmek Akrep Ayı'nın zorunlu sonucu değildir.",
+          "Social_fun negatif puanlanmaz.",
+          "Ay'ın Akrep'teki fall durumu bu rule içinde cezaya çevrilmez; lunar dignity ayrı bir teknik katmanda değerlendirilmelidir."
+        ]
+      },
+      {
+        "id": "moon_sagittarius",
+        "category": "moon_sign",
+        "role": "secondary",
+
+        "match": {
+          "moon_sign": "sagittarius"
+        },
+
+        "modifiers": {
+          "actions": {
+            "explore": 1,
+            "start_new": 1,
+            "socialize": 1
+          },
+
+          "topics": {
+            "learning": 1,
+            "personal_growth": 1
+          },
+
+          "contexts": {},
+
+          "relationship_modes": {
+            "social_fun": 1
+          }
+        },
+
+        "notes": [
+          "Yay'ın Jüpiter tarafından yönetilen, değişken ve ateş niteliği keşif, öğrenme, deneyim genişletme ve yeni deneyimlere açılma davranışlarına küçük bir bonus verir.",
+          "Research kaldırılmıştır; ayrıntılı araştırma Mercurial bir davranıştır ve yalnızca Yay Ayı nedeniyle otomatik desteklenmemelidir.",
+          "Write kaldırılmıştır; bütün yazma faaliyetleri Jüpiteryen veya Yay temalı değildir.",
+          "New context ayrıca puanlanmaz; start_new üzerinden aynı gerekçenin iki kez sayılması engellenir.",
+          "Detaylı veya idari aktiviteler cezalandırılmaz; yalnızca Yay bonusu almaz."
+        ]
+      },
+      {
+        "id": "moon_capricorn",
+        "category": "moon_sign",
+        "role": "secondary",
+
+        "match": {
+          "moon_sign": "capricorn"
+        },
+
+        "modifiers": {
+          "actions": {
+            "plan": 1,
+            "commit": 1,
+            "focus": 1,
+            "organize": 1,
+            "continue": 1
+          },
+
+          "topics": {
+            "career": 1,
+            "productivity": 1
+          },
+
+          "contexts": {},
+
+          "relationship_modes": {
+            "boundaries": 1
+          }
+        },
+
+        "notes": [
+          "Oğlak'ın Satürn tarafından yönetilen ve toprak niteliği yapılandırma, sorumluluk, devamlılık, planlama ve uzun vadeli odaklanmaya küçük bir bonus verir.",
+          "Finance kaldırılmıştır; Oğlak veya Satürn bütün finans aktivitelerinin genel yöneticisi olarak kullanılmaz.",
+          "Social_fun negatif puanlanmaz; ciddi veya yapılandırılmış sembolizm eğlence aktivitelerini otomatik olarak uygunsuz yapmaz.",
+          "Ay'ın Oğlak'taki detriment durumu bu activity-routing rule içinde cezaya çevrilmez; lunar dignity ayrı değerlendirilmelidir."
+        ]
+      },
+      {
+        "id": "moon_aquarius",
+        "category": "moon_sign",
+        "role": "secondary",
+
+        "match": {
+          "moon_sign": "aquarius"
+        },
+
+        "modifiers": {
+          "actions": {
+            "research": 1,
+            "create": 1,
+            "socialize": 1,
+            "continue": 1
+          },
+
+          "topics": {
+            "social": 1,
+            "creativity": 1,
+            "learning": 1
+          },
+
+          "contexts": {},
+
+          "relationship_modes": {
+            "social_fun": 1
+          }
+        },
+
+        "notes": [
+          "Kova'nın sabit hava niteliği düşünsel süreklilik ve fikir geliştirmeyi; modern Uranian sembolik katman ise yenilik ve özgün üretimi destekleyen küçük bir bonus olarak kullanılır.",
+          "Social ve social_fun eşleştirmeleri modern kolektif ve grup yönelimi katmanıdır; geleneksel fixed-sign mantığının tek başına sonucu olarak sunulmamalıdır.",
+          "New ve existing context bonusları kaldırılmıştır; fixed-sign sürekliliği continue üzerinden zaten temsil edilir.",
+          "Romance ve emotional_intimacy negatif puanlanmaz. Kova sembolizmi duygusal veya romantik yakınlığın otomatik olarak uygunsuz olduğu anlamına gelmez.",
+          "Personal_growth kaldırılmıştır; fazla geniş bir topic olduğu için Kova Ayı'na özgü değildir."
+        ]
+      },
+      {
+        "id": "moon_pisces",
+        "category": "moon_sign",
+        "role": "secondary",
+
+        "match": {
+          "moon_sign": "pisces"
+        },
+
+        "modifiers": {
+          "actions": {
+            "rest": 1,
+            "mindfulness": 1,
+            "reflect": 1,
+            "create": 1
+          },
+
+          "topics": {
+            "creativity": 1,
+            "wellbeing": 1,
+            "self_reflection": 1
+          },
+
+          "contexts": {},
+
+          "relationship_modes": {
+            "emotional_intimacy": 1
+          }
+        },
+
+        "notes": [
+          "Balık'ın değişken su niteliği ile geleneksel Jüpiter ve modern Neptün sembolizmi içsel, yaratıcı, sezgisel ve yavaşlatıcı faaliyetlere küçük bir bonus olarak kullanılır.",
+          "Write kaldırılmıştır; genel yazma action'ı şiirsel, sezgisel veya reflective yazıyla sınırlı değildir.",
+          "Clarify, commit ve apply negatif puanlanmaz; Balık Ayı'nın secondary bir gösterge olarak bütün netlik, taahhüt veya başvuru faaliyetlerini cezalandırması fazla geniş olur.",
+          "Finance negatif puanlanmaz; Balık sembolizmi bütün finans aktiviteleri için otomatik bir dezavantaj değildir."
+        ]
+      },
+      {
+        "id": "relevant_planet_stationary_retrograde",
+        "category": "planet_status",
+        "role": "primary",
+
+        "match": {
+          "planet": "*",
+          "status": "stationary_retrograde",
+          "use_planet_profile": true
+        },
+
+        "modifiers": {
+          "actions": {},
+          "topics": {},
+          "contexts": {},
+          "relationship_modes": {}
+        },
+
+        "conditional_activity_rules": [
+          {
+            "when": {
+              "intensity": [
+                "high"
+              ],
+              "any_actions": [
+                "start_new",
+                "commit",
+                "apply",
+                "purchase"
+              ]
+            },
+
+            "activity_modifier": -1,
+
+            "reason": "Retrograda dönmek üzere olan ilgili gezegen yüksek etkili yeni veya bağlayıcı eylemlerde ek seçimsel sürtünme yaratır."
+          }
+        ],
+
+        "profile_effect": {
+          "actions": -1,
+          "topics": -1,
+          "relationship_modes": -1
+        },
+
+        "notes": [
+          "İlk station, yani direct hareketten retrograda dönüş, ikinci station ile aynı durum olarak değerlendirilmez.",
+          "Geleneksel olarak ilk station retrogradın kendisinden daha hafif fakat yine de engelleyici bir durumdur.",
+          "Station etkisi yalnızca aktivite ile gerçekten ilgili planet_profile tag'lerine uygulanır.",
+          "Bu durum tek başına hard suppression değildir."
+        ]
+      },
+      {
+        "id": "relevant_planet_stationary_direct",
+        "category": "planet_status",
+        "role": "primary",
+
+        "match": {
+          "planet": "*",
+          "status": "stationary_direct",
+          "use_planet_profile": true
+        },
+
+        "modifiers": {
+          "actions": {},
+          "topics": {},
+          "contexts": {},
+          "relationship_modes": {}
+        },
+
+        "profile_effect": {
+          "actions": -1,
+          "topics": -1,
+          "relationship_modes": -1
+        },
+
+        "notes": [
+          "İkinci station, yani retrograd hareketten direct harekete dönüş, toparlanma yönündedir fakat gezegen hâlâ çok yavaş olduğu için tam direct hareket kadar güçlü kabul edilmez.",
+          "Bu nedenle yalnızca hafif bir -1 profile friction uygulanır ve yüksek yoğunluk için ek conditional ceza verilmez.",
+          "Station etkisi yalnızca aktiviteyle gerçekten ilişkili planet_profile tag'lerine uygulanır."
+        ]
+      },
+      {
+        "id": "relevant_planet_combust",
+        "category": "planet_status",
+        "role": "primary",
+
+        "match": {
+          "planet": "*",
+          "status": "combust",
+          "use_planet_profile": true
+        },
+
+        "modifiers": {
+          "actions": {},
+          "topics": {},
+          "contexts": {},
+          "relationship_modes": {}
+        },
+
+        "conditional_activity_rules": [
+          {
+            "when": {
+              "intensity": [
+                "high"
+              ],
+              "any_actions": [
+                "start_new",
+                "commit",
+                "apply",
+                "purchase"
+              ]
+            },
+
+            "activity_modifier": -2,
+
+            "reason": "İlgili gezegen combust olduğunda yüksek etkili ve sonuç bağımlı eylemlerde gezegenin işlevsel kapasitesindeki geleneksel zayıflık daha güçlü dikkate alınır."
+          }
+        ],
+
+        "profile_effect": {
+          "actions": -1,
+          "topics": -1,
+          "relationship_modes": -1
+        },
+
+        "notes": [
+          "Combustion geleneksel astrolojide ciddi bir accidental debility'dir fakat yalnızca ilgili gezegenin temsil ettiği activity tag'lerine uygulanır.",
+          "Astro-calculation katmanı combust statüsünü cazimi aralığının dışında ve Güneş'e yaklaşık 8°30' mesafe içinde hesaplamalıdır.",
+          "Cazimi combust değildir; cazimi eşleştiğinde combust kuralı uygulanmamalıdır.",
+          "Under-the-beams combustion ile aynı durum değildir ve ileride ayrı bir teknik status olarak modellenmelidir.",
+          "Bu genel planet-profile rule'u Uranüs, Neptün ve Plüton için traditional combustion üretmemelidir; outer-planet solar proximity ayrı bir modern policy olmadan aktive edilmemelidir.",
+          "Ay'ın Güneş'e yakınlığı Lunora'nın lunar-condition katmanında değerlendirilir ve bu generic planet-profile rule üzerinden tekrar puanlanmaz."
+        ]
+      },
+      {
+        "id": "relevant_planet_cazimi",
+        "category": "planet_status",
+        "role": "primary",
+
+        "match": {
+          "planet": "*",
+          "status": "cazimi",
+          "use_planet_profile": true
+        },
+
+        "modifiers": {
+          "actions": {},
+          "topics": {},
+          "contexts": {},
+          "relationship_modes": {}
+        },
+
+        "profile_effect": {
+          "actions": 2,
+          "topics": 1,
+          "relationship_modes": 1
+        },
+
+        "notes": [
+          "Cazimi geleneksel olarak combustion zayıflığını ortadan kaldıran ve gezegene belirgin güç kazandıran nadir bir accidental dignity olarak değerlendirilir.",
+          "Astro-calculation katmanı Lunora için cazimi eşiğini Güneş merkezinden en fazla 0°17' boylam farkı olarak sabitlemelidir.",
+          "Cazimi yalnızca gezegenin gerçekten temsil ettiği planet_profile tag'lerini güçlendirir; ilgili olmayan aktiviteler bonus almaz.",
+          "Actions +2 tutulurken topics ve relationship_modes +1 ile sınırlandırılır; böylece nadir ve güçlü condition korunur fakat tek bir cazimi bütün recommendation skorunu domine etmez.",
+          "Cazimi solar_eclipse_window veya başka bağımsız suppressorları otomatik olarak geçersiz kılmaz."
+        ]
+      },
+      {
+        "id": "mercury_retrograde",
+        "category": "planet_status",
+        "role": "primary",
+
+        "match": {
+          "planet": "mercury",
+          "status": "retrograde",
+          "use_planet_profile": true
+        },
+
+        "modifiers": {
+          "actions": {
+            "review": 2,
+            "organize": 1
+          },
+
+          "topics": {},
+
+          "contexts": {},
+
+          "relationship_modes": {}
+        },
+
+        "profile_effect": {
+          "actions": -1,
+          "topics": -1,
+          "relationship_modes": -1
+        },
+
+        "conditional_activity_rules": [
+          {
+            "when": {
+              "context_any": [
+                "unfinished"
+              ],
+              "any_actions": [
+                "review",
+                "organize",
+                "research",
+                "write",
+                "clarify"
+              ]
+            },
+
+            "activity_modifier": 1,
+
+            "reason": "Yarım kalmış Mercurial işleri gözden geçirmek, düzeltmek veya yeniden düzenlemek retrogradın yeniden ele alma temasına daha uygundur."
+          },
+
+          {
+            "when": {
+              "intensity": [
+                "high"
+              ],
+              "any_actions": [
+                "apply",
+                "commit"
+              ],
+              "topics_any": [
+                "career",
+                "learning",
+                "productivity"
+              ]
+            },
+
+            "activity_modifier": -1,
+
+            "reason": "Yüksek etkili, belge, iletişim, planlama veya anlaşma bileşeni güçlü yeni taahhütlerde Merkür retrosu ek seçimsel sürtünme olarak değerlendirilir."
+          }
+        ],
+
+        "notes": [
+          "Merkür retrosu bütün yeni başlangıçların otomatik olarak kötü olduğu anlamına gelmez.",
+          "Temel teknik etki Merkür'ün kendi işlevlerinde zayıflamadır; bu nedenle profile_effect yalnızca Mercury planet_profile ile gerçekten ilişkili tag'lere uygulanır.",
+          "Review +2 görünürde güçlüdür ancak review Mercury profile içinde olduğu için aynı anda -1 profile_effect alır; net doğrudan etki +1 olur.",
+          "Organize aynı nedenle net olarak nötrleşir ve retrograd sırasında düzenleme faaliyetinin gereksiz yere cezalandırılmasını önler.",
+          "Past veya unfinished context etiketleri genel olarak bonus almaz; yalnızca gerçekten Mercurial yeniden-ele-alma davranışı taşıyan aktiviteler conditional destek alır.",
+          "Reconnect otomatik bonus almaz. Merkür retrosu geçmişten kişilerle temasın mümkün olduğu sembolik bir dönem olarak yorumlanabilse de her reconnection aktivitesini +2 veya +3 desteklemek için yeterli teknik gerekçe yoktur.",
+          "Communication ve clarification ayrıca doğrudan -1 ile cezalandırılmaz; Mercury profile_effect zaten bu alanlarda tek bir -1 sürtünme üretir.",
+          "Merkür retrosu tek başına hard suppression üretmez; diğer bağımsız astrolojik koşullarla birlikte değerlendirilir."
+        ]
+      },
+      {
+        "id": "venus_retrograde",
+        "category": "planet_status",
+        "role": "primary",
+
+        "match": {
+          "planet": "venus",
+          "status": "retrograde",
+          "use_planet_profile": true
+        },
+
+        "modifiers": {
+          "actions": {
+            "review": 1,
+            "reconnect": 2,
+            "beauty_care": 1
+          },
+
+          "topics": {},
+
+          "contexts": {},
+
+          "relationship_modes": {
+            "reconnection": 2
+          }
+        },
+
+        "profile_effect": {
+          "actions": -1,
+          "topics": -1,
+          "relationship_modes": -1
+        },
+
+        "conditional_activity_rules": [
+          {
+            "when": {
+              "topics_any": [
+                "relationship"
+              ],
+              "context_any": [
+                "past",
+                "existing"
+              ],
+              "any_actions": [
+                "review",
+                "reconnect"
+              ]
+            },
+
+            "activity_modifier": 1,
+
+            "reason": "Mevcut veya geçmiş ilişki dinamiklerini yeniden değerlendirmek, yeni ve bağlayıcı bir ilişki başlangıcından farklı olarak Venus retrograde döneminin revision temasına daha uygundur."
+          },
+
+          {
+            "when": {
+              "topics_any": [
+                "beauty"
+              ],
+              "context_any": [
+                "new"
+              ],
+              "intensity": [
+                "high"
+              ],
+              "any_actions": [
+                "start_new",
+                "commit",
+                "purchase"
+              ]
+            },
+
+            "activity_modifier": -2,
+
+            "reason": "Yüksek etkili veya zor geri döndürülebilir yeni estetik kararlar Venus retrograde sırasında daha ihtiyatlı değerlendirilir."
+          },
+
+          {
+            "when": {
+              "topics_any": [
+                "relationship"
+              ],
+              "context_any": [
+                "new"
+              ],
+              "intensity": [
+                "high"
+              ],
+              "any_actions": [
+                "start_new",
+                "commit"
+              ]
+            },
+
+            "activity_modifier": -2,
+
+            "reason": "Yeni ve yüksek etkili ilişki taahhütleri Venus retrograde sırasında ek seçimsel ihtiyat gerektirir."
+          },
+
+          {
+            "when": {
+              "topics_any": [
+                "beauty",
+                "relationship"
+              ],
+              "intensity": [
+                "high"
+              ],
+              "any_actions": [
+                "purchase"
+              ]
+            },
+
+            "activity_modifier": -1,
+
+            "reason": "Yüksek etkili estetik veya ilişkiyle bağlantılı satın almalarda Venus retrograde ek bir değerlendirme katmanı oluşturur."
+          }
+        ],
+
+        "notes": [
+          "Venus retrograde bütün ilişki, güzellik veya sosyal aktiviteleri kötü yapmaz; etki Venus planet_profile ile gerçekten ilişkili tag'lerde çalışır.",
+          "Beauty_care +1, profile_effect içindeki -1'i nötrler; mevcut ve düşük riskli bakım rutinleri yalnızca Venus retrograde olduğu için cezalandırılmaz.",
+          "Reconnect ve reconnection değerleri profile_effect sonrasında net +1 destek üretir; +2 veya +3 düzeyinde aşırı bir 'eski ilişkiye dön' önerisi oluşturulmaz.",
+          "Past context kendi başına bonus almaz. Geçmişe ait herhangi bir aktiviteyi Venus retrograde nedeniyle yükseltmek doğru değildir.",
+          "Purchase genel olarak profile_effect nedeniyle hafif sürtünme alır; daha güçlü caution yalnızca Venus ile gerçekten bağlantılı yüksek etkili satın alma senaryolarında uygulanır.",
+          "Venus retrograde kullanıcıya eski bir ilişkiye geri dönmesini söyleyen bir kural olarak kullanılmamalıdır; reconnection yalnızca değerlendirmeye açık bir activity-ranking sinyalidir."
+        ]
+      },
+      {
+        "id": "mars_retrograde",
+        "category": "planet_status",
+        "role": "primary",
+
+        "match": {
+          "planet": "mars",
+          "status": "retrograde",
+          "use_planet_profile": true
+        },
+
+        "modifiers": {
+          "actions": {},
+
+          "topics": {},
+
+          "contexts": {},
+
+          "relationship_modes": {}
+        },
+
+        "profile_effect": {
+          "actions": -1,
+          "topics": -1,
+          "relationship_modes": -1
+        },
+
+        "conditional_activity_rules": [
+          {
+            "when": {
+              "context_any": [
+                "unfinished",
+                "past"
+              ],
+              "any_actions": [
+                "exercise",
+                "movement",
+                "continue"
+              ]
+            },
+
+            "activity_modifier": 1,
+
+            "reason": "Daha önce başlanmış fiziksel bir aktiviteyi kontrollü biçimde yeniden ele almak, tamamen yeni ve yoğun bir fiziksel girişimden daha uyumlu değerlendirilir."
+          },
+
+          {
+            "when": {
+              "context_any": [
+                "new"
+              ],
+              "intensity": [
+                "medium",
+                "high"
+              ],
+              "any_actions": [
+                "exercise",
+                "movement",
+                "start_new"
+              ]
+            },
+
+            "activity_modifier": -1,
+
+            "reason": "Yeni ve belirgin fiziksel efor gerektiren girişimler Mars retrograde sırasında ek seçimsel sürtünme alır."
+          },
+
+          {
+            "when": {
+              "intensity": [
+                "high"
+              ],
+              "any_actions": [
+                "start_new",
+                "apply"
+              ]
+            },
+
+            "activity_modifier": -1,
+
+            "reason": "Yüksek etkili girişim ve ileri hamlelerde Mars'ın retrograd hareketi eylemsel momentum açısından ek ihtiyat faktörüdür."
+          }
+        ],
+
+        "notes": [
+          "Mars retrograde bütün egzersiz veya hareket aktivitelerini yasaklamaz.",
+          "Temel teknik etki Mars'ın kendi action-profile alanlarında -1 sürtünmedir; bu nedenle fiziksel hareket, inisiyatif, uygulama ve sınır davranışları diğer faktörlere göre biraz daha düşük sıralanabilir.",
+          "Review, unfinished ve past genel olarak bonus almaz. Retrograde fikrini bütün geçmiş veya yarım kalmış aktivitelere otomatik destek olarak çevirmek kullanılmaz.",
+          "Eski bir workout veya fiziksel rutine dönme bonusu yalnızca ilgili physical-action koşulu gerçekten eşleştiğinde uygulanır.",
+          "Yeni orta veya yüksek yoğunluklu fiziksel başlangıçlara verilen ek -1 hard suppression değildir.",
+          "Mars retrograde sırasında yüksek yoğunluklu start_new eylemi başka destekleyici göstergelerle yeterli skora çıkabilir; retrograde tek başına mutlak veto değildir."
+        ]
+      },
+      {
+        "id": "mercury_jupiter_supportive",
+        "category": "aspect",
+        "role": "primary",
+
+        "match": {
+          "planet_pair": [
+            "mercury",
+            "jupiter"
+          ],
+
+          "aspect_types": [
+            "trine",
+            "sextile"
+          ]
+        },
+
+        "modifiers": {
+          "actions": {
+            "research": 1,
+            "write": 1,
+            "communicate": 1,
+            "clarify": 1,
+            "plan": 1
+          },
+
+          "topics": {
+            "learning": 1,
+            "personal_growth": 1,
+            "career": 1
+          },
+
+          "contexts": {},
+
+          "relationship_modes": {
+            "communication": 1
+          }
+        },
+
+        "notes": [
+          "Merkür-Jüpiter sextile veya trine bilgi, öğrenme, muhakeme, iletişim ve daha geniş perspektif gerektiren faaliyetlere mütevazı destek verir.",
+          "Bütün modifier değerleri +1 tutulur; tek bir destekleyici açı activity score'u gereğinden fazla domine etmemelidir.",
+          "Research ve learning ayrı boyutlarda çalışır; biri action, diğeri topic olduğu için aynı kavram olarak doğrudan iki kez sayılmaz ancak ranking formülü her boyutu kendi ağırlığıyla değerlendirir.",
+          "Explore kaldırılmıştır; Merkür-Jüpiter kombinasyonu zihinsel genişleme ve öğrenmeyle güçlü biçimde ilişkili olsa da bütün fiziksel veya deneyimsel keşif aktiviteleri otomatik olarak bu açıya ait değildir.",
+          "Aspect rule gezegenlerin retrograde, combust, stationary veya diğer condition durumlarını iptal etmez; planet-status kuralları bağımsız olarak birlikte hesaplanır.",
+          "Conjunction bu rule'a dahil değildir; conjunction_aspects ayrı review tamamlanana kadar deferred kalır."
+        ]
+      },
+      {
+        "id": "mercury_venus_supportive",
+        "category": "aspect",
+        "role": "primary",
+
+        "match": {
+          "planet_pair": [
+            "mercury",
+            "venus"
+          ],
+          "aspect_types": [
+            "trine",
+            "sextile"
+          ]
+        },
+
+        "modifiers": {
+          "actions": {
+            "communicate": 1,
+            "express": 1,
+            "write": 1,
+            "connect": 1,
+            "create": 1
+          },
+
+          "topics": {
+            "social": 1,
+            "relationship": 1,
+            "creativity": 1
+          },
+
+          "contexts": {},
+
+          "relationship_modes": {
+            "communication": 1
+          }
+        },
+
+        "notes": [
+          "Merkür-Venüs arasındaki destekleyici açı düşüncenin daha uyumlu, diplomatik veya estetik biçimde ifade edilmesini destekleyen bir sinyal olarak kullanılır.",
+          "Speech, writing and tact are more directly relevant than generic romance; therefore romance is not automatically scored.",
+          "Emotional_intimacy is not scored because deep emotional disclosure is not a necessary consequence of a Mercury-Venus aspect.",
+          "This aspect does not override Mercury or Venus retrograde, combustion, station or other independent planetary conditions."
+        ]
+      },
+      {
+        "id": "mercury_saturn_supportive",
+        "category": "aspect",
+        "role": "primary",
+
+        "match": {
+          "planet_pair": [
+            "mercury",
+            "saturn"
+          ],
+          "aspect_types": [
+            "trine",
+            "sextile"
+          ]
+        },
+
+        "modifiers": {
+          "actions": {
+            "plan": 1,
+            "organize": 1,
+            "review": 1,
+            "focus": 1,
+            "clarify": 1,
+            "compare": 1
+          },
+
+          "topics": {
+            "career": 1,
+            "productivity": 1
+          },
+
+          "contexts": {},
+
+          "relationship_modes": {
+            "communication": 1
+          }
+        },
+
+        "notes": [
+          "Merkür-Satürn arasındaki destekleyici açı disiplinli düşünme, yapılandırma, dikkat, kontrol ve metodik çalışma yönünde kullanılır.",
+          "Finance is not scored generically; a financial activity already receives support when it actually contains review, compare, organize or plan.",
+          "Conflict_resolution and boundaries are not automatically scored because Saturnian seriousness is not the same as successfully resolving interpersonal conflict.",
+          "Career and productivity receive only +1 because the aspect supports structured mental work rather than every career or productivity activity."
+        ]
+      },
+      {
+        "id": "mercury_mars_supportive",
+        "category": "aspect",
+        "role": "primary",
+
+        "match": {
+          "planet_pair": [
+            "mercury",
+            "mars"
+          ],
+          "aspect_types": [
+            "trine",
+            "sextile"
+          ]
+        },
+
+        "modifiers": {
+          "actions": {
+            "communicate": 1,
+            "clarify": 1,
+            "focus": 1,
+            "plan": 1,
+            "apply": 1
+          },
+
+          "topics": {},
+
+          "contexts": {},
+
+          "relationship_modes": {
+            "communication": 1
+          }
+        },
+
+        "notes": [
+          "Destekleyici Merkür-Mars açısı zihinsel enerji, karar verme, strateji ve düşünceyi eyleme dönüştürme yönünde küçük destek verir.",
+          "Start_new is not scored generically; mental decisiveness does not make every kind of new beginning Mercurial-Martian.",
+          "Career is not scored generically; career activities benefit only when they actually contain relevant actions such as apply, plan, focus or communicate.",
+          "The aspect supports directness but does not imply that aggressive or confrontational communication is desirable."
+        ]
+      },
+      {
+        "id": "mercury_uranus_supportive",
+        "category": "aspect",
+        "role": "primary",
+
+        "match": {
+          "planet_pair": [
+            "mercury",
+            "uranus"
+          ],
+          "aspect_types": [
+            "trine",
+            "sextile"
+          ]
+        },
+
+        "modifiers": {
+          "actions": {
+            "research": 1,
+            "create": 1,
+            "write": 1,
+            "express": 1
+          },
+
+          "topics": {
+            "creativity": 1,
+            "learning": 1
+          },
+
+          "contexts": {},
+
+          "relationship_modes": {}
+        },
+
+        "notes": [
+          "This is a modern-symbolic rule: supportive Mercury-Uranus contacts are associated with original thinking, inventive ideas and unconventional intellectual approaches.",
+          "Explore is not scored because the canonical action also covers physical and experiential exploration that may have nothing to do with Mercury-Uranus.",
+          "Start_new is not scored generically; novelty alone is insufficient to make every beginning Uranian.",
+          "The rule should remain modest because Uranus is an outer planet and this interpretation is not a traditional electional doctrine."
+        ]
+      },
+      {
+        "id": "mercury_neptune_supportive",
+        "category": "aspect",
+        "role": "primary",
+
+        "match": {
+          "planet_pair": [
+            "mercury",
+            "neptune"
+          ],
+          "aspect_types": [
+            "trine",
+            "sextile"
+          ]
+        },
+
+        "modifiers": {
+          "actions": {
+            "write": 1,
+            "create": 1,
+            "reflect": 1,
+            "express": 1
+          },
+
+          "topics": {
+            "creativity": 1,
+            "self_reflection": 1
+          },
+
+          "contexts": {},
+
+          "relationship_modes": {}
+        },
+
+        "notes": [
+          "This is a modern-symbolic rule: supportive Mercury-Neptune contacts are used for imagination, symbolic thinking, creative expression and reflective writing.",
+          "Mindfulness is not automatically scored; contemplative symbolism is not identical to a deliberate mindfulness practice.",
+          "General communication is not automatically boosted because Mercury-Neptune remains less suitable as a standalone indicator for factual precision.",
+          "Emotional_intimacy is not scored because sensitivity or imagination does not necessarily imply interpersonal emotional disclosure."
+        ]
+      },
+      {
+        "id": "mercury_pluto_supportive",
+        "category": "aspect",
+        "role": "primary",
+
+        "match": {
+          "planet_pair": [
+            "mercury",
+            "pluto"
+          ],
+          "aspect_types": [
+            "trine",
+            "sextile"
+          ]
+        },
+
+        "modifiers": {
+          "actions": {
+            "research": 1,
+            "reflect": 1,
+            "clarify": 1,
+            "focus": 1,
+            "write": 1
+          },
+
+          "topics": {
+            "self_reflection": 1
+          },
+
+          "contexts": {},
+
+          "relationship_modes": {}
+        },
+
+        "notes": [
+          "This is a modern-symbolic rule: supportive Mercury-Pluto contacts are used for mental penetration, concentrated inquiry and getting to the root of a subject.",
+          "General relationship, conflict-resolution and emotional-intimacy bonuses are intentionally omitted; depth of thought does not automatically make interpersonal confrontation appropriate.",
+          "Personal_growth is not scored generically because it is too broad; relevant activities can already benefit through research, reflect, clarify and self_reflection.",
+          "The rule remains at +1 because Pluto-based aspect interpretation is modern rather than traditional electional doctrine."
+        ]
+      },
+      {
+        "id": "mercury_neptune_hard",
+        "category": "aspect",
+        "role": "primary",
+
+        "match": {
+          "planet_pair": [
+            "mercury",
+            "neptune"
+          ],
+          "aspect_types": [
+            "square",
+            "opposition"
+          ]
+        },
+
+        "modifiers": {
+          "actions": {
+            "clarify": -2,
+            "communicate": -2,
+            "research": -1,
+            "compare": -1,
+            "focus": -1
+          },
+
+          "topics": {},
+
+          "contexts": {},
+
+          "relationship_modes": {
+            "communication": -2
+          }
+        },
+
+        "notes": [
+          "This is a modern-symbolic clarity rule: hard Mercury-Neptune contacts represent increased friction around factual precision, interpretation and communication.",
+          "Finance and career are not penalized as whole topics. Only activities that actually depend on affected Mercurial actions receive the penalty.",
+          "Reflect and create do not receive automatic bonuses from the hard aspect; creative potential may coexist with confusion but should be supported by independent positive indicators.",
+          "Because clarify, communicate and communication can receive -2, this rule can qualify as a strong negative only for activities that actually carry those tags."
+        ]
+      },
+      {
+        "id": "mercury_mars_hard",
+        "category": "aspect",
+        "role": "primary",
+
+        "match": {
+          "planet_pair": [
+            "mercury",
+            "mars"
+          ],
+          "aspect_types": [
+            "square",
+            "opposition"
+          ]
+        },
+
+        "modifiers": {
+          "actions": {
+            "communicate": -2,
+            "clarify": -1,
+            "focus": -1
+          },
+
+          "topics": {},
+
+          "contexts": {},
+
+          "relationship_modes": {
+            "communication": -2,
+            "conflict_resolution": -1
+          }
+        },
+
+        "notes": [
+          "Hard Mercury-Mars contacts are used primarily as friction around speech, impatience, argument and mentally rushed responses.",
+          "Conflict_resolution receives only -1 because the goal of resolving conflict is not itself Martian conflict; the caution concerns the communication process.",
+          "Apply and unrelated physical activities are not penalized merely because Mercury and Mars form a hard aspect.",
+          "Because communicate or communication can receive -2, this rule becomes a strong negative only when those tags are actually relevant to the activity."
+        ]
+      },
+      {
+        "id": "mercury_saturn_hard",
+        "category": "aspect",
+        "role": "primary",
+
+        "match": {
+          "planet_pair": [
+            "mercury",
+            "saturn"
+          ],
+          "aspect_types": [
+            "square",
+            "opposition"
+          ]
+        },
+
+        "modifiers": {
+          "actions": {
+            "communicate": -1,
+            "clarify": -1,
+            "review": 1,
+            "organize": 1
+          },
+
+          "topics": {},
+
+          "contexts": {},
+
+          "relationship_modes": {
+            "communication": -1
+          }
+        },
+
+        "notes": [
+          "Hard Mercury-Saturn contacts can make communication heavier, slower or more constrained without making all Mercurial work unusable.",
+          "Review and organize remain modestly useful because the Saturn-Mercury combination can channel attention toward correction, structure and careful checking even under tension.",
+          "Apply and start_new are not globally penalized; those actions may concern matters unrelated to Mercury-Saturn.",
+          "This rule contains no -2 modifier and therefore is not a strong-negative signal by itself under Lunora's scoring policy."
+        ]
+      },
+      {
+        "id": "mercury_uranus_hard",
+        "category": "aspect",
+        "role": "primary",
+
+        "match": {
+          "planet_pair": [
+            "mercury",
+            "uranus"
+          ],
+          "aspect_types": [
+            "square",
+            "opposition"
+          ]
+        },
+
+        "modifiers": {
+          "actions": {
+            "focus": -1,
+            "organize": -1,
+            "communicate": -1
+          },
+
+          "topics": {},
+
+          "contexts": {},
+
+          "relationship_modes": {
+            "communication": -1
+          }
+        },
+
+        "notes": [
+          "This is a modern-symbolic rule: hard Mercury-Uranus contacts are treated as mild friction around continuity of attention, orderly mental processing and tactful communication.",
+          "Create or explore are not automatically rewarded simply because disruption can sometimes generate innovation.",
+          "The rule remains limited to -1 because volatility and originality can coexist, and a hard Mercury-Uranus aspect is not sufficient by itself to suppress an activity.",
+          "This rule is not a strong-negative signal by itself."
+        ]
+      },
+      {
+        "id": "venus_jupiter_supportive",
+        "category": "aspect",
+        "role": "primary",
+
+        "match": {
+          "planet_pair": [
+            "venus",
+            "jupiter"
+          ],
+          "aspect_types": [
+            "trine",
+            "sextile"
+          ]
+        },
+
+        "modifiers": {
+          "actions": {
+            "connect": 1,
+            "socialize": 1,
+            "express": 1,
+            "beauty_care": 1,
+            "create": 1
+          },
+
+          "topics": {
+            "relationship": 1,
+            "social": 1,
+            "beauty": 1,
+            "creativity": 1
+          },
+
+          "contexts": {},
+
+          "relationship_modes": {
+            "romance": 1,
+            "quality_time": 1,
+            "social_fun": 1
+          }
+        },
+
+        "notes": [
+          "Venus and Jupiter are the two traditional benefics; their supportive contact is used for sociability, pleasure, relational ease, beauty and congenial activity.",
+          "The rule deliberately remains at +1 per tag so that one benefic aspect does not dominate the full recommendation score.",
+          "Purchase is not automatically boosted. Venus-Jupiter symbolism can also correlate with indulgence or excess, so spending should require its own supporting conditions.",
+          "Emotional_intimacy is omitted because social and affectionate ease does not necessarily imply deep emotional disclosure."
+        ]
+      },
+      {
+        "id": "moon_venus_supportive",
+        "category": "aspect",
+        "role": "primary",
+
+        "match": {
+          "planet_pair": [
+            "moon",
+            "venus"
+          ],
+          "aspect_types": [
+            "trine",
+            "sextile"
+          ]
+        },
+
+        "modifiers": {
+          "actions": {
+            "connect": 1,
+            "socialize": 1,
+            "beauty_care": 1,
+            "express": 1
+          },
+
+          "topics": {
+            "relationship": 1,
+            "social": 1,
+            "beauty": 1
+          },
+
+          "contexts": {},
+
+          "relationship_modes": {
+            "romance": 2,
+            "quality_time": 1,
+            "social_fun": 1
+          }
+        },
+
+        "notes": [
+          "Moon-Venus supportive aspects have direct electional precedent for love, marriage and Venusian concerns, so romance may receive a stronger +2 while broader related tags remain +1.",
+          "Rest and general wellbeing are not automatically boosted; emotional ease is not equivalent to physical recovery or wellness.",
+          "Emotional_intimacy is not automatically scored because affectionate harmony does not necessarily imply deep disclosure.",
+          "This rule does not override Venus retrograde, lunar eclipse conditions, Moon void-of-course or other independent factors."
+        ]
+      },
+      {
+        "id": "venus_mars_supportive",
+        "category": "aspect",
+        "role": "primary",
+
+        "match": {
+          "planet_pair": [
+            "venus",
+            "mars"
+          ],
+          "aspect_types": [
+            "trine",
+            "sextile"
+          ]
+        },
+
+        "modifiers": {
+          "actions": {
+            "connect": 1,
+            "socialize": 1,
+            "express": 1,
+            "create": 1
+          },
+
+          "topics": {
+            "relationship": 1,
+            "social": 1,
+            "creativity": 1
+          },
+
+          "contexts": {},
+
+          "relationship_modes": {
+            "romance": 2,
+            "social_fun": 1
+          }
+        },
+
+        "notes": [
+          "Venüs-Mars arasındaki destekleyici açı çekim, sıcaklık, sosyal yaklaşım ve yaratıcı ifade arasında uyumlu bir akış olarak kullanılır.",
+          "Romance doğrudan Venüs-Mars kesişiminde olduğu için +2 alabilir; daha geniş ilişki ve sosyal alanlar yalnızca +1 alır.",
+          "Exercise, movement ve wellbeing otomatik bonus almaz. Mars'ın fiziksel doğası, Venüs ile destekleyici açı yaptığı için bütün fiziksel aktiviteleri Venüsyen hale getirmez.",
+          "Bu rule genel bir geleneksel electional yasa olarak değil, klasik gezegen doğalarıyla uyumlu modern aspect yorum katmanı olarak kullanılmalıdır."
+        ]
+      },
+      {
+        "id": "venus_saturn_supportive",
+        "category": "aspect",
+        "role": "primary",
+
+        "match": {
+          "planet_pair": [
+            "venus",
+            "saturn"
+          ],
+          "aspect_types": [
+            "trine",
+            "sextile"
+          ]
+        },
+
+        "modifiers": {
+          "actions": {
+            "create": 1
+          },
+
+          "topics": {
+            "relationship": 1,
+            "creativity": 1
+          },
+
+          "contexts": {},
+
+          "relationship_modes": {}
+        },
+
+        "conditional_activity_rules": [
+          {
+            "when": {
+              "topics_any": [
+                "relationship"
+              ],
+              "any_actions": [
+                "commit",
+                "continue",
+                "plan",
+                "review"
+              ]
+            },
+
+            "activity_modifier": 1,
+
+            "reason": "Destekleyici Venüs-Satürn teması mevcut bir ilişkiyi ciddiyetle değerlendirme, sürdürme veya yapılandırma davranışlarına küçük ek destek verir."
+          }
+        ],
+
+        "notes": [
+          "Venüs-Satürn destekleyici açısı sadakat, dayanıklılık, ölçülülük ve estetik üretime biçim verme yönünde kullanılabilir.",
+          "Commit doğrudan global action bonusu almaz; aksi halde Venüs ile ilgisiz kariyer veya kişisel taahhütler yanlışlıkla puanlanır.",
+          "Finance genel topic bonusu almaz. Kaynaklarda business judgment teması bulunsa da bütün finans aktivitelerini Venüs-Satürn'e bağlamak fazla geniştir.",
+          "Communication, conflict_resolution ve boundaries otomatik bonus almaz.",
+          "Satürn geleneksel bir malefik olduğu için bu açı güçlü bir genel benefic bonusuna dönüştürülmez; destek yalnızca ilgili faaliyetlerde mütevazı tutulur."
+        ]
+      },
+      {
+        "id": "venus_uranus_supportive",
+        "category": "aspect",
+        "role": "primary",
+
+        "match": {
+          "planet_pair": [
+            "venus",
+            "uranus"
+          ],
+          "aspect_types": [
+            "trine",
+            "sextile"
+          ]
+        },
+
+        "modifiers": {
+          "actions": {
+            "explore": 1,
+            "express": 1,
+            "create": 1,
+            "socialize": 1
+          },
+
+          "topics": {
+            "beauty": 1,
+            "social": 1,
+            "creativity": 1
+          },
+
+          "contexts": {},
+
+          "relationship_modes": {
+            "romance": 1,
+            "social_fun": 1
+          }
+        },
+
+        "notes": [
+          "Bu modern-sembolik rule Venüsyen zevk, sosyallik ve estetik ile Uranüsyen yenilik, özgürlük ve sıra dışılık arasındaki uyumu temsil eder.",
+          "Start_new otomatik bonus almaz; yenilik isteği her tür yeni başlangıcı desteklemek anlamına gelmez.",
+          "Relationship topic'i genel olarak puanlanmaz; etki özellikle romance ve social_fun gibi daha uygun ilişki modlarında tutulur.",
+          "Beauty +1 estetik yenilik ve farklı ifade yönünü temsil eder; büyük veya geri döndürülmesi zor güzellik değişiklikleri için tek başına yeterli seçimsel gerekçe değildir.",
+          "Outer-planet aspect rule olduğu için bütün etkiler mütevazı tutulur."
+        ]
+      },
+      {
+        "id": "venus_neptune_supportive",
+        "category": "aspect",
+        "role": "primary",
+
+        "match": {
+          "planet_pair": [
+            "venus",
+            "neptune"
+          ],
+          "aspect_types": [
+            "trine",
+            "sextile"
+          ]
+        },
+
+        "modifiers": {
+          "actions": {
+            "create": 1,
+            "express": 1,
+            "connect": 1
+          },
+
+          "topics": {
+            "creativity": 1,
+            "beauty": 1,
+            "relationship": 1
+          },
+
+          "contexts": {},
+
+          "relationship_modes": {
+            "romance": 1,
+            "emotional_intimacy": 1
+          }
+        },
+
+        "notes": [
+          "Bu modern-sembolik rule sanatsal hayal gücü, romantik duyarlılık, estetik hassasiyet ve empatik bağ kurma yönünde küçük destek verir.",
+          "Rest otomatik bonus almaz; Neptünyen yumuşaklık fiziksel dinlenme davranışıyla aynı şey değildir.",
+          "Beauty_care otomatik bonus almaz; estetik duyarlılık ile kişisel bakım aktivitesi birbirinden ayrılır.",
+          "Destekleyici açı olsa bile Neptün pratik gerçekçilik için tek başına güçlü bir gösterge değildir; bu nedenle commit, purchase veya önemli kararlar bonus almaz.",
+          "Outer-planet aspect rule olduğu için +1 seviyesinde tutulur."
+        ]
+      },
+      {
+        "id": "venus_pluto_supportive",
+        "category": "aspect",
+        "role": "primary",
+
+        "match": {
+          "planet_pair": [
+            "venus",
+            "pluto"
+          ],
+          "aspect_types": [
+            "trine",
+            "sextile"
+          ]
+        },
+
+        "modifiers": {
+          "actions": {
+            "connect": 1,
+            "reflect": 1,
+            "clarify": 1,
+            "create": 1
+          },
+
+          "topics": {
+            "relationship": 1,
+            "self_reflection": 1,
+            "creativity": 1
+          },
+
+          "contexts": {},
+
+          "relationship_modes": {
+            "emotional_intimacy": 1
+          }
+        },
+
+        "notes": [
+          "Bu modern-sembolik rule ilişkisel ve yaratıcı konularda derinleşme, yoğunlaşma ve yüzeyin altındaki motivasyonları fark etme yönünde kullanılır.",
+          "Emotional_intimacy yalnızca +1 alır; yoğunluk otomatik olarak sağlıklı veya güvenli yakınlık anlamına gelmez.",
+          "Conflict_resolution otomatik bonus almaz. Derin bir konuyla yüzleşmek ile çatışmayı başarıyla çözmek aynı davranış değildir.",
+          "Romance otomatik bonus almaz; Venüs-Plüton yoğun çekim gösterebilse de Lunora bunu bütün romantik faaliyetlere genel destek olarak kullanmaz.",
+          "Outer-planet aspect rule olduğu için etkiler mütevazı tutulur."
+        ]
+      },
+      {
+        "id": "venus_saturn_hard",
+        "category": "aspect",
+        "role": "primary",
+
+        "match": {
+          "planet_pair": [
+            "venus",
+            "saturn"
+          ],
+          "aspect_types": [
+            "square",
+            "opposition"
+          ]
+        },
+
+        "modifiers": {
+          "actions": {
+            "connect": -1,
+            "socialize": -1,
+            "express": -1
+          },
+
+          "topics": {
+            "relationship": -1
+          },
+
+          "contexts": {},
+
+          "relationship_modes": {
+            "romance": -2,
+            "social_fun": -1
+          }
+        },
+
+        "conditional_activity_rules": [
+          {
+            "when": {
+              "topics_any": [
+                "relationship"
+              ],
+              "intensity": [
+                "high"
+              ],
+              "any_actions": [
+                "start_new",
+                "commit"
+              ]
+            },
+
+            "activity_modifier": -2,
+
+            "reason": "Venüs Satürn tarafından sert biçimde zorlanırken yüksek etkili yeni ilişki başlangıçları veya bağlayıcı ilişki kararları ek seçimsel ihtiyat gerektirir."
+          }
+        ],
+
+        "notes": [
+          "Venüs-Satürn sert açıları ilişki, sosyal rahatlık ve romantik akışta kısıtlanma veya mesafe teması yaratabilen ciddi bir friction sinyalidir.",
+          "Geleneksel marriage-election kaynakları Venüs'ün Satürn gibi malefikler tarafından affliction almasını özellikle istenmeyen bir durum olarak değerlendirir.",
+          "Buna rağmen bütün ilişki aktiviteleri engellenmez; mevcut ilişkiyi düşünmek, değerlendirmek veya sınırlarını görmek hâlâ yapılabilir.",
+          "Rule kendisini ayrıca strong_negative_signal olarak ilan etmez; romance -2 veya eşleşen conditional -2 üzerinden scoring policy bunu aktivite bazında belirler."
+        ]
+      },
+      {
+        "id": "venus_uranus_hard",
+        "category": "aspect",
+        "role": "primary",
+
+        "match": {
+          "planet_pair": [
+            "venus",
+            "uranus"
+          ],
+          "aspect_types": [
+            "square",
+            "opposition"
+          ]
+        },
+
+        "modifiers": {
+          "actions": {},
+
+          "topics": {
+            "relationship": -1
+          },
+
+          "contexts": {},
+
+          "relationship_modes": {
+            "romance": -1
+          }
+        },
+
+        "conditional_activity_rules": [
+          {
+            "when": {
+              "topics_any": [
+                "relationship"
+              ],
+              "intensity": [
+                "high"
+              ],
+              "any_actions": [
+                "start_new",
+                "commit"
+              ]
+            },
+
+            "activity_modifier": -2,
+
+            "reason": "Sert Venüs-Uranüs teması altında yüksek etkili yeni romantik başlangıç veya kalıcılık gerektiren taahhütler istikrar açısından ek ihtiyatla değerlendirilir."
+          }
+        ],
+
+        "notes": [
+          "Bu modern-sembolik rule'un ana problemi bütün ilişki faaliyetleri değil, özgürlük ve istikrar ihtiyaçları arasındaki gerilimdir.",
+          "Commit global olarak -2 almaz; yalnızca ilişki konusu ve yüksek intensity ile birlikte olduğunda özel caution uygulanır.",
+          "Emotional_intimacy otomatik olarak negatif puanlanmaz. Özgürlük ihtiyacını duygusal yakınlık yetersizliğiyle eşitlemek doğru değildir.",
+          "Sosyal, yaratıcı veya deneysel aktiviteler yalnızca sert Venüs-Uranüs açısı nedeniyle cezalandırılmaz."
+        ]
+      },
+      {
+        "id": "venus_neptune_hard",
+        "category": "aspect",
+        "role": "primary",
+
+        "match": {
+          "planet_pair": [
+            "venus",
+            "neptune"
+          ],
+          "aspect_types": [
+            "square",
+            "opposition"
+          ]
+        },
+
+        "modifiers": {
+          "actions": {
+            "purchase": -1
+          },
+
+          "topics": {
+            "relationship": -1
+          },
+
+          "contexts": {},
+
+          "relationship_modes": {
+            "romance": -1
+          }
+        },
+
+        "conditional_activity_rules": [
+          {
+            "when": {
+              "topics_any": [
+                "relationship"
+              ],
+              "intensity": [
+                "high"
+              ],
+              "any_actions": [
+                "start_new",
+                "commit"
+              ]
+            },
+
+            "activity_modifier": -2,
+
+            "reason": "Sert Venüs-Neptün teması altında yüksek etkili romantik başlangıç veya bağlayıcı ilişki kararları idealizasyon ve gerçeklik değerlendirmesi açısından ek ihtiyat gerektirir."
+          },
+
+          {
+            "when": {
+              "topics_any": [
+                "beauty",
+                "finance"
+              ],
+              "intensity": [
+                "high"
+              ],
+              "any_actions": [
+                "purchase"
+              ]
+            },
+
+            "activity_modifier": -2,
+
+            "reason": "Yüksek etkili estetik veya finansal satın almalarda değer algısının idealize edilmesi ihtimali nedeniyle ek seçimsel sürtünme uygulanır."
+          }
+        ],
+
+        "notes": [
+          "Bu modern-sembolik rule özellikle değer algısı, romantik idealizasyon ve pratik yargının bulanıklaşması temalarında kullanılır.",
+          "Finance topic'i doğrudan -2 almaz; böylece bütçe incelemek veya harcamaları organize etmek gibi finans aktiviteleri sırf topic nedeniyle cezalandırılmaz.",
+          "Commit global olarak -2 almaz; yalnızca ilişkiyle gerçekten ilgili yüksek etkili bir taahhütte conditional caution uygulanır.",
+          "Purchase yalnızca -1 genel friction alır; daha güçlü -2 yalnızca yüksek etkili beauty veya finance satın alma koşulu eşleştiğinde uygulanır.",
+          "Reflect ve create otomatik bonus almaz. Sert bir açının yaratıcı potansiyeli bulunabilse bile Lunora negatif bir göstergeden otomatik pozitif scoring üretmez.",
+          "Communication negatif puanlanmaz; Venüs-Neptün'ün çekirdek problemi Mercurial iletişim mekanizmasının kendisi değildir."
+        ]
+      },
+      {
+        "id": "venus_pluto_hard",
+        "category": "aspect",
+        "role": "primary",
+
+        "match": {
+          "planet_pair": [
+            "venus",
+            "pluto"
+          ],
+          "aspect_types": [
+            "square",
+            "opposition"
+          ]
+        },
+
+        "modifiers": {
+          "actions": {
+            "connect": -1
+          },
+
+          "topics": {
+            "relationship": -1
+          },
+
+          "contexts": {},
+
+          "relationship_modes": {
+            "romance": -1,
+            "emotional_intimacy": -1,
+            "conflict_resolution": -1
+          }
+        },
+
+        "conditional_activity_rules": [
+          {
+            "when": {
+              "topics_any": [
+                "relationship"
+              ],
+              "intensity": [
+                "high"
+              ],
+              "any_actions": [
+                "commit",
+                "clarify",
+                "communicate",
+                "set_boundary"
+              ]
+            },
+
+            "activity_modifier": -1,
+
+            "reason": "Yüksek etkili ilişki kararları veya yoğun yüzleşmeler, sert Venüs-Plüton teması altında güç, kontrol ve yoğunluk dinamikleri açısından ek ihtiyatla değerlendirilir."
+          }
+        ],
+
+        "notes": [
+          "Bu modern-sembolik rule'un çekirdek konusu bütün romantik faaliyetlerin kötü olması değil; ilişkisel yoğunluk, güç dengesi, takıntılı tutunma veya kontrol temalarının daha kolay öne çıkabilmesidir.",
+          "Communicate ve clarify global olarak cezalandırılmaz; bunlar Mercurial fonksiyonlardır ve yalnızca yüksek etkili ilişki senaryosunda conditional caution alabilir.",
+          "Social_fun negatif puanlanmaz. İlişkisel yoğunluk bütün sosyal eğlence aktivitelerini otomatik olarak uygunsuz yapmaz.",
+          "Emotional_intimacy yalnızca -1 alır; yoğun duygusal temasın zorlaşabilmesi mümkündür ancak bu açı yakınlığın kendisini mutlak olarak olumsuz yapmaz.",
+          "Bu outer-planet rule kendi başına strong-negative değildir."
+        ]
+      },
+      {
+        "id": "mars_saturn_supportive",
+        "category": "aspect",
+        "role": "primary",
+
+        "match": {
+          "planet_pair": [
+            "mars",
+            "saturn"
+          ],
+          "aspect_types": [
+            "trine",
+            "sextile"
+          ]
+        },
+
+        "modifiers": {
+          "actions": {
+            "exercise": 1,
+            "focus": 1,
+            "continue": 1,
+            "commit": 1,
+            "set_boundary": 1
+          },
+
+          "topics": {
+            "productivity": 1
+          },
+
+          "contexts": {},
+
+          "relationship_modes": {
+            "boundaries": 1
+          }
+        },
+
+        "notes": [
+          "Destekleyici Mars-Satürn açısı eylem ile kontrol, dayanıklılık ve disiplin arasında daha işlevsel bir koordinasyon olarak kullanılır.",
+          "Exercise yalnızca +1 alır; bu açı fiziksel çaba için otomatik olarak güçlü veya risksiz bir gösterge değildir.",
+          "Movement genel bonus almaz; Mars-Satürn daha çok kontrollü ve sürdürülebilir eforla ilişkilidir, her tür hareketle değil.",
+          "Start_new bonus almaz. Bu kombinasyonun gücü hızlı başlangıçtan çok eylemi yapılandırmak, sürdürmek ve sınırlandırmaktadır.",
+          "Wellbeing genel topic bonusu kaldırılmıştır; disiplinli efor bütün wellbeing aktivitelerini otomatik olarak desteklemez.",
+          "Mars ve Satürn geleneksel malefikler olduğu için uyumlu açıları bile geniş bir benefic bonusuna dönüştürülmez."
+        ]
+      },
+      {
+        "id": "mars_jupiter_supportive",
+        "category": "aspect",
+        "role": "primary",
+
+        "match": {
+          "planet_pair": [
+            "mars",
+            "jupiter"
+          ],
+          "aspect_types": [
+            "trine",
+            "sextile"
+          ]
+        },
+
+        "modifiers": {
+          "actions": {
+            "start_new": 1,
+            "explore": 1,
+            "exercise": 1,
+            "movement": 1,
+            "apply": 1
+          },
+
+          "topics": {
+            "personal_growth": 1
+          },
+
+          "contexts": {},
+
+          "relationship_modes": {}
+        },
+
+        "notes": [
+          "Destekleyici Mars-Jüpiter açısı girişim, cesaret, genişleme isteği ve hareketi daha büyük bir hedefe yöneltme açısından küçük destek verir.",
+          "Bütün modifier değerleri +1 tutulur; Mars-Jüpiter'in yüksek enerji ve iyimserlik sembolizmi tek bir açının recommendation skorunu domine etmesine izin vermemelidir.",
+          "Learning otomatik bonus almaz; öğrenme Jüpiter'e ait olsa da Mars ile destekleyici açı bütün öğrenme aktivitelerini doğrudan güçlendirmez.",
+          "Social ve socialize otomatik bonus almaz; dışa dönüklük olası bir tezahürdür fakat açının çekirdek activity-routing fonksiyonu değildir.",
+          "Wellbeing genel olarak puanlanmaz; fiziksel faaliyetler zaten exercise ve movement action'ları üzerinden etkilenir."
+        ]
+      },
+      {
+        "id": "sun_mars_supportive",
+        "category": "aspect",
+        "role": "primary",
+
+        "match": {
+          "planet_pair": [
+            "sun",
+            "mars"
+          ],
+          "aspect_types": [
+            "trine",
+            "sextile"
+          ]
+        },
+
+        "modifiers": {
+          "actions": {
+            "start_new": 1,
+            "focus": 1,
+            "exercise": 1,
+            "movement": 1,
+            "express": 1,
+            "apply": 1
+          },
+
+          "topics": {
+            "career": 1,
+            "personal_growth": 1
+          },
+
+          "contexts": {},
+
+          "relationship_modes": {}
+        },
+
+        "notes": [
+          "Destekleyici Güneş-Mars açısı irade, inisiyatif, özgüven ve eyleme geçme kapasitesinin daha uyumlu çalışmasını temsil eder.",
+          "Start_new ve apply yalnızca +1 alır; önemli başlangıçların uygunluğu diğer electional göstergeler tarafından ayrıca değerlendirilmelidir.",
+          "Exercise ve movement küçük destek alabilir çünkü Mars'ın fiziksel eylemi Güneş'in canlılık ve irade sembolizmiyle uyumlu çalışır.",
+          "Wellbeing topic olarak puanlanmaz; enerji veya hareket desteği tüm wellbeing faaliyetlerinin uygun olduğu anlamına gelmez.",
+          "Bu rule başka planet-status, eclipse veya lunar-condition kurallarını geçersiz kılmaz."
+        ]
+      },
+      {
+        "id": "mars_uranus_supportive",
+        "category": "aspect",
+        "role": "primary",
+
+        "match": {
+          "planet_pair": [
+            "mars",
+            "uranus"
+          ],
+          "aspect_types": [
+            "trine",
+            "sextile"
+          ]
+        },
+
+        "modifiers": {
+          "actions": {
+            "start_new": 1,
+            "explore": 1,
+            "create": 1
+          },
+
+          "topics": {
+            "creativity": 1
+          },
+
+          "contexts": {},
+
+          "relationship_modes": {}
+        },
+
+        "notes": [
+          "Bu modern-sembolik rule Mars'ın eylemsel gücü ile Uranüs'ün yenilik, deney ve alışılmış kalıplardan çıkma teması arasındaki uyumu temsil eder.",
+          "Exercise ve movement otomatik bonus almaz; Uranüsyen ani veya sıra dışı enerji fiziksel faaliyetin kendisini seçimsel olarak daha uygun hale getirmek için yeterli değildir.",
+          "Personal_growth ve social gibi geniş topic bonusları kaldırılmıştır.",
+          "Start_new yalnızca +1 alır ve özellikle yenilik veya deneme karakteri taşıyan başlangıçlarda anlamlıdır.",
+          "Outer-planet aspect rule olduğu için etkiler bilinçli olarak mütevazı tutulur."
+        ]
+      },
+      {
+        "id": "mars_pluto_supportive",
+        "category": "aspect",
+        "role": "primary",
+
+        "match": {
+          "planet_pair": [
+            "mars",
+            "pluto"
+          ],
+          "aspect_types": [
+            "trine",
+            "sextile"
+          ]
+        },
+
+        "modifiers": {
+          "actions": {
+            "focus": 1,
+            "continue": 1,
+            "set_boundary": 1,
+            "exercise": 1
+          },
+
+          "topics": {},
+
+          "contexts": {},
+
+          "relationship_modes": {
+            "boundaries": 1
+          }
+        },
+
+        "notes": [
+          "Bu modern-sembolik rule yoğunlaştırılmış irade, dayanıklılık ve hedefe yönelik efor temasını temsil eder.",
+          "Focus ve continue güçlü ama dar activity eşleşmeleridir; genel productivity veya personal_growth topic'lerine bonus verilmez.",
+          "Exercise yalnızca +1 alır; yüksek fiziksel yoğunluk veya dayanıklılık gerektiren faaliyetlerin güvenliği bu astrolojik rule üzerinden varsayılmaz.",
+          "Set_boundary ve boundaries güç ve assertion temasını kontrollü biçimde temsil eder.",
+          "Outer-planet aspect olduğu için +2 veya +3 düzeyinde genel güçlendirme kullanılmaz."
+        ]
+      },
+      {
+        "id": "mars_saturn_hard",
+        "category": "aspect",
+        "role": "primary",
+
+        "match": {
+          "planet_pair": [
+            "mars",
+            "saturn"
+          ],
+          "aspect_types": [
+            "square",
+            "opposition"
+          ]
+        },
+
+        "modifiers": {
+          "actions": {
+            "start_new": -1,
+            "exercise": -1,
+            "movement": -1,
+            "focus": -1
+          },
+
+          "topics": {},
+
+          "contexts": {},
+
+          "relationship_modes": {}
+        },
+
+        "conditional_activity_rules": [
+          {
+            "when": {
+              "intensity": [
+                "medium",
+                "high"
+              ],
+              "context_any": [
+                "new"
+              ],
+              "any_actions": [
+                "exercise",
+                "movement",
+                "start_new"
+              ]
+            },
+
+            "activity_modifier": -2,
+
+            "reason": "Yeni ve belirgin efor gerektiren orta veya yüksek yoğunluklu girişimler, sert Mars-Satürn teması altında stop-start, kısıtlama ve zorlanma dinamiği nedeniyle daha ihtiyatlı sıralanır."
+          }
+        ],
+
+        "notes": [
+          "Sert Mars-Satürn açısı eylem ve engel, hız ve kısıtlama arasındaki sürtünmeyi temsil eder.",
+          "Global action modifier'ları -1 ile sınırlıdır; bu açı bütün fiziksel veya yeni aktiviteleri otomatik olarak engellemez.",
+          "Daha güçlü -2 yalnızca yeni ve medium/high intensity eylem koşulu gerçekten eşleştiğinde uygulanır.",
+          "Continue veya kontrollü mevcut faaliyetler otomatik olarak cezalandırılmaz; Mars-Satürn bazı durumlarda dayanıklılık ve disiplin gerektiren mevcut işleri sürdürebilir.",
+          "Reflect ve review gibi ilgisiz faaliyetlere hiçbir ceza uygulanmaz.",
+          "Rule kendisini ayrıca strong_negative_signal olarak işaretlemez; conditional -2 eşleştiğinde scoring policy bunu aktivite bazında strong negative olarak hesaplar."
+        ]
+      },
+      {
+        "id": "mars_neptune_hard",
+        "category": "aspect",
+        "role": "primary",
+
+        "match": {
+          "planet_pair": [
+            "mars",
+            "neptune"
+          ],
+          "aspect_types": [
+            "square",
+            "opposition"
+          ]
+        },
+
+        "modifiers": {
+          "actions": {
+            "start_new": -1,
+            "focus": -1,
+            "apply": -1,
+            "exercise": -1,
+            "movement": -1
+          },
+
+          "topics": {},
+
+          "contexts": {},
+
+          "relationship_modes": {}
+        },
+
+        "conditional_activity_rules": [
+          {
+            "when": {
+              "intensity": [
+                "high"
+              ],
+              "any_actions": [
+                "start_new",
+                "apply",
+                "exercise",
+                "movement"
+              ]
+            },
+
+            "activity_modifier": -2,
+
+            "reason": "Yüksek etkili eylemler, sert Mars-Neptün teması altında yön, motivasyon veya eylemsel netliğin dağılması ihtimali nedeniyle ek seçimsel sürtünme alır."
+          }
+        ],
+
+        "notes": [
+          "Bu modern-sembolik rule Mars'ın doğrudan eylem kapasitesi ile Neptün'ün çözülme, belirsizlik ve yön kaybı teması arasındaki sürtünmeyi temsil eder.",
+          "Commit global olarak cezalandırılmaz; bütün taahhütler Mars fonksiyonu değildir.",
+          "Rest ve reflect otomatik bonus almaz. Sert bir açının eylemsel sürtünme yaratması, dinlenme veya reflection aktivitelerinin astrolojik olarak otomatik desteklendiği anlamına gelmez.",
+          "Medium veya low intensity gündelik hareket aktiviteleri yalnızca hafif -1 sürtünme alır ve tek başına hard-suppress edilmez.",
+          "Yüksek intensity için conditional -2, ancak ilgili action gerçekten activity içinde bulunduğunda strong-negative olarak sayılır.",
+          "Outer-planet rule olduğu için herhangi bir mutlak yasak üretmez."
+        ]
+      },
+      {
+        "id": "mars_uranus_hard",
+        "category": "aspect",
+        "role": "primary",
+
+        "match": {
+          "planet_pair": [
+            "mars",
+            "uranus"
+          ],
+          "aspect_types": [
+            "square",
+            "opposition"
+          ]
+        },
+
+        "modifiers": {
+          "actions": {
+            "start_new": -1,
+            "exercise": -1,
+            "movement": -1,
+            "focus": -1
+          },
+
+          "topics": {},
+
+          "contexts": {},
+
+          "relationship_modes": {}
+        },
+
+        "conditional_activity_rules": [
+          {
+            "when": {
+              "intensity": [
+                "high"
+              ],
+              "any_actions": [
+                "exercise",
+                "movement"
+              ]
+            },
+
+            "activity_modifier": -1,
+
+            "reason": "Yüksek yoğunluklu fiziksel faaliyetler, sert Mars-Uranüs teması altında dürtüsellik ve ritim düzensizliği açısından ek seçimsel sürtünme alır."
+          }
+        ],
+
+        "notes": [
+          "Bu modern-sembolik rule Mars'ın doğrudan eylem dürtüsü ile Uranüs'ün ani değişim, bağımsızlık ve kesintili hareket teması arasındaki gerilimi temsil eder.",
+          "Exercise ve movement yalnızca hafif negatif puan alır; bu rule gerçek dünyadaki yaralanma veya kaza riskini tahmin eden bir güvenlik modeli değildir.",
+          "Eski -4 hard suppression kaldırılmıştır. Bir dış gezegen açısı tek başına yüksek yoğunluklu fiziksel bir aktiviteyi mutlak biçimde yasaklamamalıdır.",
+          "Explore ve commit cezalandırılmaz; yenilik aramak veya taahhüt vermek bu açının her durumda doğrudan hedefi değildir.",
+          "Bu rule kendi başına strong-negative sinyal üretmez."
+        ]
+      },
+      {
+        "id": "mars_pluto_hard",
+        "category": "aspect",
+        "role": "primary",
+
+        "match": {
+          "planet_pair": [
+            "mars",
+            "pluto"
+          ],
+          "aspect_types": [
+            "square",
+            "opposition"
+          ]
+        },
+
+        "modifiers": {
+          "actions": {},
+
+          "topics": {
+            "relationship": -1
+          },
+
+          "contexts": {},
+
+          "relationship_modes": {
+            "conflict_resolution": -1,
+            "boundaries": -1
+          }
+        },
+
+        "conditional_activity_rules": [
+          {
+            "when": {
+              "topics_any": [
+                "relationship"
+              ],
+              "intensity": [
+                "high"
+              ],
+              "any_actions": [
+                "communicate",
+                "clarify",
+                "set_boundary"
+              ]
+            },
+
+            "activity_modifier": -1,
+
+            "reason": "Yüksek etkili ilişki yüzleşmeleri sert Mars-Plüton teması altında güç, kontrol ve zorlayıcılık dinamikleri açısından ek ihtiyatla değerlendirilir."
+          }
+        ],
+
+        "notes": [
+          "Bu modern-sembolik rule yoğun irade, zorlayıcılık, güç mücadelesi ve kontrol temalarının kolayca aşırılaşabilmesini temsil eder.",
+          "Communicate ve clarify global olarak cezalandırılmaz; bunlar Mercurial fonksiyonlardır ve yalnızca yoğun ilişki senaryolarında ek sürtünme alır.",
+          "Set_boundary global olarak negatif değildir. Sağlıklı sınır koymak ile güç mücadelesine girmek aynı şey değildir.",
+          "Conflict_resolution ve boundaries yalnızca -1 alır; Mars-Plüton sert açısı bütün çatışma çözme faaliyetlerini otomatik olarak uygunsuz yapmaz.",
+          "Outer-planet rule olduğu için tek başına strong-negative veya suppression üretmez."
+        ]
+      },
+      {
+        "id": "moon_mars_hard",
+        "category": "aspect",
+        "role": "primary",
+
+        "match": {
+          "planet_pair": [
+            "moon",
+            "mars"
+          ],
+          "aspect_types": [
+            "square",
+            "opposition"
+          ]
+        },
+
+        "modifiers": {
+          "actions": {
+            "communicate": -1,
+            "clarify": -1
+          },
+
+          "topics": {},
+
+          "contexts": {},
+
+          "relationship_modes": {
+            "communication": -1,
+            "conflict_resolution": -1
+          }
+        },
+
+        "conditional_activity_rules": [
+          {
+            "when": {
+              "topics_any": [
+                "relationship"
+              ],
+              "intensity": [
+                "medium",
+                "high"
+              ],
+              "any_actions": [
+                "communicate",
+                "clarify",
+                "set_boundary"
+              ]
+            },
+
+            "activity_modifier": -2,
+
+            "reason": "Duygusal olarak yüklü ve sonuçları önemli ilişki konuşmaları, sert Ay-Mars teması altında reaktivite ve çekişme ihtimali nedeniyle daha ihtiyatlı sıralanır."
+          }
+        ],
+
+        "notes": [
+          "Ay-Mars sert açıları relationship aktivitelerini genel olarak yasaklamaz; ana seçimsel sorun tartışma, reaktivite ve duygusal gerilim içeren eylemlerdir.",
+          "Emotional_intimacy doğrudan negatif puanlanmaz. Duygusal yakınlık ile çatışmalı veya reaktif iletişim aynı şey değildir.",
+          "Bu rule'un -2 conditional etkisi yalnızca ilgili relationship aktivitesi gerçekten eşleştiğinde strong-negative sayılır.",
+          "Aynı Ay-Mars açısı moon_next_aspect_malefic_hard sinyalinin de astronomik kaynağıysa iki rule aynı olayı iki kez puanlamamalıdır."
+        ]
+      },
+      {
+        "id": "sun_jupiter_supportive",
+        "category": "aspect",
+        "role": "primary",
+
+        "match": {
+          "planet_pair": [
+            "sun",
+            "jupiter"
+          ],
+          "aspect_types": [
+            "trine",
+            "sextile"
+          ]
+        },
+
+        "modifiers": {
+          "actions": {
+            "express": 1,
+            "start_new": 1,
+            "apply": 1
+          },
+
+          "topics": {
+            "personal_growth": 1,
+            "career": 1
+          },
+
+          "contexts": {},
+
+          "relationship_modes": {}
+        },
+
+        "notes": [
+          "Destekleyici Güneş-Jüpiter açısı özgüven, kendini ortaya koyma, gelişim ve daha geniş hedeflere yönelme açısından küçük destek verir.",
+          "Focus kaldırılmıştır; Jüpiter genişletici bir ilke olduğu için konsantrasyon bu kombinasyonun en doğrudan fonksiyonu değildir.",
+          "Social genel bonus almaz; olumlu ve dışa dönük bir ton mümkün olsa da bütün sosyal aktiviteleri puanlamak fazla geniş olur.",
+          "Bütün etkiler +1 ile sınırlıdır; tek bir benefic açı önemli başlangıçların uygunluğunu tek başına belirlemez."
+        ]
+      },
+      {
+        "id": "jupiter_saturn_supportive",
+        "category": "aspect",
+        "role": "primary",
+
+        "match": {
+          "planet_pair": [
+            "jupiter",
+            "saturn"
+          ],
+          "aspect_types": [
+            "trine",
+            "sextile"
+          ]
+        },
+
+        "modifiers": {
+          "actions": {
+            "plan": 1,
+            "commit": 1,
+            "organize": 1,
+            "continue": 1
+          },
+
+          "topics": {
+            "career": 1,
+            "productivity": 1
+          },
+
+          "contexts": {},
+
+          "relationship_modes": {}
+        },
+
+        "notes": [
+          "Destekleyici Jüpiter-Satürn açısı büyüme isteği ile gerçekçilik, yapı ve süreklilik arasında daha işlevsel bir denge olarak kullanılır.",
+          "Plan ve commit özellikle anlamlıdır fakat +3 veya +2 kullanılmaz; tek açı recommendation skorunu domine etmemelidir.",
+          "Finance genel topic bonusu kaldırılmıştır. İyi iş muhakemesi veya ihtiyat teması bütün kişisel finans aktivitelerinin otomatik olarak desteklendiği anlamına gelmez.",
+          "Review otomatik bonus almaz; bu açının çekirdeği geriye dönmekten çok planı uygulanabilir ve sürdürülebilir hale getirmektir."
+        ]
+      },
+      {
+        "id": "sun_saturn_supportive",
+        "category": "aspect",
+        "role": "primary",
+
+        "match": {
+          "planet_pair": [
+            "sun",
+            "saturn"
+          ],
+          "aspect_types": [
+            "trine",
+            "sextile"
+          ]
+        },
+
+        "modifiers": {
+          "actions": {
+            "focus": 1,
+            "plan": 1,
+            "continue": 1,
+            "commit": 1
+          },
+
+          "topics": {
+            "career": 1,
+            "productivity": 1
+          },
+
+          "contexts": {},
+
+          "relationship_modes": {}
+        },
+
+        "notes": [
+          "Destekleyici Güneş-Satürn açısı irade, sorumluluk, özdenetim ve uzun vadeli çabanın daha düzenli çalışması olarak kullanılır.",
+          "Career +1, otorite, sorumluluk ve hedef yöneliminin ortak alanını temsil eder.",
+          "Personal_growth kaldırılmıştır; fazla geniş bir topic olduğu için Güneş-Satürn'e özgü değildir.",
+          "Bu rule hızlı büyümeden çok sürdürülebilirlik, sorumluluk ve devamlılığı destekler."
+        ]
+      },
+      {
+        "id": "jupiter_neptune_hard",
+        "category": "aspect",
+        "role": "primary",
+
+        "match": {
+          "planet_pair": [
+            "jupiter",
+            "neptune"
+          ],
+          "aspect_types": [
+            "square",
+            "opposition"
+          ]
+        },
+
+        "modifiers": {
+          "actions": {
+            "plan": -1,
+            "clarify": -1
+          },
+
+          "topics": {},
+
+          "contexts": {},
+
+          "relationship_modes": {}
+        },
+
+        "conditional_activity_rules": [
+          {
+            "when": {
+              "intensity": [
+                "high"
+              ],
+              "topics_any": [
+                "career",
+                "finance",
+                "personal_growth",
+                "learning"
+              ],
+              "any_actions": [
+                "plan",
+                "commit",
+                "apply",
+                "purchase"
+              ]
+            },
+
+            "activity_modifier": -1,
+
+            "reason": "Büyük ölçekli plan, yatırım veya taahhütlerde sert Jüpiter-Neptün teması beklentilerin gerçekçilikten uzaklaşması açısından ek seçimsel sürtünme oluşturur."
+          }
+        ],
+
+        "notes": [
+          "Bu modern-sembolik rule aşırı iyimserlik, abartı, idealizasyon ve uygulanabilirlik değerlendirmesinin zayıflaması temalarında kullanılır.",
+          "Finance ve career topic'leri doğrudan negatif puanlanmaz; böylece sıradan bütçe kontrolü veya kariyer düzenleme aktiviteleri gereksiz yere cezalandırılmaz.",
+          "Commit, purchase ve apply global olarak cezalandırılmaz; daha güçlü ihtiyat yalnızca yüksek intensity ve ilgili topic koşulları birlikte oluştuğunda uygulanır.",
+          "Create veya creativity otomatik pozitif bonus almaz. Hard aspect'ten pozitif activity score üretmeme prensibi korunur.",
+          "Outer-planet rule olduğu için tek başına strong-negative veya hard suppression üretmez."
+        ]
+      },
+      {
+        "id": "jupiter_mars_hard",
+        "category": "aspect",
+        "role": "primary",
+
+        "match": {
+          "planet_pair": [
+            "jupiter",
+            "mars"
+          ],
+          "aspect_types": [
+            "square",
+            "opposition"
+          ]
+        },
+
+        "modifiers": {
+          "actions": {
+            "start_new": -1,
+            "exercise": -1,
+            "movement": -1
+          },
+
+          "topics": {},
+
+          "contexts": {},
+
+          "relationship_modes": {}
+        },
+
+        "notes": [
+          "Sert Mars-Jüpiter açısındaki ana Lunora teması eylemin kendisinin kötü olması değil, ölçüyü aşma ve kapasitenin üzerinde hareket etme eğilimidir.",
+          "Exercise ve movement yalnızca -1 alır; bu astrolojik rule fiziksel güvenlik veya tıbbi risk tahmini için kullanılmaz.",
+          "Purchase kaldırılmıştır; Mars-Jüpiter aşırılık sembolizmini her satın alma davranışına çevirmek fazla geniştir.",
+          "High-intensity start_new aktiviteleri zaten Lunora'nın critical-action gate'i tarafından daha sıkı değerlendirilir; ayrıca blanket -2 veya -4 eklenmez.",
+          "Bu rule kendi başına strong-negative değildir."
+        ]
+      },
+      {
+        "id": "jupiter_saturn_hard",
+        "category": "aspect",
+        "role": "primary",
+
+        "match": {
+          "planet_pair": [
+            "jupiter",
+            "saturn"
+          ],
+          "aspect_types": [
+            "square",
+            "opposition"
+          ]
+        },
+
+        "modifiers": {
+          "actions": {
+            "start_new": -1,
+            "commit": -1
+          },
+
+          "topics": {},
+
+          "contexts": {},
+
+          "relationship_modes": {}
+        },
+
+        "notes": [
+          "Sert Jüpiter-Satürn açısı büyütme ile sınırlama, iyimserlik ile gerçekçilik arasında sürtünme olarak kullanılır.",
+          "Plan ve review pozitif bonus almaz. Zor bir açının faydalı şekilde kullanılabilmesi mümkündür fakat negatif göstergeden otomatik pozitif scoring üretilmez.",
+          "Career genel olarak cezalandırılmaz; profesyonel alandaki bütün faaliyetler bu açıdan aynı şekilde etkilenmez.",
+          "Start_new ve commit yalnızca -1 sürtünme alır; bu dönemler ilerlemeyi imkânsız kılan blanket veto olarak kullanılmaz.",
+          "Bu rule kendi başına strong-negative değildir."
+        ]
+      },
+      {
+        "id": "sun_saturn_hard",
+        "category": "aspect",
+        "role": "primary",
+
+        "match": {
+          "planet_pair": [
+            "sun",
+            "saturn"
+          ],
+          "aspect_types": [
+            "square",
+            "opposition"
+          ]
+        },
+
+        "modifiers": {
+          "actions": {
+            "express": -1,
+            "start_new": -1,
+            "apply": -1
+          },
+
+          "topics": {
+            "career": -1
+          },
+
+          "contexts": {},
+
+          "relationship_modes": {}
+        },
+
+        "notes": [
+          "Sert Güneş-Satürn açısı görünürlük, otorite, özgüven ve ileri hareket üzerinde kısıtlama veya ağırlık teması olarak kullanılır.",
+          "Express eski -2 yerine -1 alır; kendini ifade etmek bu açı altında otomatik olarak uygunsuz değildir.",
+          "Career yalnızca yumuşak -1 topic friction alır ve topic score hiçbir zaman hard veto oluşturmaz.",
+          "Personal_growth negatif puanlanmaz; zorluk veya sınır deneyiminin bütün kişisel gelişim aktivitelerini uygunsuz yaptığı varsayılmaz.",
+          "High-intensity start_new veya apply aktiviteleri zaten critical-action gate tarafından daha katı değerlendirilir; ayrıca blanket suppression eklenmez."
+        ]
+      },
+      {
+        "id": "moon_mercury_supportive",
+        "category": "aspect",
+        "role": "primary",
+
+        "match": {
+          "planet_pair": [
+            "moon",
+            "mercury"
+          ],
+          "aspect_types": [
+            "trine",
+            "sextile"
+          ]
+        },
+
+        "modifiers": {
+          "actions": {
+            "write": 1,
+            "communicate": 1,
+            "clarify": 1,
+            "research": 1
+          },
+
+          "topics": {
+            "learning": 1
+          },
+
+          "contexts": {},
+
+          "relationship_modes": {
+            "communication": 1
+          }
+        },
+
+        "notes": [
+          "Ay-Merkür destekleyici açıları yazı, çalışma, öğrenme, bilgi alışverişi ve iletişim gerektiren faaliyetler için doğrudan electional dayanağa sahiptir.",
+          "Reflect kaldırılmıştır; içsel reflection bütün Ay-Merkür faaliyetlerinin zorunlu özelliği değildir.",
+          "Relationship genel topic bonusu kaldırılmıştır. İlişki aktivitesi ancak gerçekten communication etiketi taşıyorsa bu açıdan destek alır.",
+          "Emotional_intimacy bonusu kaldırılmıştır; düşünce ve duygu arasındaki uyum derin duygusal yakınlığın otomatik göstergesi değildir."
+        ]
+      },
+      {
+        "id": "moon_pluto_supportive",
+        "category": "aspect",
+        "role": "primary",
+
+        "match": {
+          "planet_pair": [
+            "moon",
+            "pluto"
+          ],
+          "aspect_types": [
+            "trine",
+            "sextile"
+          ]
+        },
+
+        "modifiers": {
+          "actions": {
+            "reflect": 1,
+            "clarify": 1,
+            "review": 1
+          },
+
+          "topics": {
+            "self_reflection": 1
+          },
+
+          "contexts": {},
+
+          "relationship_modes": {
+            "emotional_intimacy": 1
+          }
+        },
+
+        "notes": [
+          "Bu modern-sembolik rule duygusal materyali daha derin inceleme, yüzeyin altındaki motivasyonları fark etme ve eski duygusal örüntüleri değerlendirme yönünde küçük destek verir.",
+          "Moon-Pluto supportive aspect is not a traditional electional doctrine; therefore all modifiers remain at +1.",
+          "Set_boundary otomatik bonus almaz. Kendi sınırlarını fark etmek ile aktif olarak sınır koymak aynı davranış değildir.",
+          "Relationship genel topic bonusu almaz; yalnızca gerçekten self_reflection veya emotional_intimacy içeren aktiviteler etkilenir.",
+          "Emotional_intimacy +1, duygusal derinliği temsil eder; yoğunluk otomatik olarak sağlıklı, güvenli veya uygun yakınlık anlamına gelmez."
+        ]
+      },
+      {
+        "id": "moon_uranus_hard",
+        "category": "aspect",
+        "role": "primary",
+
+        "match": {
+          "planet_pair": [
+            "moon",
+            "uranus"
+          ],
+          "aspect_types": [
+            "square",
+            "opposition"
+          ]
+        },
+
+        "modifiers": {
+          "actions": {
+            "focus": -1,
+            "connect": -1
+          },
+
+          "topics": {},
+
+          "contexts": {},
+
+          "relationship_modes": {
+            "emotional_intimacy": -1
+          }
+        },
+
+        "notes": [
+          "Bu modern-sembolik rule duygusal ritimde düzensizlik, ani yön değişimi ve daha fazla bağımsızlık ihtiyacı temasını temsil eder.",
+          "Rest otomatik olarak negatif puanlanmaz; duygusal huzursuzluk her dinlenme aktivitesinin uygunsuz olduğu anlamına gelmez.",
+          "Quality_time genel olarak cezalandırılmaz. Birlikte zaman geçirmek ile duygusal olarak yoğun veya öngörülebilir bir bağ kurmak aynı şey değildir.",
+          "Emotional_intimacy yalnızca -1 alır; Uranian özgürlük ihtiyacı duygusal yakınlığın otomatik olarak kötü olduğu anlamına gelmez.",
+          "Bu outer-planet rule kendi başına strong-negative veya hard suppression üretmez."
+        ]
+      },
+      {
+        "id": "moon_saturn_hard",
+        "category": "aspect",
+        "role": "primary",
+
+        "match": {
+          "planet_pair": [
+            "moon",
+            "saturn"
+          ],
+          "aspect_types": [
+            "square",
+            "opposition"
+          ]
+        },
+
+        "modifiers": {
+          "actions": {
+            "start_new": -1,
+            "connect": -1,
+            "express": -1
+          },
+
+          "topics": {},
+
+          "contexts": {},
+
+          "relationship_modes": {
+            "emotional_intimacy": -1,
+            "romance": -1
+          }
+        },
+
+        "notes": [
+          "Ay-Satürn sert açısı bu gruptaki outer-planet Moon rules ile aynı kategoride değildir; Ay'ın Satürn tarafından sert biçimde affliction alması geleneksel horary/electional uygulamada gerçek bir malefic consideration'dır.",
+          "Bu nedenle yeni bir şeyi ilerletme konusunda küçük -1 electional friction bırakılır, ancak bütün başlangıçlar veya ilişkiler yasaklanmaz.",
+          "Connect, express, emotional_intimacy ve romance yalnızca -1 alır; Satürnyen ağırlık veya mesafe, yakınlık aktivitelerinin otomatik olarak başarısız olacağı anlamına gelmez.",
+          "Serious reflection, planning or boundary work does not receive an automatic positive bonus from the hard aspect.",
+          "If this exact Moon-Saturn aspect is also the Moon's next applying malefic aspect, moon_next_aspect_malefic_hard must not be stacked on top of this rule."
+        ]
+      },
+      {
+        "id": "moon_neptune_hard",
+        "category": "aspect",
+        "role": "primary",
+
+        "match": {
+          "planet_pair": [
+            "moon",
+            "neptune"
+          ],
+          "aspect_types": [
+            "square",
+            "opposition"
+          ]
+        },
+
+        "modifiers": {
+          "actions": {
+            "clarify": -1,
+            "set_boundary": -1,
+            "focus": -1
+          },
+
+          "topics": {},
+
+          "contexts": {},
+
+          "relationship_modes": {
+            "boundaries": -1
+          }
+        },
+
+        "notes": [
+          "Bu modern-sembolik rule duygu ile algı arasındaki sınırların bulanıklaşması, idealizasyon ve pratik değerlendirmede belirsizlik temalarını temsil eder.",
+          "Reflect otomatik pozitif bonus almaz. Bir hard aspect'in içe dönük veya yaratıcı şekilde kullanılabilmesi, motorun negatif göstergeden otomatik pozitif scoring üretmesini gerektirmez.",
+          "Communication genel olarak negatif puanlanmaz; bu açı doğrudan Mercurial iletişim mekanizmasının kendisini temsil etmez.",
+          "Boundary ve clarity alanlarındaki etki yalnızca -1'dir; bu outer-planet rule tek başına strong-negative veya suppression oluşturmaz."
+        ]
+      },
+      ],
+
+  "deferred_rules": [
+    {
+      "id": "transit_house_rules",
+      "status": "deferred",
+
+      "reason": "Generic house-number-only scoring is astrologically under-specified. A transit house has meaning only after the transiting planet, the reference chart and the house system are known. Do not activate transit_house_1 through transit_house_12 as standalone activity modifiers.",
+
+      "required_before_activation": [
+        "transiting_planet",
+        "reference_chart",
+        "house_system",
+        "reliable_birth_time_when_reference_chart_is_natal"
+      ],
+
+      "reference_chart_policy": {
+        "preferred_reference": "user_natal",
+        "event_chart": "Do not mix event-chart houses into personalized natal transit-house scoring.",
+        "moon_chart": "Do not use as a substitute for natal houses.",
+        "unknown_birth_time": "Do not calculate natal transit-house rules when house cusps cannot be determined reliably."
+      },
+
+      "implementation_direction": [
+        "Build planet-by-house routing rather than generic house-only bonuses.",
+        "Combine the natural significations of the transiting planet with the topics of the natal house.",
+        "Keep house effects secondary unless a future personalized electional model explicitly justifies stronger weighting.",
+        "Do not create hard suppression from house placement alone.",
+        "Do not use the modern sign-equals-house alphabet as a substitute for actual house significations."
+      ],
+
+      "example": "transiting Venus in the user's natal 5th house and transiting Saturn in the user's natal 5th house must not produce the same activity modifiers."
+    },
+
+    {
+      "id": "node_contacts",
+      "status": "deferred",
+
+      "reason": "North Node and South Node must not be translated into generic 'future/growth' versus 'past/reconnection' activity bonuses. Their effect depends on the contacted planet or significator and on the exact contact geometry.",
+
+      "required_before_activation": [
+        "contacted_body",
+        "contact_type",
+        "orb_policy",
+        "node_calculation_method"
+      ],
+
+      "implementation_direction": [
+        "Do not restore generic north_node_contact -> start_new/personal_growth bonuses.",
+        "Do not restore generic south_node_contact -> past/reconnection bonuses.",
+        "Review conjunctions to the Nodes first before considering other aspect geometries.",
+        "Model the Node as modifying the contacted significator rather than as an independent activity-topic generator."
+      ]
+    },
+
+    {
+      "id": "conjunction_aspects",
+      "status": "deferred",
+
+      "reason": "A conjunction cannot be classified globally as supportive or hard. Its expression depends strongly on the nature and condition of the planets involved, so conjunctions require pair-by-pair rules.",
+
+      "required_before_activation": [
+        "planet_pair_specific_interpretation",
+        "orb_policy",
+        "applying_separating_policy",
+        "planetary_condition_interaction"
+      ],
+
+      "implementation_direction": [
+        "Do not automatically copy trine/sextile modifiers onto conjunctions.",
+        "Do not automatically copy square/opposition modifiers onto conjunctions.",
+        "Audit each planet pair separately.",
+        "Respect astronomical feasibility when defining aspect types for each planet pair.",
+        "Sun-Mercury and Sun-Venus relationships require special solar-proximity handling because their possible geocentric configurations are constrained."
+      ]
+    },
+
+    {
+      "id": "jupiter_saturn_retrogrades",
+      "status": "deferred",
+
+      "reason": "Retrogradation is a traditional planetary debility for Jupiter and Saturn, but these slow retrograde periods persist for long spans. A generic daily penalty may flatten recommendation scores for months unless relevance and weighting are carefully constrained.",
+
+      "required_before_activation": [
+        "planet_profile_relevance_test",
+        "long_duration_bias_test",
+        "interaction_with_station_rules",
+        "interaction_with_aspect_rules"
+      ],
+
+      "implementation_direction": [
+        "If activated, prefer a small planet-profile-specific friction rather than generic activity penalties.",
+        "Do not create generic past, review or reconnect bonuses merely because the planet is retrograde.",
+        "Do not allow long retrograde periods to dominate the daily recommendation engine."
+      ]
+    },
+
+    {
+      "id": "outer_planet_retrogrades",
+      "status": "deferred",
+
+      "reason": "Uranus, Neptune and Pluto retrogrades belong to modern astrology rather than the traditional planetary-condition framework used for Mercury, Venus, Mars, Jupiter and Saturn. Their long duration also makes them weak candidates for generic daily ranking modifiers.",
+
+      "required_before_activation": [
+        "explicit_modern_astrology_policy",
+        "daily_signal_value_test",
+        "planet_profile_relevance_test"
+      ],
+
+      "implementation_direction": [
+        "Do not activate Uranus, Neptune or Pluto retrograde as generic daily modifiers by default.",
+        "Prefer using their exact aspects and other time-specific contacts, which provide greater daily discrimination.",
+        "If they are ever activated, keep effects small and restricted to directly relevant planet-profile tags."
+      ]
+    },
+
+    {
+      "id": "eclipse_activation_window_policy",
+      "status": "required_before_production",
+
+      "reason": "The active eclipse rules refer to configured_eclipse_window, but no universal evidence-based or universally accepted electional number of surrounding days exists. An arbitrary three-day, seven-day or similar window must not be invented inside the scoring rules.",
+
+      "required_before_production": [
+        "solar_eclipse_window_definition",
+        "lunar_eclipse_window_definition",
+        "exact_event_timestamp_source",
+        "replacement_behavior_validation"
+      ],
+
+      "implementation_direction": [
+        "Keep solar and lunar eclipse windows configurable outside individual rule definitions.",
+        "Use the same configured value consistently throughout the engine.",
+        "Do not silently expand the eclipse influence period from social-media conventions.",
+        "Solar eclipse must continue to replace new_moon during overlap.",
+        "Lunar eclipse must continue to replace full_moon during overlap."
+      ]
+    },
+
+    {
+      "id": "lunar_dignity_condition",
+      "status": "deferred",
+
+      "reason": "The Moon's traditional essential dignity is technically distinct from moon-sign activity routing. Cancer domicile, Taurus exaltation, Scorpio fall and Capricorn detriment must not be hidden inside generic activity-topic bonuses or penalties.",
+
+      "required_before_activation": [
+        "lunar_dignity_scoring_model",
+        "interaction_with_moon_sign_rules",
+        "interaction_with_moon_aspect_rules"
+      ],
+
+      "implementation_direction": [
+        "Keep moon_taurus and moon_cancer activity bonuses separate from essential dignity.",
+        "Do not automatically punish Scorpio or Capricorn activities because the Moon is debilitated there.",
+        "If activated, treat dignity as a condition of the Moon itself rather than as evidence that particular topics are inherently good or bad."
+      ]
+    },
+
+    {
+      "id": "under_the_beams_status",
+      "status": "deferred",
+
+      "reason": "Under-the-beams is technically distinct from both combustion and cazimi and should not be collapsed into either condition.",
+
+      "required_before_activation": [
+        "angular_distance_threshold",
+        "eligible_planets",
+        "interaction_with_combust",
+        "interaction_with_cazimi"
+      ],
+
+      "implementation_direction": [
+        "Cazimi must remain mutually exclusive with combustion.",
+        "Under-the-beams must remain distinct from combustion.",
+        "Do not apply generic solar-proximity status rules to Uranus, Neptune or Pluto without a separate modern policy.",
+        "Handle lunar solar proximity through the lunar-condition model rather than duplicating generic planet-status scoring."
+      ]
+    },
+
+    {
+      "id": "aspect_activation_policy",
+      "status": "required_before_production",
+
+      "reason": "The active aspect rules specify aspect type but do not yet define a single global production standard for orb, exactness and applying versus separating status. Without this, the same sky can produce different recommendation results depending on the upstream astrology calculator.",
+
+      "required_before_production": [
+        "aspect_orb_policy",
+        "applying_exact_separating_definition",
+        "exactness_strength_policy",
+        "planet_pair_astronomical_validation"
+      ],
+
+      "implementation_direction": [
+        "Use one centralized aspect calculator for every active aspect rule.",
+        "Do not allow individual rules to invent their own hidden orb conventions.",
+        "Store the underlying aspect event ID so identical astronomical events can be deduplicated.",
+        "Applying, exact and separating contacts must be distinguishable in sky data even if the first production version ultimately gives them equal scoring.",
+        "Validate impossible geocentric aspect combinations before a rule can enter production."
+      ]
+    }
+  ]
+}

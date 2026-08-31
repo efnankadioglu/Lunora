@@ -1,0 +1,1447 @@
+{
+  "schemaVersion": 1,
+  "rules": [
+    {
+      "id": "mercury_retrograde",
+      "name": "Merkür Retrosu",
+      "category": "astrology",
+      "enabled": true,
+      "source": {
+        "dataset": "astro_data",
+        "match": {
+          "type": "planet_status",
+          "planet": "mercury",
+          "status": "retrograde"
+        },
+        "eventDateField": "start_at",
+        "detectTransition": true
+      },
+      "planning": {
+        "system": "scheduled",
+        "timezone": "Europe/Istanbul",
+        "generateAheadDays": 45
+      },
+      "audience": {
+        "preferenceKey": "astrology",
+        "requireMainNotificationsEnabled": true,
+        "requireCategoryEnabled": true,
+        "requireSystemPermission": true,
+        "requireReadyDevice": true
+      },
+      "destination": {
+        "type": "deep_link",
+        "route": "astro_event_detail",
+        "params": {
+          "event": "mercury_retrograde"
+        }
+      },
+      "notifications": [
+        {
+          "id": "mercury_retrograde_observation_30d",
+          "enabled": true,
+          "trigger": {
+            "relativeTo": "event_start",
+            "offsetDays": -30
+          },
+          "sendTime": "19:30",
+          "stage": "observation",
+          "priority": 40,
+          "purpose": "Yaklaşan dönemi erken haber vermek",
+          "content": {
+            "title": "Merkür retrosu yaklaşıyor",
+            "body": "İletişim, planlar ve günlük akışındaki tekrar eden küçük aksaklıkları şimdiden gözlemlemeye başla."
+          }
+        },
+        {
+          "id": "mercury_retrograde_prepare_14d",
+          "enabled": true,
+          "trigger": {
+            "relativeTo": "event_start",
+            "offsetDays": -14
+          },
+          "sendTime": "19:30",
+          "stage": "prepare",
+          "priority": 60,
+          "purpose": "İletişim, teknoloji, randevu ve önemli planlarda hazırlık",
+          "content": {
+            "title": "Merkür retrosu hazırlıkları başlasın",
+            "body": "Önemli randevuları, teknoloji işlerini ve iletişim gerektiren planlarını önceden düzenlemek işini kolaylaştırabilir."
+          }
+        },
+        {
+          "id": "mercury_retrograde_checklist_7d",
+          "enabled": true,
+          "trigger": {
+            "relativeTo": "event_start",
+            "offsetDays": -7
+          },
+          "sendTime": "19:30",
+          "stage": "checklist",
+          "priority": 75,
+          "purpose": "Eksikleri tamamlama ve kontroller",
+          "content": {
+            "title": "Merkür retrosuna 1 hafta kaldı",
+            "body": "Yarım kalan işler, önemli mesajlar, rezervasyonlar ve planlar için son kontrollerini yap."
+          }
+        },
+        {
+          "id": "mercury_retrograde_last_check_1d",
+          "enabled": true,
+          "trigger": {
+            "relativeTo": "event_start",
+            "offsetDays": -1
+          },
+          "sendTime": "19:30",
+          "stage": "last_check",
+          "priority": 90,
+          "purpose": "Son kontroller",
+          "content": {
+            "title": "Merkür retrosuna 1 gün kaldı",
+            "body": "Bugün önemli konuşmaları, tarihleri ve planlarını bir kez daha kontrol etmek için iyi bir zaman."
+          }
+        },
+        {
+          "id": "mercury_retrograde_started",
+          "enabled": true,
+          "trigger": {
+            "relativeTo": "event_start",
+            "offsetDays": 0
+          },
+          "sendTime": "10:00",
+          "stage": "started",
+          "priority": 100,
+          "purpose": "Dönemin başladığını haber vermek",
+          "content": {
+            "title": "Merkür retrosu başladı",
+            "body": "İletişim ve kararlarında hızlanmak yerine gözden geçirmek bu dönemi daha iyi yönetmene yardımcı olabilir."
+          }
+        }
+      ]
+    },
+    {
+      "id": "venus_retrograde",
+      "name": "Venüs Retrosu",
+      "category": "astrology",
+      "enabled": true,
+      "source": {
+        "dataset": "astro_data",
+        "match": {
+          "type": "planet_status",
+          "planet": "venus",
+          "status": "retrograde"
+        },
+        "eventDateField": "start_at",
+        "detectTransition": true
+      },
+      "planning": {
+        "system": "scheduled",
+        "timezone": "Europe/Istanbul",
+        "generateAheadDays": 45
+      },
+      "audience": {
+        "preferenceKey": "astrology",
+        "requireMainNotificationsEnabled": true,
+        "requireCategoryEnabled": true,
+        "requireSystemPermission": true,
+        "requireReadyDevice": true
+      },
+      "destination": {
+        "type": "deep_link",
+        "route": "astro_event_detail",
+        "params": {
+          "event": "venus_retrograde"
+        }
+      },
+      "notifications": [
+        {
+          "id": "venus_retrograde_observation_30d",
+          "enabled": true,
+          "trigger": {
+            "relativeTo": "event_start",
+            "offsetDays": -30
+          },
+          "sendTime": "19:30",
+          "stage": "observation",
+          "priority": 45,
+          "purpose": "İlişki, para ve özdeğer temalarına erken hazırlık",
+          "content": {
+            "title": "Venüs retrosu yaklaşıyor",
+            "body": "İlişkilerinde, harcamalarında ve kendine verdiğin değerde tekrar eden kalıpları şimdiden gözlemlemeye başla."
+          }
+        },
+        {
+          "id": "venus_retrograde_prepare_14d",
+          "enabled": true,
+          "trigger": {
+            "relativeTo": "event_start",
+            "offsetDays": -14
+          },
+          "sendTime": "19:30",
+          "stage": "prepare",
+          "priority": 65,
+          "purpose": "Yaklaşan döneme hazırlanmak",
+          "content": {
+            "title": "Venüs retrosuna hazırlık zamanı",
+            "body": "İlişki beklentilerini, bütçeni ve kendinle ilgili önemli kararlarını gözden geçirmek için iyi bir zaman."
+          }
+        },
+        {
+          "id": "venus_retrograde_checklist_7d",
+          "enabled": true,
+          "trigger": {
+            "relativeTo": "event_start",
+            "offsetDays": -7
+          },
+          "sendTime": "19:30",
+          "stage": "checklist",
+          "priority": 80,
+          "purpose": "İlişki, para ve güzellik kararlarını gözden geçirmek",
+          "content": {
+            "title": "Venüs retrosuna 1 hafta kaldı",
+            "body": "İlişki, para ve görünümünle ilgili büyük kararları vermeden önce gerçekten ne istediğini netleştir."
+          }
+        },
+        {
+          "id": "venus_retrograde_last_check_1d",
+          "enabled": true,
+          "trigger": {
+            "relativeTo": "event_start",
+            "offsetDays": -1
+          },
+          "sendTime": "19:30",
+          "stage": "last_check",
+          "priority": 95,
+          "purpose": "Acele kararları azaltmak",
+          "content": {
+            "title": "Venüs retrosuna 1 gün kaldı",
+            "body": "Aşk, para veya görünüm konusunda ani bir karar vermek istiyorsan bugün kendine biraz düşünme payı bırak."
+          }
+        },
+        {
+          "id": "venus_retrograde_started",
+          "enabled": true,
+          "trigger": {
+            "relativeTo": "event_start",
+            "offsetDays": 0
+          },
+          "sendTime": "10:00",
+          "stage": "started",
+          "priority": 100,
+          "purpose": "Dönemin başladığını haber vermek",
+          "content": {
+            "title": "Venüs retrosu başladı",
+            "body": "İlişkiler, özdeğer ve para konularında neyi gerçekten istediğini yeniden değerlendireceğin dönem başladı."
+          }
+        }
+      ]
+    },
+    {
+      "id": "mars_retrograde",
+      "name": "Mars Retrosu",
+      "category": "astrology",
+      "enabled": true,
+      "source": {
+        "dataset": "astro_data",
+        "match": {
+          "type": "planet_status",
+          "planet": "mars",
+          "status": "retrograde"
+        },
+        "eventDateField": "start_at",
+        "detectTransition": true
+      },
+      "planning": {
+        "system": "scheduled",
+        "timezone": "Europe/Istanbul",
+        "generateAheadDays": 45
+      },
+      "audience": {
+        "preferenceKey": "astrology",
+        "requireMainNotificationsEnabled": true,
+        "requireCategoryEnabled": true,
+        "requireSystemPermission": true,
+        "requireReadyDevice": true
+      },
+      "destination": {
+        "type": "deep_link",
+        "route": "astro_event_detail",
+        "params": {
+          "event": "mars_retrograde"
+        }
+      },
+      "notifications": [
+        {
+          "id": "mars_retrograde_observation_14d",
+          "enabled": true,
+          "trigger": {
+            "relativeTo": "event_start",
+            "offsetDays": -14
+          },
+          "sendTime": "19:30",
+          "stage": "observation",
+          "priority": 55,
+          "purpose": "Enerji, öfke ve eylem düzenini gözlemlemek",
+          "content": {
+            "title": "Mars retrosu yaklaşıyor",
+            "body": "Enerjini neyin tükettiğini, nerelerde çabuk öfkelendiğini ve hangi mücadelelerin tekrar ettiğini gözlemlemeye başla."
+          }
+        },
+        {
+          "id": "mars_retrograde_prepare_7d",
+          "enabled": true,
+          "trigger": {
+            "relativeTo": "event_start",
+            "offsetDays": -7
+          },
+          "sendTime": "19:30",
+          "stage": "prepare",
+          "priority": 75,
+          "purpose": "Yarım kalan işleri ve mücadeleleri değerlendirmek",
+          "content": {
+            "title": "Mars retrosuna hazırlık zamanı",
+            "body": "Yarım kalan mücadeleleri ve seni sürekli zorlayan işleri gözden geçir. Her şeye aynı anda enerji vermen gerekmiyor."
+          }
+        },
+        {
+          "id": "mars_retrograde_last_check_1d",
+          "enabled": true,
+          "trigger": {
+            "relativeTo": "event_start",
+            "offsetDays": -1
+          },
+          "sendTime": "19:30",
+          "stage": "last_check",
+          "priority": 90,
+          "purpose": "Enerjiyi korumak",
+          "content": {
+            "title": "Mars retrosuna 1 gün kaldı",
+            "body": "Yarın başlamadan önce enerjini nereye harcadığını fark et. Her gerilime cevap vermek zorunda değilsin."
+          }
+        },
+        {
+          "id": "mars_retrograde_started",
+          "enabled": true,
+          "trigger": {
+            "relativeTo": "event_start",
+            "offsetDays": 0
+          },
+          "sendTime": "10:00",
+          "stage": "started",
+          "priority": 100,
+          "purpose": "Retro başlangıcını haber vermek",
+          "content": {
+            "title": "Mars retrosu başladı",
+            "body": "Eyleme geçmeden önce ne için mücadele ettiğini yeniden değerlendirme dönemi başladı."
+          }
+        }
+      ]
+    },
+    {
+      "id": "saturn_retrograde",
+      "name": "Satürn Retrosu",
+      "category": "astrology",
+      "enabled": true,
+      "source": {
+        "dataset": "astro_data",
+        "match": {
+          "type": "planet_status",
+          "planet": "saturn",
+          "status": "retrograde"
+        },
+        "eventDateField": "start_at",
+        "detectTransition": true
+      },
+      "planning": {
+        "system": "scheduled",
+        "timezone": "Europe/Istanbul",
+        "generateAheadDays": 45
+      },
+      "audience": {
+        "preferenceKey": "astrology",
+        "requireMainNotificationsEnabled": true,
+        "requireCategoryEnabled": true,
+        "requireSystemPermission": true,
+        "requireReadyDevice": true
+      },
+      "destination": {
+        "type": "deep_link",
+        "route": "astro_event_detail",
+        "params": {
+          "event": "saturn_retrograde"
+        }
+      },
+      "notifications": [
+        {
+          "id": "saturn_retrograde_observation_7d",
+          "enabled": true,
+          "trigger": {
+            "relativeTo": "event_start",
+            "offsetDays": -7
+          },
+          "sendTime": "19:30",
+          "stage": "observation",
+          "priority": 55,
+          "purpose": "Sorumluluk ve sınırları değerlendirmek",
+          "content": {
+            "title": "Satürn retrosu yaklaşıyor",
+            "body": "Üzerine aldığın sorumluluklara ve sınır koymakta zorlandığın alanlara yeniden bakmak için iyi bir hafta."
+          }
+        },
+        {
+          "id": "saturn_retrograde_last_check_1d",
+          "enabled": true,
+          "trigger": {
+            "relativeTo": "event_start",
+            "offsetDays": -1
+          },
+          "sendTime": "19:30",
+          "stage": "last_check",
+          "priority": 80,
+          "purpose": "Kısa hazırlık",
+          "content": {
+            "title": "Satürn retrosuna 1 gün kaldı",
+            "body": "Hayatında yük gibi hissettiren sorumlulukları ve artık daha net sınır koyman gereken yerleri düşün."
+          }
+        },
+        {
+          "id": "saturn_retrograde_started",
+          "enabled": true,
+          "trigger": {
+            "relativeTo": "event_start",
+            "offsetDays": 0
+          },
+          "sendTime": "10:00",
+          "stage": "started",
+          "priority": 90,
+          "purpose": "Başlangıcı haber vermek",
+          "content": {
+            "title": "Satürn retrosu başladı",
+            "body": "Sorumluluklar, sınırlar ve uzun vadeli düzenin yeniden değerlendirilmek üzere gündemde."
+          }
+        }
+      ]
+    },
+    {
+      "id": "jupiter_retrograde",
+      "name": "Jüpiter Retrosu",
+      "category": "astrology",
+      "enabled": true,
+      "source": {
+        "dataset": "astro_data",
+        "match": {
+          "type": "planet_status",
+          "planet": "jupiter",
+          "status": "retrograde"
+        },
+        "eventDateField": "start_at",
+        "detectTransition": true
+      },
+      "planning": {
+        "system": "scheduled",
+        "timezone": "Europe/Istanbul",
+        "generateAheadDays": 45
+      },
+      "audience": {
+        "preferenceKey": "astrology",
+        "requireMainNotificationsEnabled": true,
+        "requireCategoryEnabled": true,
+        "requireSystemPermission": true,
+        "requireReadyDevice": true
+      },
+      "destination": {
+        "type": "deep_link",
+        "route": "astro_event_detail",
+        "params": {
+          "event": "jupiter_retrograde"
+        }
+      },
+      "notifications": [
+        {
+          "id": "jupiter_retrograde_observation_7d",
+          "enabled": true,
+          "trigger": {
+            "relativeTo": "event_start",
+            "offsetDays": -7
+          },
+          "sendTime": "19:30",
+          "stage": "observation",
+          "priority": 55,
+          "purpose": "Hedefleri ve büyüme alanlarını değerlendirmek",
+          "content": {
+            "title": "Jüpiter retrosu yaklaşıyor",
+            "body": "Büyümek istediğin alanlara bak: hangi hedef hâlâ sana ait, hangisi artık yalnızca alışkanlık?"
+          }
+        },
+        {
+          "id": "jupiter_retrograde_last_check_1d",
+          "enabled": true,
+          "trigger": {
+            "relativeTo": "event_start",
+            "offsetDays": -1
+          },
+          "sendTime": "19:30",
+          "stage": "last_check",
+          "priority": 80,
+          "purpose": "Kısa hazırlık",
+          "content": {
+            "title": "Jüpiter retrosuna 1 gün kaldı",
+            "body": "Yeni hedef eklemek yerine mevcut hedeflerinin gerçekten sana ne kattığını değerlendirmek için kısa bir alan aç."
+          }
+        },
+        {
+          "id": "jupiter_retrograde_started",
+          "enabled": true,
+          "trigger": {
+            "relativeTo": "event_start",
+            "offsetDays": 0
+          },
+          "sendTime": "10:00",
+          "stage": "started",
+          "priority": 90,
+          "purpose": "Başlangıcı haber vermek",
+          "content": {
+            "title": "Jüpiter retrosu başladı",
+            "body": "Büyüme, hedefler ve fırsatlar konusunda dışarı doğru koşmadan önce yönünü yeniden değerlendirme dönemi başladı."
+          }
+        }
+      ]
+    },
+    {
+      "id": "pluto_direct",
+      "name": "Plüton Direkt Hareket",
+      "category": "astrology",
+      "enabled": true,
+      "source": {
+        "dataset": "astro_data",
+        "match": {
+          "type": "planet_status",
+          "planet": "pluto",
+          "status": "direct"
+        },
+        "eventDateField": "start_at",
+        "detectTransition": true
+      },
+      "planning": {
+        "system": "scheduled",
+        "timezone": "Europe/Istanbul",
+        "generateAheadDays": 45
+      },
+      "audience": {
+        "preferenceKey": "astrology",
+        "requireMainNotificationsEnabled": true,
+        "requireCategoryEnabled": true,
+        "requireSystemPermission": true,
+        "requireReadyDevice": true
+      },
+      "destination": {
+        "type": "deep_link",
+        "route": "astro_event_detail",
+        "params": {
+          "event": "pluto_direct"
+        }
+      },
+      "notifications": [
+        {
+          "id": "pluto_direct_started",
+          "enabled": true,
+          "trigger": {
+            "relativeTo": "event_start",
+            "offsetDays": 0
+          },
+          "sendTime": "10:00",
+          "stage": "direct",
+          "priority": 75,
+          "purpose": "Önemli yön değişimini haber vermek",
+          "content": {
+            "title": "Plüton direkt harekete geçti",
+            "body": "Uzun süredir değiştirmeye çalıştığın bir konuda artık neyi farklı yapacağını düşünme zamanı."
+          }
+        }
+      ]
+    },
+    {
+      "id": "balsamic_moon_phase",
+      "name": "Yeniay Öncesi Balsamik Faz",
+      "category": "astrology",
+      "enabled": true,
+      "source": {
+        "dataset": "astro_data",
+        "match": {
+          "type": "moon_phase",
+          "value": "balsamic"
+        },
+        "eventDateField": "start_at",
+        "detectTransition": true
+      },
+      "planning": {
+        "system": "scheduled",
+        "timezone": "Europe/Istanbul",
+        "generateAheadDays": 45
+      },
+      "audience": {
+        "preferenceKey": "astrology",
+        "requireMainNotificationsEnabled": true,
+        "requireCategoryEnabled": true,
+        "requireSystemPermission": true,
+        "requireReadyDevice": true
+      },
+      "destination": {
+        "type": "deep_link",
+        "route": "astro_event_detail",
+        "params": {
+          "event": "balsamic_moon"
+        }
+      },
+      "notifications": [
+        {
+          "id": "balsamic_phase_started",
+          "enabled": true,
+          "trigger": {
+            "relativeTo": "event_start",
+            "offsetDays": 0
+          },
+          "sendTime": "18:30",
+          "stage": "release",
+          "priority": 70,
+          "purpose": "Bırakma ve temizleme hazırlığı",
+          "content": {
+            "title": "Yeniay öncesi kapanış başladı",
+            "body": "Yeni bir niyet eklemeden önce zihninde, ilişkilerinde veya rutininde artık taşımak istemediğin şeyi fark et."
+          }
+        }
+      ]
+    },
+    {
+      "id": "new_moon",
+      "name": "Yeniay",
+      "category": "astrology",
+      "enabled": true,
+      "source": {
+        "dataset": "astro_data",
+        "match": {
+          "type": "moon_phase",
+          "value": "new_moon"
+        },
+        "eventDateField": "start_at",
+        "detectTransition": true
+      },
+      "planning": {
+        "system": "scheduled",
+        "timezone": "Europe/Istanbul",
+        "generateAheadDays": 45
+      },
+      "audience": {
+        "preferenceKey": "astrology",
+        "requireMainNotificationsEnabled": true,
+        "requireCategoryEnabled": true,
+        "requireSystemPermission": true,
+        "requireReadyDevice": true
+      },
+      "destination": {
+        "type": "deep_link",
+        "route": "astro_event_detail",
+        "params": {
+          "event": "new_moon"
+        }
+      },
+      "notifications": [
+        {
+          "id": "new_moon_prepare_1d",
+          "enabled": true,
+          "trigger": {
+            "relativeTo": "event_start",
+            "offsetDays": -1
+          },
+          "sendTime": "19:30",
+          "stage": "prepare",
+          "priority": 85,
+          "purpose": "Niyetleri hazırlamak",
+          "content": {
+            "title": "Yeniaya 1 gün kaldı",
+            "body": "Yarın için uzun bir dilek listesi yerine hayatında gerçekten değiştirmek istediğin tek alanı seç."
+          }
+        },
+        {
+          "id": "new_moon_started",
+          "enabled": true,
+          "trigger": {
+            "relativeTo": "event_start",
+            "offsetDays": 0
+          },
+          "sendTime": "10:00",
+          "stage": "started",
+          "priority": 95,
+          "purpose": "Yeni döngüyü haber vermek",
+          "content": {
+            "title": "Yeniay bugün",
+            "body": "Yeni döngünün ana teması ne? İlişkilerden özdeğere, bugünkü enerjiyi hangi alanda kullanabileceğine bak."
+          }
+        }
+      ]
+    },
+    {
+      "id": "full_moon",
+      "name": "Dolunay",
+      "category": "astrology",
+      "enabled": true,
+      "source": {
+        "dataset": "astro_data",
+        "match": {
+          "type": "moon_phase",
+          "value": "full_moon"
+        },
+        "eventDateField": "start_at",
+        "detectTransition": true
+      },
+      "planning": {
+        "system": "scheduled",
+        "timezone": "Europe/Istanbul",
+        "generateAheadDays": 45
+      },
+      "audience": {
+        "preferenceKey": "astrology",
+        "requireMainNotificationsEnabled": true,
+        "requireCategoryEnabled": true,
+        "requireSystemPermission": true,
+        "requireReadyDevice": true
+      },
+      "destination": {
+        "type": "deep_link",
+        "route": "astro_event_detail",
+        "params": {
+          "event": "full_moon"
+        }
+      },
+      "notifications": [
+        {
+          "id": "full_moon_observation_2d",
+          "enabled": true,
+          "trigger": {
+            "relativeTo": "event_start",
+            "offsetDays": -2
+          },
+          "sendTime": "19:30",
+          "stage": "observation",
+          "priority": 75,
+          "purpose": "Artan yoğunluğa hazırlanmak",
+          "content": {
+            "title": "Dolunay yaklaşıyor",
+            "body": "Duygular biraz yükseliyorsa hemen sonuç çıkarmak yerine hangi konunun seni bu kadar etkilediğini gözlemle."
+          }
+        },
+        {
+          "id": "full_moon_prepare_1d",
+          "enabled": true,
+          "trigger": {
+            "relativeTo": "event_start",
+            "offsetDays": -1
+          },
+          "sendTime": "19:30",
+          "stage": "prepare",
+          "priority": 90,
+          "purpose": "Bırakma ve tamamlama hazırlığı",
+          "content": {
+            "title": "Dolunaya 1 gün kaldı",
+            "body": "Bir ilişkiyi, alışkanlığı veya hedefi düşün: devam ettirmek mi, değiştirmek mi, bırakmak mı sana daha iyi geliyor?"
+          }
+        },
+        {
+          "id": "full_moon_started",
+          "enabled": true,
+          "trigger": {
+            "relativeTo": "event_start",
+            "offsetDays": 0
+          },
+          "sendTime": "10:00",
+          "stage": "started",
+          "priority": 100,
+          "purpose": "Olay günü rehberi",
+          "content": {
+            "title": "Dolunay bugün",
+            "body": "Bugünün duygusal temasını, ilişkilerde dikkat edilmesi gerekenleri ve neyi tamamlamak için uygun olduğunu gör."
+          }
+        }
+      ]
+    },
+    {
+      "id": "solar_eclipse",
+      "name": "Güneş Tutulması",
+      "category": "astrology",
+      "enabled": true,
+      "source": {
+        "dataset": "astro_data",
+        "match": {
+          "type": "eclipse",
+          "event": "solar_eclipse"
+        },
+        "eventDateField": "start_at",
+        "detectTransition": true
+      },
+      "planning": {
+        "system": "scheduled",
+        "timezone": "Europe/Istanbul",
+        "generateAheadDays": 45
+      },
+      "audience": {
+        "preferenceKey": "astrology",
+        "requireMainNotificationsEnabled": true,
+        "requireCategoryEnabled": true,
+        "requireSystemPermission": true,
+        "requireReadyDevice": true
+      },
+      "destination": {
+        "type": "deep_link",
+        "route": "astro_event_detail",
+        "params": {
+          "event": "solar_eclipse"
+        }
+      },
+      "notifications": [
+        {
+          "id": "solar_eclipse_prepare_7d",
+          "enabled": true,
+          "trigger": {
+            "relativeTo": "event_start",
+            "offsetDays": -7
+          },
+          "sendTime": "19:30",
+          "stage": "prepare",
+          "priority": 90,
+          "purpose": "Tutulma haftasına hazırlık",
+          "content": {
+            "title": "Güneş tutulması haftası başlıyor",
+            "body": "Önümüzdeki günlerde hangi konuda yeni bir yön ihtiyacı hissettiğini gözlemle. Hemen karar vermek zorunda değilsin."
+          }
+        },
+        {
+          "id": "solar_eclipse_observation_3d",
+          "enabled": true,
+          "trigger": {
+            "relativeTo": "event_start",
+            "offsetDays": -3
+          },
+          "sendTime": "19:30",
+          "stage": "observation",
+          "priority": 95,
+          "purpose": "Yavaşlama ve gözlem",
+          "content": {
+            "title": "Güneş tutulmasına 3 gün kaldı",
+            "body": "İlişkilerinde, hedeflerinde veya günlük düzeninde seni huzursuz eden değişimleri hemen çözmeye çalışma; önce neyin değişmek istediğini fark et."
+          }
+        },
+        {
+          "id": "solar_eclipse_prepare_1d",
+          "enabled": true,
+          "trigger": {
+            "relativeTo": "event_start",
+            "offsetDays": -1
+          },
+          "sendTime": "19:30",
+          "stage": "last_check",
+          "priority": 100,
+          "purpose": "Son hazırlık",
+          "content": {
+            "title": "Güneş tutulmasına 1 gün kaldı",
+            "body": "Yarın için büyük kararlar hazırlamak yerine hayatında artık aynı şekilde devam etmesini istemediğin alanı netleştir."
+          }
+        },
+        {
+          "id": "solar_eclipse_started",
+          "enabled": true,
+          "trigger": {
+            "relativeTo": "event_start",
+            "offsetDays": 0
+          },
+          "sendTime": "10:00",
+          "stage": "started",
+          "priority": 100,
+          "purpose": "Olay günü rehberi",
+          "content": {
+            "title": "Güneş tutulması bugün",
+            "body": "Bugünün ana temasını, ilişkilerde öne çıkabilecek konuları ve bu dönemi daha bilinçli geçirmek için neye odaklanabileceğini gör."
+          }
+        },
+        {
+          "id": "solar_eclipse_integration_1d",
+          "enabled": true,
+          "trigger": {
+            "relativeTo": "event_start",
+            "offsetDays": 1
+          },
+          "sendTime": "18:30",
+          "stage": "integration",
+          "priority": 90,
+          "purpose": "Olay sonrası toparlanma ve entegrasyon",
+          "content": {
+            "title": "Tutulma sonrası: şimdi ne?",
+            "body": "Dün fark ettiğin her şeyi hemen değiştirmeye çalışma. Önce hangi duygu, ilişki veya hedefin sende iz bıraktığını ayırt et."
+          }
+        }
+      ]
+    },
+    {
+      "id": "lunar_eclipse",
+      "name": "Ay Tutulması",
+      "category": "astrology",
+      "enabled": true,
+      "source": {
+        "dataset": "astro_data",
+        "match": {
+          "type": "eclipse",
+          "event": "lunar_eclipse"
+        },
+        "eventDateField": "start_at",
+        "detectTransition": true
+      },
+      "planning": {
+        "system": "scheduled",
+        "timezone": "Europe/Istanbul",
+        "generateAheadDays": 45
+      },
+      "audience": {
+        "preferenceKey": "astrology",
+        "requireMainNotificationsEnabled": true,
+        "requireCategoryEnabled": true,
+        "requireSystemPermission": true,
+        "requireReadyDevice": true
+      },
+      "destination": {
+        "type": "deep_link",
+        "route": "astro_event_detail",
+        "params": {
+          "event": "lunar_eclipse"
+        }
+      },
+      "notifications": [
+        {
+          "id": "lunar_eclipse_prepare_7d",
+          "enabled": true,
+          "trigger": {
+            "relativeTo": "event_start",
+            "offsetDays": -7
+          },
+          "sendTime": "19:30",
+          "stage": "prepare",
+          "priority": 90,
+          "purpose": "Tutulma haftasına hazırlanmak",
+          "content": {
+            "title": "Ay tutulması haftası başlıyor",
+            "body": "Bu hafta hangi duygu, ilişki veya eski mesele tekrar tekrar dikkatini çekiyor gözlemle. Hemen çözmek zorunda değilsin."
+          }
+        },
+        {
+          "id": "lunar_eclipse_observation_3d",
+          "enabled": true,
+          "trigger": {
+            "relativeTo": "event_start",
+            "offsetDays": -3
+          },
+          "sendTime": "19:30",
+          "stage": "observation",
+          "priority": 95,
+          "purpose": "Hazırlık ve duygusal gözlem",
+          "content": {
+            "title": "Ay tutulmasına 3 gün kaldı",
+            "body": "Duygular yükselirken özellikle ilişkilerinde neye tahammülünün azaldığını ve neye daha çok ihtiyaç duyduğunu fark et."
+          }
+        },
+        {
+          "id": "lunar_eclipse_prepare_1d",
+          "enabled": true,
+          "trigger": {
+            "relativeTo": "event_start",
+            "offsetDays": -1
+          },
+          "sendTime": "19:30",
+          "stage": "last_check",
+          "priority": 100,
+          "purpose": "Son hazırlık",
+          "content": {
+            "title": "Ay tutulmasına 1 gün kaldı",
+            "body": "Yarın için büyük kararlar vermek yerine artık taşımak istemediğin bir duygu, beklenti veya ilişki kalıbını netleştir."
+          }
+        },
+        {
+          "id": "lunar_eclipse_started",
+          "enabled": true,
+          "trigger": {
+            "relativeTo": "event_start",
+            "offsetDays": 0
+          },
+          "sendTime": "10:00",
+          "stage": "started",
+          "priority": 100,
+          "purpose": "Olay günü rehberi",
+          "content": {
+            "title": "Ay tutulması bugün",
+            "body": "Bugünün duygusal temasını, ilişkilerde öne çıkabilecek konuları ve neyi bırakmanın sana iyi gelebileceğini gör."
+          }
+        },
+        {
+          "id": "lunar_eclipse_integration_1d",
+          "enabled": true,
+          "trigger": {
+            "relativeTo": "event_start",
+            "offsetDays": 1
+          },
+          "sendTime": "18:30",
+          "stage": "integration",
+          "priority": 90,
+          "purpose": "Olay sonrası toparlanma ve entegrasyon",
+          "content": {
+            "title": "Tutulma sonrası: sende ne kaldı?",
+            "body": "Dün yoğun gelen duygulara bugün biraz uzaktan bak. Hangi ilişki, ihtiyaç veya sınır konusunda daha net olduğunu fark et."
+          }
+        }
+      ]
+    },
+    {
+      "id": "sun_lunar_node_conjunction",
+      "name": "Güneş–Ay Düğümü Kavuşumu",
+      "category": "astrology",
+      "enabled": true,
+      "source": {
+        "dataset": "astro_data",
+        "match": {
+          "type": "aspect",
+          "planet_pair": [
+            "sun",
+            "lunar_node"
+          ],
+          "aspect_type": "conjunction"
+        },
+        "eventDateField": "start_at",
+        "detectTransition": true
+      },
+      "qualification": {
+        "onlyIfSignificant": true,
+        "requiresEditorialApproval": true
+      },
+      "planning": {
+        "system": "scheduled",
+        "timezone": "Europe/Istanbul",
+        "generateAheadDays": 45
+      },
+      "audience": {
+        "preferenceKey": "astrology",
+        "requireMainNotificationsEnabled": true,
+        "requireCategoryEnabled": true,
+        "requireSystemPermission": true,
+        "requireReadyDevice": true
+      },
+      "destination": {
+        "type": "deep_link",
+        "route": "astro_event_detail",
+        "params": {
+          "event": "sun_lunar_node_conjunction"
+        }
+      },
+      "notifications": [
+        {
+          "id": "sun_lunar_node_conjunction_prepare_1d",
+          "enabled": true,
+          "trigger": {
+            "relativeTo": "event_start",
+            "offsetDays": -1
+          },
+          "sendTime": "19:30",
+          "stage": "observation",
+          "priority": 70,
+          "purpose": "Yalnızca güçlü ve anlamlı kavuşumlarda yön ve tekrar eden kalıpları gözlemletmek",
+          "content": {
+            "title": "Güneş–Ay Düğümü kavuşumu yaklaşıyor",
+            "body": "Son günlerde aynı seçim, ilişki veya hedef tekrar tekrar önüne geliyorsa fark et. Yarın bunun altında hangi yön ihtiyacının olduğunu görebilirsin."
+          }
+        },
+        {
+          "id": "sun_lunar_node_conjunction_started",
+          "enabled": true,
+          "trigger": {
+            "relativeTo": "event_start",
+            "offsetDays": 0
+          },
+          "sendTime": "10:00",
+          "stage": "started",
+          "priority": 85,
+          "purpose": "Yalnızca içerik açısından anlamlı kavuşumlarda olay günü rehberi",
+          "content": {
+            "title": "Güneş–Ay Düğümü kavuşumu bugün",
+            "body": "Bugün hangi eski kalıbın geride kalmak, hangi yönün güçlenmek istediğine bak. İlişkiler ve kişisel hedeflerde ana temayı gör."
+          }
+        }
+      ]
+    },
+    {
+      "id": "beauty_hair_cut_positive_window",
+      "name": "Saç Kesimi İçin Uygun Dönem",
+      "category": "beauty",
+      "enabled": true,
+      "source": {
+        "dataset": "beauty_data",
+        "match": {
+          "type": "positive_window",
+          "value": "hair_cut"
+        },
+        "eventDateField": "start_at",
+        "detectTransition": true
+      },
+      "planning": {
+        "system": "scheduled",
+        "timezone": "Europe/Istanbul",
+        "generateAheadDays": 45,
+        "oncePerWindow": true
+      },
+      "audience": {
+        "preferenceKey": "beauty",
+        "requireMainNotificationsEnabled": true,
+        "requireCategoryEnabled": true,
+        "requireSystemPermission": true,
+        "requireReadyDevice": true
+      },
+      "destination": {
+        "type": "deep_link",
+        "route": "beauty_timing",
+        "params": {
+          "topic": "hair_cut"
+        },
+        "detailSections": []
+      },
+      "notifications": [
+        {
+          "id": "hair_cut_positive_window_started",
+          "enabled": true,
+          "trigger": {
+            "relativeTo": "event_start",
+            "offsetDays": 0
+          },
+          "sendTime": "10:30",
+          "stage": "window_started",
+          "priority": 65,
+          "purpose": "Yeni pozitif saç kesimi penceresinin başladığını haber vermek",
+          "deduplication": {
+            "oncePerWindow": true
+          },
+          "content": {
+            "title": "Saç kesimi için uygun dönem başladı ✂️",
+            "body": "Saçını kestirmeyi düşünüyorsan bugünden başlayan uygun zaman aralığına göz at."
+          }
+        }
+      ]
+    },
+    {
+      "id": "beauty_hair_dye_positive_window",
+      "name": "Saç Boyama İçin Uygun Dönem",
+      "category": "beauty",
+      "enabled": true,
+      "source": {
+        "dataset": "beauty_data",
+        "match": {
+          "type": "positive_window",
+          "value": "hair_dye"
+        },
+        "eventDateField": "start_at",
+        "detectTransition": true
+      },
+      "planning": {
+        "system": "scheduled",
+        "timezone": "Europe/Istanbul",
+        "generateAheadDays": 45,
+        "oncePerWindow": true
+      },
+      "audience": {
+        "preferenceKey": "beauty",
+        "requireMainNotificationsEnabled": true,
+        "requireCategoryEnabled": true,
+        "requireSystemPermission": true,
+        "requireReadyDevice": true
+      },
+      "destination": {
+        "type": "deep_link",
+        "route": "beauty_timing",
+        "params": {
+          "topic": "hair_dye"
+        },
+        "detailSections": []
+      },
+      "notifications": [
+        {
+          "id": "hair_dye_positive_window_started",
+          "enabled": true,
+          "trigger": {
+            "relativeTo": "event_start",
+            "offsetDays": 0
+          },
+          "sendTime": "10:30",
+          "stage": "window_started",
+          "priority": 65,
+          "purpose": "Yeni pozitif saç boyama penceresinin başladığını haber vermek",
+          "deduplication": {
+            "oncePerWindow": true
+          },
+          "content": {
+            "title": "Saç boyamak için uygun dönem başladı 🎨",
+            "body": "Renk değişikliği planlıyorsan bugünden başlayan uygun zaman aralığını kontrol edebilirsin."
+          }
+        }
+      ]
+    },
+    {
+      "id": "beauty_before_mercury_retrograde",
+      "name": "Merkür Retrosu Öncesi Güzellik Planlaması",
+      "category": "beauty",
+      "enabled": true,
+      "source": {
+        "dataset": "astro_data",
+        "match": {
+          "type": "planet_status",
+          "planet": "mercury",
+          "status": "retrograde"
+        },
+        "eventDateField": "start_at",
+        "detectTransition": true
+      },
+      "planning": {
+        "system": "scheduled",
+        "timezone": "Europe/Istanbul",
+        "generateAheadDays": 45
+      },
+      "audience": {
+        "preferenceKey": "beauty",
+        "requireMainNotificationsEnabled": true,
+        "requireCategoryEnabled": true,
+        "requireSystemPermission": true,
+        "requireReadyDevice": true
+      },
+      "destination": {
+        "type": "deep_link",
+        "route": "beauty_timing",
+        "params": {
+          "topic": "pre_retro_beauty_planning",
+          "planet": "mercury"
+        },
+        "detailSections": []
+      },
+      "notifications": [
+        {
+          "id": "beauty_mercury_retrograde_plan_25d",
+          "enabled": true,
+          "trigger": {
+            "relativeTo": "event_start",
+            "offsetDays": -25,
+            "adjustment": {
+              "ifShadowStartsEarlier": true,
+              "relativeToShadowStart": true,
+              "shadowOffsetDays": -1
+            }
+          },
+          "sendTime": "19:00",
+          "stage": "early_planning",
+          "priority": 70,
+          "purpose": "Yeni veya ilk kez yapılacak güzellik işlemlerini retro öncesinde planlamak",
+          "content": {
+            "title": "Yeni bir güzellik işlemi mi düşünüyorsun?",
+            "body": "Merkür retrosu yaklaşmadan önce ilk kez deneyeceğin bakım veya işlemleri planlamak için zamanlamanı kontrol et."
+          }
+        }
+      ]
+    },
+    {
+      "id": "beauty_before_venus_retrograde",
+      "name": "Venüs Retrosu Öncesi Güzellik Planlaması",
+      "category": "beauty",
+      "enabled": true,
+      "source": {
+        "dataset": "astro_data",
+        "match": {
+          "type": "planet_status",
+          "planet": "venus",
+          "status": "retrograde"
+        },
+        "eventDateField": "start_at",
+        "detectTransition": true
+      },
+      "planning": {
+        "system": "scheduled",
+        "timezone": "Europe/Istanbul",
+        "generateAheadDays": 45
+      },
+      "audience": {
+        "preferenceKey": "beauty",
+        "requireMainNotificationsEnabled": true,
+        "requireCategoryEnabled": true,
+        "requireSystemPermission": true,
+        "requireReadyDevice": true
+      },
+      "destination": {
+        "type": "deep_link",
+        "route": "beauty_timing",
+        "params": {
+          "topic": "pre_retro_beauty_planning",
+          "planet": "venus"
+        },
+        "detailSections": []
+      },
+      "notifications": [
+        {
+          "id": "beauty_venus_retrograde_plan_25d",
+          "enabled": true,
+          "trigger": {
+            "relativeTo": "event_start",
+            "offsetDays": -25,
+            "adjustment": {
+              "ifShadowStartsEarlier": true,
+              "relativeToShadowStart": true,
+              "shadowOffsetDays": -1
+            }
+          },
+          "sendTime": "19:00",
+          "stage": "early_planning",
+          "priority": 80,
+          "purpose": "Yeni saç rengi, görünüm değişimi ve ilk kez yapılacak işlemleri önceden planlamak",
+          "content": {
+            "title": "Görünümünde değişiklik mi planlıyorsun?",
+            "body": "Venüs retrosu yaklaşmadan önce yeni saç rengi veya ilk kez deneyeceğin büyük bir görünüm değişikliğinin zamanlamasına bak."
+          }
+        }
+      ]
+    },
+    {
+      "id": "new_program_published",
+      "name": "Yeni Program Yayınlandı",
+      "category": "program",
+      "enabled": true,
+      "automationType": "event_trigger",
+      "source": {
+        "dataset": "programs",
+        "event": "program_activated",
+        "conditions": {
+          "isActive": true,
+          "onlyFirstActivation": true
+        }
+      },
+      "planning": {
+        "system": "automation",
+        "timezone": "Europe/Istanbul",
+        "generateScheduledPlan": false
+      },
+      "audience": {
+        "preferenceKey": "program",
+        "requireMainNotificationsEnabled": true,
+        "requireCategoryEnabled": true,
+        "requireSystemPermission": true,
+        "requireReadyDevice": true
+      },
+      "deduplication": {
+        "enabled": true,
+        "key": "new_program_{{programId}}",
+        "oncePerProgram": true
+      },
+      "destination": {
+        "type": "deep_link",
+        "route": "program_detail",
+        "params": {
+          "programId": "{{programId}}"
+        }
+      },
+      "notifications": [
+        {
+          "id": "new_program_published_push",
+          "enabled": true,
+          "trigger": {
+            "type": "source_event",
+            "event": "program_activated"
+          },
+          "stage": "published",
+          "priority": 85,
+          "purpose": "Kullanıcıya gerçekten yeni yayınlanan programı haber vermek",
+          "content": {
+            "title": "Yeni bir program yayınlandı ✨",
+            "body": "{{programName}} artık Lunora'da. Sana ne kazandıracağını ve programın nasıl ilerlediğini keşfet."
+          }
+        }
+      ]
+    },
+    {
+      "id": "daily_program_incomplete_reminder",
+      "name": "Günlük Program Görev Hatırlatması",
+      "category": "program",
+      "enabled": true,
+      "automationType": "conditional_schedule",
+      "source": {
+        "dataset": "program_enrollments",
+        "conditions": {
+          "hasActiveEnrollment": true
+        }
+      },
+      "schedule": {
+        "timezone": "Europe/Istanbul",
+        "frequency": "daily",
+        "time": "23:00"
+      },
+      "planning": {
+        "system": "automation",
+        "generateScheduledPlan": false
+      },
+      "audience": {
+        "preferenceKey": "program",
+        "requireMainNotificationsEnabled": true,
+        "requireCategoryEnabled": true,
+        "requireSystemPermission": true,
+        "requireReadyDevice": true
+      },
+      "eligibility": {
+        "all": [
+          {
+            "field": "activeEnrollment",
+            "operator": "exists",
+            "value": true
+          },
+          {
+            "field": "todayCompletionThresholdMet",
+            "operator": "equals",
+            "value": false
+          },
+          {
+            "field": "programCompleted",
+            "operator": "equals",
+            "value": false
+          },
+          {
+            "field": "programFailed",
+            "operator": "equals",
+            "value": false
+          }
+        ]
+      },
+      "deduplication": {
+        "enabled": true,
+        "key": "daily_program_reminder_{{userId}}_{{dateKey}}",
+        "maxSendsPerDay": 1
+      },
+      "destination": {
+        "type": "deep_link",
+        "route": "active_program_today",
+        "params": {
+          "enrollmentId": "{{enrollmentId}}"
+        }
+      },
+      "notifications": [
+        {
+          "id": "daily_program_incomplete_23",
+          "enabled": true,
+          "trigger": {
+            "type": "scheduled_condition_check"
+          },
+          "stage": "daily_reminder",
+          "priority": 80,
+          "purpose": "Aktif programı olan ve bugünkü tamamlama eşiğini henüz karşılamayan kullanıcıyı hatırlatmak",
+          "content": {
+            "title": "Bugünkü görevlerini tamamlamak için 1 saatin kaldı",
+            "body": "Programındaki bugünkü adımlardan bazıları hâlâ seni bekliyor. Günü tamamlamadan önce kaldığın yerden devam edebilirsin."
+          }
+        }
+      ]
+    }
+  ]
+}
+

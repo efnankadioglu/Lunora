@@ -26,6 +26,12 @@ enum EnrollmentLifecycleResult {
     case noActiveEnrollment
 }
 
+private struct EnrollmentProgressSummary {
+    let progressPercent: Double
+    let completedDaysCount: Int
+    let isFinalDayFullyCompleted: Bool
+}
+
 
 final class EnrollmentRepository {
     
@@ -93,6 +99,14 @@ final class EnrollmentRepository {
                 let badgeDescription = programData["badgeDescription"] as? String ?? ""
                 let programImageName = programData["imageName"] as? String ?? ""
 
+                let badgeTitle =
+                    programData["badgeTitle"] as? String
+                    ?? "\(programName) Rozeti"
+
+                let badgeImageName =
+                    programData["badgeImageName"] as? String
+                    ?? programImageName
+
                 guard durationDays > 0 else {
                     print("🔴 durationDays geçersiz:", durationDays)
                     completion(.failure(NSError(
@@ -116,8 +130,11 @@ final class EnrollmentRepository {
                     "programId": programId,
                     "programName": programName,
                     "durationDays": durationDays,
+
                     "badgeId": badgeId,
+                    "badgeTitle": badgeTitle,
                     "badgeDescription": badgeDescription,
+                    "badgeImageName": badgeImageName,
                     "programImageName": programImageName,
 
                     "status": "active",
@@ -131,7 +148,10 @@ final class EnrollmentRepository {
 
                     "isCompleted": false,
                     "isFailed": false,
-                    "earnedBadge": false
+
+                    "earnedBadge": false,
+                    "badgeEvaluationCompleted": false,
+                    "finalizationVersion": 0
                 ]
 
                 let userDataToMerge: [String: Any] = [
@@ -224,38 +244,73 @@ final class EnrollmentRepository {
         userId: String,
         completion: @escaping (Result<EnrollmentLifecycleResult, Error>) -> Void
     ) {
+
         fetchActiveEnrollment(userId: userId) { [weak self] result in
             guard let self = self else { return }
 
             switch result {
+
             case .failure(let error):
                 completion(.failure(error))
 
             case .success(let enrollment):
+
                 guard let enrollment = enrollment else {
                     completion(.success(.noActiveEnrollment))
                     return
                 }
 
+                // MARK: - Zaten tamamlanmışsa
+
                 if enrollment.status == "completed" || enrollment.isCompleted {
+
                     if enrollment.earnedBadge {
                         completion(.success(.completedWithBadge(enrollment)))
                     } else {
                         completion(.success(.completedWithoutBadge(enrollment)))
                     }
+
                     return
                 }
 
-                guard self.hasEnrollmentDurationEnded(enrollment) else {
-                    completion(.success(.stillActive(enrollment)))
+                // MARK: - Programın takvim süresi bittiyse
+
+                if self.hasEnrollmentDurationEnded(enrollment) {
+
+                    self.finalizeEnrollment(
+                        userId: userId,
+                        enrollment: enrollment,
+                        trigger: .durationEnded,
+                        completion: completion
+                    )
+
                     return
                 }
 
-                self.finalizeEnrollmentAfterDurationEnd(
-                    userId: userId,
-                    enrollment: enrollment,
-                    completion: completion
-                )
+                // MARK: - Son gün recovery kontrolü
+                //
+                // Kullanıcı son görevi bitirdi ama uygulama tam
+                // finalization sırasında kapandıysa Progress tekrar
+                // açıldığında burası sistemi kurtarır.
+
+                let calculatedCurrentDay =
+                    self.calculateCurrentDay(
+                        from: enrollment.startedAt
+                    )
+
+                if calculatedCurrentDay >= enrollment.durationDays {
+
+                    self.finalizeEnrollment(
+                        userId: userId,
+                        enrollment: enrollment,
+                        trigger: .lastTask,
+                        completion: completion
+                    )
+
+                    return
+                }
+
+                completion(.success(.stillActive(enrollment)))
             }
         }
     }
@@ -282,7 +337,7 @@ final class EnrollmentRepository {
         let logRef = userRef
             .collection(FirestoreCollection.programEnrollments)
             .document(enrollment.enrollmentId)
-            .collection("dailyLogs")
+            .collection(FirestoreCollection.dailyLogs)
             .document(dateKey)
         
         logRef.getDocument { snapshot, error in
@@ -359,7 +414,7 @@ final class EnrollmentRepository {
             .document(userId)
             .collection(FirestoreCollection.programEnrollments)
             .document(enrollmentId)
-            .collection("dailyLogs")
+            .collection(FirestoreCollection.dailyLogs)
             .document(dateKey)
 
         var updateData: [String: Any] = [
@@ -429,7 +484,7 @@ final class EnrollmentRepository {
             .collection(FirestoreCollection.programEnrollments)
             .document(enrollment.enrollmentId)
 
-        calculateEnrollmentProgressPercent(
+        calculateEnrollmentProgressSummary(
             userId: userId,
             enrollment: enrollment
         ) { [weak self] result in
@@ -460,64 +515,311 @@ final class EnrollmentRepository {
         }
     }
     
-    private func calculateEnrollmentProgressPercent(
+    private func calculateEnrollmentProgressSummary(
         userId: String,
         enrollment: ActiveEnrollment,
-        completion: @escaping (Result<(progressPercent: Double, completedDaysCount: Int), Error>) -> Void
+        completion: @escaping (
+            Result<EnrollmentProgressSummary, Error>
+        ) -> Void
     ) {
+
         let programRef = db
             .collection(FirestoreCollection.programs)
             .document(enrollment.programId)
 
         programRef.getDocument { [weak self] programSnapshot, programError in
-            guard let self = self else { return }
+
+            guard let self = self else {
+                return
+            }
 
             if let programError = programError {
                 completion(.failure(programError))
                 return
             }
 
-            let programData = programSnapshot?.data() ?? [:]
-            let dailyTasks = programData["dailyTasks"] as? [[String: Any]] ?? []
-            let taskCountPerDay = max(1, dailyTasks.count)
-            let totalDays = max(1, enrollment.durationDays)
-            let totalPossibleTaskCompletions = totalDays * taskCountPerDay
+            guard let programData = programSnapshot?.data() else {
+
+                completion(
+                    .failure(
+                        NSError(
+                            domain: "EnrollmentRepository",
+                            code: -30,
+                            userInfo: [
+                                NSLocalizedDescriptionKey:
+                                    "Program bilgisi bulunamadı."
+                            ]
+                        )
+                    )
+                )
+
+                return
+            }
+
+            let totalDays = max(
+                1,
+                enrollment.durationDays
+            )
+
+            // Her gün için zorunlu task ID'lerini tutacağız.
+            var requiredTaskIdsByDay: [Int: Set<String>] = [:]
+
+            // MARK: - Yeni Program Formatı
+
+            if let programDays =
+                programData["days"] as? [[String: Any]],
+               !programDays.isEmpty {
+
+                for dayData in programDays {
+
+                    guard
+                        let dayNumber =
+                            dayData["dayNumber"] as? Int,
+                        dayNumber >= 1,
+                        dayNumber <= totalDays
+                    else {
+                        continue
+                    }
+
+                    let tasks =
+                        dayData["tasks"] as? [[String: Any]]
+                        ?? []
+
+                    let requiredTaskIds = Set(
+                        tasks.compactMap { task -> String? in
+
+                            let isRequired =
+                                task["isRequired"] as? Bool
+                                ?? true
+
+                            guard isRequired else {
+                                return nil
+                            }
+
+                            return task["id"] as? String
+                        }
+                    )
+
+                    requiredTaskIdsByDay[dayNumber] =
+                        requiredTaskIds
+                }
+
+            } else {
+
+                // MARK: - Eski Program Formatı
+
+                let dailyTasks =
+                    programData["dailyTasks"]
+                    as? [[String: Any]]
+                    ?? []
+
+                let requiredTaskIds = Set(
+                    dailyTasks.compactMap { task -> String? in
+
+                        let isRequired =
+                            task["isRequired"] as? Bool
+                            ?? true
+
+                        guard isRequired else {
+                            return nil
+                        }
+
+                        return task["id"] as? String
+                    }
+                )
+
+                for dayNumber in 1...totalDays {
+
+                    requiredTaskIdsByDay[dayNumber] =
+                        requiredTaskIds
+                }
+            }
+
+            // Eksik gün varsa güvenli şekilde boş Set oluştur.
+            for dayNumber in 1...totalDays {
+
+                if requiredTaskIdsByDay[dayNumber] == nil {
+
+                    requiredTaskIdsByDay[dayNumber] = []
+                }
+            }
+
+            let totalRequiredTaskCount =
+                requiredTaskIdsByDay
+                    .values
+                    .reduce(0) {
+                        $0 + $1.count
+                    }
+
+            guard totalRequiredTaskCount > 0 else {
+
+                completion(
+                    .failure(
+                        NSError(
+                            domain: "EnrollmentRepository",
+                            code: -31,
+                            userInfo: [
+                                NSLocalizedDescriptionKey:
+                                    "Programda zorunlu görev bulunamadı."
+                            ]
+                        )
+                    )
+                )
+
+                return
+            }
+
+            // Programdaki günlük tamamlanma eşiği.
+            let dailyThreshold =
+                min(
+                    max(
+                        (
+                            programData[
+                                "dailyTaskCompletionThreshold"
+                            ] as? NSNumber
+                        )?.doubleValue ?? 0.5,
+                        0.0
+                    ),
+                    1.0
+                )
 
             let logsRef = self.db
                 .collection(FirestoreCollection.users)
                 .document(userId)
-                .collection(FirestoreCollection.programEnrollments)
+                .collection(
+                    FirestoreCollection.programEnrollments
+                )
                 .document(enrollment.enrollmentId)
-                .collection("dailyLogs")
+                .collection(FirestoreCollection.dailyLogs)
 
             logsRef.getDocuments { snapshot, logsError in
+
                 if let logsError = logsError {
+
                     completion(.failure(logsError))
                     return
                 }
 
-                let logs: [DailyLog] = snapshot?.documents.compactMap { document in
-                    DailyLog(documentId: document.documentID, data: document.data())
-                } ?? []
+                let logs: [DailyLog] =
+                    snapshot?.documents.compactMap { document in
 
-                let completedTaskCount = logs.reduce(0) { result, log in
-                    result + Set(log.completedTaskIds).count
+                        DailyLog(
+                            documentId: document.documentID,
+                            data: document.data()
+                        )
+                    } ?? []
+
+                /*
+                 Aynı dayNumber için bir şekilde birden fazla
+                 DailyLog oluşmuşsa task'ları birleştiriyoruz.
+                */
+                var completedTaskIdsByDay:
+                    [Int: Set<String>] = [:]
+
+                for log in logs {
+
+                    guard
+                        log.dayNumber >= 1,
+                        log.dayNumber <= totalDays
+                    else {
+                        continue
+                    }
+
+                    completedTaskIdsByDay[
+                        log.dayNumber,
+                        default: []
+                    ].formUnion(
+                        log.completedTaskIds
+                    )
                 }
 
-                let completedDaysCount = logs.filter { $0.isCompleted }.count
+                var completedRequiredTaskCount = 0
+                var completedDaysCount = 0
 
-                let rawProgress = Double(completedTaskCount) / Double(totalPossibleTaskCompletions)
-                let progressPercent = min(100.0, max(0.0, rawProgress * 100.0))
+                for dayNumber in 1...totalDays {
 
-                completion(.success((
-                    progressPercent: progressPercent,
-                    completedDaysCount: completedDaysCount
-                )))
+                    let requiredIds =
+                        requiredTaskIdsByDay[dayNumber]
+                        ?? []
+
+                    guard !requiredIds.isEmpty else {
+                        continue
+                    }
+
+                    let completedIds =
+                        completedTaskIdsByDay[dayNumber]
+                        ?? []
+
+                    let completedRequiredIds =
+                        requiredIds.intersection(
+                            completedIds
+                        )
+
+                    completedRequiredTaskCount +=
+                        completedRequiredIds.count
+
+                    let dayCompletionRate =
+                        Double(
+                            completedRequiredIds.count
+                        )
+                        /
+                        Double(
+                            requiredIds.count
+                        )
+
+                    if dayCompletionRate >= dailyThreshold {
+
+                        completedDaysCount += 1
+                    }
+                }
+
+                let rawProgress =
+                    Double(completedRequiredTaskCount)
+                    /
+                    Double(totalRequiredTaskCount)
+
+                let progressPercent =
+                    min(
+                        100.0,
+                        max(
+                            0.0,
+                            rawProgress * 100.0
+                        )
+                    )
+
+                // Son gün tamamen tamamlandı mı?
+                let finalDayRequiredIds =
+                    requiredTaskIdsByDay[totalDays]
+                    ?? []
+
+                let finalDayCompletedIds =
+                    completedTaskIdsByDay[totalDays]
+                    ?? []
+
+                let isFinalDayFullyCompleted =
+                    !finalDayRequiredIds.isEmpty
+                    &&
+                    finalDayRequiredIds.isSubset(
+                        of: finalDayCompletedIds
+                    )
+
+                completion(
+                    .success(
+                        EnrollmentProgressSummary(
+                            progressPercent:
+                                progressPercent,
+
+                            completedDaysCount:
+                                completedDaysCount,
+
+                            isFinalDayFullyCompleted:
+                                isFinalDayFullyCompleted
+                        )
+                    )
+                )
             }
         }
     }
-    
-    
     
     func refreshUserStreak(
         userId: String,
@@ -596,7 +898,7 @@ final class EnrollmentRepository {
             .document(userId)
             .collection(FirestoreCollection.programEnrollments)
             .document(enrollmentId)
-            .collection("dailyLogs")
+            .collection(FirestoreCollection.dailyLogs)
 
         logsRef.getDocuments { snapshot, error in
             if let error = error {
@@ -609,6 +911,94 @@ final class EnrollmentRepository {
             } ?? []
 
             completion(.success(logs))
+        }
+    }
+    
+    func fetchTotalActivityDays(
+        userId: String,
+        completion: @escaping (Result<Int, Error>) -> Void
+    ) {
+        let enrollmentsRef = db
+            .collection(FirestoreCollection.users)
+            .document(userId)
+            .collection(FirestoreCollection.programEnrollments)
+
+        enrollmentsRef.getDocuments { snapshot, error in
+
+            if let error = error {
+                completion(.failure(error))
+                return
+            }
+
+            let enrollmentDocuments = snapshot?.documents ?? []
+
+            guard !enrollmentDocuments.isEmpty else {
+                completion(.success(0))
+                return
+            }
+
+            let group = DispatchGroup()
+            let lock = NSLock()
+
+            var activeDateKeys = Set<String>()
+            var firstError: Error?
+
+            for enrollmentDocument in enrollmentDocuments {
+
+                group.enter()
+
+                enrollmentDocument.reference
+                    .collection(FirestoreCollection.dailyLogs)
+                    .getDocuments { logsSnapshot, logsError in
+
+                        defer {
+                            group.leave()
+                        }
+
+                        if let logsError = logsError {
+                            lock.lock()
+
+                            if firstError == nil {
+                                firstError = logsError
+                            }
+
+                            lock.unlock()
+                            return
+                        }
+
+                        let logDocuments = logsSnapshot?.documents ?? []
+
+                        for logDocument in logDocuments {
+
+                            let data = logDocument.data()
+
+                            let completedTaskIds =
+                                data["completedTaskIds"] as? [String] ?? []
+
+                            guard !completedTaskIds.isEmpty else {
+                                continue
+                            }
+
+                            let dateKey =
+                                data["dateKey"] as? String
+                                ?? logDocument.documentID
+
+                            lock.lock()
+                            activeDateKeys.insert(dateKey)
+                            lock.unlock()
+                        }
+                    }
+            }
+
+            group.notify(queue: .main) {
+
+                if let firstError = firstError {
+                    completion(.failure(firstError))
+                    return
+                }
+
+                completion(.success(activeDateKeys.count))
+            }
         }
     }
     
@@ -650,7 +1040,7 @@ final class EnrollmentRepository {
             for enrollmentDocument in enrollmentDocuments {
                 group.enter()
                 
-                let logsRef = enrollmentDocument.reference.collection("dailyLogs")
+                let logsRef = enrollmentDocument.reference.collection(FirestoreCollection.dailyLogs)
                 
                 logsRef.getDocuments { logsSnapshot, logsError in
                     defer { group.leave() }
@@ -740,11 +1130,91 @@ final class EnrollmentRepository {
         return longestStreak
     }
     
-    private func finalizeEnrollmentAfterDurationEnd(
+    func finalizeEnrollment(
         userId: String,
         enrollment: ActiveEnrollment,
+        trigger: EnrollmentCompletionTrigger,
         completion: @escaping (Result<EnrollmentLifecycleResult, Error>) -> Void
     ) {
+
+        calculateEnrollmentProgressSummary(
+            userId: userId,
+            enrollment: enrollment
+        ) { [weak self] result in
+
+            guard let self = self else { return }
+
+            switch result {
+
+            case .failure(let error):
+                completion(.failure(error))
+
+            case .success(let summary):
+
+                // MARK: - Trigger doğrulaması
+
+                switch trigger {
+
+                case .lastTask:
+
+                    let currentDay =
+                        self.calculateCurrentDay(
+                            from: enrollment.startedAt
+                        )
+
+                    /*
+                     UI yanlışlıkla finalize çağırsa bile:
+                     - gerçekten son gün olmalı
+                     - son günün bütün required task'ları bitmiş olmalı
+                    */
+                    guard
+                        currentDay >= enrollment.durationDays,
+                        summary.isFinalDayFullyCompleted
+                    else {
+
+                        completion(.success(.stillActive(enrollment)))
+                        return
+                    }
+
+                case .durationEnded:
+
+                    /*
+                     durationEnded yalnızca takvim süresi
+                     gerçekten bittiyse geçerli.
+                    */
+                    guard self.hasEnrollmentDurationEnded(enrollment) else {
+                        completion(.success(.stillActive(enrollment)))
+                        return
+                    }
+                }
+
+                // MARK: - Tek rozet kararı
+
+                let earnedBadge =
+                    summary.progressPercent
+                    >= ProgramCompletionPolicy.badgeUnlockPercent
+
+                self.commitFinalization(
+                    userId: userId,
+                    enrollment: enrollment,
+                    summary: summary,
+                    trigger: trigger,
+                    earnedBadge: earnedBadge,
+                    completion: completion
+                )
+            }
+        }
+    }
+    
+    private func commitFinalization(
+        userId: String,
+        enrollment: ActiveEnrollment,
+        summary: EnrollmentProgressSummary,
+        trigger: EnrollmentCompletionTrigger,
+        earnedBadge: Bool,
+        completion: @escaping (Result<EnrollmentLifecycleResult, Error>) -> Void
+    ) {
+
         let userRef = db
             .collection(FirestoreCollection.users)
             .document(userId)
@@ -753,105 +1223,295 @@ final class EnrollmentRepository {
             .collection(FirestoreCollection.programEnrollments)
             .document(enrollment.enrollmentId)
 
-        calculateEnrollmentProgressPercent(
-            userId: userId,
-            enrollment: enrollment
-        ) { [weak self] result in
-            guard let self = self else { return }
+        let badgeDocumentId =
+            enrollment.badgeId.isEmpty
+            ? enrollment.programId
+            : enrollment.badgeId
 
-            switch result {
-            case .failure(let error):
-                completion(.failure(error))
+        let earnedBadgeRef = userRef
+            .collection(FirestoreCollection.earnedBadges)
+            .document(badgeDocumentId)
 
-            case .success(let summary):
-                let now = Timestamp(date: Date())
-                let finalProgress = summary.progressPercent
-                let earnedBadge = finalProgress >= 80.0
+        db.runTransaction({ transaction, errorPointer -> Any? in
 
-                let batch = self.db.batch()
+            // MARK: - Önce bütün READ işlemleri
 
-                let enrollmentUpdate: [String: Any] = [
-                    "status": "completed",
-                    "isCompleted": true,
-                    "isFailed": false,
-                    "earnedBadge": earnedBadge,
-                    "completedDaysCount": summary.completedDaysCount,
-                    "progressPercent": finalProgress,
-                    "completionReason": "duration_ended",
-                    "finalProgressPercent": finalProgress,
-                    "completedAt": now,
-                    "updatedAt": now
-                ]
+            let enrollmentSnapshot: DocumentSnapshot
+            let userSnapshot: DocumentSnapshot
+            var existingBadgeSnapshot: DocumentSnapshot?
 
-                batch.updateData(enrollmentUpdate, forDocument: enrollmentRef)
+            do {
 
-                batch.updateData([
-                    "activeEnrollmentId": FieldValue.delete(),
-                    "updatedAt": now
-                ], forDocument: userRef)
+                enrollmentSnapshot =
+                    try transaction.getDocument(enrollmentRef)
+
+                userSnapshot =
+                    try transaction.getDocument(userRef)
 
                 if earnedBadge {
-                    let badgeDocumentId = enrollment.badgeId.isEmpty
-                        ? enrollment.programId
-                        : enrollment.badgeId
-
-                    let earnedBadgeRef = userRef
-                        .collection(FirestoreCollection.earnedBadges)
-                        .document(badgeDocumentId)
-
-                    let earnedBadgeData: [String: Any] = [
-                        "badgeId": badgeDocumentId,
-                        "badgeDescription": enrollment.badgeDescription,
-                        "programId": enrollment.programId,
-                        "programName": enrollment.programName ?? "",
-                        "programImageName": enrollment.programImageName,
-                        "enrollmentId": enrollment.enrollmentId,
-                        "earnedAt": now,
-                        "progressPercent": finalProgress,
-                        "completionReason": "duration_ended",
-                        "isFeatured": false,
-                        "isSeen": false
-                    ]
-
-                    batch.setData(earnedBadgeData, forDocument: earnedBadgeRef, merge: true)
+                    existingBadgeSnapshot =
+                        try transaction.getDocument(earnedBadgeRef)
                 }
 
-                batch.commit { error in
-                    if let error = error {
-                        completion(.failure(error))
-                        return
-                    }
+            } catch let error as NSError {
 
-                    enrollmentRef.getDocument { snapshot, error in
-                        if let error = error {
-                            completion(.failure(error))
-                            return
-                        }
+                errorPointer?.pointee = error
+                return nil
+            }
 
-                        guard
-                            let snapshot = snapshot,
-                            let data = snapshot.data(),
-                            let finalizedEnrollment = ActiveEnrollment(
-                                documentId: snapshot.documentID,
-                                data: data
-                            )
-                        else {
-                            completion(.failure(NSError(
+            guard
+                enrollmentSnapshot.exists,
+                let enrollmentData = enrollmentSnapshot.data(),
+                let currentEnrollment = ActiveEnrollment(
+                    documentId: enrollmentSnapshot.documentID,
+                    data: enrollmentData
+                )
+            else {
+
+                errorPointer?.pointee = NSError(
+                    domain: "EnrollmentRepository",
+                    code: -40,
+                    userInfo: [
+                        NSLocalizedDescriptionKey:
+                            "Finalization sırasında enrollment okunamadı."
+                    ]
+                )
+
+                return nil
+            }
+
+            guard userSnapshot.exists else {
+
+                errorPointer?.pointee = NSError(
+                    domain: "EnrollmentRepository",
+                    code: -41,
+                    userInfo: [
+                        NSLocalizedDescriptionKey:
+                            "Finalization sırasında kullanıcı belgesi bulunamadı."
+                    ]
+                )
+
+                return nil
+            }
+
+            // MARK: - Idempotency
+            //
+            // Bu program daha önce kesin olarak finalize edilmişse
+            // ikinci kez hiçbir şey yazma.
+
+            if currentEnrollment.isCompleted &&
+                currentEnrollment.badgeEvaluationCompleted {
+
+                return nil
+            }
+
+            let now = Timestamp(date: Date())
+
+            // MARK: - Enrollment Final State
+
+            let enrollmentUpdate: [String: Any] = [
+                "status": "completed",
+                "isCompleted": true,
+                "isFailed": false,
+
+                "completedDaysCount":
+                    summary.completedDaysCount,
+
+                "progressPercent":
+                    summary.progressPercent,
+
+                "finalProgressPercent":
+                    summary.progressPercent,
+
+                "earnedBadge":
+                    earnedBadge,
+
+                "badgeEvaluationCompleted":
+                    true,
+
+                "finalizationVersion":
+                    ProgramCompletionPolicy.finalizationVersion,
+
+                "completionReason":
+                    trigger.rawValue,
+
+                "completedAt":
+                    now,
+
+                "updatedAt":
+                    now
+            ]
+
+            transaction.updateData(
+                enrollmentUpdate,
+                forDocument: enrollmentRef
+            )
+
+            // MARK: - Active Enrollment temizliği
+            //
+            // Sadece kullanıcının activeEnrollmentId'si gerçekten
+            // bu enrollment ise siliyoruz.
+
+            if let activeEnrollmentId =
+                userSnapshot.data()?["activeEnrollmentId"] as? String,
+               activeEnrollmentId == enrollment.enrollmentId {
+
+                transaction.updateData(
+                    [
+                        "activeEnrollmentId":
+                            FieldValue.delete(),
+
+                        "updatedAt":
+                            now
+                    ],
+                    forDocument: userRef
+                )
+            }
+
+            // MARK: - Badge
+
+            if earnedBadge {
+
+                /*
+                 Aynı badge document zaten varsa yeniden oluşturmuyoruz.
+
+                 Böylece finalization iki kez çağrılsa bile
+                 ikinci badge üretilemez.
+                */
+
+                if existingBadgeSnapshot?.exists != true {
+
+                    let badgeTitle =
+                        enrollment.badgeTitle.isEmpty
+                        ? "\(enrollment.programName ?? "Program") Rozeti"
+                        : enrollment.badgeTitle
+
+                    let badgeImageName =
+                        enrollment.badgeImageName.isEmpty
+                        ? enrollment.programImageName
+                        : enrollment.badgeImageName
+
+                    let earnedBadgeData: [String: Any] = [
+                        "badgeId":
+                            badgeDocumentId,
+
+                        "programId":
+                            enrollment.programId,
+
+                        "enrollmentId":
+                            enrollment.enrollmentId,
+
+                        "awardedAt":
+                            now,
+
+                        "status":
+                            "earned",
+
+                        "isSeen":
+                            false,
+
+                        "isFeatured":
+                            false,
+
+                        "badgeTitleSnapshot":
+                            badgeTitle,
+
+                        "badgeDescriptionSnapshot":
+                            enrollment.badgeDescription,
+
+                        "iconNameSnapshot":
+                            badgeImageName,
+
+                        "progressPercent":
+                            summary.progressPercent,
+
+                        "completionReason":
+                            trigger.rawValue,
+
+                        "createdAt":
+                            now,
+
+                        "updatedAt":
+                            now
+                    ]
+
+                    transaction.setData(
+                        earnedBadgeData,
+                        forDocument: earnedBadgeRef
+                    )
+                }
+            }
+
+            return nil
+
+        }) { _, error in
+
+            if let error = error {
+
+                completion(.failure(error))
+                return
+            }
+
+            /*
+             Transaction başarılı olduktan sonra enrollment'ı
+             yeniden Firestore'dan okuyoruz.
+
+             UI kendi tahminini yapmayacak.
+             Firestore'daki kesin sonucu kullanacak.
+            */
+
+            enrollmentRef.getDocument { snapshot, error in
+
+                if let error = error {
+
+                    completion(.failure(error))
+                    return
+                }
+
+                guard
+                    let snapshot = snapshot,
+                    let data = snapshot.data(),
+                    let finalizedEnrollment = ActiveEnrollment(
+                        documentId: snapshot.documentID,
+                        data: data
+                    )
+                else {
+
+                    completion(
+                        .failure(
+                            NSError(
                                 domain: "EnrollmentRepository",
-                                code: -20,
+                                code: -42,
                                 userInfo: [
-                                    NSLocalizedDescriptionKey: "Tamamlanan enrollment yeniden okunamadı."
+                                    NSLocalizedDescriptionKey:
+                                        "Finalized enrollment yeniden okunamadı."
                                 ]
-                            )))
-                            return
-                        }
+                            )
+                        )
+                    )
 
-                        if earnedBadge {
-                            completion(.success(.completedWithBadge(finalizedEnrollment)))
-                        } else {
-                            completion(.success(.completedWithoutBadge(finalizedEnrollment)))
-                        }
-                    }
+                    return
+                }
+
+                if finalizedEnrollment.earnedBadge {
+
+                    completion(
+                        .success(
+                            .completedWithBadge(
+                                finalizedEnrollment
+                            )
+                        )
+                    )
+
+                } else {
+
+                    completion(
+                        .success(
+                            .completedWithoutBadge(
+                                finalizedEnrollment
+                            )
+                        )
+                    )
                 }
             }
         }
@@ -859,77 +1519,169 @@ final class EnrollmentRepository {
     
     
     // MARK: - Completed Enrollments
+//    func fetchCompletedEnrollments(
+//        userId: String,
+//        completion: @escaping (Result<[CompletedEnrollment], Error>) -> Void
+//    ) {
+//        
+//        let enrollmentsRef = db
+//            .collection(FirestoreCollection.users)
+//            .document(userId)
+//            .collection(FirestoreCollection.programEnrollments)
+//        
+//        enrollmentsRef.getDocuments { snapshot, error in
+//            
+//            if let error = error {
+//                completion(.failure(error))
+//                return
+//            }
+//            
+//            let completed: [CompletedEnrollment] = snapshot?.documents.compactMap { document in
+//                CompletedEnrollment(
+//                    documentId: document.documentID,
+//                    data: document.data()
+//                )
+//            } ?? []
+//
+//            let sorted = completed.sorted {
+//                ($0.completedAt?.dateValue() ?? Date()) >
+//                ($1.completedAt?.dateValue() ?? Date())
+//            }
+//            
+//            completion(.success(sorted))
+//        }
+//    }
+
+    
+    // MARK: - Completed Enrollments
+
     func fetchCompletedEnrollments(
         userId: String,
         completion: @escaping (Result<[CompletedEnrollment], Error>) -> Void
     ) {
-        
+
         let enrollmentsRef = db
             .collection(FirestoreCollection.users)
             .document(userId)
             .collection(FirestoreCollection.programEnrollments)
-        
-        enrollmentsRef.getDocuments { snapshot, error in
-            
+
+
+        // Offline tamamlanmış ama henüz Firebase'de finalize
+        // edilmemiş enrollment'ları buluyoruz.
+        let pendingFinalizations =
+            PendingProgressManager.shared
+                .loadAll()
+                .filter {
+                    $0.userId == userId &&
+                    $0.shouldFinalizeProgram == true
+                }
+
+
+        var pendingByEnrollmentId:
+            [String: PendingProgressAction] = [:]
+
+        for action in pendingFinalizations {
+            pendingByEnrollmentId[action.enrollmentId] = action
+        }
+
+
+        let source: FirestoreSource =
+            NetworkMonitor.shared.isConnected
+            ? .default
+            : .cache
+
+
+        enrollmentsRef.getDocuments(
+            source: source
+        ) { snapshot, error in
+
             if let error = error {
+
                 completion(.failure(error))
                 return
             }
-            
-            let completed: [CompletedEnrollment] = snapshot?.documents.compactMap { document in
-                CompletedEnrollment(
-                    documentId: document.documentID,
-                    data: document.data()
-                )
-            } ?? []
+
+
+            let completed: [CompletedEnrollment] =
+                snapshot?.documents.compactMap { document in
+
+                    var data = document.data()
+
+
+                    // Eğer bu enrollment offline olarak programı
+                    // tamamladıysa, SADECE UI için completed gibi
+                    // decode ediyoruz.
+                    //
+                    // Firestore'a burada hiçbir şey yazılmıyor.
+                    if let pendingAction =
+                        pendingByEnrollmentId[
+                            document.documentID
+                        ] {
+
+                        data["status"] = "completed"
+                        data["isCompleted"] = true
+                        data["isFailed"] = false
+
+                        // Gerçek completedAt henüz backend'de yoksa
+                        // offline completion zamanını göster.
+                        if data["completedAt"] == nil {
+
+                            data["completedAt"] =
+                                Timestamp(
+                                    date:
+                                        pendingAction.createdAt
+                                )
+                        }
+                    }
+
+
+                    return CompletedEnrollment(
+                        documentId:
+                            document.documentID,
+                        data:
+                            data
+                    )
+                } ?? []
+
 
             let sorted = completed.sorted {
-                ($0.completedAt?.dateValue() ?? Date()) >
+
+                ($0.completedAt?.dateValue() ?? Date())
+                >
                 ($1.completedAt?.dateValue() ?? Date())
             }
-            
-            completion(.success(sorted))
+
+
+            completion(
+                .success(sorted)
+            )
         }
     }
-
+    
     func completeJourney(
         userId: String,
         enrollmentId: String,
         note: String,
         completion: @escaping (Result<Void, Error>) -> Void
     ) {
-        let userRef = db
+
+        let enrollmentRef = db
             .collection(FirestoreCollection.users)
             .document(userId)
-
-        let enrollmentRef = userRef
             .collection(FirestoreCollection.programEnrollments)
             .document(enrollmentId)
 
-        let now = Timestamp(date: Date())
-
-        let enrollmentUpdate: [String: Any] = [
-            "status": "completed",
-            "isCompleted": true,
-            "isFailed": false,
+        enrollmentRef.updateData([
             "completionNote": note,
-            "completedAt": now,
-            "updatedAt": now
-        ]
+            "updatedAt": Timestamp(date: Date())
+        ]) { error in
 
-        let userUpdate: [String: Any] = [
-            "activeEnrollmentId": FieldValue.delete(),
-            "updatedAt": now
-        ]
-
-        let batch = db.batch()
-        batch.updateData(enrollmentUpdate, forDocument: enrollmentRef)
-        batch.setData(userUpdate, forDocument: userRef, merge: true)
-
-        batch.commit { error in
             if let error = error {
+
                 completion(.failure(error))
+
             } else {
+
                 completion(.success(()))
             }
         }

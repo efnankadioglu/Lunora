@@ -190,7 +190,7 @@ final class BirthInformationViewController: UIViewController {
         let label = UILabel()
         label.translatesAutoresizingMaskIntoConstraints = false
         label.text =
-            "Doğum tarihi, saati ve yeri; kişiselleştirilmiş astroloji yorumlarının hazırlanmasında kullanılır."
+            "Doğum tarihi, saati ve yeri; yakında kullanıma sunulacak kişiselleştirilmiş astroloji yorumlarının hazırlanmasında kullanılacaktır. Bu özellik şu anda aktif değildir."
         label.font = .systemFont(ofSize: 14)
         label.textColor = Palette.secondaryText
         label.numberOfLines = 0

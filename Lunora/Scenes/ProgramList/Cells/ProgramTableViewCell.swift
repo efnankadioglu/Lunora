@@ -323,7 +323,7 @@ final class ProgramTableViewCell: UITableViewCell {
             ),
 
             levelButton.widthAnchor.constraint(
-                greaterThanOrEqualToConstant: 128
+                greaterThanOrEqualToConstant: 156
             ),
 
             // Süre rozeti
@@ -374,10 +374,17 @@ final class ProgramTableViewCell: UITableViewCell {
             UIImage(named: program.imageName)
             ?? UIImage(named: "program_placeholder")
 
-        levelButton.setTitle(
-            "Zorluk \(program.difficultyLevel)/\(program.difficultyScale)",
-            for: .normal
-        )
+        if let recommendedStartText = makeRecommendedStartText(for: program) {
+            levelButton.setTitle(
+                "Önerilen · \(recommendedStartText)",
+                for: .normal
+            )
+        } else {
+            levelButton.setTitle(
+                "Zorluk \(program.difficultyLevel)/\(program.difficultyScale)",
+                for: .normal
+            )
+        }
 
         durationButton.setTitle(
             program.durationText,
@@ -450,6 +457,40 @@ final class ProgramTableViewCell: UITableViewCell {
     }
 
     // MARK: - Badge Helper
+    
+    private func makeRecommendedStartText(
+        for program: Program
+    ) -> String? {
+
+        guard
+            let dateString =
+                program.astroProfile?
+                    .availability?
+                    .recommendedStartDate
+        else {
+            return nil
+        }
+
+        let inputFormatter = DateFormatter()
+        inputFormatter.locale = Locale(identifier: "en_US_POSIX")
+        inputFormatter.timeZone = TimeZone(
+            identifier: "Europe/Istanbul"
+        )
+        inputFormatter.dateFormat = "yyyy-MM-dd"
+
+        guard let date = inputFormatter.date(from: dateString) else {
+            return nil
+        }
+
+        let outputFormatter = DateFormatter()
+        outputFormatter.locale = Locale(identifier: "tr_TR")
+        outputFormatter.timeZone = TimeZone(
+            identifier: "Europe/Istanbul"
+        )
+        outputFormatter.dateFormat = "d MMMM"
+
+        return outputFormatter.string(from: date)
+    }
 
     private func makePinkBadgeButton() -> UIButton {
         let button = UIButton(type: .system)

@@ -12,7 +12,7 @@ enum FirestoreCollection {
     static let programs = "programs"
     static let badges = "badges"
     static let programEnrollments = "program_enrollments"
-    static let dailyLogs = "daily_logs"
+    static let dailyLogs = "dailyLogs"
     static let earnedBadges = "earned_badges"
     static let dailyInsights = "dailyInsights"
 }

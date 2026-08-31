@@ -70,16 +70,6 @@ final class ProgramProgressCardView: UIView {
         return view
     }()
 
-    private let legendStackView: UIStackView = {
-        let stack = UIStackView()
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        stack.axis = .vertical
-        stack.spacing = 8
-        stack.alignment = .fill
-        stack.distribution = .fill
-        return stack
-    }()
-
     private let dividerView: UIView = {
         let view = UIView()
         view.translatesAutoresizingMaskIntoConstraints = false
@@ -146,94 +136,22 @@ final class ProgramProgressCardView: UIView {
         percentLabel.text = "\(data.progressPercent)%"
         progressPercentLabel.text = "\(data.progressPercent)%"
 
-        updateProgressFill(multiplier: CGFloat(data.progressPercent) / 100.0)
+        let progress = CGFloat(data.progressPercent) / 100.0
 
-        legendStackView.arrangedSubviews.forEach {
-            legendStackView.removeArrangedSubview($0)
-            $0.removeFromSuperview()
-        }
+        updateProgressFill(multiplier: progress)
 
-        data.legendItems.forEach { item in
-            legendStackView.addArrangedSubview(
-                makeLegendRow(color: item.color, title: item.title, value: item.valueText)
-            )
-        }
-
-        let adjustedLegendItems = adjustedLegendItemsForChart(
-            data.legendItems,
-            currentDay: data.currentDay
-        )
-
-        let segments = adjustedLegendItems.map {
+        let progressColor = UIColor(red: 250/255, green: 185/255, blue: 219/255, alpha: 1)
+        let segments = [
             SegmentedDonutChartView.Segment(
-                value: $0.chartValue,
-                color: $0.color
+                value: progress,
+                color: progressColor
             )
-        }
+        ]
 
         donutChartView.configure(
             segments: segments,
             totalText: "\(data.donutCenterPercent)%"
         )
-    }
-    
-    private func adjustedLegendItemsForChart(
-        _ items: [ProgramProgressCardLegendItem],
-        currentDay: Int
-    ) -> [ProgramProgressCardLegendItem] {
-        let visibleItems = items.filter { $0.chartValue > 0 }
-
-        guard !visibleItems.isEmpty else {
-            return []
-        }
-
-        let minimumVisibleValue = minimumVisibleChartValue(for: currentDay)
-
-        var adjustedItems = items
-        var totalAdjustedValue: CGFloat = 0
-
-        for index in adjustedItems.indices {
-            let originalValue = adjustedItems[index].chartValue
-
-            if originalValue > 0, originalValue < minimumVisibleValue {
-                adjustedItems[index] = ProgramProgressCardLegendItem(
-                    color: adjustedItems[index].color,
-                    title: adjustedItems[index].title,
-                    valueText: adjustedItems[index].valueText,
-                    chartValue: minimumVisibleValue
-                )
-            }
-
-            totalAdjustedValue += adjustedItems[index].chartValue
-        }
-
-        if totalAdjustedValue > 1 {
-            let scale = 1 / totalAdjustedValue
-
-            adjustedItems = adjustedItems.map { item in
-                ProgramProgressCardLegendItem(
-                    color: item.color,
-                    title: item.title,
-                    valueText: item.valueText,
-                    chartValue: item.chartValue * scale
-                )
-            }
-        }
-
-        return adjustedItems.filter { $0.chartValue > 0 }
-    }
-
-    private func minimumVisibleChartValue(for currentDay: Int) -> CGFloat {
-        switch currentDay {
-        case 1...4:
-            return 0.015
-        case 5...8:
-            return 0.012
-        case 9...14:
-            return 0.010
-        default:
-            return 0.008
-        }
     }
     
     private func updateProgressFill(multiplier: CGFloat) {
@@ -256,8 +174,11 @@ final class ProgramProgressCardView: UIView {
         
         containerView.addSubview(donutChartView)
 
-        containerView.addSubview(legendStackView)
         containerView.addSubview(dividerView)
+        containerView.addSubview(progressTitleLabel)
+        containerView.addSubview(progressPercentLabel)
+        containerView.addSubview(progressTrackView)
+        
         containerView.addSubview(progressTitleLabel)
         containerView.addSubview(progressPercentLabel)
         containerView.addSubview(progressTrackView)
@@ -278,18 +199,43 @@ final class ProgramProgressCardView: UIView {
             percentLabel.centerYAnchor.constraint(equalTo: titleLabel.centerYAnchor),
             percentLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -24),
             
-            donutChartView.topAnchor.constraint(equalTo: dayLabel.bottomAnchor, constant: 24),
-            donutChartView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 24),
-            donutChartView.widthAnchor.constraint(equalToConstant: 140),
-            donutChartView.heightAnchor.constraint(equalToConstant: 140),
+            donutChartView.topAnchor.constraint(
+                equalTo: dayLabel.bottomAnchor,
+                constant: 24
+            ),
 
-//            legendStackView.centerYAnchor.constraint(equalTo: donutChartView.centerYAnchor),
-            legendStackView.topAnchor.constraint(equalTo: donutChartView.topAnchor),
-            legendStackView.leadingAnchor.constraint(equalTo: donutChartView.trailingAnchor, constant: 24),
+            donutChartView.centerXAnchor.constraint(
+                equalTo: containerView.centerXAnchor
+            ),
 
-            legendStackView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -24),
+            donutChartView.widthAnchor.constraint(
+                equalToConstant: 140
+            ),
 
-            dividerView.topAnchor.constraint(equalTo: legendStackView.bottomAnchor, constant: 20),
+            donutChartView.heightAnchor.constraint(
+                equalToConstant: 140
+            ),
+
+            dividerView.topAnchor.constraint(
+                equalTo: donutChartView.bottomAnchor,
+                constant: 24
+            ),
+
+            dividerView.leadingAnchor.constraint(
+                equalTo: containerView.leadingAnchor,
+                constant: 24
+            ),
+
+            dividerView.trailingAnchor.constraint(
+                equalTo: containerView.trailingAnchor,
+                constant: -24
+            ),
+
+            dividerView.heightAnchor.constraint(
+                equalToConstant: 1
+            ),
+            
+            
             dividerView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 24),
             dividerView.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -24),
             dividerView.heightAnchor.constraint(equalToConstant: 1),
@@ -314,55 +260,6 @@ final class ProgramProgressCardView: UIView {
         ])
         progressFillWidthConstraint = progressFillView.widthAnchor.constraint(equalToConstant: 0)
         progressFillWidthConstraint?.isActive = true
-    }
-
-    private func makeLegendRow(color: UIColor, title: String, value: String) -> UIView {
-        let row = UIView()
-        row.translatesAutoresizingMaskIntoConstraints = false
-
-        let dotView = UIView()
-        dotView.translatesAutoresizingMaskIntoConstraints = false
-        dotView.backgroundColor = color
-        dotView.layer.cornerRadius = 7
-
-        let titleLabel = UILabel()
-        titleLabel.translatesAutoresizingMaskIntoConstraints = false
-        titleLabel.text = title
-        titleLabel.font = .systemFont(ofSize: 16, weight: .medium)
-        titleLabel.textColor = UIColor(red: 55/255, green: 65/255, blue: 81/255, alpha: 1)
-        titleLabel.numberOfLines = 2
-        titleLabel.lineBreakMode = .byWordWrapping
-
-        let valueLabel = UILabel()
-        valueLabel.translatesAutoresizingMaskIntoConstraints = false
-        valueLabel.text = value
-        valueLabel.font = .systemFont(ofSize: 16, weight: .bold)
-        valueLabel.textColor = UIColor(red: 35/255, green: 45/255, blue: 63/255, alpha: 1)
-        valueLabel.textAlignment = .right
-        valueLabel.setContentCompressionResistancePriority(.required, for: .horizontal)
-
-        row.addSubview(dotView)
-        row.addSubview(titleLabel)
-        row.addSubview(valueLabel)
-
-        NSLayoutConstraint.activate([
-            dotView.leadingAnchor.constraint(equalTo: row.leadingAnchor),
-            dotView.centerYAnchor.constraint(equalTo: row.centerYAnchor),
-            dotView.widthAnchor.constraint(equalToConstant: 14),
-            dotView.heightAnchor.constraint(equalToConstant: 14),
-
-            titleLabel.leadingAnchor.constraint(equalTo: dotView.trailingAnchor, constant: 10),
-            titleLabel.centerYAnchor.constraint(equalTo: row.centerYAnchor),
-
-            valueLabel.leadingAnchor.constraint(greaterThanOrEqualTo: titleLabel.trailingAnchor, constant: 10),
-            valueLabel.trailingAnchor.constraint(equalTo: row.trailingAnchor),
-            valueLabel.centerYAnchor.constraint(equalTo: row.centerYAnchor),
-            
-
-            row.heightAnchor.constraint(greaterThanOrEqualToConstant: 34)
-        ])
-
-        return row
     }
     
 

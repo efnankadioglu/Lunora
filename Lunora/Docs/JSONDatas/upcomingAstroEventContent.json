@@ -1,0 +1,242 @@
+{
+  "version": 1,
+  "language": "tr",
+  "audience": "20-35 yaş kadın kullanıcılar",
+  "content_style": {
+    "tone": "warm_supportive_non_deterministic",
+    "principles": [
+      "Korku yaratma.",
+      "Kesin gelecek tahmini yapma.",
+      "Olayları kötü veya tehlikeli olarak etiketleme.",
+      "Kullanıcıya kontrol hissi veren küçük ve uygulanabilir öneriler sun.",
+      "İlişkiler, özdeğer, para, kariyer, sosyal hayat, bakım, rutinler, sınırlar ve enerji gibi günlük yaşam alanlarına doğal şekilde dokun.",
+      "Kullanıcı üzerinde bir şey yapmak zorundaymış hissi yaratma.",
+      "Astrolojik olayı kader veya kaçınılmaz sonuç gibi sunma."
+    ],
+    "preferred_language": [
+      "olabilir",
+      "gündemine gelebilir",
+      "fark edebilirsin",
+      "isteyebilirsin",
+      "iyi gelebilir",
+      "değerlendirebilirsin",
+      "kendine zaman tanıyabilirsin"
+    ],
+    "avoid_language": [
+      "kesinlikle",
+      "başına gelecek",
+      "yaşayacaksın",
+      "sakın",
+      "kötü bir dönem",
+      "tehlikeli",
+      "ayrılık yaşayabilirsin",
+      "para kaybedebilirsin",
+      "eski sevgilin dönecek",
+      "ilişkin bitebilir"
+    ]
+  },
+  "events": [
+    {
+      "id": "mercury_retrograde",
+      "event_type": "planet_retrograde",
+      "planet": "mercury",
+      "show_before_days": 10,
+      "priority": 80,
+      "display": {
+        "title": "Merkür Retrosu",
+        "upcoming_label": "Yaklaşıyor",
+        "themes": [
+          "İletişim",
+          "Planlar",
+          "Sosyal hayat",
+          "Teknoloji"
+        ],
+        "preview": "Planlarını, iletişimini ve günlük akışını biraz daha bilinçli gözden geçirmek isteyebileceğin bir dönem yaklaşıyor.",
+        "detail": "Her şeyi kusursuz yürütmeye çalışmak yerine bazı planları yeniden değerlendirmek, ayrıntıları kontrol etmek ve yarım kalan konulara dönmek iyi gelebilir. Fikir değiştirmek veya bir planı yeniden düzenlemek her zaman geriye gitmek anlamına gelmez.",
+        "action_title": "Şimdiden iyi gelebilir",
+        "actions": [
+          "Önemli randevu, rezervasyon ve planlarının ayrıntılarını bir kez daha kontrol et.",
+          "Senin için önemli fotoğraf, belge ve dosyaları yedekle.",
+          "Yarım bıraktığın bir konuşmayı veya işi tamamlamak isteyip istemediğini düşün."
+        ],
+        "keep_in_mind": "Bir şeyin yeniden gündeme gelmesi onu hemen çözmen gerektiği anlamına gelmez. Önce neye ihtiyaç duyduğunu anlamak için kendine biraz zaman tanıyabilirsin.",
+        "reflection_question": "Son zamanlarda hangi konuda biraz daha netliğe ihtiyacım var?",
+        "cta": "Planlarını gözden geçir"
+      }
+    },
+    {
+      "id": "venus_retrograde",
+      "event_type": "planet_retrograde",
+      "planet": "venus",
+      "show_before_days": 14,
+      "priority": 90,
+      "display": {
+        "title": "Venüs Retrosu",
+        "upcoming_label": "Yaklaşıyor",
+        "themes": [
+          "İlişkiler",
+          "Özdeğer",
+          "Para",
+          "Güzellik"
+        ],
+        "preview": "İlişkilerin, seçimlerin ve kendine verdiğin değer üzerine biraz daha düşünmek isteyebileceğin bir dönem yaklaşıyor.",
+        "detail": "Kimlerle ve nelerle gerçekten iyi hissettiğini, nelere para ve zaman ayırmak istediğini ve kendinle ilişkinin nasıl olduğunu yeniden değerlendirmek için güzel bir alan açabilirsin. Amaç hemen karar vermek değil; kendi isteklerini biraz daha iyi duymak.",
+        "action_title": "Şimdiden iyi gelebilir",
+        "actions": [
+          "İlişkilerinde sana iyi gelen şeyleri ve ihtiyaç duyduğun sınırları düşün.",
+          "Büyük bir alışveriş yapmadan önce gerçekten istediğin şeyin ne olduğunu kendine sor.",
+          "Görünümünde büyük bir değişiklik düşünüyorsan, bunun gerçekten senin isteğin olup olmadığını anlamak için kendine biraz zaman tanı."
+        ],
+        "keep_in_mind": "Geçmişten biri veya eski bir konu yeniden aklına gelirse buna hemen özel bir anlam yüklemek zorunda değilsin. Sadece sende ne hissettirdiğini gözlemleyebilirsin.",
+        "reflection_question": "Hayatımda neyi gerçekten seviyorum, neyi sadece alıştığım için sürdürüyorum?",
+        "cta": "Değerlerini yeniden düşün"
+      }
+    },
+    {
+      "id": "mars_retrograde",
+      "event_type": "planet_retrograde",
+      "planet": "mars",
+      "show_before_days": 14,
+      "priority": 90,
+      "display": {
+        "title": "Mars Retrosu",
+        "upcoming_label": "Yaklaşıyor",
+        "themes": [
+          "Enerji",
+          "Motivasyon",
+          "Sınırlar",
+          "Hareket"
+        ],
+        "preview": "Enerjini nereye verdiğini ve hayatındaki temponun sana gerçekten iyi gelip gelmediğini gözden geçirmek isteyebilirsin.",
+        "detail": "Her şeye aynı anda yetişmeye çalışmak yerine gücünü gerçekten önemli olan yerlere yönlendirmek iyi gelebilir. Motivasyonunun zaman zaman değişmesi de kendine yeni bir tempo bulman için bir fırsata dönüşebilir.",
+        "action_title": "Şimdiden iyi gelebilir",
+        "actions": [
+          "Son zamanlarda seni en çok yoran üç şeyi belirle.",
+          "Programında sana gerçekten nefes aldıracak küçük boşluklar bırak.",
+          "Seni kızdıran veya zorlayan bir konuda hemen tepki vermek yerine önce neye ihtiyacın olduğunu düşün."
+        ],
+        "keep_in_mind": "Yavaşlamak, vazgeçmek veya geriye gitmek değildir. Bazen enerjini korumak da ilerlemenin bir parçasıdır.",
+        "reflection_question": "Enerjimi gerçekten hak eden şeylere mi veriyorum?",
+        "cta": "Enerjini yeniden düzenle"
+      }
+    },
+    {
+      "id": "new_moon",
+      "event_type": "moon_phase",
+      "moon_phase": "new_moon",
+      "show_before_days": 5,
+      "priority": 60,
+      "display": {
+        "title": "Yeniay",
+        "upcoming_label": "Yaklaşıyor",
+        "themes": [
+          "Niyetler",
+          "Yeni başlangıçlar",
+          "Planlar",
+          "Kendine yatırım"
+        ],
+        "preview": "Önümüzdeki haftalarda hayatında neye daha fazla yer vermek istediğini düşünmek için güzel bir zaman yaklaşıyor.",
+        "detail": "Yeni bir başlangıç yapmak için hayatını bir gecede değiştirmene gerek yok. Seni gerçekten heyecanlandıran veya sana iyi gelebilecek tek bir alan seçip küçük bir adımla başlamak yeterli olabilir.",
+        "action_title": "Yeniaya hazırlan",
+        "actions": [
+          "Önümüzdeki birkaç hafta için kendine tek bir gerçekçi niyet seç.",
+          "Bu niyeti destekleyecek küçücük bir ilk adım belirle.",
+          "Yeni bir şeye yer açmak için takviminde, odanda veya rutininde küçük bir alan oluştur."
+        ],
+        "keep_in_mind": "Niyetinin büyük veya etkileyici olması gerekmiyor. Sana ait ve sürdürülebilir olması çok daha değerli.",
+        "reflection_question": "Önümüzdeki birkaç hafta boyunca kendim için neyi büyütmek istiyorum?",
+        "cta": "Niyetini seç"
+      }
+    },
+    {
+      "id": "full_moon",
+      "event_type": "moon_phase",
+      "moon_phase": "full_moon",
+      "show_before_days": 5,
+      "priority": 60,
+      "display": {
+        "title": "Dolunay",
+        "upcoming_label": "Yaklaşıyor",
+        "themes": [
+          "Farkındalık",
+          "Tamamlama",
+          "Duygular",
+          "Bırakma"
+        ],
+        "preview": "Son haftalarda hayatında nelerin geliştiğini ve artık neleri farklı yapmak istediğini fark etmek için güzel bir durak yaklaşıyor.",
+        "detail": "Bir sürecin nasıl ilerlediğini görmek, kendinle gurur duyduğun şeyleri fark etmek veya artık sana iyi gelmeyen küçük bir alışkanlığı değiştirmeyi düşünmek isteyebilirsin.",
+        "action_title": "Bu günlerde iyi gelebilir",
+        "actions": [
+          "Son birkaç haftada ilerleme kaydettiğin bir şeyi fark et.",
+          "Uzun süredir açık kalan küçük bir işi tamamla.",
+          "Artık sana hizmet etmediğini düşündüğün bir alışkanlığı veya beklentiyi not et."
+        ],
+        "keep_in_mind": "Dolunay geldi diye bir şeyi bitirmek veya hayatından çıkarmak zorunda değilsin. Sadece nelerin değiştiğini fark etmek bile yeterli.",
+        "reflection_question": "Neyi tamamladım ve bundan sonra neyi farklı yapmak istiyorum?",
+        "cta": "Nelerin değiştiğine bak"
+      }
+    },
+    {
+      "id": "solar_eclipse",
+      "event_type": "eclipse",
+      "eclipse_type": "solar_eclipse",
+      "show_before_days": 14,
+      "priority": 100,
+      "suppresses_event_types": [
+        "new_moon"
+      ],
+      "display": {
+        "title": "Güneş Tutulması",
+        "upcoming_label": "Yaklaşıyor",
+        "themes": [
+          "Yeni yönler",
+          "Değişim",
+          "Niyetler",
+          "Gelecek planları"
+        ],
+        "preview": "Hayatında nasıl ilerlemek istediğini düşünmek ve yeni ihtimallere biraz daha açık olmak isteyebileceğin bir dönem yaklaşıyor.",
+        "detail": "Her şeyi hemen değiştirmek veya yeni bir karar almak zorunda değilsin. Bunun yerine önümüzdeki dönemde seni gerçekten heyecanlandıran şeyleri gözlemlemek ve kendine biraz daha alan açmak iyi gelebilir.",
+        "action_title": "Kendine alan aç",
+        "actions": [
+          "Son zamanlarda seni heyecanlandıran yeni fikirleri bir yere not et.",
+          "Takviminde sadece kendin için kullanabileceğin küçük bir boşluk yarat.",
+          "Hemen karar vermek yerine önümüzdeki günlerde hangi isteğinin daha güçlü kaldığını gözlemle."
+        ],
+        "keep_in_mind": "Her şeyin cevabını bugün bulmak zorunda değilsin. Bazen yeni bir yön önce küçük bir merak olarak ortaya çıkar.",
+        "reflection_question": "Hayatımda hangi alanda yeni bir sayfa açmaya hazır hissediyorum?",
+        "cta": "Alan aç ve gözlemle"
+      }
+    },
+    {
+      "id": "lunar_eclipse",
+      "event_type": "eclipse",
+      "eclipse_type": "lunar_eclipse",
+      "show_before_days": 14,
+      "priority": 100,
+      "suppresses_event_types": [
+        "full_moon"
+      ],
+      "display": {
+        "title": "Ay Tutulması",
+        "upcoming_label": "Yaklaşıyor",
+        "themes": [
+          "Duygular",
+          "Farkındalık",
+          "Tamamlama",
+          "Kendine alan açma"
+        ],
+        "preview": "Duygularını, ihtiyaçlarını ve hayatında artık farklı hissettiren konuları biraz daha yakından fark etmek isteyebileceğin bir dönem yaklaşıyor.",
+        "detail": "Bir şeyi hemen çözmeye, bırakmaya veya değiştirmeye çalışmak yerine sende nelerin değiştiğini gözlemlemek daha iyi hissettirebilir. Kendine biraz daha yavaşlama ve düşünme alanı bırakabilirsin.",
+        "action_title": "Bu günlerde iyi gelebilir",
+        "actions": [
+          "Son zamanlarda seni duygusal olarak meşgul eden şeyi kendin için birkaç cümleyle yaz.",
+          "Programında dinlenebileceğin veya yalnız kalabileceğin küçük bir alan bırak.",
+          "Yoğun hissettiğin bir anda hemen karar vermek yerine düşünmek için kendine zaman tanı."
+        ],
+        "keep_in_mind": "Bir şeyi bırakmak veya hayatında büyük bir değişiklik yapmak zorunda değilsin. Sadece neyin sana artık aynı şekilde iyi gelmediğini fark etmek bile değerli olabilir.",
+        "reflection_question": "Artık taşımak zorunda olmadığım ne var?",
+        "cta": "Yavaşla ve fark et"
+      }
+    }
+  ]
+}

@@ -38,14 +38,16 @@ final class SettingsViewController: UIViewController {
             title: "Hesap",
             rows: [
                 SettingsRow(icon: "person.crop.circle", title: "Profili Düzenle", isDestructive: false),
-//                SettingsRow(icon: "key", title: "Şifre Değiştir", isDestructive: false)
             ]
         ),
+        
         SettingsSection(
             title: "Tercihler",
             rows: [
                 SettingsRow(icon: "bell", title: "Bildirimler", isDestructive: false),
-                SettingsRow(icon: "globe", title: "Dil", isDestructive: false)
+                SettingsRow(icon: "globe", title: "Dil", isDestructive: false),
+                SettingsRow(icon: "book.closed", title: "Lunora’yı Nasıl Kullanabilirsin?",
+                            isDestructive: false)
             ]
         ),
         SettingsSection(
@@ -287,6 +289,15 @@ final class SettingsViewController: UIViewController {
     }
 
     // MARK: - Actions
+    
+    private func requireInternet() -> Bool {
+        guard NetworkMonitor.shared.isConnected else {
+            InternetRequiredAlert.show(on: self)
+            return false
+        }
+
+        return true
+    }
 
     @objc private func didTapBack() {
         navigationController?.popViewController(animated: true)
@@ -300,10 +311,15 @@ final class SettingsViewController: UIViewController {
 
         switch title {
         case "Profili Düzenle":
+            guard requireInternet() else { return }
             navigateToEditProfile()
+        
+        case "Lunora’yı Nasıl Kullanabilirsin?":
+            guard requireInternet() else { return }
+            openLunoraGuide()
 
         case "Bildirimler":
-            showComingSoonAlert(title: "Bildirimler")
+            navigateToNotificationSettings()
 
         case "Dil":
             showInfoAlert(
@@ -318,24 +334,28 @@ final class SettingsViewController: UIViewController {
             showComingSoonAlert(title: "Kullanım Şartları")
 
         case "Hesabımı Sil":
+            guard requireInternet() else { return }
             showDeleteAccountWarning()
 
         case "Bize Ulaş":
-            showComingSoonAlert(title: "Bize Ulaş")
+            guard requireInternet() else { return }
+            navigateToContactUs()
 
         case "Sorun Bildir":
-            showComingSoonAlert(title: "Sorun Bildir")
+            guard requireInternet() else { return }
+            navigateToBugReport()
 
         case "Lunora Hakkında":
             showInfoAlert(
                 title: "Lunora Hakkında",
-                message: "Lunora, kişisel farkındalık ve içsel gelişim yolculuklarını destekleyen bir rehber uygulamasıdır."
+                message: "Lunora, gökyüzünün döngülerinden ilham alan kişisel gelişim programları sunar. Programlar, farkındalık kazanmanı, rutinlerini desteklemeni ve kendine daha bilinçli alan açmanı amaçlar. Uygulamada ayrıca güncel gökyüzü hareketlerine ilişkin genel astrolojik yorumlar yer alır."
             )
 
         case "Uygulama Sürümü":
             showAppVersion()
 
         case "Çıkış Yap":
+            guard requireInternet() else { return }
             showLogoutConfirmation()
 
         default:
@@ -344,12 +364,159 @@ final class SettingsViewController: UIViewController {
     }
     
     // MARK: - Navigation
+    
+    private func openLunoraGuide() {
+
+        guard let uid = Auth.auth().currentUser?.uid else {
+            return
+        }
+
+        let coordinator = FirstExperienceCoordinator(
+            userID: uid
+        )
+
+        // MARK: 1 / 3
+
+        let needViewController =
+            FirstExperienceNeedViewController(
+                coordinator: coordinator
+            )
+
+        let guideNavigationController =
+            UINavigationController(
+                rootViewController: needViewController
+            )
+
+        guideNavigationController.setNavigationBarHidden(
+            true,
+            animated: false
+        )
+
+        guideNavigationController.modalPresentationStyle = .fullScreen
+
+        needViewController.onContinue = {
+            [weak guideNavigationController] need in
+
+            guard let guideNavigationController else {
+                return
+            }
+
+            // MARK: 2 / 3
+
+            let previewViewController =
+                FirstExperienceSelectedPreviewViewController(
+                    coordinator: coordinator,
+                    need: need
+                )
+
+            previewViewController.onBack = {
+                [weak guideNavigationController] in
+
+                guideNavigationController?.popViewController(
+                    animated: true
+                )
+            }
+
+            previewViewController.onContinue = {
+                [weak guideNavigationController] in
+
+                guard let guideNavigationController else {
+                    return
+                }
+
+                // MARK: 3 / 3
+
+                let handoffViewController =
+                    FirstExperienceHandoffViewController(
+                        coordinator: coordinator
+                    )
+
+                handoffViewController.onBack = {
+                    [weak guideNavigationController] in
+
+                    guideNavigationController?.popViewController(
+                        animated: true
+                    )
+                }
+
+                handoffViewController.onContinue = {
+                    [weak self, weak guideNavigationController] in
+
+                    guard
+                        let self,
+                        let uid = Auth.auth().currentUser?.uid
+                    else {
+                        return
+                    }
+
+                    // Uygulama içi rehberi en baştan başlat.
+                    GuidedOnboardingManager.shared.restart(
+                        for: uid
+                    )
+
+                    // 3 sayfalık rehberi kapat.
+                    guideNavigationController?.dismiss(
+                        animated: true
+                    ) {
+                        // Gerçek uygulamada Programlar sekmesine geç.
+                        self.tabBarController?.selectedIndex = 0
+                    }
+                }
+
+                guideNavigationController
+                    .pushViewController(
+                        handoffViewController,
+                        animated: true
+                    )
+            }
+
+            guideNavigationController
+                .pushViewController(
+                    previewViewController,
+                    animated: true
+                )
+        }
+
+        present(
+            guideNavigationController,
+            animated: true
+        )
+    }
+    
+    private func navigateToNotificationSettings() {
+
+        let notificationSettingsViewController =
+            NotificationSettingsViewController()
+
+        navigationController?.pushViewController(
+            notificationSettingsViewController,
+            animated: true
+        )
+    }
 
     private func navigateToEditProfile() {
         let editProfileViewController = EditProfileViewController()
 
         navigationController?.pushViewController(
             editProfileViewController,
+            animated: true
+        )
+    }
+    
+    private func navigateToBugReport() {
+        let bugReportViewController = BugReportViewController()
+
+        navigationController?.pushViewController(
+            bugReportViewController,
+            animated: true
+        )
+    }
+    
+    private func navigateToContactUs() {
+        let contactUsViewController = ContactUsViewController()
+
+        navigationController?.pushViewController(
+            contactUsViewController,
             animated: true
         )
     }
@@ -448,26 +615,28 @@ final class SettingsViewController: UIViewController {
     }
 
     private func navigateToLoginScreen() {
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
 
-        guard let loginViewController = storyboard.instantiateViewController(
-            withIdentifier: "LoginViewController"
-        ) as? LoginViewController else {
-            print("🔴 LoginViewController bulunamadı. Storyboard ID kontrol edilmeli.")
+        let loginViewController = LoginViewController()
+
+        let navigationController = UINavigationController(
+            rootViewController: loginViewController
+        )
+
+        navigationController.setNavigationBarHidden(
+            true,
+            animated: false
+        )
+
+        guard let sceneDelegate =
+            view.window?.windowScene?.delegate as? SceneDelegate
+        else {
             return
         }
 
-        let navigationController = UINavigationController(rootViewController: loginViewController)
-        navigationController.setNavigationBarHidden(true, animated: false)
-
-        if let sceneDelegate = view.window?.windowScene?.delegate as? SceneDelegate,
-           let window = sceneDelegate.window {
-            window.rootViewController = navigationController
-            window.makeKeyAndVisible()
-        } else {
-            view.window?.rootViewController = navigationController
-            view.window?.makeKeyAndVisible()
-        }
+        sceneDelegate.setRoot(
+            navigationController,
+            animated: true
+        )
     }
 
     private func showAppVersion() {

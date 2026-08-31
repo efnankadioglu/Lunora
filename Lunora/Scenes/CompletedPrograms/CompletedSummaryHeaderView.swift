@@ -12,9 +12,10 @@ struct CompletedSummaryHeaderData {
     let totalCompletedDays: Int
     let bestStreakText: String
     let badgeImageNames: [String]
-    let elementCardViewModel: ElementBalanceCardViewModel
 }
 final class CompletedSummaryHeaderView: UIView {
+    
+    var onTapAddProgram: (() -> Void)?
 
     private let titleLabel = UILabel()
     private let subtitleLabel = UILabel()
@@ -23,11 +24,6 @@ final class CompletedSummaryHeaderView: UIView {
     private let badgesContainerView = UIView()
     private let badgesStackView = UIStackView()
     private let badgesScrollView = UIScrollView()
-
-    private let elementCardView = UIView()
-    private let elementTitleLabel = UILabel()
-    private let elementLabel = UILabel()
-    private let elementDescriptionLabel = UILabel()
 
     override init(frame: CGRect) {
         super.init(frame: frame)
@@ -66,9 +62,12 @@ final class CompletedSummaryHeaderView: UIView {
         titleLabel.font = .systemFont(ofSize: 26, weight: .bold)
         titleLabel.textColor = UIColor(red: 35/255, green: 45/255, blue: 63/255, alpha: 1)
 
-        subtitleLabel.text = "Harikasın! Her adım bir zafer ✨"
+        subtitleLabel.text = ""
         subtitleLabel.font = .systemFont(ofSize: 15, weight: .medium)
         subtitleLabel.textColor = UIColor(red: 113/255, green: 122/255, blue: 138/255, alpha: 1)
+        
+        subtitleLabel.numberOfLines = 0
+        subtitleLabel.lineBreakMode = .byWordWrapping
 
         let headerStack = UIStackView(arrangedSubviews: [titleLabel, subtitleLabel])
         headerStack.axis = .vertical
@@ -116,7 +115,7 @@ final class CompletedSummaryHeaderView: UIView {
             badgesInnerStack.trailingAnchor.constraint(equalTo: badgesContainerView.trailingAnchor, constant: -16),
             badgesInnerStack.bottomAnchor.constraint(equalTo: badgesContainerView.bottomAnchor, constant: -16),
 
-            badgesScrollView.heightAnchor.constraint(equalToConstant: 64),
+            badgesScrollView.heightAnchor.constraint(equalToConstant: 76),
 
             badgesStackView.topAnchor.constraint(equalTo: badgesScrollView.contentLayoutGuide.topAnchor),
             badgesStackView.leadingAnchor.constraint(equalTo: badgesScrollView.contentLayoutGuide.leadingAnchor),
@@ -128,54 +127,15 @@ final class CompletedSummaryHeaderView: UIView {
 
         mainStack.addArrangedSubview(badgesContainerView)
 
-        // Element card
-        elementCardView.backgroundColor = UIColor(hex: "#EAF4FF")
-        elementCardView.layer.cornerRadius = 24
-        elementCardView.layer.shadowColor = UIColor.black.cgColor
-        elementCardView.layer.shadowOpacity = 0.05
-        elementCardView.layer.shadowRadius = 12
-        elementCardView.layer.shadowOffset = CGSize(width: 0, height: 6)
-        elementCardView.heightAnchor.constraint(greaterThanOrEqualToConstant: 128).isActive = true
-
-        elementTitleLabel.text = "✧ Element Dengesi"
-        elementTitleLabel.font = .systemFont(ofSize: 15, weight: .semibold)
-        elementTitleLabel.textColor = UIColor(hex: "#244A99")
-
-        elementLabel.font = .systemFont(ofSize: 18, weight: .semibold)
-        elementLabel.textColor = UIColor(hex: "#244A99")
-        elementLabel.numberOfLines = 2
-        elementLabel.adjustsFontSizeToFitWidth = true
-        elementLabel.minimumScaleFactor = 0.85
-
-        elementDescriptionLabel.font = .systemFont(ofSize: 13, weight: .semibold)
-        elementDescriptionLabel.adjustsFontSizeToFitWidth = true
-        elementDescriptionLabel.minimumScaleFactor = 0.85
-        elementDescriptionLabel.textColor = UIColor(hex: "#77AEEB")
-        elementDescriptionLabel.numberOfLines = 2
-
-        let elementStack = UIStackView(arrangedSubviews: [
-            elementTitleLabel,
-            elementLabel,
-            elementDescriptionLabel
-        ])
-
-        elementStack.axis = .vertical
-        elementStack.spacing = 8
-        elementStack.translatesAutoresizingMaskIntoConstraints = false
-
-        elementCardView.addSubview(elementStack)
-
-        NSLayoutConstraint.activate([
-            elementStack.topAnchor.constraint(equalTo: elementCardView.topAnchor, constant: 18),
-            elementStack.leadingAnchor.constraint(equalTo: elementCardView.leadingAnchor, constant: 20),
-            elementStack.trailingAnchor.constraint(equalTo: elementCardView.trailingAnchor, constant: -20),
-            elementStack.bottomAnchor.constraint(equalTo: elementCardView.bottomAnchor, constant: -18)
-        ])
-
-        mainStack.addArrangedSubview(elementCardView)
     }
 
     func configure(with data: CompletedSummaryHeaderData) {
+        
+        if data.completedProgramCount == 0 {
+                subtitleLabel.text = "Henüz bir program tamamlamadın. İlk adımını attığında başarıların burada görünecek ✨"
+            } else {
+                subtitleLabel.text = "Harikasın! Her adım bir zafer ✨"
+            }
         
         cardsStackView.arrangedSubviews.forEach { $0.removeFromSuperview() }
 
@@ -186,7 +146,7 @@ final class CompletedSummaryHeaderView: UIView {
 
         cardsStackView.addArrangedSubview(makeCard(
             value: "\(data.totalCompletedDays)",
-            title: "Toplam Günler"
+            title: "Aktif Günler"
         ))
 
         cardsStackView.addArrangedSubview(makeCard(
@@ -204,19 +164,6 @@ final class CompletedSummaryHeaderView: UIView {
         if data.badgeImageNames.isEmpty {
             badgesStackView.addArrangedSubview(makePlusBadgeIcon())
         }
-
-        let elementViewModel = data.elementCardViewModel
-
-        elementCardView.backgroundColor = elementViewModel.backgroundColor
-
-        elementTitleLabel.text = "✧ \(elementViewModel.title)"
-        elementTitleLabel.textColor = elementViewModel.titleColor
-
-        elementLabel.text = elementViewModel.mainText
-        elementLabel.textColor = elementViewModel.titleColor
-
-        elementDescriptionLabel.text = elementViewModel.subtitle
-        elementDescriptionLabel.textColor = elementViewModel.subtitleColor
     }
 
     private func makeCard(value: String, title: String) -> UIView {
@@ -234,7 +181,7 @@ final class CompletedSummaryHeaderView: UIView {
                 UIColor(red: 255/255, green: 150/255, blue: 0/255, alpha: 1).cgColor
             ]
 
-        case "Toplam Günler":
+        case "Aktif Günler":
             colors = [
                 UIColor(red: 255/255, green: 105/255, blue: 180/255, alpha: 1).cgColor,
                 UIColor(red: 255/255, green: 80/255, blue: 150/255, alpha: 1).cgColor
@@ -264,7 +211,7 @@ final class CompletedSummaryHeaderView: UIView {
 
         let iconLabel = UILabel() 
         iconLabel.translatesAutoresizingMaskIntoConstraints = false
-        iconLabel.text = title == "Tamamlanan Program" ? "😊" : (title == "Toplam Günler" ? "🔥" : "⭐️")
+        iconLabel.text = title == "Tamamlanan Program" ? "😊" : (title == "Aktif Günler" ? "🔥" : "⭐️")
         iconLabel.font = .systemFont(ofSize: 24)
         iconLabel.textAlignment = .center
 
@@ -345,33 +292,60 @@ final class CompletedSummaryHeaderView: UIView {
 
         return container
     }
-
+    
     private func makePlusBadgeIcon() -> UIView {
-        let container = UIView()
-        container.translatesAutoresizingMaskIntoConstraints = false
-        container.backgroundColor = .clear
-        container.layer.cornerRadius = 28
-        container.layer.borderWidth = 2
-        container.layer.borderColor = UIColor(red: 211/255, green: 137/255, blue: 204/255, alpha: 0.8).cgColor
+        let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+
+        button.backgroundColor = UIColor(
+            red: 255/255,
+            green: 232/255,
+            blue: 244/255,
+            alpha: 1
+        )
+
+        button.setTitle("+", for: .normal)
+        button.setTitleColor(
+            UIColor(
+                red: 230/255,
+                green: 112/255,
+                blue: 174/255,
+                alpha: 1
+            ),
+            for: .normal
+        )
+
+        button.titleLabel?.font = .systemFont(ofSize: 28, weight: .semibold)
+
+        button.layer.borderWidth = 2
+        button.layer.borderColor = UIColor(
+            red: 244/255,
+            green: 180/255,
+            blue: 216/255,
+            alpha: 1
+        ).cgColor
+
+        button.clipsToBounds = true
+
+        button.addTarget(
+            self,
+            action: #selector(didTapAddProgram),
+            for: .touchUpInside
+        )
 
         NSLayoutConstraint.activate([
-            container.widthAnchor.constraint(equalToConstant: 56),
-            container.heightAnchor.constraint(equalToConstant: 56)
+            button.widthAnchor.constraint(equalToConstant: 68),
+            button.heightAnchor.constraint(equalToConstant: 68)
         ])
 
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "+"
-        label.font = .systemFont(ofSize: 24, weight: .semibold)
-        label.textColor = UIColor(red: 211/255, green: 137/255, blue: 204/255, alpha: 1)
+        button.layer.cornerRadius = 34
 
-        container.addSubview(label)
-
-        NSLayoutConstraint.activate([
-            label.centerXAnchor.constraint(equalTo: container.centerXAnchor),
-            label.centerYAnchor.constraint(equalTo: container.centerYAnchor)
-        ])
-
-        return container
+        return button
     }
+    
+    @objc
+    private func didTapAddProgram() {
+        onTapAddProgram?()
+    }
+
 }

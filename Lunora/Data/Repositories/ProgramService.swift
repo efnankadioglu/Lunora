@@ -70,6 +70,97 @@ final class ProgramService {
                 completion(activePrograms)
             }
     }
+    
+    // MARK: - Firestore'dan Tüm Programları Çek
+
+    func fetchAllPrograms(
+        completion: @escaping ([Program]) -> Void
+    ) {
+
+        db.collection("programs")
+            .getDocuments { snapshot, error in
+
+                if let error = error {
+                    print(
+                        "❌ Firestore tüm programlar okuma hatası:",
+                        error.localizedDescription
+                    )
+                    completion([])
+                    return
+                }
+
+                guard let documents = snapshot?.documents else {
+                    print("❌ Firestore program document bulunamadı")
+                    completion([])
+                    return
+                }
+
+                let decodedPrograms: [(sortOrder: Int, program: Program)] =
+                    documents.compactMap { document in
+
+                        do {
+
+                            var data = document.data()
+
+                            if data["id"] == nil {
+                                data["id"] = document.documentID
+                            }
+
+                            data.removeValue(forKey: "updatedAt")
+                            data.removeValue(forKey: "createdAt")
+
+                            let sortOrder =
+                                data["sortOrder"] as? Int
+                                ?? 999
+
+                            let jsonData =
+                                try JSONSerialization.data(
+                                    withJSONObject: data,
+                                    options: []
+                                )
+
+                            let program =
+                                try JSONDecoder()
+                                    .decode(
+                                        Program.self,
+                                        from: jsonData
+                                    )
+                                    .formatted()
+
+                            return (
+                                sortOrder: sortOrder,
+                                program: program
+                            )
+
+                        } catch {
+
+                            print(
+                                "❌ Tüm programlardan biri decode edilemedi:",
+                                document.documentID,
+                                error.localizedDescription
+                            )
+
+                            return nil
+                        }
+                    }
+
+                let programs =
+                    decodedPrograms
+                        .sorted {
+                            $0.sortOrder < $1.sortOrder
+                        }
+                        .map {
+                            $0.program
+                        }
+
+                print(
+                    "🟢 Firestore tüm program sayısı:",
+                    programs.count
+                )
+
+                completion(programs)
+            }
+    }
  
     
     // MARK: - Program Başlatma (14 Gün Kontrolü Dahil)

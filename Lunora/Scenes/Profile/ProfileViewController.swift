@@ -15,9 +15,10 @@ final class ProfileViewController: UIViewController {
 
     private let db = Firestore.firestore()
     private let enrollmentRepository = EnrollmentRepository()
+    
+    private let programService = ProgramService.shared
 
     private var hasActiveJourney: Bool = false
-    private var isLoadingDailyInsight = false
 
     private let pageBackgroundColor = UIColor(named: "lunoraPink") ?? UIColor(
         red: 246/255,
@@ -61,17 +62,6 @@ final class ProfileViewController: UIViewController {
     private let achievementsScrollView = UIScrollView()
     private let achievementsSubtitleLabel = UILabel()
 
-    private let elementCardView = UIView()
-    private let elementTitleLabel = UILabel()
-    private let elementMainLabel = UILabel()
-    private let elementDescriptionLabel = UILabel()
-
-    private let insightCardView = UIView()
-    private let insightSectionTitleLabel = UILabel()
-    private let insightTitleLabel = UILabel()
-    private let insightSubtitleLabel = UILabel()
-    private let insightBodyLabel = UILabel()
-
     // MARK: - Lifecycle
 
     override func viewDidLoad() {
@@ -89,7 +79,6 @@ final class ProfileViewController: UIViewController {
 
         loadProfileInfo()
         loadProfileDashboardData()
-        loadDailyInsight()
     }
 
     override func viewDidLayoutSubviews() {
@@ -108,8 +97,6 @@ final class ProfileViewController: UIViewController {
         setupStatsCards()
         setupCurrentJourneyCard()
         setupAchievementsCard()
-        setupElementCard()
-        setupInsightCard()
     }
 
     private func setupScrollView() {
@@ -289,7 +276,7 @@ final class ProfileViewController: UIViewController {
         let activeDaysCard = makeStatCard(
             valueLabel: activeDaysValueLabel,
             initialValue: "0",
-            title: "Toplam Günler",
+            title: "Aktif Günler",
             icon: "📅",
             iconBackgroundColor: UIColor(hex: "#EDE3FF")
         )
@@ -426,100 +413,6 @@ final class ProfileViewController: UIViewController {
         mainStackView.addArrangedSubview(achievementsCardView)
     }
 
-    private func setupElementCard() {
-        elementCardView.backgroundColor = UIColor(hex: "#F4ECF7")
-        elementCardView.layer.cornerRadius = 26
-        elementCardView.layer.shadowColor = UIColor.black.cgColor
-        elementCardView.layer.shadowOpacity = 0.06
-        elementCardView.layer.shadowRadius = 14
-        elementCardView.layer.shadowOffset = CGSize(width: 0, height: 8)
-
-        elementTitleLabel.text = "Your Element"
-        elementTitleLabel.font = .systemFont(ofSize: 15, weight: .semibold)
-        elementTitleLabel.textColor = UIColor(hex: "#5B3A66")
-
-        elementMainLabel.text = "Element journey begins ✨"
-        elementMainLabel.font = .systemFont(ofSize: 20, weight: .bold)
-        elementMainLabel.textColor = UIColor(hex: "#5B3A66")
-        elementMainLabel.numberOfLines = 2
-
-        elementDescriptionLabel.text = "İlk programını tamamladığında burada sana özel bir iz oluşacak."
-        elementDescriptionLabel.font = .systemFont(ofSize: 14, weight: .semibold)
-        elementDescriptionLabel.textColor = UIColor(hex: "#A47BB7")
-        elementDescriptionLabel.numberOfLines = 3
-
-        let stack = UIStackView(arrangedSubviews: [
-            elementTitleLabel,
-            elementMainLabel,
-            elementDescriptionLabel
-        ])
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        stack.axis = .vertical
-        stack.spacing = 8
-
-        elementCardView.addSubview(stack)
-
-        NSLayoutConstraint.activate([
-            stack.topAnchor.constraint(equalTo: elementCardView.topAnchor, constant: 20),
-            stack.leadingAnchor.constraint(equalTo: elementCardView.leadingAnchor, constant: 20),
-            stack.trailingAnchor.constraint(equalTo: elementCardView.trailingAnchor, constant: -20),
-            stack.bottomAnchor.constraint(equalTo: elementCardView.bottomAnchor, constant: -20)
-        ])
-
-        mainStackView.addArrangedSubview(elementCardView)
-    }
-    
-    private func setupInsightCard() {
-        insightCardView.backgroundColor = .white
-        insightCardView.layer.cornerRadius = 26
-        insightCardView.layer.shadowColor = UIColor.black.cgColor
-        insightCardView.layer.shadowOpacity = 0.06
-        insightCardView.layer.shadowRadius = 14
-        insightCardView.layer.shadowOffset = CGSize(width: 0, height: 8)
-
-        insightSectionTitleLabel.text = "🤖 Bugünün İçgörüsü"
-        insightSectionTitleLabel.font = .systemFont(ofSize: 18, weight: .bold)
-        insightSectionTitleLabel.textColor = UIColor(hex: "#2D2430")
-        insightSectionTitleLabel.numberOfLines = 1
-
-        insightTitleLabel.text = "İç sesine dön"
-        insightTitleLabel.font = .systemFont(ofSize: 16, weight: .semibold)
-        insightTitleLabel.textColor = UIColor(hex: "#E85A9F")
-        insightTitleLabel.numberOfLines = 2
-
-        insightSubtitleLabel.text = "Küçük adım da yeterli."
-        insightSubtitleLabel.font = .systemFont(ofSize: 14, weight: .semibold)
-        insightSubtitleLabel.textColor = UIColor(hex: "#9A7FA3")
-        insightSubtitleLabel.numberOfLines = 2
-
-        insightBodyLabel.text = "Bugün kendine yüklenmeden ilerlemen yeterli. Bir görevi bilinçle tamamlamak bile yolculuğunu canlı tutar."
-        insightBodyLabel.font = .systemFont(ofSize: 14, weight: .medium)
-        insightBodyLabel.textColor = UIColor(hex: "#7B6A80")
-        insightBodyLabel.numberOfLines = 0
-        insightBodyLabel.setLineSpacing(4)
-
-        let stack = UIStackView(arrangedSubviews: [
-            insightSectionTitleLabel,
-            insightTitleLabel,
-            insightSubtitleLabel,
-            insightBodyLabel
-        ])
-        stack.translatesAutoresizingMaskIntoConstraints = false
-        stack.axis = .vertical
-        stack.spacing = 8
-
-        insightCardView.addSubview(stack)
-
-        NSLayoutConstraint.activate([
-            stack.topAnchor.constraint(equalTo: insightCardView.topAnchor, constant: 20),
-            stack.leadingAnchor.constraint(equalTo: insightCardView.leadingAnchor, constant: 20),
-            stack.trailingAnchor.constraint(equalTo: insightCardView.trailingAnchor, constant: -20),
-            stack.bottomAnchor.constraint(equalTo: insightCardView.bottomAnchor, constant: -20)
-        ])
-
-        mainStackView.addArrangedSubview(insightCardView)
-    }
-
     // MARK: - Firestore Profile Data
 
     private func loadProfileInfo() {
@@ -559,7 +452,13 @@ final class ProfileViewController: UIViewController {
 
                 if let profileImageURL = profileImageURL,
                    !profileImageURL.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
-                    self.loadRemoteAvatar(from: profileImageURL)
+                    self.loadRemoteAvatar(
+                        from: profileImageURL,
+                        uid: userId,
+                        name: name ?? "",
+                        username: username ?? "",
+                        motivation: motivation ?? ""
+                    )
                 } else {
                     self.loadLocalAvatarFallback(uid: userId)
                 }
@@ -598,30 +497,100 @@ final class ProfileViewController: UIViewController {
         applyAvatar(image)
     }
 
-    private func loadRemoteAvatar(from urlString: String) {
+//    private func loadRemoteAvatar(from urlString: String) {
+//        guard let url = URL(string: urlString) else {
+//            applyDefaultAvatar()
+//            return
+//        }
+//
+//        URLSession.shared.dataTask(with: url) { [weak self] data, _, error in
+//            DispatchQueue.main.async {
+//                guard let self = self else { return }
+//
+//                if let error = error {
+//                    print("🔴 Avatar indirilemedi:", error.localizedDescription)
+//                    self.applyDefaultAvatar()
+//                    return
+//                }
+//
+//                guard let data = data,
+//                      let image = UIImage(data: data) else {
+//                    self.applyDefaultAvatar()
+//                    return
+//                }
+//
+//                self.applyAvatar(image)
+//            }
+//        }.resume()
+//    }
+    
+    private func loadRemoteAvatar(
+        from urlString: String,
+        uid: String,
+        name: String,
+        username: String,
+        motivation: String
+    ) {
+
+        // Varsa önce local fotoğrafı göster.
+        loadLocalAvatarFallback(uid: uid)
+
         guard let url = URL(string: urlString) else {
-            applyDefaultAvatar()
             return
         }
 
         URLSession.shared.dataTask(with: url) { [weak self] data, _, error in
+
             DispatchQueue.main.async {
-                guard let self = self else { return }
+
+                guard let self = self else {
+                    return
+                }
 
                 if let error = error {
-                    print("🔴 Avatar indirilemedi:", error.localizedDescription)
-                    self.applyDefaultAvatar()
+
+                    print(
+                        "🔴 Avatar remote indirilemedi:",
+                        error.localizedDescription
+                    )
+
                     return
                 }
 
-                guard let data = data,
-                      let image = UIImage(data: data) else {
-                    self.applyDefaultAvatar()
+                guard
+                    let data = data,
+                    let image = UIImage(data: data)
+                else {
                     return
                 }
 
+                // Fotoğrafı ekranda göster.
                 self.applyAvatar(image)
+
+                // Fotoğrafı local ProfileStore'a da kaydet.
+                do {
+
+                    _ = try ProfileStore.shared.saveProfile(
+                        uid: uid,
+                        name: name,
+                        username: username,
+                        motivation: motivation,
+                        avatar: image
+                    )
+
+                    print(
+                        "✅ Profil fotoğrafı local cache'e kaydedildi"
+                    )
+
+                } catch {
+
+                    print(
+                        "🔴 Profil fotoğrafı local kaydedilemedi:",
+                        error.localizedDescription
+                    )
+                }
             }
+
         }.resume()
     }
 
@@ -677,67 +646,7 @@ final class ProfileViewController: UIViewController {
 
         return motivation
     }
-    
-    // MARK: - Daily Insight
 
-    private func loadDailyInsight() {
-        guard !isLoadingDailyInsight else {
-            print("🟡 DailyInsight zaten yükleniyor, tekrar çağrı engellendi")
-            return
-        }
-
-        guard let userId = Auth.auth().currentUser?.uid else {
-            print("🔴 DailyInsight: userId yok")
-            applyDailyInsightFallback()
-            return
-        }
-
-        isLoadingDailyInsight = true
-        applyDailyInsightLoadingState()
-
-        DailyInsightService.shared.fetchTodayInsight(userId: userId) { [weak self] result in
-            DispatchQueue.main.async {
-                guard let self = self else { return }
-
-                self.isLoadingDailyInsight = false
-
-                switch result {
-                case .success(let insight):
-                    self.configureDailyInsight(with: insight)
-
-                case .failure(let error):
-                    print("🔴 DailyInsight alınamadı:", error.localizedDescription)
-                    self.applyDailyInsightFallback()
-                }
-            }
-        }
-    }
-
-    private func applyDailyInsightLoadingState() {
-        insightTitleLabel.text = "İçgörün hazırlanıyor"
-        insightSubtitleLabel.text = "Bugünün enerjisi okunuyor."
-        insightBodyLabel.text = "Kısa bir anda, yolculuğuna eşlik edecek mesaj hazırlanıyor."
-    }
-
-    private func configureDailyInsight(with insight: DailyInsight) {
-        insightTitleLabel.text = insight.title
-        insightSubtitleLabel.text = insight.subtitle
-        insightBodyLabel.text = insight.body
-        insightBodyLabel.setLineSpacing(4)
-    }
-
-    private func applyDailyInsightFallback() {
-        let dateKey = makeTodayDateKeyForProfile()
-        let fallback = DailyInsight.fallback(dateKey: dateKey)
-        configureDailyInsight(with: fallback)
-    }
-
-    private func makeTodayDateKeyForProfile() -> String {
-        let formatter = DateFormatter()
-        formatter.dateFormat = "yyyy-MM-dd"
-        formatter.timeZone = TimeZone.current
-        return formatter.string(from: Date())
-    }
 
     // MARK: - Real Dashboard Data
 
@@ -748,69 +657,93 @@ final class ProfileViewController: UIViewController {
 
         configureNoActiveJourney()
         configureAchievements(with: [])
-        configureElementEmptyState()
     }
 
     private func loadProfileDashboardData() {
+
         guard let userId = Auth.auth().currentUser?.uid else {
             print("🔴 Profile dashboard: userId yok")
             applyEmptyProfileDashboard()
             return
         }
 
-        let programs = ProgramLoader.loadPrograms()
+        // Aktivite günleri program datasından bağımsız.
+        loadTotalActivityDays(userId: userId)
 
-        enrollmentRepository.fetchCompletedEnrollments(userId: userId) { [weak self] completedResult in
+        // Programları artık local JSON'dan değil Firestore'dan alıyoruz.
+        programService.fetchAllPrograms { [weak self] programs in
+
+            guard let self = self else {
+                return
+            }
+
             DispatchQueue.main.async {
-                guard let self = self else { return }
 
-                switch completedResult {
-                case .success(let completedEnrollments):
-                    let completedProgramCount = completedEnrollments.count
-                    let completedDaysFromFinishedPrograms = completedEnrollments.reduce(0) {
-                        $0 + $1.completedDaysCount
-                    }
+                print(
+                    "🟢 Profile Firestore program sayısı:",
+                    programs.count
+                )
 
-                    let badgeImageNames: [String] = completedEnrollments.compactMap { enrollment in
-                        guard let program = programs.first(where: { $0.id == enrollment.programId }) else {
-                            return nil
+                self.enrollmentRepository.fetchCompletedEnrollments(
+                    userId: userId
+                ) { [weak self] completedResult in
+
+                    DispatchQueue.main.async {
+
+                        guard let self = self else {
+                            return
                         }
 
-                        return program.badgeImageName ?? program.imageName
-                    }
+                        switch completedResult {
 
-                    let completedItems: [CompletedProgramDisplayItem] = completedEnrollments.compactMap { enrollment in
-                        guard let program = programs.first(where: { $0.id == enrollment.programId }) else {
-                            return nil
+                        case .success(let completedEnrollments):
+
+                            let completedProgramCount =
+                                completedEnrollments.count
+
+                            let badgeImageNames: [String] =
+                                completedEnrollments.compactMap { enrollment in
+
+                                    guard let program = programs.first(
+                                        where: {
+                                            $0.id == enrollment.programId
+                                        }
+                                    ) else {
+                                        return nil
+                                    }
+
+                                    return program.badgeImageName
+                                        ?? program.imageName
+                                }
+
+                            self.completedProgramsValueLabel.text =
+                                "\(completedProgramCount)"
+
+                            self.configureAchievements(
+                                with: badgeImageNames
+                            )
+
+                            // Aktif programı da artık Firestore listesinden bulacak.
+                            self.loadActiveJourneyData(
+                                userId: userId,
+                                programs: programs
+                            )
+
+                            self.loadStreakData(
+                                userId: userId,
+                                programs: programs
+                            )
+
+                        case .failure(let error):
+
+                            print(
+                                "🔴 Profile completed enrollments alınamadı:",
+                                error.localizedDescription
+                            )
+
+                            self.applyEmptyProfileDashboard()
                         }
-
-                        return CompletedProgramDisplayItem(
-                            enrollmentId: enrollment.enrollmentId,
-                            programName: program.name,
-                            imageName: program.badgeImageName ?? program.imageName,
-                            durationText: program.durationText,
-                            completedDateText: "",
-                            completionNote: enrollment.completionNote,
-                            completedDaysCount: enrollment.completedDaysCount,
-                            elements: program.elements
-                        )
                     }
-
-                    self.completedProgramsValueLabel.text = "\(completedProgramCount)"
-                    self.configureAchievements(with: badgeImageNames)
-                    self.configureElementCard(from: completedItems)
-
-                    self.loadActiveJourneyData(
-                        userId: userId,
-                        programs: programs,
-                        completedDaysFromFinishedPrograms: completedDaysFromFinishedPrograms
-                    )
-
-                    self.loadStreakData(userId: userId, programs: programs)
-
-                case .failure(let error):
-                    print("🔴 Profile completed enrollments alınamadı:", error.localizedDescription)
-                    self.applyEmptyProfileDashboard()
                 }
             }
         }
@@ -818,39 +751,149 @@ final class ProfileViewController: UIViewController {
 
     private func loadActiveJourneyData(
         userId: String,
-        programs: [Program],
-        completedDaysFromFinishedPrograms: Int
+        programs: [Program]
     ) {
         enrollmentRepository.fetchActiveEnrollment(userId: userId) { [weak self] activeResult in
             DispatchQueue.main.async {
                 guard let self = self else { return }
 
                 switch activeResult {
+
                 case .success(let activeEnrollment):
+
                     if let activeEnrollment = activeEnrollment,
-                       let activeProgram = programs.first(where: { $0.id == activeEnrollment.programId }) {
+                       let activeProgram = programs.first(where: {
+                           $0.id == activeEnrollment.programId
+                       }) {
 
                         self.hasActiveJourney = true
+
                         self.configureCurrentJourney(
                             program: activeProgram,
                             enrollment: activeEnrollment
                         )
 
-                        let activeTotalDays = completedDaysFromFinishedPrograms + activeEnrollment.completedDaysCount
-                        self.activeDaysValueLabel.text = "\(activeTotalDays)"
-
                     } else {
+
                         self.hasActiveJourney = false
                         self.configureNoActiveJourney()
-                        self.activeDaysValueLabel.text = "\(completedDaysFromFinishedPrograms)"
                     }
 
                 case .failure(let error):
-                    print("🔴 Profile active enrollment alınamadı:", error.localizedDescription)
+
+                    print(
+                        "🔴 Profile active enrollment alınamadı:",
+                        error.localizedDescription
+                    )
+
                     self.hasActiveJourney = false
                     self.configureNoActiveJourney()
-                    self.activeDaysValueLabel.text = "\(completedDaysFromFinishedPrograms)"
                 }
+            }
+        }
+    }
+    
+    private func loadTotalActivityDays(userId: String) {
+
+        let enrollmentsRef = db
+            .collection("users")
+            .document(userId)
+            .collection("program_enrollments")
+
+        enrollmentsRef.getDocuments { [weak self] snapshot, error in
+
+            guard let self = self else { return }
+
+            if let error = error {
+                print(
+                    "🔴 Toplam aktivite günü için enrollment'lar alınamadı:",
+                    error.localizedDescription
+                )
+
+                DispatchQueue.main.async {
+                    self.activeDaysValueLabel.text = "0"
+                }
+
+                return
+            }
+
+            let enrollmentDocuments = snapshot?.documents ?? []
+
+            guard !enrollmentDocuments.isEmpty else {
+                DispatchQueue.main.async {
+                    self.activeDaysValueLabel.text = "0"
+                }
+                return
+            }
+
+            let group = DispatchGroup()
+            let lock = NSLock()
+
+            var activeDateKeys = Set<String>()
+
+            for enrollmentDocument in enrollmentDocuments {
+
+                group.enter()
+
+                enrollmentDocument.reference
+                    .collection("dailyLogs")
+                    .getDocuments { logsSnapshot, logsError in
+
+                        defer {
+                            group.leave()
+                        }
+
+                        if let logsError = logsError {
+                            print(
+                                "🔴 Daily log alınamadı:",
+                                logsError.localizedDescription
+                            )
+                            return
+                        }
+
+                        let logDocuments = logsSnapshot?.documents ?? []
+
+                        for logDocument in logDocuments {
+
+                            let data = logDocument.data()
+
+                            let completedTaskIds =
+                                data["completedTaskIds"] as? [String] ?? []
+
+                            // O gün hiçbir görev işaretlenmemişse sayma
+                            guard !completedTaskIds.isEmpty else {
+                                continue
+                            }
+
+                            // dateKey normalde yyyy-MM-dd.
+                            // Yoksa document ID zaten dateKey olduğu için onu kullan.
+                            let dateKey =
+                                data["dateKey"] as? String
+                                ?? logDocument.documentID
+
+                            lock.lock()
+                            activeDateKeys.insert(dateKey)
+                            lock.unlock()
+                        }
+                    }
+            }
+
+            group.notify(queue: .main) {
+
+                let totalActivityDays = activeDateKeys.count
+
+                self.activeDaysValueLabel.text =
+                    "\(totalActivityDays)"
+
+                print(
+                    "🟣 Toplam aktivite günü:",
+                    totalActivityDays
+                )
+
+                print(
+                    "🟣 Aktivite tarihleri:",
+                    activeDateKeys.sorted()
+                )
             }
         }
     }
@@ -895,7 +938,6 @@ final class ProfileViewController: UIViewController {
         hasActiveJourney = false
         configureNoActiveJourney()
         configureAchievements(with: [])
-        configureElementEmptyState()
     }
 
     private func configureCurrentJourney(
@@ -947,83 +989,14 @@ final class ProfileViewController: UIViewController {
         }
     }
 
-    private func configureElementCard(from items: [CompletedProgramDisplayItem]) {
-        guard !items.isEmpty else {
-            configureElementEmptyState()
-            return
-        }
 
-        let viewModel = makeElementBalanceCardViewModel(from: items)
-
-        elementCardView.backgroundColor = viewModel.backgroundColor
-
-        elementTitleLabel.text = viewModel.title
-        elementTitleLabel.textColor = viewModel.titleColor
-
-        elementMainLabel.text = viewModel.mainText
-        elementMainLabel.textColor = viewModel.titleColor
-
-        elementDescriptionLabel.text = viewModel.subtitle
-        elementDescriptionLabel.textColor = viewModel.subtitleColor
-    }
-
-    private func configureElementEmptyState() {
-        elementCardView.backgroundColor = UIColor(hex: "#F4ECF7")
-
-        elementTitleLabel.text = "Element Dengesi"
-        elementTitleLabel.textColor = UIColor(hex: "#5B3A66")
-
-        elementMainLabel.text = "Element yolculuğun başlıyor ✨"
-        elementMainLabel.textColor = UIColor(hex: "#5B3A66")
-
-        elementDescriptionLabel.text = "İlk programını tamamladığında burada sana özel bir iz oluşacak."
-        elementDescriptionLabel.textColor = UIColor(hex: "#A47BB7")
-    }
-
-    private func makeElementBalanceCardViewModel(
-        from items: [CompletedProgramDisplayItem]
-    ) -> ElementBalanceCardViewModel {
-
-        guard !items.isEmpty else {
-            return ElementBalanceCardFactory.makeEmptyCard()
-        }
-
-        var elementCounts: [LunoraElement: Int] = [:]
-
-        for item in items {
-            let parsedElements = LunoraElementParser.parseElements(from: item.elements)
-
-            for element in parsedElements {
-                elementCounts[element, default: 0] += 1
-            }
-        }
-
-        guard let maxCount = elementCounts.values.max(), maxCount > 0 else {
-            return ElementBalanceCardFactory.makeEmptyCard()
-        }
-
-        let candidateElements = elementCounts
-            .filter { $0.value == maxCount }
-            .map { $0.key }
-
-        var selectedElement = candidateElements.first ?? .air
-
-        for item in items {
-            let parsedElements = LunoraElementParser.parseElements(from: item.elements)
-
-            if let matchedElement = parsedElements.first(where: { candidateElements.contains($0) }) {
-                selectedElement = matchedElement
-                break
-            }
-        }
-
-        return ElementBalanceCardFactory.makeCard(
-            element: selectedElement,
-            count: maxCount
-        )
-    }
 
     // MARK: - Actions
+    
+    @objc
+    private func didTapEmptyBadge() {
+        tabBarController?.selectedIndex = 0
+    }
     
     @objc private func didTapSettings() {
         let settingsViewController = SettingsViewController()
@@ -1207,33 +1180,47 @@ final class ProfileViewController: UIViewController {
     }
 
     private func makeEmptyBadgeIcon() -> UIView {
-        let container = UIView()
-        container.translatesAutoresizingMaskIntoConstraints = false
-        container.backgroundColor = UIColor(hex: "#F7E7F1")
-        container.layer.cornerRadius = 30
-        container.layer.borderWidth = 1
-        container.layer.borderColor = UIColor(hex: "#EAB8D4").cgColor
+        let button = UIButton(type: .system)
+        button.translatesAutoresizingMaskIntoConstraints = false
+
+        // Açık pembe iç renk
+        button.backgroundColor = UIColor(hex: "#FFE8F4")
+
+        // Pembe çerçeve
+        button.layer.borderWidth = 2
+        button.layer.borderColor = UIColor(hex: "#F4B4D8").cgColor
+
+        // Tam yuvarlak
+        button.layer.cornerRadius = 34
+        button.clipsToBounds = true
+
+        // +
+        button.setTitle("+", for: .normal)
+        button.setTitleColor(
+            UIColor(hex: "#E670AE"),
+            for: .normal
+        )
+
+        button.titleLabel?.font = .systemFont(
+            ofSize: 28,
+            weight: .semibold
+        )
+
+        // Tıklama
+        button.addTarget(
+            self,
+            action: #selector(didTapEmptyBadge),
+            for: .touchUpInside
+        )
+
+        button.accessibilityLabel = "Program seç"
 
         NSLayoutConstraint.activate([
-            container.widthAnchor.constraint(equalToConstant: 60),
-            container.heightAnchor.constraint(equalToConstant: 60)
+            button.widthAnchor.constraint(equalToConstant: 68),
+            button.heightAnchor.constraint(equalToConstant: 68)
         ])
 
-        let label = UILabel()
-        label.translatesAutoresizingMaskIntoConstraints = false
-        label.text = "+"
-        label.font = .systemFont(ofSize: 28, weight: .semibold)
-        label.textColor = UIColor(hex: "#D65C9E")
-        label.textAlignment = .center
-
-        container.addSubview(label)
-
-        NSLayoutConstraint.activate([
-            label.centerXAnchor.constraint(equalTo: container.centerXAnchor),
-            label.centerYAnchor.constraint(equalTo: container.centerYAnchor)
-        ])
-
-        return container
+        return button
     }
 
     private func makeSettingsRow(

@@ -51,6 +51,15 @@ final class ProgramBadgeCardView: UIView {
         view.layer.shadowOffset = CGSize(width: 0, height: 6)
         return view
     }()
+    
+    private let badgeRevealOverlay: UIView = {
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor.white
+        view.alpha = 0.75
+        view.isUserInteractionEnabled = false
+        return view
+    }()
 
     private let badgeImageView: UIImageView = {
         let imageView = UIImageView()
@@ -237,27 +246,59 @@ final class ProgramBadgeCardView: UIView {
         ])
     }
 
+//    func configure(with data: ProgramBadgeCardData) {
+//        badgeNameLabel.text = data.badgeName
+//        badgeImageView.image = UIImage(named: data.badgeImageName)
+//
+//        let clampedProgress = max(0, min(100, data.progressPercent))
+//        let remainingPercent = max(0, 100 - clampedProgress)
+//
+//        badgeDescriptionLabel.text = message(for: clampedProgress)
+//
+//        remainingLabel.text = data.isUnlocked
+//            ? "Rozet açıldı"
+//            : "%\(remainingPercent) kaldı"
+//
+//        progressTitleLabel.text = data.isUnlocked
+//            ? "Rozet durumu"
+//            : "Rozete ulaşmak için"
+//
+//        badgeImageView.alpha = data.isUnlocked ? 1.0 : imageAlpha(for: clampedProgress)
+//        lockImageView.isHidden = data.isUnlocked
+//
+//        updateProgressFill(multiplier: CGFloat(clampedProgress) / 100.0)
+//    }
+    
     func configure(with data: ProgramBadgeCardData) {
         badgeNameLabel.text = data.badgeName
         badgeImageView.image = UIImage(named: data.badgeImageName)
 
         let clampedProgress = max(0, min(100, data.progressPercent))
-        let remainingPercent = max(0, 100 - clampedProgress)
+        let unlockThreshold = data.unlockThreshold
+
+        // Görsel %100'e kadar giderek netleşir
+        badgeImageView.alpha = imageAlpha(for: clampedProgress)
+
+        // Kilit %80'de açılır
+        lockImageView.isHidden = clampedProgress >= unlockThreshold
 
         badgeDescriptionLabel.text = message(for: clampedProgress)
 
-        remainingLabel.text = data.isUnlocked
-            ? "Rozet açıldı"
-            : "%\(remainingPercent) kaldı"
+        if data.isUnlocked {
+            remainingLabel.text = "Rozet kazanıldı ✨"
+            progressTitleLabel.text = "Program ilerlemen"
+        } else {
+            let remainingToUnlock = max(
+                0,
+                unlockThreshold - clampedProgress
+            )
 
-        progressTitleLabel.text = data.isUnlocked
-            ? "Rozet durumu"
-            : "Rozete ulaşmak için"
+            remainingLabel.text = "Rozet için %\(remainingToUnlock) kaldı"
+            progressTitleLabel.text = "Rozete ulaşmak için"
+        }
 
-        badgeImageView.alpha = data.isUnlocked ? 1.0 : imageAlpha(for: clampedProgress)
-        lockImageView.isHidden = data.isUnlocked
-
-        updateProgressFill(multiplier: CGFloat(clampedProgress) / 100.0)
+        let progressMultiplier = CGFloat(clampedProgress) / 100.0
+        updateProgressFill(multiplier: progressMultiplier)
     }
     
     private func updateProgressFill(multiplier: CGFloat) {

@@ -1,0 +1,4270 @@
+[
+    {
+        "date": "2026-08-22",
+        "timezone": "Europe/Istanbul",
+        "schema_version": "1.0.0",
+        "ruleset_version": "beauty-1.0.0",
+        "beauty_recommendations": [
+          {
+            "category": "massage",
+            "recommendation": "recommended",
+            "start_at": "2026-08-22T00:00:00+03:00",
+            "end_at": "2026-08-23T00:00:00+03:00",
+            "traditional_goals": [
+              "renewing_care"
+            ],
+            "astro_basis": [
+              {
+                "type": "lunar_cycle_direction",
+                "value": "waxing"
+              }
+            ],
+            "rule_ids": [
+              "massage_waxing"
+            ],
+            "display_text": "Rahatlatıcı ve yenileyici masaj için uygun bir gün. Dinlenme ve bakım odaklı bir uygulama tercih edebilirsin."
+          },
+          {
+            "category": "nail_care",
+            "recommendation": "especially_recommended",
+            "start_at": "2026-08-22T23:59:00+03:00",
+            "end_at": "2026-08-23T00:00:00+03:00",
+            "traditional_goals": [
+              "longer_lasting_nail_care"
+            ],
+            "astro_basis": [
+              {
+                "type": "moon_sign",
+                "value": "capricorn"
+              }
+            ],
+            "rule_ids": [
+              "nail_care_capricorn"
+            ],
+            "display_text": "23:59'dan sonra manikür, pedikür ve tırnak bakımı için özellikle güçlü bir zaman. Bakımın düzenli görünümünü daha uzun süre korumak istiyorsan değerlendirebilirsin."
+          }
+        ]
+      },
+      {
+        "date": "2026-08-23",
+        "timezone": "Europe/Istanbul",
+        "schema_version": "1.0.0",
+        "ruleset_version": "beauty-1.0.0",
+        "beauty_recommendations": [
+          {
+            "category": "nail_care",
+            "recommendation": "especially_recommended",
+            "start_at": "2026-08-23T00:00:00+03:00",
+            "end_at": "2026-08-24T00:00:00+03:00",
+            "traditional_goals": [
+              "longer_lasting_nail_care"
+            ],
+            "astro_basis": [
+              {
+                "type": "moon_sign",
+                "value": "capricorn"
+              }
+            ],
+            "rule_ids": [
+              "nail_care_capricorn"
+            ],
+            "display_text": "Manikür, pedikür ve tırnak bakımı için özellikle güçlü bir gün. Bakımın düzenli görünümünü daha uzun süre korumak istiyorsan tercih edebilirsin."
+          },
+          {
+            "category": "massage",
+            "recommendation": "recommended",
+            "start_at": "2026-08-23T00:00:00+03:00",
+            "end_at": "2026-08-24T00:00:00+03:00",
+            "traditional_goals": [
+              "renewing_care"
+            ],
+            "astro_basis": [
+              {
+                "type": "lunar_cycle_direction",
+                "value": "waxing"
+              }
+            ],
+            "rule_ids": [
+              "massage_waxing"
+            ],
+            "display_text": "Rahatlatıcı ve yenileyici masaj için uygun bir gün. Dinlenme ve bakım odaklı bir uygulama tercih edebilirsin."
+          }
+        ]
+      },
+      {
+        "date": "2026-08-24",
+        "timezone": "Europe/Istanbul",
+        "schema_version": "1.0.0",
+        "ruleset_version": "beauty-1.0.0",
+        "beauty_recommendations": [
+          {
+            "category": "nail_care",
+            "recommendation": "especially_recommended",
+            "start_at": "2026-08-24T00:00:00+03:00",
+            "end_at": "2026-08-25T00:00:00+03:00",
+            "traditional_goals": [
+              "longer_lasting_nail_care"
+            ],
+            "astro_basis": [
+              {
+                "type": "moon_sign",
+                "value": "capricorn"
+              }
+            ],
+            "rule_ids": [
+              "nail_care_capricorn"
+            ],
+            "display_text": "Manikür, pedikür ve tırnak bakımı için özellikle güçlü bir gün. Bakımın düzenli görünümünü daha uzun süre korumak istiyorsan tercih edebilirsin."
+          },
+          {
+            "category": "massage",
+            "recommendation": "recommended",
+            "start_at": "2026-08-24T00:00:00+03:00",
+            "end_at": "2026-08-25T00:00:00+03:00",
+            "traditional_goals": [
+              "renewing_care"
+            ],
+            "astro_basis": [
+              {
+                "type": "lunar_cycle_direction",
+                "value": "waxing"
+              }
+            ],
+            "rule_ids": [
+              "massage_waxing"
+            ],
+            "display_text": "Rahatlatıcı ve yenileyici masaj için uygun bir gün. Dinlenme ve bakım odaklı bir uygulama tercih edebilirsin."
+          }
+        ]
+      },
+      {
+        "date": "2026-08-25",
+        "timezone": "Europe/Istanbul",
+        "schema_version": "1.0.0",
+        "ruleset_version": "beauty-1.0.0",
+        "beauty_recommendations": [
+          {
+            "category": "nail_care",
+            "recommendation": "especially_recommended",
+            "start_at": "2026-08-25T00:00:00+03:00",
+            "end_at": "2026-08-25T12:02:00+03:00",
+            "traditional_goals": [
+              "longer_lasting_nail_care"
+            ],
+            "astro_basis": [
+              {
+                "type": "moon_sign",
+                "value": "capricorn"
+              }
+            ],
+            "rule_ids": [
+              "nail_care_capricorn"
+            ],
+            "display_text": "12:02'ye kadar manikür, pedikür ve tırnak bakımı için özellikle güçlü bir zaman. Bakımın düzenli görünümünü daha uzun süre korumak istiyorsan değerlendirebilirsin."
+          },
+          {
+            "category": "hair_dye",
+            "recommendation": "recommended",
+            "start_at": "2026-08-25T12:02:00+03:00",
+            "end_at": "2026-08-26T00:00:00+03:00",
+            "traditional_goals": [
+              "better_color_result"
+            ],
+            "astro_basis": [
+              {
+                "type": "moon_sign",
+                "value": "aquarius"
+              }
+            ],
+            "rule_ids": [
+              "hair_dye_aquarius"
+            ],
+            "display_text": "12:02'den sonra saç boyama, dip boya ve renk yenileme için uygun bir zaman. Daha canlı ve dengeli bir renk sonucu hedeflenir."
+          },
+          {
+            "category": "massage",
+            "recommendation": "recommended",
+            "start_at": "2026-08-25T00:00:00+03:00",
+            "end_at": "2026-08-26T00:00:00+03:00",
+            "traditional_goals": [
+              "renewing_care"
+            ],
+            "astro_basis": [
+              {
+                "type": "lunar_cycle_direction",
+                "value": "waxing"
+              }
+            ],
+            "rule_ids": [
+              "massage_waxing"
+            ],
+            "display_text": "Rahatlatıcı ve yenileyici masaj için uygun bir gün. Dinlenme ve bakım odaklı bir uygulama tercih edebilirsin."
+          }
+        ]
+      },
+      {
+        "date": "2026-08-26",
+        "timezone": "Europe/Istanbul",
+        "schema_version": "1.0.0",
+        "ruleset_version": "beauty-1.0.0",
+        "beauty_recommendations": [
+          {
+            "category": "hair_dye",
+            "recommendation": "recommended",
+            "start_at": "2026-08-26T00:00:00+03:00",
+            "end_at": "2026-08-27T00:00:00+03:00",
+            "traditional_goals": [
+              "better_color_result"
+            ],
+            "astro_basis": [
+              {
+                "type": "moon_sign",
+                "value": "aquarius"
+              }
+            ],
+            "rule_ids": [
+              "hair_dye_aquarius"
+            ],
+            "display_text": "Saç boyama, dip boya ve renk yenileme için uygun bir gün. Daha canlı ve dengeli bir renk sonucu hedeflenir."
+          },
+          {
+            "category": "massage",
+            "recommendation": "recommended",
+            "start_at": "2026-08-26T00:00:00+03:00",
+            "end_at": "2026-08-27T00:00:00+03:00",
+            "traditional_goals": [
+              "renewing_care"
+            ],
+            "astro_basis": [
+              {
+                "type": "lunar_cycle_direction",
+                "value": "waxing"
+              }
+            ],
+            "rule_ids": [
+              "massage_waxing"
+            ],
+            "display_text": "Rahatlatıcı ve yenileyici masaj için uygun bir gün. Dinlenme ve bakım odaklı bir uygulama tercih edebilirsin."
+          }
+        ]
+      },
+      {
+        "date": "2026-08-27",
+        "timezone": "Europe/Istanbul",
+        "schema_version": "1.0.0",
+        "ruleset_version": "beauty-1.0.0",
+        "beauty_recommendations": [
+          {
+            "category": "hair_dye",
+            "recommendation": "recommended",
+            "start_at": "2026-08-27T00:00:00+03:00",
+            "end_at": "2026-08-27T22:04:00+03:00",
+            "traditional_goals": [
+              "better_color_result"
+            ],
+            "astro_basis": [
+              {
+                "type": "moon_sign",
+                "value": "aquarius"
+              }
+            ],
+            "rule_ids": [
+              "hair_dye_aquarius"
+            ],
+            "display_text": "22:04'e kadar saç boyama, dip boya ve renk yenileme için uygun. Daha canlı ve dengeli bir renk sonucu hedeflenir."
+          },
+          {
+            "category": "hair_cut",
+            "recommendation": "not_recommended",
+            "start_at": "2026-08-27T22:04:00+03:00",
+            "end_at": "2026-08-28T00:00:00+03:00",
+            "traditional_goals": [],
+            "astro_basis": [
+              {
+                "type": "moon_sign",
+                "value": "pisces"
+              }
+            ],
+            "rule_ids": [
+              "hair_cut_pisces_not_recommended"
+            ],
+            "display_text": "22:04'ten sonra saç kesimi için uygun bir zaman değil. Kesimi mümkünse başka bir güne bırak."
+          },
+          {
+            "category": "massage",
+            "recommendation": "recommended",
+            "start_at": "2026-08-27T00:00:00+03:00",
+            "end_at": "2026-08-28T00:00:00+03:00",
+            "traditional_goals": [
+              "renewing_care"
+            ],
+            "astro_basis": [
+              {
+                "type": "lunar_cycle_direction",
+                "value": "waxing"
+              }
+            ],
+            "rule_ids": [
+              "massage_waxing"
+            ],
+            "display_text": "Rahatlatıcı ve yenileyici masaj için uygun bir gün. Dinlenme ve bakım odaklı bir uygulama tercih edebilirsin."
+          }
+        ]
+      },
+      {
+        "date": "2026-08-28",
+        "timezone": "Europe/Istanbul",
+        "schema_version": "1.0.0",
+        "ruleset_version": "beauty-1.0.0",
+        "beauty_recommendations": [
+          {
+            "category": "hair_cut",
+            "recommendation": "not_recommended",
+            "start_at": "2026-08-28T00:00:00+03:00",
+            "end_at": "2026-08-29T00:00:00+03:00",
+            "traditional_goals": [],
+            "astro_basis": [
+              {
+                "type": "moon_sign",
+                "value": "pisces"
+              }
+            ],
+            "rule_ids": [
+              "hair_cut_pisces_not_recommended"
+            ],
+            "display_text": "Saç kesimi için uygun bir gün değil. Kesimin formunu daha iyi korumak istiyorsan başka bir günü tercih et."
+          }
+        ]
+      },
+      {
+        "date": "2026-08-29",
+        "timezone": "Europe/Istanbul",
+        "schema_version": "1.0.0",
+        "ruleset_version": "beauty-1.0.0",
+        "beauty_recommendations": [
+          {
+            "category": "skincare",
+            "recommendation": "recommended",
+            "start_at": "2026-08-29T00:00:00+03:00",
+            "end_at": "2026-08-30T00:00:00+03:00",
+            "traditional_goals": [],
+            "astro_basis": [
+              {
+                "type": "lunar_cycle_direction",
+                "value": "waning"
+              }
+            ],
+            "rule_ids": [
+              "skincare_waning"
+            ],
+            "display_text": "Cilt bakımı, peeling ve arındırıcı kozmetik bakım uygulamaları için uygun bir gün."
+          },
+          {
+            "category": "epilation",
+            "recommendation": "recommended",
+            "start_at": "2026-08-29T00:00:00+03:00",
+            "end_at": "2026-08-30T00:00:00+03:00",
+            "traditional_goals": [],
+            "astro_basis": [
+              {
+                "type": "lunar_cycle_direction",
+                "value": "waning"
+              }
+            ],
+            "rule_ids": [
+              "epilation_waning"
+            ],
+            "display_text": "Epilasyon ve istenmeyen tüylerden arınmaya yönelik bakım işlemleri için uygun bir gün."
+          },
+          {
+            "category": "hair_lightening",
+            "recommendation": "recommended",
+            "start_at": "2026-08-29T00:00:00+03:00",
+            "end_at": "2026-08-30T00:00:00+03:00",
+            "traditional_goals": [],
+            "astro_basis": [
+              {
+                "type": "lunar_cycle_direction",
+                "value": "waning"
+              }
+            ],
+            "rule_ids": [
+              "hair_lightening_waning"
+            ],
+            "display_text": "Saç rengini açtırmak, açıcı uygulamak veya daha açık tonlara geçmek için uygun bir gün."
+          },
+          {
+            "category": "hair_cut",
+            "recommendation": "not_recommended",
+            "start_at": "2026-08-29T00:00:00+03:00",
+            "end_at": "2026-08-30T00:00:00+03:00",
+            "traditional_goals": [],
+            "astro_basis": [
+              {
+                "type": "moon_sign",
+                "value": "pisces"
+              }
+            ],
+            "rule_ids": [
+              "hair_cut_pisces_not_recommended"
+            ],
+            "display_text": "Saç kesimi için uygun bir gün değil. Kesimin formunu daha iyi korumak istiyorsan başka bir günü tercih et."
+          }
+        ]
+      },
+      {
+        "date": "2026-08-30",
+        "timezone": "Europe/Istanbul",
+        "schema_version": "1.0.0",
+        "ruleset_version": "beauty-1.0.0",
+        "beauty_recommendations": [
+          {
+            "category": "skincare",
+            "recommendation": "recommended",
+            "start_at": "2026-08-30T00:00:00+03:00",
+            "end_at": "2026-08-31T00:00:00+03:00",
+            "traditional_goals": [],
+            "astro_basis": [
+              {
+                "type": "lunar_cycle_direction",
+                "value": "waning"
+              }
+            ],
+            "rule_ids": [
+              "skincare_waning"
+            ],
+            "display_text": "Cilt bakımı, peeling ve arındırıcı kozmetik bakım uygulamaları için uygun bir gün."
+          },
+          {
+            "category": "epilation",
+            "recommendation": "recommended",
+            "start_at": "2026-08-30T00:00:00+03:00",
+            "end_at": "2026-08-31T00:00:00+03:00",
+            "traditional_goals": [],
+            "astro_basis": [
+              {
+                "type": "lunar_cycle_direction",
+                "value": "waning"
+              }
+            ],
+            "rule_ids": [
+              "epilation_waning"
+            ],
+            "display_text": "Epilasyon ve istenmeyen tüylerden arınmaya yönelik bakım işlemleri için uygun bir gün."
+          },
+          {
+            "category": "hair_lightening",
+            "recommendation": "recommended",
+            "start_at": "2026-08-30T00:00:00+03:00",
+            "end_at": "2026-08-31T00:00:00+03:00",
+            "traditional_goals": [],
+            "astro_basis": [
+              {
+                "type": "lunar_cycle_direction",
+                "value": "waning"
+              }
+            ],
+            "rule_ids": [
+              "hair_lightening_waning"
+            ],
+            "display_text": "Saç rengini açtırmak, açıcı uygulamak veya daha açık tonlara geçmek için uygun bir gün."
+          },
+          {
+            "category": "hair_cut",
+            "recommendation": "not_recommended",
+            "start_at": "2026-08-30T00:00:00+03:00",
+            "end_at": "2026-08-30T05:38:00+03:00",
+            "traditional_goals": [],
+            "astro_basis": [
+              {
+                "type": "moon_sign",
+                "value": "pisces"
+              }
+            ],
+            "rule_ids": [
+              "hair_cut_pisces_not_recommended"
+            ],
+            "display_text": "05:38'e kadar saç kesimi için uygun bir zaman değil. Kesimi günün ilerleyen saatlerine veya başka bir güne bırakabilirsin."
+          }
+        ]
+      },
+      {
+        "date": "2026-08-31",
+        "timezone": "Europe/Istanbul",
+        "schema_version": "1.0.0",
+        "ruleset_version": "beauty-1.0.0",
+        "beauty_recommendations": [
+          {
+            "category": "skincare",
+            "recommendation": "recommended",
+            "start_at": "2026-08-31T00:00:00+03:00",
+            "end_at": "2026-09-01T00:00:00+03:00",
+            "traditional_goals": [],
+            "astro_basis": [
+              {
+                "type": "lunar_cycle_direction",
+                "value": "waning"
+              }
+            ],
+            "rule_ids": [
+              "skincare_waning"
+            ],
+            "display_text": "Cilt bakımı, peeling ve arındırıcı kozmetik bakım uygulamaları için uygun bir gün."
+          },
+          {
+            "category": "epilation",
+            "recommendation": "recommended",
+            "start_at": "2026-08-31T00:00:00+03:00",
+            "end_at": "2026-09-01T00:00:00+03:00",
+            "traditional_goals": [],
+            "astro_basis": [
+              {
+                "type": "lunar_cycle_direction",
+                "value": "waning"
+              }
+            ],
+            "rule_ids": [
+              "epilation_waning"
+            ],
+            "display_text": "Epilasyon ve istenmeyen tüylerden arınmaya yönelik bakım işlemleri için uygun bir gün."
+          },
+          {
+            "category": "hair_lightening",
+            "recommendation": "recommended",
+            "start_at": "2026-08-31T00:00:00+03:00",
+            "end_at": "2026-09-01T00:00:00+03:00",
+            "traditional_goals": [],
+            "astro_basis": [
+              {
+                "type": "lunar_cycle_direction",
+                "value": "waning"
+              }
+            ],
+            "rule_ids": [
+              "hair_lightening_waning"
+            ],
+            "display_text": "Saç rengini açtırmak, açıcı uygulamak veya daha açık tonlara geçmek için uygun bir gün."
+          }
+        ]
+      },
+  {
+    "date": "2026-09-01",
+    "timezone": "Europe/Istanbul",
+    "schema_version": "1.0.0",
+    "ruleset_version": "beauty-1.0.0",
+    "beauty_recommendations": [
+      {
+        "category": "skincare",
+        "recommendation": "recommended",
+        "start_at": "2026-09-01T00:00:00+03:00",
+        "end_at": "2026-09-02T00:00:00+03:00",
+        "traditional_goals": [],
+        "astro_basis": [
+          {
+            "type": "lunar_cycle_direction",
+            "value": "waning"
+          }
+        ],
+        "rule_ids": [
+          "skincare_waning"
+        ],
+        "display_text": "Cilt bakımı, peeling ve arındırıcı kozmetik bakım uygulamaları için uygun bir gün."
+      },
+      {
+        "category": "epilation",
+        "recommendation": "recommended",
+        "start_at": "2026-09-01T00:00:00+03:00",
+        "end_at": "2026-09-02T00:00:00+03:00",
+        "traditional_goals": [],
+        "astro_basis": [
+          {
+            "type": "lunar_cycle_direction",
+            "value": "waning"
+          }
+        ],
+        "rule_ids": [
+          "epilation_waning"
+        ],
+        "display_text": "Epilasyon ve istenmeyen tüylerden arınmaya yönelik bakım işlemleri için uygun bir gün."
+      },
+      {
+        "category": "hair_lightening",
+        "recommendation": "recommended",
+        "start_at": "2026-09-01T00:00:00+03:00",
+        "end_at": "2026-09-02T00:00:00+03:00",
+        "traditional_goals": [],
+        "astro_basis": [
+          {
+            "type": "lunar_cycle_direction",
+            "value": "waning"
+          }
+        ],
+        "rule_ids": [
+          "hair_lightening_waning"
+        ],
+        "display_text": "Saç rengini açtırmak, açıcı uygulamak veya daha açık tonlara geçmek için uygun bir gün."
+      }
+    ]
+  },
+  {
+    "date": "2026-09-02",
+    "timezone": "Europe/Istanbul",
+    "schema_version": "1.0.0",
+    "ruleset_version": "beauty-1.0.0",
+    "beauty_recommendations": [
+      {
+        "category": "skincare",
+        "recommendation": "recommended",
+        "start_at": "2026-09-02T00:00:00+03:00",
+        "end_at": "2026-09-03T00:00:00+03:00",
+        "traditional_goals": [],
+        "astro_basis": [
+          {
+            "type": "lunar_cycle_direction",
+            "value": "waning"
+          }
+        ],
+        "rule_ids": [
+          "skincare_waning"
+        ],
+        "display_text": "Cilt bakımı, peeling ve arındırıcı kozmetik bakım uygulamaları için uygun bir gün."
+      },
+      {
+        "category": "epilation",
+        "recommendation": "recommended",
+        "start_at": "2026-09-02T00:00:00+03:00",
+        "end_at": "2026-09-03T00:00:00+03:00",
+        "traditional_goals": [],
+        "astro_basis": [
+          {
+            "type": "lunar_cycle_direction",
+            "value": "waning"
+          }
+        ],
+        "rule_ids": [
+          "epilation_waning"
+        ],
+        "display_text": "Epilasyon ve istenmeyen tüylerden arınmaya yönelik bakım işlemleri için uygun bir gün."
+      },
+      {
+        "category": "hair_lightening",
+        "recommendation": "recommended",
+        "start_at": "2026-09-02T00:00:00+03:00",
+        "end_at": "2026-09-03T00:00:00+03:00",
+        "traditional_goals": [],
+        "astro_basis": [
+          {
+            "type": "lunar_cycle_direction",
+            "value": "waning"
+          }
+        ],
+        "rule_ids": [
+          "hair_lightening_waning"
+        ],
+        "display_text": "Saç rengini açtırmak, açıcı uygulamak veya daha açık tonlara geçmek için uygun bir gün."
+      }
+    ]
+  },
+  {
+    "date": "2026-09-03",
+    "timezone": "Europe/Istanbul",
+    "schema_version": "1.0.0",
+    "ruleset_version": "beauty-1.0.0",
+    "beauty_recommendations": [
+      {
+        "category": "skincare",
+        "recommendation": "recommended",
+        "start_at": "2026-09-03T00:00:00+03:00",
+        "end_at": "2026-09-04T00:00:00+03:00",
+        "traditional_goals": [],
+        "astro_basis": [
+          {
+            "type": "lunar_cycle_direction",
+            "value": "waning"
+          }
+        ],
+        "rule_ids": [
+          "skincare_waning"
+        ],
+        "display_text": "Cilt bakımı, peeling ve arındırıcı kozmetik bakım uygulamaları için uygun bir gün."
+      },
+      {
+        "category": "epilation",
+        "recommendation": "recommended",
+        "start_at": "2026-09-03T00:00:00+03:00",
+        "end_at": "2026-09-04T00:00:00+03:00",
+        "traditional_goals": [],
+        "astro_basis": [
+          {
+            "type": "lunar_cycle_direction",
+            "value": "waning"
+          }
+        ],
+        "rule_ids": [
+          "epilation_waning"
+        ],
+        "display_text": "Epilasyon ve istenmeyen tüylerden arınmaya yönelik bakım işlemleri için uygun bir gün."
+      },
+      {
+        "category": "hair_lightening",
+        "recommendation": "recommended",
+        "start_at": "2026-09-03T00:00:00+03:00",
+        "end_at": "2026-09-04T00:00:00+03:00",
+        "traditional_goals": [],
+        "astro_basis": [
+          {
+            "type": "lunar_cycle_direction",
+            "value": "waning"
+          }
+        ],
+        "rule_ids": [
+          "hair_lightening_waning"
+        ],
+        "display_text": "Saç rengini açtırmak, açıcı uygulamak veya daha açık tonlara geçmek için uygun bir gün."
+      }
+    ]
+  },
+  {
+    "date": "2026-09-04",
+    "timezone": "Europe/Istanbul",
+    "schema_version": "1.0.0",
+    "ruleset_version": "beauty-1.0.0",
+    "beauty_recommendations": [
+      {
+        "category": "skincare",
+        "recommendation": "recommended",
+        "start_at": "2026-09-04T00:00:00+03:00",
+        "end_at": "2026-09-05T00:00:00+03:00",
+        "traditional_goals": [],
+        "astro_basis": [
+          {
+            "type": "lunar_cycle_direction",
+            "value": "waning"
+          }
+        ],
+        "rule_ids": [
+          "skincare_waning"
+        ],
+        "display_text": "Cilt bakımı, peeling ve arındırıcı kozmetik bakım uygulamaları için uygun bir gün."
+      },
+      {
+        "category": "epilation",
+        "recommendation": "recommended",
+        "start_at": "2026-09-04T00:00:00+03:00",
+        "end_at": "2026-09-05T00:00:00+03:00",
+        "traditional_goals": [],
+        "astro_basis": [
+          {
+            "type": "lunar_cycle_direction",
+            "value": "waning"
+          }
+        ],
+        "rule_ids": [
+          "epilation_waning"
+        ],
+        "display_text": "Epilasyon ve istenmeyen tüylerden arınmaya yönelik bakım işlemleri için uygun bir gün."
+      },
+      {
+        "category": "hair_lightening",
+        "recommendation": "recommended",
+        "start_at": "2026-09-04T00:00:00+03:00",
+        "end_at": "2026-09-05T00:00:00+03:00",
+        "traditional_goals": [],
+        "astro_basis": [
+          {
+            "type": "lunar_cycle_direction",
+            "value": "waning"
+          }
+        ],
+        "rule_ids": [
+          "hair_lightening_waning"
+        ],
+        "display_text": "Saç rengini açtırmak, açıcı uygulamak veya daha açık tonlara geçmek için uygun bir gün."
+      }
+    ]
+  },
+  {
+    "date": "2026-09-05",
+    "timezone": "Europe/Istanbul",
+    "schema_version": "1.0.0",
+    "ruleset_version": "beauty-1.0.0",
+    "beauty_recommendations": [
+      {
+        "category": "skincare",
+        "recommendation": "recommended",
+        "start_at": "2026-09-05T00:00:00+03:00",
+        "end_at": "2026-09-06T00:00:00+03:00",
+        "traditional_goals": [],
+        "astro_basis": [
+          {
+            "type": "lunar_cycle_direction",
+            "value": "waning"
+          }
+        ],
+        "rule_ids": [
+          "skincare_waning"
+        ],
+        "display_text": "Cilt bakımı, peeling ve arındırıcı kozmetik bakım uygulamaları için uygun bir gün."
+      },
+      {
+        "category": "epilation",
+        "recommendation": "recommended",
+        "start_at": "2026-09-05T00:00:00+03:00",
+        "end_at": "2026-09-06T00:00:00+03:00",
+        "traditional_goals": [],
+        "astro_basis": [
+          {
+            "type": "lunar_cycle_direction",
+            "value": "waning"
+          }
+        ],
+        "rule_ids": [
+          "epilation_waning"
+        ],
+        "display_text": "Epilasyon ve istenmeyen tüylerden arınmaya yönelik bakım işlemleri için uygun bir gün."
+      },
+      {
+        "category": "hair_lightening",
+        "recommendation": "recommended",
+        "start_at": "2026-09-05T00:00:00+03:00",
+        "end_at": "2026-09-06T00:00:00+03:00",
+        "traditional_goals": [],
+        "astro_basis": [
+          {
+            "type": "lunar_cycle_direction",
+            "value": "waning"
+          }
+        ],
+        "rule_ids": [
+          "hair_lightening_waning"
+        ],
+        "display_text": "Saç rengini açtırmak, açıcı uygulamak veya daha açık tonlara geçmek için uygun bir gün."
+      }
+    ]
+  },
+  {
+    "date": "2026-09-06",
+    "timezone": "Europe/Istanbul",
+    "schema_version": "1.0.0",
+    "ruleset_version": "beauty-1.0.0",
+    "beauty_recommendations": [
+      {
+        "category": "skincare",
+        "recommendation": "recommended",
+        "start_at": "2026-09-06T00:00:00+03:00",
+        "end_at": "2026-09-07T00:00:00+03:00",
+        "traditional_goals": [],
+        "astro_basis": [
+          {
+            "type": "lunar_cycle_direction",
+            "value": "waning"
+          }
+        ],
+        "rule_ids": [
+          "skincare_waning"
+        ],
+        "display_text": "Cilt bakımı, peeling ve arındırıcı kozmetik bakım uygulamaları için uygun bir gün."
+      },
+      {
+        "category": "epilation",
+        "recommendation": "recommended",
+        "start_at": "2026-09-06T00:00:00+03:00",
+        "end_at": "2026-09-07T00:00:00+03:00",
+        "traditional_goals": [],
+        "astro_basis": [
+          {
+            "type": "lunar_cycle_direction",
+            "value": "waning"
+          }
+        ],
+        "rule_ids": [
+          "epilation_waning"
+        ],
+        "display_text": "Epilasyon ve istenmeyen tüylerden arınmaya yönelik bakım işlemleri için uygun bir gün."
+      },
+      {
+        "category": "hair_lightening",
+        "recommendation": "recommended",
+        "start_at": "2026-09-06T00:00:00+03:00",
+        "end_at": "2026-09-07T00:00:00+03:00",
+        "traditional_goals": [],
+        "astro_basis": [
+          {
+            "type": "lunar_cycle_direction",
+            "value": "waning"
+          }
+        ],
+        "rule_ids": [
+          "hair_lightening_waning"
+        ],
+        "display_text": "Saç rengini açtırmak, açıcı uygulamak veya daha açık tonlara geçmek için uygun bir gün."
+      }
+    ]
+  },
+  {
+    "date": "2026-09-07",
+    "timezone": "Europe/Istanbul",
+    "schema_version": "1.0.0",
+    "ruleset_version": "beauty-1.0.0",
+    "beauty_recommendations": [
+      {
+        "category": "skincare",
+        "recommendation": "recommended",
+        "start_at": "2026-09-07T00:00:00+03:00",
+        "end_at": "2026-09-08T00:00:00+03:00",
+        "traditional_goals": [],
+        "astro_basis": [
+          {
+            "type": "lunar_cycle_direction",
+            "value": "waning"
+          }
+        ],
+        "rule_ids": [
+          "skincare_waning"
+        ],
+        "display_text": "Cilt bakımı, peeling ve arındırıcı kozmetik bakım uygulamaları için uygun bir gün."
+      },
+      {
+        "category": "epilation",
+        "recommendation": "recommended",
+        "start_at": "2026-09-07T00:00:00+03:00",
+        "end_at": "2026-09-08T00:00:00+03:00",
+        "traditional_goals": [],
+        "astro_basis": [
+          {
+            "type": "lunar_cycle_direction",
+            "value": "waning"
+          }
+        ],
+        "rule_ids": [
+          "epilation_waning"
+        ],
+        "display_text": "Epilasyon ve istenmeyen tüylerden arınmaya yönelik bakım işlemleri için uygun bir gün."
+      },
+      {
+        "category": "hair_lightening",
+        "recommendation": "recommended",
+        "start_at": "2026-09-07T00:00:00+03:00",
+        "end_at": "2026-09-08T00:00:00+03:00",
+        "traditional_goals": [],
+        "astro_basis": [
+          {
+            "type": "lunar_cycle_direction",
+            "value": "waning"
+          }
+        ],
+        "rule_ids": [
+          "hair_lightening_waning"
+        ],
+        "display_text": "Saç rengini açtırmak, açıcı uygulamak veya daha açık tonlara geçmek için uygun bir gün."
+      },
+      {
+        "category": "hair_cut",
+        "recommendation": "recommended",
+        "start_at": "2026-09-07T19:49:00+03:00",
+        "end_at": "2026-09-08T00:00:00+03:00",
+        "traditional_goals": [
+          "fuller_appearance",
+          "slower_regrowth"
+        ],
+        "astro_basis": [
+          {
+            "type": "moon_sign",
+            "value": "leo"
+          },
+          {
+            "type": "lunar_cycle_direction",
+            "value": "waning"
+          }
+        ],
+        "rule_ids": [
+          "hair_cut_leo",
+          "hair_cut_waning_modifier"
+        ],
+        "display_text": "Saç modelinin ve mevcut uzunluğunun daha uzun süre korunmasını istiyorsan 19:49'dan sonrası kesim için uygun. Saçın daha yavaş uzaması ve daha dolgun görünmesi hedeflenir."
+      }
+    ]
+  },
+    {
+      "date": "2026-09-08",
+      "timezone": "Europe/Istanbul",
+      "schema_version": "1.0.0",
+      "ruleset_version": "beauty-1.0.0",
+      "beauty_recommendations": [
+        {
+          "category": "skincare",
+          "recommendation": "recommended",
+          "start_at": "2026-09-08T00:00:00+03:00",
+          "end_at": "2026-09-09T00:00:00+03:00",
+          "traditional_goals": [],
+          "astro_basis": [
+            {
+              "type": "lunar_cycle_direction",
+              "value": "waning"
+            }
+          ],
+          "rule_ids": [
+            "skincare_waning"
+          ],
+          "display_text": "Cilt bakımı, peeling ve arındırıcı kozmetik bakım uygulamaları için uygun bir gün."
+        },
+        {
+          "category": "epilation",
+          "recommendation": "recommended",
+          "start_at": "2026-09-08T00:00:00+03:00",
+          "end_at": "2026-09-09T00:00:00+03:00",
+          "traditional_goals": [],
+          "astro_basis": [
+            {
+              "type": "lunar_cycle_direction",
+              "value": "waning"
+            }
+          ],
+          "rule_ids": [
+            "epilation_waning"
+          ],
+          "display_text": "Epilasyon ve istenmeyen tüylerden arınmaya yönelik bakım işlemleri için uygun bir gün."
+        },
+        {
+          "category": "hair_lightening",
+          "recommendation": "recommended",
+          "start_at": "2026-09-08T00:00:00+03:00",
+          "end_at": "2026-09-09T00:00:00+03:00",
+          "traditional_goals": [],
+          "astro_basis": [
+            {
+              "type": "lunar_cycle_direction",
+              "value": "waning"
+            }
+          ],
+          "rule_ids": [
+            "hair_lightening_waning"
+          ],
+          "display_text": "Saç rengini açtırmak, açıcı uygulamak veya daha açık tonlara geçmek için uygun bir gün."
+        },
+        {
+          "category": "hair_cut",
+          "recommendation": "recommended",
+          "start_at": "2026-09-08T00:00:00+03:00",
+          "end_at": "2026-09-09T00:00:00+03:00",
+          "traditional_goals": [
+            "fuller_appearance",
+            "slower_regrowth"
+          ],
+          "astro_basis": [
+            {
+              "type": "moon_sign",
+              "value": "leo"
+            },
+            {
+              "type": "lunar_cycle_direction",
+              "value": "waning"
+            }
+          ],
+          "rule_ids": [
+            "hair_cut_leo",
+            "hair_cut_waning_modifier"
+          ],
+          "display_text": "Saçının mevcut kesimini ve uzunluğunu daha uzun süre korumak istiyorsan kesim için uygun bir gün. Saçın daha yavaş uzaması ve daha dolgun görünmesi hedeflenir."
+        }
+      ]
+    },
+    {
+      "date": "2026-09-09",
+      "timezone": "Europe/Istanbul",
+      "schema_version": "1.0.0",
+      "ruleset_version": "beauty-1.0.0",
+      "beauty_recommendations": [
+        {
+          "category": "skincare",
+          "recommendation": "recommended",
+          "start_at": "2026-09-09T00:00:00+03:00",
+          "end_at": "2026-09-10T00:00:00+03:00",
+          "traditional_goals": [],
+          "astro_basis": [
+            {
+              "type": "lunar_cycle_direction",
+              "value": "waning"
+            }
+          ],
+          "rule_ids": [
+            "skincare_waning"
+          ],
+          "display_text": "Cilt bakımı, peeling ve arındırıcı kozmetik bakım uygulamaları için uygun bir gün."
+        },
+        {
+          "category": "epilation",
+          "recommendation": "recommended",
+          "start_at": "2026-09-09T00:00:00+03:00",
+          "end_at": "2026-09-10T00:00:00+03:00",
+          "traditional_goals": [],
+          "astro_basis": [
+            {
+              "type": "lunar_cycle_direction",
+              "value": "waning"
+            }
+          ],
+          "rule_ids": [
+            "epilation_waning"
+          ],
+          "display_text": "Epilasyon ve istenmeyen tüylerden arınmaya yönelik bakım işlemleri için uygun bir gün."
+        },
+        {
+          "category": "hair_lightening",
+          "recommendation": "recommended",
+          "start_at": "2026-09-09T00:00:00+03:00",
+          "end_at": "2026-09-10T00:00:00+03:00",
+          "traditional_goals": [],
+          "astro_basis": [
+            {
+              "type": "lunar_cycle_direction",
+              "value": "waning"
+            }
+          ],
+          "rule_ids": [
+            "hair_lightening_waning"
+          ],
+          "display_text": "Saç rengini açtırmak, açıcı uygulamak veya daha açık tonlara geçmek için uygun bir gün."
+        },
+        {
+          "category": "hair_cut",
+          "recommendation": "recommended",
+          "start_at": "2026-09-09T00:00:00+03:00",
+          "end_at": "2026-09-09T22:35:00+03:00",
+          "traditional_goals": [
+            "fuller_appearance",
+            "slower_regrowth"
+          ],
+          "astro_basis": [
+            {
+              "type": "moon_sign",
+              "value": "leo"
+            },
+            {
+              "type": "lunar_cycle_direction",
+              "value": "waning"
+            }
+          ],
+          "rule_ids": [
+            "hair_cut_leo",
+            "hair_cut_waning_modifier"
+          ],
+          "display_text": "Saçının mevcut kesimini ve uzunluğunu daha uzun süre korumak istiyorsan 22:35'e kadar kesim için uygun. Saçın daha yavaş uzaması ve daha dolgun görünmesi hedeflenir."
+        },
+        {
+          "category": "hair_cut",
+          "recommendation": "recommended",
+          "start_at": "2026-09-09T22:35:00+03:00",
+          "end_at": "2026-09-10T00:00:00+03:00",
+          "traditional_goals": [
+            "longer_shape_retention",
+            "slower_regrowth"
+          ],
+          "astro_basis": [
+            {
+              "type": "moon_sign",
+              "value": "virgo"
+            },
+            {
+              "type": "lunar_cycle_direction",
+              "value": "waning"
+            }
+          ],
+          "rule_ids": [
+            "hair_cut_virgo",
+            "hair_cut_waning_modifier"
+          ],
+          "display_text": "22:35'ten sonra saç modelinin formunu ve mevcut uzunluğunu daha uzun süre korumaya yönelik bir kesim için uygun. Saçın daha yavaş uzaması hedeflenir."
+        },
+        {
+          "category": "hair_perm",
+          "recommendation": "especially_recommended",
+          "start_at": "2026-09-09T22:35:00+03:00",
+          "end_at": "2026-09-10T00:00:00+03:00",
+          "traditional_goals": [
+            "longer_shape_retention"
+          ],
+          "astro_basis": [
+            {
+              "type": "moon_sign",
+              "value": "virgo"
+            }
+          ],
+          "rule_ids": [
+            "hair_perm_virgo"
+          ],
+          "display_text": "22:35'ten sonra perma ve kalıcı dalga işlemleri için güçlü bir zaman. Şeklin daha düzenli ve uzun süre korunması hedeflenir."
+        }
+      ]
+    },
+    {
+      "date": "2026-09-10",
+      "timezone": "Europe/Istanbul",
+      "schema_version": "1.0.0",
+      "ruleset_version": "beauty-1.0.0",
+      "beauty_recommendations": [
+        {
+          "category": "skincare",
+          "recommendation": "recommended",
+          "start_at": "2026-09-10T00:00:00+03:00",
+          "end_at": "2026-09-11T00:00:00+03:00",
+          "traditional_goals": [],
+          "astro_basis": [
+            {
+              "type": "lunar_cycle_direction",
+              "value": "waning"
+            }
+          ],
+          "rule_ids": [
+            "skincare_waning"
+          ],
+          "display_text": "Cilt bakımı, peeling ve arındırıcı kozmetik bakım uygulamaları için uygun bir gün."
+        },
+        {
+          "category": "epilation",
+          "recommendation": "recommended",
+          "start_at": "2026-09-10T00:00:00+03:00",
+          "end_at": "2026-09-11T00:00:00+03:00",
+          "traditional_goals": [],
+          "astro_basis": [
+            {
+              "type": "lunar_cycle_direction",
+              "value": "waning"
+            }
+          ],
+          "rule_ids": [
+            "epilation_waning"
+          ],
+          "display_text": "Epilasyon ve istenmeyen tüylerden arınmaya yönelik bakım işlemleri için uygun bir gün."
+        },
+        {
+          "category": "hair_lightening",
+          "recommendation": "recommended",
+          "start_at": "2026-09-10T00:00:00+03:00",
+          "end_at": "2026-09-11T00:00:00+03:00",
+          "traditional_goals": [],
+          "astro_basis": [
+            {
+              "type": "lunar_cycle_direction",
+              "value": "waning"
+            }
+          ],
+          "rule_ids": [
+            "hair_lightening_waning"
+          ],
+          "display_text": "Saç rengini açtırmak, açıcı uygulamak veya daha açık tonlara geçmek için uygun bir gün."
+        },
+        {
+          "category": "hair_cut",
+          "recommendation": "recommended",
+          "start_at": "2026-09-10T00:00:00+03:00",
+          "end_at": "2026-09-11T00:00:00+03:00",
+          "traditional_goals": [
+            "longer_shape_retention",
+            "slower_regrowth"
+          ],
+          "astro_basis": [
+            {
+              "type": "moon_sign",
+              "value": "virgo"
+            },
+            {
+              "type": "lunar_cycle_direction",
+              "value": "waning"
+            }
+          ],
+          "rule_ids": [
+            "hair_cut_virgo",
+            "hair_cut_waning_modifier"
+          ],
+          "display_text": "Saç modelinin şeklini ve mevcut uzunluğunu daha uzun süre korumak istiyorsan kesim için uygun bir gün. Saçın daha yavaş uzaması hedeflenir."
+        },
+        {
+          "category": "hair_perm",
+          "recommendation": "especially_recommended",
+          "start_at": "2026-09-10T00:00:00+03:00",
+          "end_at": "2026-09-11T00:00:00+03:00",
+          "traditional_goals": [
+            "longer_shape_retention"
+          ],
+          "astro_basis": [
+            {
+              "type": "moon_sign",
+              "value": "virgo"
+            }
+          ],
+          "rule_ids": [
+            "hair_perm_virgo"
+          ],
+          "display_text": "Perma ve kalıcı dalga işlemleri için güçlü bir gün. Şeklin daha düzenli ve uzun süre korunması hedeflenir."
+        }
+      ]
+    },
+    {
+      "date": "2026-09-11",
+      "timezone": "Europe/Istanbul",
+      "schema_version": "1.0.0",
+      "ruleset_version": "beauty-1.0.0",
+      "beauty_recommendations": [
+        {
+          "category": "skincare",
+          "recommendation": "recommended",
+          "start_at": "2026-09-11T00:00:00+03:00",
+          "end_at": "2026-09-11T06:27:00+03:00",
+          "traditional_goals": [],
+          "astro_basis": [
+            {
+              "type": "lunar_cycle_direction",
+              "value": "waning"
+            }
+          ],
+          "rule_ids": [
+            "skincare_waning"
+          ],
+          "display_text": "06:27'ye kadar cilt bakımı, peeling ve arındırıcı kozmetik bakım uygulamaları için uygun."
+        },
+        {
+          "category": "epilation",
+          "recommendation": "recommended",
+          "start_at": "2026-09-11T00:00:00+03:00",
+          "end_at": "2026-09-11T06:27:00+03:00",
+          "traditional_goals": [],
+          "astro_basis": [
+            {
+              "type": "lunar_cycle_direction",
+              "value": "waning"
+            }
+          ],
+          "rule_ids": [
+            "epilation_waning"
+          ],
+          "display_text": "06:27'ye kadar epilasyon ve istenmeyen tüylerden arınmaya yönelik bakım işlemleri için uygun."
+        },
+        {
+          "category": "hair_lightening",
+          "recommendation": "recommended",
+          "start_at": "2026-09-11T00:00:00+03:00",
+          "end_at": "2026-09-11T06:27:00+03:00",
+          "traditional_goals": [],
+          "astro_basis": [
+            {
+              "type": "lunar_cycle_direction",
+              "value": "waning"
+            }
+          ],
+          "rule_ids": [
+            "hair_lightening_waning"
+          ],
+          "display_text": "06:27'ye kadar saç rengini açtırmak veya açıcı uygulamak için uygun bir zaman."
+        },
+        {
+          "category": "hair_cut",
+          "recommendation": "recommended",
+          "start_at": "2026-09-11T00:00:00+03:00",
+          "end_at": "2026-09-11T06:27:00+03:00",
+          "traditional_goals": [
+            "longer_shape_retention",
+            "slower_regrowth"
+          ],
+          "astro_basis": [
+            {
+              "type": "moon_sign",
+              "value": "virgo"
+            },
+            {
+              "type": "lunar_cycle_direction",
+              "value": "waning"
+            }
+          ],
+          "rule_ids": [
+            "hair_cut_virgo",
+            "hair_cut_waning_modifier"
+          ],
+          "display_text": "06:27'ye kadar saç modelinin formunu ve mevcut uzunluğunu daha uzun süre korumaya yönelik bir kesim için uygun. Saçın daha yavaş uzaması hedeflenir."
+        },
+        {
+          "category": "hair_cut",
+          "recommendation": "recommended",
+          "start_at": "2026-09-11T06:27:00+03:00",
+          "end_at": "2026-09-12T00:00:00+03:00",
+          "traditional_goals": [
+            "longer_shape_retention"
+          ],
+          "astro_basis": [
+            {
+              "type": "moon_sign",
+              "value": "virgo"
+            },
+            {
+              "type": "moon_phase",
+              "value": "new_moon"
+            }
+          ],
+          "rule_ids": [
+            "hair_cut_virgo"
+          ],
+          "display_text": "Saç modelinin formunu daha uzun süre korumaya yönelik bir kesim için uygun. Bu saatlerden sonra hızlı veya yavaş uzama hedefi eklenmez."
+        },
+        {
+          "category": "hair_perm",
+          "recommendation": "especially_recommended",
+          "start_at": "2026-09-11T00:00:00+03:00",
+          "end_at": "2026-09-12T00:00:00+03:00",
+          "traditional_goals": [
+            "longer_shape_retention"
+          ],
+          "astro_basis": [
+            {
+              "type": "moon_sign",
+              "value": "virgo"
+            }
+          ],
+          "rule_ids": [
+            "hair_perm_virgo"
+          ],
+          "display_text": "Perma ve kalıcı dalga işlemleri için güçlü bir gün. Şeklin daha düzenli ve uzun süre korunması hedeflenir."
+        }
+      ]
+    },
+    {
+      "date": "2026-09-12",
+      "timezone": "Europe/Istanbul",
+      "schema_version": "1.0.0",
+      "ruleset_version": "beauty-1.0.0",
+      "beauty_recommendations": [
+        {
+          "category": "hair_cut",
+          "recommendation": "recommended",
+          "start_at": "2026-09-12T00:00:00+03:00",
+          "end_at": "2026-09-12T02:51:00+03:00",
+          "traditional_goals": [
+            "longer_shape_retention"
+          ],
+          "astro_basis": [
+            {
+              "type": "moon_sign",
+              "value": "virgo"
+            }
+          ],
+          "rule_ids": [
+            "hair_cut_virgo"
+          ],
+          "display_text": "02:51'e kadar saç modelinin formunu daha uzun süre korumaya yönelik bir kesim için uygun."
+        },
+        {
+          "category": "hair_perm",
+          "recommendation": "especially_recommended",
+          "start_at": "2026-09-12T00:00:00+03:00",
+          "end_at": "2026-09-12T02:51:00+03:00",
+          "traditional_goals": [
+            "longer_shape_retention"
+          ],
+          "astro_basis": [
+            {
+              "type": "moon_sign",
+              "value": "virgo"
+            }
+          ],
+          "rule_ids": [
+            "hair_perm_virgo"
+          ],
+          "display_text": "02:51'e kadar perma ve kalıcı dalga işlemleri için güçlü bir zaman. Şeklin daha düzenli ve uzun süre korunması hedeflenir."
+        }
+      ]
+    },
+    {
+      "date": "2026-09-13",
+      "timezone": "Europe/Istanbul",
+      "schema_version": "1.0.0",
+      "ruleset_version": "beauty-1.0.0",
+      "beauty_recommendations": []
+    },
+    {
+      "date": "2026-09-14",
+      "timezone": "Europe/Istanbul",
+      "schema_version": "1.0.0",
+      "ruleset_version": "beauty-1.0.0",
+      "beauty_recommendations": [
+        {
+          "category": "hair_cut",
+          "recommendation": "not_recommended",
+          "start_at": "2026-09-14T09:44:00+03:00",
+          "end_at": "2026-09-15T00:00:00+03:00",
+          "traditional_goals": [],
+          "astro_basis": [
+            {
+              "type": "moon_sign",
+              "value": "scorpio"
+            }
+          ],
+          "rule_ids": [
+            "hair_cut_scorpio_not_recommended"
+          ],
+          "display_text": "09:44'ten sonra saç kesimi için uygun bir zaman değil. Mümkünse kesimi başka bir güne bırak."
+        },
+        {
+          "category": "massage",
+          "recommendation": "recommended",
+          "start_at": "2026-09-14T23:02:00+03:00",
+          "end_at": "2026-09-15T00:00:00+03:00",
+          "traditional_goals": [
+            "renewing_care"
+          ],
+          "astro_basis": [
+            {
+              "type": "lunar_cycle_direction",
+              "value": "waxing"
+            }
+          ],
+          "rule_ids": [
+            "massage_waxing"
+          ],
+          "display_text": "23:02'den sonra rahatlatıcı ve yenileyici masaj için uygun bir zaman."
+        }
+      ]
+    },
+      {
+        "date": "2026-09-15",
+        "timezone": "Europe/Istanbul",
+        "schema_version": "1.0.0",
+        "ruleset_version": "beauty-1.0.0",
+        "beauty_recommendations": [
+          {
+            "category": "hair_cut",
+            "recommendation": "not_recommended",
+            "start_at": "2026-09-15T00:00:00+03:00",
+            "end_at": "2026-09-16T00:00:00+03:00",
+            "traditional_goals": [],
+            "astro_basis": [
+              {
+                "type": "moon_sign",
+                "value": "scorpio"
+              }
+            ],
+            "rule_ids": [
+              "hair_cut_scorpio_not_recommended"
+            ],
+            "display_text": "Saç kesimi için uygun bir gün değil. Kesimin istediğin gibi şekil almaması ihtimaline karşı başka bir günü tercih etmek daha iyi."
+          },
+          {
+            "category": "massage",
+            "recommendation": "recommended",
+            "start_at": "2026-09-15T00:00:00+03:00",
+            "end_at": "2026-09-16T00:00:00+03:00",
+            "traditional_goals": [
+              "renewing_care"
+            ],
+            "astro_basis": [
+              {
+                "type": "lunar_cycle_direction",
+                "value": "waxing"
+              }
+            ],
+            "rule_ids": [
+              "massage_waxing"
+            ],
+            "display_text": "Rahatlatıcı ve yenileyici bir masaj için uygun bir gün. Özellikle dinlenmeye ve bakım rutinine zaman ayırabilirsin."
+          }
+        ]
+      },
+      {
+        "date": "2026-09-16",
+        "timezone": "Europe/Istanbul",
+        "schema_version": "1.0.0",
+        "ruleset_version": "beauty-1.0.0",
+        "beauty_recommendations": [
+          {
+            "category": "hair_cut",
+            "recommendation": "not_recommended",
+            "start_at": "2026-09-16T00:00:00+03:00",
+            "end_at": "2026-09-16T19:41:00+03:00",
+            "traditional_goals": [],
+            "astro_basis": [
+              {
+                "type": "moon_sign",
+                "value": "scorpio"
+              }
+            ],
+            "rule_ids": [
+              "hair_cut_scorpio_not_recommended"
+            ],
+            "display_text": "19:41'e kadar saç kesimi için uygun bir zaman değil. Kesimi mümkünse başka bir güne bırak."
+          },
+          {
+            "category": "massage",
+            "recommendation": "recommended",
+            "start_at": "2026-09-16T00:00:00+03:00",
+            "end_at": "2026-09-17T00:00:00+03:00",
+            "traditional_goals": [
+              "renewing_care"
+            ],
+            "astro_basis": [
+              {
+                "type": "lunar_cycle_direction",
+                "value": "waxing"
+              }
+            ],
+            "rule_ids": [
+              "massage_waxing"
+            ],
+            "display_text": "Rahatlatıcı ve yenileyici masaj için uygun bir gün. Bedeni gevşetmeye yönelik hafif bakım uygulamalarını tercih edebilirsin."
+          }
+        ]
+      },
+      {
+        "date": "2026-09-17",
+        "timezone": "Europe/Istanbul",
+        "schema_version": "1.0.0",
+        "ruleset_version": "beauty-1.0.0",
+        "beauty_recommendations": [
+          {
+            "category": "massage",
+            "recommendation": "recommended",
+            "start_at": "2026-09-17T00:00:00+03:00",
+            "end_at": "2026-09-18T00:00:00+03:00",
+            "traditional_goals": [
+              "renewing_care"
+            ],
+            "astro_basis": [
+              {
+                "type": "lunar_cycle_direction",
+                "value": "waxing"
+              }
+            ],
+            "rule_ids": [
+              "massage_waxing"
+            ],
+            "display_text": "Rahatlatıcı ve yenileyici masaj için uygun bir gün. Bakım rutininde gevşemeye ve dinlenmeye biraz daha yer verebilirsin."
+          }
+        ]
+      },
+      {
+        "date": "2026-09-18",
+        "timezone": "Europe/Istanbul",
+        "schema_version": "1.0.0",
+        "ruleset_version": "beauty-1.0.0",
+        "beauty_recommendations": [
+          {
+            "category": "massage",
+            "recommendation": "recommended",
+            "start_at": "2026-09-18T00:00:00+03:00",
+            "end_at": "2026-09-19T00:00:00+03:00",
+            "traditional_goals": [
+              "renewing_care"
+            ],
+            "astro_basis": [
+              {
+                "type": "lunar_cycle_direction",
+                "value": "waxing"
+              }
+            ],
+            "rule_ids": [
+              "massage_waxing"
+            ],
+            "display_text": "Rahatlatıcı ve yenileyici masaj için uygun bir gün. Özellikle dinlendirici ve hafif bakım uygulamaları öne çıkıyor."
+          }
+        ]
+      },
+      {
+        "date": "2026-09-19",
+        "timezone": "Europe/Istanbul",
+        "schema_version": "1.0.0",
+        "ruleset_version": "beauty-1.0.0",
+        "beauty_recommendations": [
+          {
+            "category": "massage",
+            "recommendation": "recommended",
+            "start_at": "2026-09-19T00:00:00+03:00",
+            "end_at": "2026-09-20T00:00:00+03:00",
+            "traditional_goals": [
+              "renewing_care"
+            ],
+            "astro_basis": [
+              {
+                "type": "lunar_cycle_direction",
+                "value": "waxing"
+              }
+            ],
+            "rule_ids": [
+              "massage_waxing"
+            ],
+            "display_text": "Rahatlatıcı ve yenileyici masaj için uygun bir gün. Bakım rutinine dinlendirici bir masaj ekleyebilirsin."
+          },
+          {
+            "category": "nail_care",
+            "recommendation": "especially_recommended",
+            "start_at": "2026-09-19T07:55:00+03:00",
+            "end_at": "2026-09-20T00:00:00+03:00",
+            "traditional_goals": [
+              "longer_lasting_nail_care"
+            ],
+            "astro_basis": [
+              {
+                "type": "moon_sign",
+                "value": "capricorn"
+              }
+            ],
+            "rule_ids": [
+              "nail_care_capricorn"
+            ],
+            "display_text": "07:55'ten sonra manikür, pedikür ve tırnak bakımı için haftanın en güçlü zamanlarından biri. Düzenli ve uzun süre korunacak bir bakım hedefliyorsan değerlendirebilirsin."
+          }
+        ]
+      },
+      {
+        "date": "2026-09-20",
+        "timezone": "Europe/Istanbul",
+        "schema_version": "1.0.0",
+        "ruleset_version": "beauty-1.0.0",
+        "beauty_recommendations": [
+          {
+            "category": "nail_care",
+            "recommendation": "especially_recommended",
+            "start_at": "2026-09-20T00:00:00+03:00",
+            "end_at": "2026-09-21T00:00:00+03:00",
+            "traditional_goals": [
+              "longer_lasting_nail_care"
+            ],
+            "astro_basis": [
+              {
+                "type": "moon_sign",
+                "value": "capricorn"
+              }
+            ],
+            "rule_ids": [
+              "nail_care_capricorn"
+            ],
+            "display_text": "Manikür, pedikür ve tırnak bakımı için özellikle güçlü bir gün. Bakımın düzenli görünümünü daha uzun süre korumak istiyorsan tercih edebilirsin."
+          },
+          {
+            "category": "massage",
+            "recommendation": "recommended",
+            "start_at": "2026-09-20T00:00:00+03:00",
+            "end_at": "2026-09-21T00:00:00+03:00",
+            "traditional_goals": [
+              "renewing_care"
+            ],
+            "astro_basis": [
+              {
+                "type": "lunar_cycle_direction",
+                "value": "waxing"
+              }
+            ],
+            "rule_ids": [
+              "massage_waxing"
+            ],
+            "display_text": "Rahatlatıcı ve yenileyici masaj için uygun bir gün. Dinlenme ve bakım odaklı uygulamalar için değerlendirebilirsin."
+          }
+        ]
+      },
+      {
+        "date": "2026-09-21",
+        "timezone": "Europe/Istanbul",
+        "schema_version": "1.0.0",
+        "ruleset_version": "beauty-1.0.0",
+        "beauty_recommendations": [
+          {
+            "category": "nail_care",
+            "recommendation": "especially_recommended",
+            "start_at": "2026-09-21T00:00:00+03:00",
+            "end_at": "2026-09-21T20:14:00+03:00",
+            "traditional_goals": [
+              "longer_lasting_nail_care"
+            ],
+            "astro_basis": [
+              {
+                "type": "moon_sign",
+                "value": "capricorn"
+              }
+            ],
+            "rule_ids": [
+              "nail_care_capricorn"
+            ],
+            "display_text": "20:14'e kadar manikür, pedikür ve tırnak bakımı için özellikle güçlü bir zaman. Bakımın temiz ve düzenli görünümünü daha uzun süre korumak istiyorsan değerlendirebilirsin."
+          },
+          {
+            "category": "massage",
+            "recommendation": "recommended",
+            "start_at": "2026-09-21T00:00:00+03:00",
+            "end_at": "2026-09-22T00:00:00+03:00",
+            "traditional_goals": [
+              "renewing_care"
+            ],
+            "astro_basis": [
+              {
+                "type": "lunar_cycle_direction",
+                "value": "waxing"
+              }
+            ],
+            "rule_ids": [
+              "massage_waxing"
+            ],
+            "display_text": "Rahatlatıcı ve yenileyici masaj için uygun bir gün. Kendine ayıracağın sakin bir bakım rutini için değerlendirebilirsin."
+          }
+        ]
+      },
+        {
+          "date": "2026-09-22",
+          "timezone": "Europe/Istanbul",
+          "schema_version": "1.0.0",
+          "ruleset_version": "beauty-1.0.0",
+          "beauty_recommendations": [
+            {
+              "category": "hair_dye",
+              "recommendation": "recommended",
+              "start_at": "2026-09-22T00:00:00+03:00",
+              "end_at": "2026-09-23T00:00:00+03:00",
+              "traditional_goals": [
+                "better_color_result"
+              ],
+              "astro_basis": [
+                {
+                  "type": "moon_sign",
+                  "value": "aquarius"
+                }
+              ],
+              "rule_ids": [
+                "hair_dye_aquarius"
+              ],
+              "display_text": "Saç boyama, dip boya ve renk yenileme için uygun bir gün. Daha canlı ve dengeli bir renk sonucu hedeflenir."
+            },
+            {
+              "category": "massage",
+              "recommendation": "recommended",
+              "start_at": "2026-09-22T00:00:00+03:00",
+              "end_at": "2026-09-23T00:00:00+03:00",
+              "traditional_goals": [
+                "renewing_care"
+              ],
+              "astro_basis": [
+                {
+                  "type": "lunar_cycle_direction",
+                  "value": "waxing"
+                }
+              ],
+              "rule_ids": [
+                "massage_waxing"
+              ],
+              "display_text": "Rahatlatıcı ve yenileyici masaj için uygun bir gün. Gevşeme ve bakım odaklı bir masajı tercih edebilirsin."
+            }
+          ]
+        },
+        {
+          "date": "2026-09-23",
+          "timezone": "Europe/Istanbul",
+          "schema_version": "1.0.0",
+          "ruleset_version": "beauty-1.0.0",
+          "beauty_recommendations": [
+            {
+              "category": "hair_dye",
+              "recommendation": "recommended",
+              "start_at": "2026-09-23T00:00:00+03:00",
+              "end_at": "2026-09-24T00:00:00+03:00",
+              "traditional_goals": [
+                "better_color_result"
+              ],
+              "astro_basis": [
+                {
+                  "type": "moon_sign",
+                  "value": "aquarius"
+                }
+              ],
+              "rule_ids": [
+                "hair_dye_aquarius"
+              ],
+              "display_text": "Saç boyama, dip boya ve renk yenileme için uygun bir gün. Daha canlı ve dengeli bir renk sonucu hedeflenir."
+            },
+            {
+              "category": "massage",
+              "recommendation": "recommended",
+              "start_at": "2026-09-23T00:00:00+03:00",
+              "end_at": "2026-09-24T00:00:00+03:00",
+              "traditional_goals": [
+                "renewing_care"
+              ],
+              "astro_basis": [
+                {
+                  "type": "lunar_cycle_direction",
+                  "value": "waxing"
+                }
+              ],
+              "rule_ids": [
+                "massage_waxing"
+              ],
+              "display_text": "Rahatlatıcı ve yenileyici masaj için uygun bir gün. Gevşeme ve bakım odaklı bir masajı tercih edebilirsin."
+            }
+          ]
+        },
+        {
+          "date": "2026-09-24",
+          "timezone": "Europe/Istanbul",
+          "schema_version": "1.0.0",
+          "ruleset_version": "beauty-1.0.0",
+          "beauty_recommendations": [
+            {
+              "category": "massage",
+              "recommendation": "recommended",
+              "start_at": "2026-09-24T00:00:00+03:00",
+              "end_at": "2026-09-25T00:00:00+03:00",
+              "traditional_goals": [
+                "renewing_care"
+              ],
+              "astro_basis": [
+                {
+                  "type": "lunar_cycle_direction",
+                  "value": "waxing"
+                }
+              ],
+              "rule_ids": [
+                "massage_waxing"
+              ],
+              "display_text": "Rahatlatıcı ve yenileyici masaj için uygun bir gün. Dinlenme ve bakım odaklı uygulamaları tercih edebilirsin."
+            },
+            {
+              "category": "hair_cut",
+              "recommendation": "not_recommended",
+              "start_at": "2026-09-24T06:23:00+03:00",
+              "end_at": "2026-09-25T00:00:00+03:00",
+              "traditional_goals": [],
+              "astro_basis": [
+                {
+                  "type": "moon_sign",
+                  "value": "pisces"
+                }
+              ],
+              "rule_ids": [
+                "hair_cut_pisces_not_recommended"
+              ],
+              "display_text": "06:23'ten sonra saç kesimi için uygun bir zaman değil. Kesimin formunu daha iyi korumak istiyorsan başka bir günü tercih et."
+            }
+          ]
+        },
+        {
+          "date": "2026-09-25",
+          "timezone": "Europe/Istanbul",
+          "schema_version": "1.0.0",
+          "ruleset_version": "beauty-1.0.0",
+          "beauty_recommendations": [
+            {
+              "category": "massage",
+              "recommendation": "recommended",
+              "start_at": "2026-09-25T00:00:00+03:00",
+              "end_at": "2026-09-26T00:00:00+03:00",
+              "traditional_goals": [
+                "renewing_care"
+              ],
+              "astro_basis": [
+                {
+                  "type": "lunar_cycle_direction",
+                  "value": "waxing"
+                }
+              ],
+              "rule_ids": [
+                "massage_waxing"
+              ],
+              "display_text": "Rahatlatıcı ve yenileyici masaj için uygun bir gün. Dinlenmeye ve bakım rutinine zaman ayırabilirsin."
+            },
+            {
+              "category": "hair_cut",
+              "recommendation": "not_recommended",
+              "start_at": "2026-09-25T00:00:00+03:00",
+              "end_at": "2026-09-26T00:00:00+03:00",
+              "traditional_goals": [],
+              "astro_basis": [
+                {
+                  "type": "moon_sign",
+                  "value": "pisces"
+                }
+              ],
+              "rule_ids": [
+                "hair_cut_pisces_not_recommended"
+              ],
+              "display_text": "Saç kesimi için uygun bir gün değil. Kesimin formunu daha iyi korumak istiyorsan başka bir günü tercih et."
+            }
+          ]
+        },
+        {
+          "date": "2026-09-26",
+          "timezone": "Europe/Istanbul",
+          "schema_version": "1.0.0",
+          "ruleset_version": "beauty-1.0.0",
+          "beauty_recommendations": [
+            {
+              "category": "hair_cut",
+              "recommendation": "not_recommended",
+              "start_at": "2026-09-26T00:00:00+03:00",
+              "end_at": "2026-09-26T13:23:00+03:00",
+              "traditional_goals": [],
+              "astro_basis": [
+                {
+                  "type": "moon_sign",
+                  "value": "pisces"
+                }
+              ],
+              "rule_ids": [
+                "hair_cut_pisces_not_recommended"
+              ],
+              "display_text": "13:23'e kadar saç kesimi için uygun bir zaman değil. Kesim yaptıracaksan günün ilerleyen saatlerini veya başka bir günü tercih et."
+            }
+          ]
+        },
+        {
+          "date": "2026-09-27",
+          "timezone": "Europe/Istanbul",
+          "schema_version": "1.0.0",
+          "ruleset_version": "beauty-1.0.0",
+          "beauty_recommendations": [
+            {
+              "category": "skincare",
+              "recommendation": "recommended",
+              "start_at": "2026-09-27T00:00:00+03:00",
+              "end_at": "2026-09-28T00:00:00+03:00",
+              "traditional_goals": [],
+              "astro_basis": [
+                {
+                  "type": "lunar_cycle_direction",
+                  "value": "waning"
+                }
+              ],
+              "rule_ids": [
+                "skincare_waning"
+              ],
+              "display_text": "Cilt bakımı, peeling ve arındırıcı kozmetik uygulamalar için uygun bir gün."
+            },
+            {
+              "category": "epilation",
+              "recommendation": "recommended",
+              "start_at": "2026-09-27T00:00:00+03:00",
+              "end_at": "2026-09-28T00:00:00+03:00",
+              "traditional_goals": [
+                "slower_regrowth"
+              ],
+              "astro_basis": [
+                {
+                  "type": "lunar_cycle_direction",
+                  "value": "waning"
+                }
+              ],
+              "rule_ids": [
+                "epilation_waning"
+              ],
+              "display_text": "Epilasyon ve tüy alma işlemleri için uygun bir gün. Tüylerin daha geç belirginleşmesini hedefliyorsan değerlendirebilirsin."
+            },
+            {
+              "category": "hair_lightening",
+              "recommendation": "recommended",
+              "start_at": "2026-09-27T00:00:00+03:00",
+              "end_at": "2026-09-28T00:00:00+03:00",
+              "traditional_goals": [],
+              "astro_basis": [
+                {
+                  "type": "lunar_cycle_direction",
+                  "value": "waning"
+                }
+              ],
+              "rule_ids": [
+                "hair_lightening_waning"
+              ],
+              "display_text": "Saç rengini açtırmak, açıcı uygulamak veya daha açık tonlara geçmek için uygun bir gün."
+            }
+          ]
+        },
+        {
+          "date": "2026-09-28",
+          "timezone": "Europe/Istanbul",
+          "schema_version": "1.0.0",
+          "ruleset_version": "beauty-1.0.0",
+          "beauty_recommendations": [
+            {
+              "category": "skincare",
+              "recommendation": "recommended",
+              "start_at": "2026-09-28T00:00:00+03:00",
+              "end_at": "2026-09-29T00:00:00+03:00",
+              "traditional_goals": [],
+              "astro_basis": [
+                {
+                  "type": "lunar_cycle_direction",
+                  "value": "waning"
+                }
+              ],
+              "rule_ids": [
+                "skincare_waning"
+              ],
+              "display_text": "Cilt bakımı, peeling ve arındırıcı kozmetik uygulamalar için uygun bir gün."
+            },
+            {
+              "category": "epilation",
+              "recommendation": "recommended",
+              "start_at": "2026-09-28T00:00:00+03:00",
+              "end_at": "2026-09-29T00:00:00+03:00",
+              "traditional_goals": [
+                "slower_regrowth"
+              ],
+              "astro_basis": [
+                {
+                  "type": "lunar_cycle_direction",
+                  "value": "waning"
+                }
+              ],
+              "rule_ids": [
+                "epilation_waning"
+              ],
+              "display_text": "Epilasyon ve tüy alma işlemleri için uygun bir gün. Tüylerin daha geç belirginleşmesini hedefliyorsan değerlendirebilirsin."
+            },
+            {
+              "category": "hair_lightening",
+              "recommendation": "recommended",
+              "start_at": "2026-09-28T00:00:00+03:00",
+              "end_at": "2026-09-29T00:00:00+03:00",
+              "traditional_goals": [],
+              "astro_basis": [
+                {
+                  "type": "lunar_cycle_direction",
+                  "value": "waning"
+                }
+              ],
+              "rule_ids": [
+                "hair_lightening_waning"
+              ],
+              "display_text": "Saç rengini açtırmak, açıcı uygulamak veya daha açık tonlara geçmek için uygun bir gün."
+            }
+          ]
+        },
+        {
+          "date": "2026-09-29",
+          "timezone": "Europe/Istanbul",
+          "schema_version": "1.0.0",
+          "ruleset_version": "beauty-1.0.0",
+          "beauty_recommendations": [
+            {
+              "category": "skincare",
+              "recommendation": "recommended",
+              "start_at": "2026-09-29T00:00:00+03:00",
+              "end_at": "2026-09-30T00:00:00+03:00",
+              "traditional_goals": [],
+              "astro_basis": [
+                {
+                  "type": "lunar_cycle_direction",
+                  "value": "waning"
+                }
+              ],
+              "rule_ids": [
+                "skincare_waning"
+              ],
+              "display_text": "Cilt bakımı, peeling ve arındırıcı kozmetik uygulamalar için uygun bir gün."
+            },
+            {
+              "category": "epilation",
+              "recommendation": "recommended",
+              "start_at": "2026-09-29T00:00:00+03:00",
+              "end_at": "2026-09-30T00:00:00+03:00",
+              "traditional_goals": [
+                "slower_regrowth"
+              ],
+              "astro_basis": [
+                {
+                  "type": "lunar_cycle_direction",
+                  "value": "waning"
+                }
+              ],
+              "rule_ids": [
+                "epilation_waning"
+              ],
+              "display_text": "Epilasyon ve tüy alma işlemleri için uygun bir gün. Tüylerin daha geç belirginleşmesini hedefliyorsan değerlendirebilirsin."
+            },
+            {
+              "category": "hair_lightening",
+              "recommendation": "recommended",
+              "start_at": "2026-09-29T00:00:00+03:00",
+              "end_at": "2026-09-30T00:00:00+03:00",
+              "traditional_goals": [],
+              "astro_basis": [
+                {
+                  "type": "lunar_cycle_direction",
+                  "value": "waning"
+                }
+              ],
+              "rule_ids": [
+                "hair_lightening_waning"
+              ],
+              "display_text": "Saç rengini açtırmak, açıcı uygulamak veya daha açık tonlara geçmek için uygun bir gün."
+            }
+          ]
+        },
+        {
+          "date": "2026-09-30",
+          "timezone": "Europe/Istanbul",
+          "schema_version": "1.0.0",
+          "ruleset_version": "beauty-1.0.0",
+          "beauty_recommendations": [
+            {
+              "category": "skincare",
+              "recommendation": "recommended",
+              "start_at": "2026-09-30T00:00:00+03:00",
+              "end_at": "2026-10-01T00:00:00+03:00",
+              "traditional_goals": [],
+              "astro_basis": [
+                {
+                  "type": "lunar_cycle_direction",
+                  "value": "waning"
+                }
+              ],
+              "rule_ids": [
+                "skincare_waning"
+              ],
+              "display_text": "Cilt bakımı, peeling ve arındırıcı kozmetik uygulamalar için uygun bir gün."
+            },
+            {
+              "category": "epilation",
+              "recommendation": "recommended",
+              "start_at": "2026-09-30T00:00:00+03:00",
+              "end_at": "2026-10-01T00:00:00+03:00",
+              "traditional_goals": [
+                "slower_regrowth"
+              ],
+              "astro_basis": [
+                {
+                  "type": "lunar_cycle_direction",
+                  "value": "waning"
+                }
+              ],
+              "rule_ids": [
+                "epilation_waning"
+              ],
+              "display_text": "Epilasyon ve tüy alma işlemleri için uygun bir gün. Tüylerin daha geç belirginleşmesini hedefliyorsan değerlendirebilirsin."
+            },
+            {
+              "category": "hair_lightening",
+              "recommendation": "recommended",
+              "start_at": "2026-09-30T00:00:00+03:00",
+              "end_at": "2026-10-01T00:00:00+03:00",
+              "traditional_goals": [],
+              "astro_basis": [
+                {
+                  "type": "lunar_cycle_direction",
+                  "value": "waning"
+                }
+              ],
+              "rule_ids": [
+                "hair_lightening_waning"
+              ],
+              "display_text": "Saç rengini açtırmak, açıcı uygulamak veya daha açık tonlara geçmek için uygun bir gün."
+            }
+          ]
+        },
+          {
+            "date": "2026-10-01",
+            "timezone": "Europe/Istanbul",
+            "schema_version": "1.0.0",
+            "ruleset_version": "beauty-1.1.0",
+            "beauty_recommendations": [
+              {
+                "category": "skincare",
+                "recommendation": "recommended",
+                "start_at": "2026-10-01T00:00:00+03:00",
+                "end_at": "2026-10-02T00:00:00+03:00",
+                "traditional_goals": [],
+                "astro_basis": [
+                  {
+                    "type": "lunar_cycle_direction",
+                    "value": "waning"
+                  }
+                ],
+                "rule_ids": [
+                  "skincare_waning"
+                ],
+                "display_text": "Cilt bakımı, peeling ve arındırıcı kozmetik uygulamalar için uygun bir gün."
+              },
+              {
+                "category": "epilation",
+                "recommendation": "recommended",
+                "start_at": "2026-10-01T00:00:00+03:00",
+                "end_at": "2026-10-02T00:00:00+03:00",
+                "traditional_goals": [
+                  "slower_regrowth"
+                ],
+                "astro_basis": [
+                  {
+                    "type": "lunar_cycle_direction",
+                    "value": "waning"
+                  }
+                ],
+                "rule_ids": [
+                  "epilation_waning"
+                ],
+                "display_text": "Epilasyon ve tüy alma işlemleri için uygun bir gün. Tüylerin daha geç belirginleşmesini hedefliyorsan değerlendirebilirsin."
+              },
+              {
+                "category": "hair_lightening",
+                "recommendation": "recommended",
+                "start_at": "2026-10-01T00:00:00+03:00",
+                "end_at": "2026-10-02T00:00:00+03:00",
+                "traditional_goals": [],
+                "astro_basis": [
+                  {
+                    "type": "lunar_cycle_direction",
+                    "value": "waning"
+                  }
+                ],
+                "rule_ids": [
+                  "hair_lightening_waning"
+                ],
+                "display_text": "Saç rengini açtırmak, açıcı uygulamak veya daha açık tonlara geçmek için uygun bir gün."
+              }
+            ]
+          },
+          {
+            "date": "2026-10-02",
+            "timezone": "Europe/Istanbul",
+            "schema_version": "1.0.0",
+            "ruleset_version": "beauty-1.1.0",
+            "beauty_recommendations": [
+              {
+                "category": "skincare",
+                "recommendation": "recommended",
+                "start_at": "2026-10-02T00:00:00+03:00",
+                "end_at": "2026-10-03T00:00:00+03:00",
+                "traditional_goals": [],
+                "astro_basis": [
+                  {
+                    "type": "lunar_cycle_direction",
+                    "value": "waning"
+                  }
+                ],
+                "rule_ids": [
+                  "skincare_waning"
+                ],
+                "display_text": "Cilt bakımı, peeling ve arındırıcı kozmetik uygulamalar için uygun bir gün."
+              },
+              {
+                "category": "epilation",
+                "recommendation": "recommended",
+                "start_at": "2026-10-02T00:00:00+03:00",
+                "end_at": "2026-10-03T00:00:00+03:00",
+                "traditional_goals": [
+                  "slower_regrowth"
+                ],
+                "astro_basis": [
+                  {
+                    "type": "lunar_cycle_direction",
+                    "value": "waning"
+                  }
+                ],
+                "rule_ids": [
+                  "epilation_waning"
+                ],
+                "display_text": "Epilasyon ve tüy alma işlemleri için uygun bir gün. Tüylerin daha geç belirginleşmesini hedefliyorsan değerlendirebilirsin."
+              },
+              {
+                "category": "hair_lightening",
+                "recommendation": "recommended",
+                "start_at": "2026-10-02T00:00:00+03:00",
+                "end_at": "2026-10-03T00:00:00+03:00",
+                "traditional_goals": [],
+                "astro_basis": [
+                  {
+                    "type": "lunar_cycle_direction",
+                    "value": "waning"
+                  }
+                ],
+                "rule_ids": [
+                  "hair_lightening_waning"
+                ],
+                "display_text": "Saç rengini açtırmak, açıcı uygulamak veya daha açık tonlara geçmek için uygun bir gün."
+              }
+            ]
+          },
+          {
+            "date": "2026-10-03",
+            "timezone": "Europe/Istanbul",
+            "schema_version": "1.0.0",
+            "ruleset_version": "beauty-1.1.0",
+            "beauty_recommendations": [
+              {
+                "category": "skincare",
+                "recommendation": "recommended",
+                "start_at": "2026-10-03T00:00:00+03:00",
+                "end_at": "2026-10-04T00:00:00+03:00",
+                "traditional_goals": [],
+                "astro_basis": [
+                  {
+                    "type": "lunar_cycle_direction",
+                    "value": "waning"
+                  }
+                ],
+                "rule_ids": [
+                  "skincare_waning"
+                ],
+                "display_text": "Cilt bakımı, peeling ve alıştığın kozmetik bakım rutinleri için uygun bir gün."
+              },
+              {
+                "category": "epilation",
+                "recommendation": "recommended",
+                "start_at": "2026-10-03T00:00:00+03:00",
+                "end_at": "2026-10-04T00:00:00+03:00",
+                "traditional_goals": [
+                  "slower_regrowth"
+                ],
+                "astro_basis": [
+                  {
+                    "type": "lunar_cycle_direction",
+                    "value": "waning"
+                  }
+                ],
+                "rule_ids": [
+                  "epilation_waning"
+                ],
+                "display_text": "Epilasyon ve tüy alma işlemleri için uygun bir gün. Alıştığın yöntemle bakımını sürdürebilirsin."
+              },
+              {
+                "category": "hair_lightening",
+                "recommendation": "recommended",
+                "start_at": "2026-10-03T00:00:00+03:00",
+                "end_at": "2026-10-03T10:16:00+03:00",
+                "traditional_goals": [],
+                "astro_basis": [
+                  {
+                    "type": "lunar_cycle_direction",
+                    "value": "waning"
+                  }
+                ],
+                "rule_ids": [
+                  "hair_lightening_waning"
+                ],
+                "display_text": "Saç rengini açtırmak veya daha açık tonlara geçmek için uygun bir zaman."
+              },
+              {
+                "category": "hair_lightening",
+                "recommendation": "recommended",
+                "start_at": "2026-10-03T10:16:00+03:00",
+                "end_at": "2026-10-04T00:00:00+03:00",
+                "traditional_goals": [],
+                "astro_basis": [
+                  {
+                    "type": "lunar_cycle_direction",
+                    "value": "waning"
+                  },
+                  {
+                    "type": "planet_status",
+                    "planet": "venus",
+                    "value": "retrograde"
+                  }
+                ],
+                "rule_ids": [
+                  "hair_lightening_waning",
+                  "venus_retrograde_aesthetic_modifier"
+                ],
+                "display_text": "Daha önce yaptırdığın bir açma işlemini yenilemek için değerlendirilebilir. İlk kez çok farklı bir tona geçmek veya büyük bir renk değişikliği yapmak istiyorsan retro sonrasını beklemek daha iyi olabilir."
+              }
+            ]
+          },
+          {
+            "date": "2026-10-04",
+            "timezone": "Europe/Istanbul",
+            "schema_version": "1.0.0",
+            "ruleset_version": "beauty-1.1.0",
+            "beauty_recommendations": [
+              {
+                "category": "skincare",
+                "recommendation": "recommended",
+                "start_at": "2026-10-04T00:00:00+03:00",
+                "end_at": "2026-10-05T00:00:00+03:00",
+                "traditional_goals": [],
+                "astro_basis": [
+                  {
+                    "type": "lunar_cycle_direction",
+                    "value": "waning"
+                  }
+                ],
+                "rule_ids": [
+                  "skincare_waning"
+                ],
+                "display_text": "Cilt bakımı, peeling ve alıştığın kozmetik bakım rutinleri için uygun bir gün."
+              },
+              {
+                "category": "epilation",
+                "recommendation": "recommended",
+                "start_at": "2026-10-04T00:00:00+03:00",
+                "end_at": "2026-10-05T00:00:00+03:00",
+                "traditional_goals": [
+                  "slower_regrowth"
+                ],
+                "astro_basis": [
+                  {
+                    "type": "lunar_cycle_direction",
+                    "value": "waning"
+                  }
+                ],
+                "rule_ids": [
+                  "epilation_waning"
+                ],
+                "display_text": "Epilasyon ve tüy alma işlemleri için uygun bir gün. Alıştığın yöntemle bakımını sürdürebilirsin."
+              },
+              {
+                "category": "hair_lightening",
+                "recommendation": "recommended",
+                "start_at": "2026-10-04T00:00:00+03:00",
+                "end_at": "2026-10-05T00:00:00+03:00",
+                "traditional_goals": [],
+                "astro_basis": [
+                  {
+                    "type": "lunar_cycle_direction",
+                    "value": "waning"
+                  },
+                  {
+                    "type": "planet_status",
+                    "planet": "venus",
+                    "value": "retrograde"
+                  }
+                ],
+                "rule_ids": [
+                  "hair_lightening_waning",
+                  "venus_retrograde_aesthetic_modifier"
+                ],
+                "display_text": "Daha önce yaptırdığın bir açma işlemini yenilemek için değerlendirilebilir. İlk kez çok farklı bir tona geçmek veya büyük bir renk değişikliği yapmak istiyorsan retro sonrasını beklemek daha iyi olabilir."
+              }
+            ]
+          },
+          {
+            "date": "2026-10-05",
+            "timezone": "Europe/Istanbul",
+            "schema_version": "1.0.0",
+            "ruleset_version": "beauty-1.1.0",
+            "beauty_recommendations": [
+              {
+                "category": "skincare",
+                "recommendation": "recommended",
+                "start_at": "2026-10-05T00:00:00+03:00",
+                "end_at": "2026-10-06T00:00:00+03:00",
+                "traditional_goals": [],
+                "astro_basis": [
+                  {
+                    "type": "lunar_cycle_direction",
+                    "value": "waning"
+                  }
+                ],
+                "rule_ids": [
+                  "skincare_waning"
+                ],
+                "display_text": "Cilt bakımı, peeling ve alıştığın kozmetik bakım rutinleri için uygun bir gün."
+              },
+              {
+                "category": "epilation",
+                "recommendation": "recommended",
+                "start_at": "2026-10-05T00:00:00+03:00",
+                "end_at": "2026-10-06T00:00:00+03:00",
+                "traditional_goals": [
+                  "slower_regrowth"
+                ],
+                "astro_basis": [
+                  {
+                    "type": "lunar_cycle_direction",
+                    "value": "waning"
+                  }
+                ],
+                "rule_ids": [
+                  "epilation_waning"
+                ],
+                "display_text": "Epilasyon ve tüy alma işlemleri için uygun bir gün. Alıştığın yöntemle bakımını sürdürebilirsin."
+              },
+              {
+                "category": "hair_lightening",
+                "recommendation": "recommended",
+                "start_at": "2026-10-05T00:00:00+03:00",
+                "end_at": "2026-10-06T00:00:00+03:00",
+                "traditional_goals": [],
+                "astro_basis": [
+                  {
+                    "type": "lunar_cycle_direction",
+                    "value": "waning"
+                  },
+                  {
+                    "type": "planet_status",
+                    "planet": "venus",
+                    "value": "retrograde"
+                  }
+                ],
+                "rule_ids": [
+                  "hair_lightening_waning",
+                  "venus_retrograde_aesthetic_modifier"
+                ],
+                "display_text": "Daha önce yaptırdığın bir açma işlemini yenilemek için değerlendirilebilir. İlk kez çok farklı bir tona geçmek veya büyük bir renk değişikliği yapmak istiyorsan retro sonrasını beklemek daha iyi olabilir."
+              },
+              {
+                "category": "hair_cut",
+                "recommendation": "recommended",
+                "start_at": "2026-10-05T01:54:00+03:00",
+                "end_at": "2026-10-06T00:00:00+03:00",
+                "traditional_goals": [
+                  "fuller_appearance",
+                  "slower_regrowth"
+                ],
+                "astro_basis": [
+                  {
+                    "type": "moon_sign",
+                    "value": "leo"
+                  },
+                  {
+                    "type": "lunar_cycle_direction",
+                    "value": "waning"
+                  },
+                  {
+                    "type": "planet_status",
+                    "planet": "venus",
+                    "value": "retrograde"
+                  }
+                ],
+                "rule_ids": [
+                  "hair_cut_leo",
+                  "hair_cut_waning_modifier",
+                  "venus_retrograde_aesthetic_modifier"
+                ],
+                "display_text": "01:54'ten sonra mevcut saç modelini koruyan bir kesim için uygun. Saçın daha yavaş uzaması ve daha dolgun görünmesi hedeflenir. Çok farklı veya radikal bir model denemek istiyorsan retro sonrasını beklemek daha iyi olabilir."
+              }
+            ]
+          },
+          {
+            "date": "2026-10-06",
+            "timezone": "Europe/Istanbul",
+            "schema_version": "1.0.0",
+            "ruleset_version": "beauty-1.1.0",
+            "beauty_recommendations": [
+              {
+                "category": "skincare",
+                "recommendation": "recommended",
+                "start_at": "2026-10-06T00:00:00+03:00",
+                "end_at": "2026-10-07T00:00:00+03:00",
+                "traditional_goals": [],
+                "astro_basis": [
+                  {
+                    "type": "lunar_cycle_direction",
+                    "value": "waning"
+                  }
+                ],
+                "rule_ids": [
+                  "skincare_waning"
+                ],
+                "display_text": "Cilt bakımı, peeling ve alıştığın kozmetik bakım rutinleri için uygun bir gün."
+              },
+              {
+                "category": "epilation",
+                "recommendation": "recommended",
+                "start_at": "2026-10-06T00:00:00+03:00",
+                "end_at": "2026-10-07T00:00:00+03:00",
+                "traditional_goals": [
+                  "slower_regrowth"
+                ],
+                "astro_basis": [
+                  {
+                    "type": "lunar_cycle_direction",
+                    "value": "waning"
+                  }
+                ],
+                "rule_ids": [
+                  "epilation_waning"
+                ],
+                "display_text": "Epilasyon ve tüy alma işlemleri için uygun bir gün. Alıştığın yöntemle bakımını sürdürebilirsin."
+              },
+              {
+                "category": "hair_lightening",
+                "recommendation": "recommended",
+                "start_at": "2026-10-06T00:00:00+03:00",
+                "end_at": "2026-10-07T00:00:00+03:00",
+                "traditional_goals": [],
+                "astro_basis": [
+                  {
+                    "type": "lunar_cycle_direction",
+                    "value": "waning"
+                  },
+                  {
+                    "type": "planet_status",
+                    "planet": "venus",
+                    "value": "retrograde"
+                  }
+                ],
+                "rule_ids": [
+                  "hair_lightening_waning",
+                  "venus_retrograde_aesthetic_modifier"
+                ],
+                "display_text": "Daha önce yaptırdığın bir açma işlemini yenilemek için değerlendirilebilir. İlk kez çok farklı bir tona geçmek veya büyük bir renk değişikliği yapmak istiyorsan retro sonrasını beklemek daha iyi olabilir."
+              },
+              {
+                "category": "hair_cut",
+                "recommendation": "recommended",
+                "start_at": "2026-10-06T00:00:00+03:00",
+                "end_at": "2026-10-07T00:00:00+03:00",
+                "traditional_goals": [
+                  "fuller_appearance",
+                  "slower_regrowth"
+                ],
+                "astro_basis": [
+                  {
+                    "type": "moon_sign",
+                    "value": "leo"
+                  },
+                  {
+                    "type": "lunar_cycle_direction",
+                    "value": "waning"
+                  },
+                  {
+                    "type": "planet_status",
+                    "planet": "venus",
+                    "value": "retrograde"
+                  }
+                ],
+                "rule_ids": [
+                  "hair_cut_leo",
+                  "hair_cut_waning_modifier",
+                  "venus_retrograde_aesthetic_modifier"
+                ],
+                "display_text": "Mevcut saç modelini koruyan bir kesim için uygun bir gün. Saçın daha yavaş uzaması ve daha dolgun görünmesi hedeflenir. Büyük bir stil değişikliğini ise retro sonrasına bırakmak daha iyi olabilir."
+              }
+            ]
+          },
+          {
+            "date": "2026-10-07",
+            "timezone": "Europe/Istanbul",
+            "schema_version": "1.0.0",
+            "ruleset_version": "beauty-1.1.0",
+            "beauty_recommendations": [
+              {
+                "category": "skincare",
+                "recommendation": "recommended",
+                "start_at": "2026-10-07T00:00:00+03:00",
+                "end_at": "2026-10-08T00:00:00+03:00",
+                "traditional_goals": [],
+                "astro_basis": [
+                  {
+                    "type": "lunar_cycle_direction",
+                    "value": "waning"
+                  }
+                ],
+                "rule_ids": [
+                  "skincare_waning"
+                ],
+                "display_text": "Cilt bakımı, peeling ve alıştığın kozmetik bakım rutinleri için uygun bir gün."
+              },
+              {
+                "category": "epilation",
+                "recommendation": "recommended",
+                "start_at": "2026-10-07T00:00:00+03:00",
+                "end_at": "2026-10-08T00:00:00+03:00",
+                "traditional_goals": [
+                  "slower_regrowth"
+                ],
+                "astro_basis": [
+                  {
+                    "type": "lunar_cycle_direction",
+                    "value": "waning"
+                  }
+                ],
+                "rule_ids": [
+                  "epilation_waning"
+                ],
+                "display_text": "Epilasyon ve tüy alma işlemleri için uygun bir gün. Alıştığın yöntemle bakımını sürdürebilirsin."
+              },
+              {
+                "category": "hair_lightening",
+                "recommendation": "recommended",
+                "start_at": "2026-10-07T00:00:00+03:00",
+                "end_at": "2026-10-08T00:00:00+03:00",
+                "traditional_goals": [],
+                "astro_basis": [
+                  {
+                    "type": "lunar_cycle_direction",
+                    "value": "waning"
+                  },
+                  {
+                    "type": "planet_status",
+                    "planet": "venus",
+                    "value": "retrograde"
+                  }
+                ],
+                "rule_ids": [
+                  "hair_lightening_waning",
+                  "venus_retrograde_aesthetic_modifier"
+                ],
+                "display_text": "Daha önce yaptırdığın bir açma işlemini yenilemek için değerlendirilebilir. İlk kez büyük bir renk değişikliği yapmak istiyorsan retro sonrasını beklemek daha iyi olabilir."
+              },
+              {
+                "category": "hair_cut",
+                "recommendation": "recommended",
+                "start_at": "2026-10-07T00:00:00+03:00",
+                "end_at": "2026-10-07T05:52:00+03:00",
+                "traditional_goals": [
+                  "fuller_appearance",
+                  "slower_regrowth"
+                ],
+                "astro_basis": [
+                  {
+                    "type": "moon_sign",
+                    "value": "leo"
+                  },
+                  {
+                    "type": "lunar_cycle_direction",
+                    "value": "waning"
+                  },
+                  {
+                    "type": "planet_status",
+                    "planet": "venus",
+                    "value": "retrograde"
+                  }
+                ],
+                "rule_ids": [
+                  "hair_cut_leo",
+                  "hair_cut_waning_modifier",
+                  "venus_retrograde_aesthetic_modifier"
+                ],
+                "display_text": "05:52'ye kadar mevcut saç modelini koruyan bir kesim için uygun. Saçın daha yavaş uzaması ve daha dolgun görünmesi hedeflenir. Radikal bir model değişikliğini retro sonrasına bırakmak daha iyi olabilir."
+              },
+              {
+                "category": "hair_cut",
+                "recommendation": "recommended",
+                "start_at": "2026-10-07T05:52:00+03:00",
+                "end_at": "2026-10-08T00:00:00+03:00",
+                "traditional_goals": [
+                  "longer_shape_retention",
+                  "slower_regrowth"
+                ],
+                "astro_basis": [
+                  {
+                    "type": "moon_sign",
+                    "value": "virgo"
+                  },
+                  {
+                    "type": "lunar_cycle_direction",
+                    "value": "waning"
+                  },
+                  {
+                    "type": "planet_status",
+                    "planet": "venus",
+                    "value": "retrograde"
+                  }
+                ],
+                "rule_ids": [
+                  "hair_cut_virgo",
+                  "hair_cut_waning_modifier",
+                  "venus_retrograde_aesthetic_modifier"
+                ],
+                "display_text": "05:52'den sonra mevcut saç modelinin formunu ve uzunluğunu daha uzun süre korumaya yönelik bir kesim için uygun. Alıştığın modeli yenilemek için değerlendirebilirsin; tamamen yeni bir görünüm için retro sonrasını beklemek daha iyi olabilir."
+              },
+              {
+                "category": "hair_perm",
+                "recommendation": "especially_recommended",
+                "start_at": "2026-10-07T05:52:00+03:00",
+                "end_at": "2026-10-08T00:00:00+03:00",
+                "traditional_goals": [
+                  "longer_shape_retention"
+                ],
+                "astro_basis": [
+                  {
+                    "type": "moon_sign",
+                    "value": "virgo"
+                  },
+                  {
+                    "type": "planet_status",
+                    "planet": "venus",
+                    "value": "retrograde"
+                  }
+                ],
+                "rule_ids": [
+                  "hair_perm_virgo",
+                  "venus_retrograde_aesthetic_modifier"
+                ],
+                "display_text": "05:52'den sonra perma ve kalıcı dalga için güçlü bir zaman. Daha önce kullandığın bir görünümü yenilemek için değerlendirilebilir; ilk kez deneyeceğin veya görünümünü belirgin biçimde değiştirecek bir işlem için retro sonrasını beklemek daha iyi olabilir."
+              }
+            ]
+          },
+            {
+              "date": "2026-10-08",
+              "timezone": "Europe/Istanbul",
+              "schema_version": "1.0.0",
+              "ruleset_version": "beauty-1.1.0",
+              "beauty_recommendations": [
+                {
+                  "category": "skincare",
+                  "recommendation": "recommended",
+                  "start_at": "2026-10-08T00:00:00+03:00",
+                  "end_at": "2026-10-09T00:00:00+03:00",
+                  "traditional_goals": [],
+                  "astro_basis": [
+                    {
+                      "type": "lunar_cycle_direction",
+                      "value": "waning"
+                    }
+                  ],
+                  "rule_ids": [
+                    "skincare_waning"
+                  ],
+                  "display_text": "Cilt bakımı, peeling ve alıştığın kozmetik bakım rutinleri için uygun bir gün."
+                },
+                {
+                  "category": "epilation",
+                  "recommendation": "recommended",
+                  "start_at": "2026-10-08T00:00:00+03:00",
+                  "end_at": "2026-10-09T00:00:00+03:00",
+                  "traditional_goals": [
+                    "slower_regrowth"
+                  ],
+                  "astro_basis": [
+                    {
+                      "type": "lunar_cycle_direction",
+                      "value": "waning"
+                    }
+                  ],
+                  "rule_ids": [
+                    "epilation_waning"
+                  ],
+                  "display_text": "Epilasyon ve tüy alma işlemleri için uygun bir gün. Tüylerin daha geç belirginleşmesini hedefliyorsan değerlendirebilirsin."
+                },
+                {
+                  "category": "hair_lightening",
+                  "recommendation": "recommended",
+                  "start_at": "2026-10-08T00:00:00+03:00",
+                  "end_at": "2026-10-09T00:00:00+03:00",
+                  "traditional_goals": [],
+                  "astro_basis": [
+                    {
+                      "type": "lunar_cycle_direction",
+                      "value": "waning"
+                    },
+                    {
+                      "type": "planet_status",
+                      "planet": "venus",
+                      "value": "retrograde"
+                    }
+                  ],
+                  "rule_ids": [
+                    "hair_lightening_waning",
+                    "venus_retrograde_aesthetic_modifier"
+                  ],
+                  "display_text": "Daha önce yaptırdığın bir açma işlemini yenilemek için değerlendirilebilir. İlk kez çok farklı bir tona geçmek veya büyük bir renk değişikliği yapmak istiyorsan retro sonrasını beklemek daha iyi olabilir."
+                },
+                {
+                  "category": "hair_cut",
+                  "recommendation": "recommended",
+                  "start_at": "2026-10-08T00:00:00+03:00",
+                  "end_at": "2026-10-09T00:00:00+03:00",
+                  "traditional_goals": [
+                    "longer_shape_retention",
+                    "slower_regrowth"
+                  ],
+                  "astro_basis": [
+                    {
+                      "type": "moon_sign",
+                      "value": "virgo"
+                    },
+                    {
+                      "type": "lunar_cycle_direction",
+                      "value": "waning"
+                    },
+                    {
+                      "type": "planet_status",
+                      "planet": "venus",
+                      "value": "retrograde"
+                    }
+                  ],
+                  "rule_ids": [
+                    "hair_cut_virgo",
+                    "hair_cut_waning_modifier",
+                    "venus_retrograde_aesthetic_modifier"
+                  ],
+                  "display_text": "Mevcut saç modelinin formunu ve uzunluğunu daha uzun süre korumaya yönelik bir kesim için uygun bir gün. Alıştığın modeli yenilemek için değerlendirebilirsin; tamamen yeni bir görünüm için retro sonrasını beklemek daha iyi olabilir."
+                },
+                {
+                  "category": "hair_perm",
+                  "recommendation": "especially_recommended",
+                  "start_at": "2026-10-08T00:00:00+03:00",
+                  "end_at": "2026-10-09T00:00:00+03:00",
+                  "traditional_goals": [
+                    "longer_shape_retention"
+                  ],
+                  "astro_basis": [
+                    {
+                      "type": "moon_sign",
+                      "value": "virgo"
+                    },
+                    {
+                      "type": "planet_status",
+                      "planet": "venus",
+                      "value": "retrograde"
+                    }
+                  ],
+                  "rule_ids": [
+                    "hair_perm_virgo",
+                    "venus_retrograde_aesthetic_modifier"
+                  ],
+                  "display_text": "Perma ve kalıcı dalga için güçlü bir gün. Daha önce kullandığın bir görünümü yenilemek için değerlendirilebilir; ilk kez deneyeceğin veya görünümünü belirgin biçimde değiştirecek bir işlem için retro sonrasını beklemek daha iyi olabilir."
+                }
+              ]
+            },
+            {
+              "date": "2026-10-09",
+              "timezone": "Europe/Istanbul",
+              "schema_version": "1.0.0",
+              "ruleset_version": "beauty-1.1.0",
+              "beauty_recommendations": [
+                {
+                  "category": "skincare",
+                  "recommendation": "recommended",
+                  "start_at": "2026-10-09T00:00:00+03:00",
+                  "end_at": "2026-10-10T00:00:00+03:00",
+                  "traditional_goals": [],
+                  "astro_basis": [
+                    {
+                      "type": "lunar_cycle_direction",
+                      "value": "waning"
+                    }
+                  ],
+                  "rule_ids": [
+                    "skincare_waning"
+                  ],
+                  "display_text": "Cilt bakımı, peeling ve alıştığın kozmetik bakım rutinleri için uygun bir gün."
+                },
+                {
+                  "category": "epilation",
+                  "recommendation": "recommended",
+                  "start_at": "2026-10-09T00:00:00+03:00",
+                  "end_at": "2026-10-10T00:00:00+03:00",
+                  "traditional_goals": [
+                    "slower_regrowth"
+                  ],
+                  "astro_basis": [
+                    {
+                      "type": "lunar_cycle_direction",
+                      "value": "waning"
+                    }
+                  ],
+                  "rule_ids": [
+                    "epilation_waning"
+                  ],
+                  "display_text": "Epilasyon ve tüy alma işlemleri için uygun bir gün. Tüylerin daha geç belirginleşmesini hedefliyorsan değerlendirebilirsin."
+                },
+                {
+                  "category": "hair_lightening",
+                  "recommendation": "recommended",
+                  "start_at": "2026-10-09T00:00:00+03:00",
+                  "end_at": "2026-10-10T00:00:00+03:00",
+                  "traditional_goals": [],
+                  "astro_basis": [
+                    {
+                      "type": "lunar_cycle_direction",
+                      "value": "waning"
+                    },
+                    {
+                      "type": "planet_status",
+                      "planet": "venus",
+                      "value": "retrograde"
+                    }
+                  ],
+                  "rule_ids": [
+                    "hair_lightening_waning",
+                    "venus_retrograde_aesthetic_modifier"
+                  ],
+                  "display_text": "Daha önce yaptırdığın bir açma işlemini yenilemek için değerlendirilebilir. İlk kez çok farklı bir tona geçmek istiyorsan retro sonrasını beklemek daha iyi olabilir."
+                },
+                {
+                  "category": "hair_cut",
+                  "recommendation": "recommended",
+                  "start_at": "2026-10-09T00:00:00+03:00",
+                  "end_at": "2026-10-09T11:10:00+03:00",
+                  "traditional_goals": [
+                    "longer_shape_retention",
+                    "slower_regrowth"
+                  ],
+                  "astro_basis": [
+                    {
+                      "type": "moon_sign",
+                      "value": "virgo"
+                    },
+                    {
+                      "type": "lunar_cycle_direction",
+                      "value": "waning"
+                    },
+                    {
+                      "type": "planet_status",
+                      "planet": "venus",
+                      "value": "retrograde"
+                    }
+                  ],
+                  "rule_ids": [
+                    "hair_cut_virgo",
+                    "hair_cut_waning_modifier",
+                    "venus_retrograde_aesthetic_modifier"
+                  ],
+                  "display_text": "11:10'a kadar mevcut saç modelinin formunu ve uzunluğunu daha uzun süre korumaya yönelik bir kesim için uygun. Alıştığın modeli korumak için değerlendirebilirsin."
+                },
+                {
+                  "category": "hair_perm",
+                  "recommendation": "especially_recommended",
+                  "start_at": "2026-10-09T00:00:00+03:00",
+                  "end_at": "2026-10-09T11:10:00+03:00",
+                  "traditional_goals": [
+                    "longer_shape_retention"
+                  ],
+                  "astro_basis": [
+                    {
+                      "type": "moon_sign",
+                      "value": "virgo"
+                    },
+                    {
+                      "type": "planet_status",
+                      "planet": "venus",
+                      "value": "retrograde"
+                    }
+                  ],
+                  "rule_ids": [
+                    "hair_perm_virgo",
+                    "venus_retrograde_aesthetic_modifier"
+                  ],
+                  "display_text": "11:10'a kadar perma ve kalıcı dalga için güçlü bir zaman. Daha önce yaptırdığın bir işlemi yenilemek için daha uygun; ilk kez deneyeceğin büyük bir değişiklik için beklemek daha iyi olabilir."
+                }
+              ]
+            },
+            {
+              "date": "2026-10-10",
+              "timezone": "Europe/Istanbul",
+              "schema_version": "1.0.0",
+              "ruleset_version": "beauty-1.1.0",
+              "beauty_recommendations": [
+                {
+                  "category": "skincare",
+                  "recommendation": "recommended",
+                  "start_at": "2026-10-10T00:00:00+03:00",
+                  "end_at": "2026-10-10T18:50:00+03:00",
+                  "traditional_goals": [],
+                  "astro_basis": [
+                    {
+                      "type": "lunar_cycle_direction",
+                      "value": "waning"
+                    }
+                  ],
+                  "rule_ids": [
+                    "skincare_waning"
+                  ],
+                  "display_text": "18:50'ye kadar cilt bakımı, peeling ve arındırıcı kozmetik bakım uygulamaları için uygun."
+                },
+                {
+                  "category": "epilation",
+                  "recommendation": "recommended",
+                  "start_at": "2026-10-10T00:00:00+03:00",
+                  "end_at": "2026-10-10T18:50:00+03:00",
+                  "traditional_goals": [
+                    "slower_regrowth"
+                  ],
+                  "astro_basis": [
+                    {
+                      "type": "lunar_cycle_direction",
+                      "value": "waning"
+                    }
+                  ],
+                  "rule_ids": [
+                    "epilation_waning"
+                  ],
+                  "display_text": "18:50'ye kadar epilasyon ve tüy alma işlemleri için uygun bir zaman."
+                },
+                {
+                  "category": "hair_lightening",
+                  "recommendation": "recommended",
+                  "start_at": "2026-10-10T00:00:00+03:00",
+                  "end_at": "2026-10-10T18:50:00+03:00",
+                  "traditional_goals": [],
+                  "astro_basis": [
+                    {
+                      "type": "lunar_cycle_direction",
+                      "value": "waning"
+                    },
+                    {
+                      "type": "planet_status",
+                      "planet": "venus",
+                      "value": "retrograde"
+                    }
+                  ],
+                  "rule_ids": [
+                    "hair_lightening_waning",
+                    "venus_retrograde_aesthetic_modifier"
+                  ],
+                  "display_text": "18:50'ye kadar daha önce yaptırdığın bir saç açma işlemini yenilemek için değerlendirilebilir. Büyük bir renk değişikliğini ise retro sonrasına bırakmak daha iyi olabilir."
+                }
+              ]
+            },
+            {
+              "date": "2026-10-11",
+              "timezone": "Europe/Istanbul",
+              "schema_version": "1.0.0",
+              "ruleset_version": "beauty-1.1.0",
+              "beauty_recommendations": [
+                {
+                  "category": "hair_cut",
+                  "recommendation": "not_recommended",
+                  "start_at": "2026-10-11T18:21:00+03:00",
+                  "end_at": "2026-10-12T00:00:00+03:00",
+                  "traditional_goals": [],
+                  "astro_basis": [
+                    {
+                      "type": "moon_sign",
+                      "value": "scorpio"
+                    }
+                  ],
+                  "rule_ids": [
+                    "hair_cut_scorpio_not_recommended"
+                  ],
+                  "display_text": "18:21'den sonra saç kesimi için uygun bir zaman değil. Kesimi mümkünse başka bir güne bırak."
+                }
+              ]
+            },
+            {
+              "date": "2026-10-12",
+              "timezone": "Europe/Istanbul",
+              "schema_version": "1.0.0",
+              "ruleset_version": "beauty-1.1.0",
+              "beauty_recommendations": [
+                {
+                  "category": "hair_cut",
+                  "recommendation": "not_recommended",
+                  "start_at": "2026-10-12T00:00:00+03:00",
+                  "end_at": "2026-10-13T00:00:00+03:00",
+                  "traditional_goals": [],
+                  "astro_basis": [
+                    {
+                      "type": "moon_sign",
+                      "value": "scorpio"
+                    }
+                  ],
+                  "rule_ids": [
+                    "hair_cut_scorpio_not_recommended"
+                  ],
+                  "display_text": "Saç kesimi için uygun bir gün değil. Kesimi mümkünse başka bir güne bırak."
+                }
+              ]
+            },
+            {
+              "date": "2026-10-13",
+              "timezone": "Europe/Istanbul",
+              "schema_version": "1.0.0",
+              "ruleset_version": "beauty-1.1.0",
+              "beauty_recommendations": [
+                {
+                  "category": "hair_cut",
+                  "recommendation": "not_recommended",
+                  "start_at": "2026-10-13T00:00:00+03:00",
+                  "end_at": "2026-10-14T00:00:00+03:00",
+                  "traditional_goals": [],
+                  "astro_basis": [
+                    {
+                      "type": "moon_sign",
+                      "value": "scorpio"
+                    }
+                  ],
+                  "rule_ids": [
+                    "hair_cut_scorpio_not_recommended"
+                  ],
+                  "display_text": "Saç kesimi için uygun bir gün değil. Kesimi mümkünse başka bir güne bırak."
+                }
+              ]
+            },
+            {
+              "date": "2026-10-14",
+              "timezone": "Europe/Istanbul",
+              "schema_version": "1.0.0",
+              "ruleset_version": "beauty-1.1.0",
+              "beauty_recommendations": [
+                {
+                  "category": "hair_cut",
+                  "recommendation": "not_recommended",
+                  "start_at": "2026-10-14T00:00:00+03:00",
+                  "end_at": "2026-10-14T03:59:00+03:00",
+                  "traditional_goals": [],
+                  "astro_basis": [
+                    {
+                      "type": "moon_sign",
+                      "value": "scorpio"
+                    }
+                  ],
+                  "rule_ids": [
+                    "hair_cut_scorpio_not_recommended"
+                  ],
+                  "display_text": "03:59'a kadar saç kesimi için uygun bir zaman değil."
+                },
+                {
+                  "category": "massage",
+                  "recommendation": "recommended",
+                  "start_at": "2026-10-14T16:14:00+03:00",
+                  "end_at": "2026-10-15T00:00:00+03:00",
+                  "traditional_goals": [
+                    "renewing_care"
+                  ],
+                  "astro_basis": [
+                    {
+                      "type": "lunar_cycle_direction",
+                      "value": "waxing"
+                    }
+                  ],
+                  "rule_ids": [
+                    "massage_waxing"
+                  ],
+                  "display_text": "16:14'ten sonra rahatlatıcı ve yenileyici masaj için uygun bir zaman."
+                }
+              ]
+            },
+              {
+                "date": "2026-10-15",
+                "timezone": "Europe/Istanbul",
+                "schema_version": "1.0.0",
+                "ruleset_version": "beauty-1.1.0",
+                "beauty_recommendations": [
+                  {
+                    "category": "massage",
+                    "recommendation": "recommended",
+                    "start_at": "2026-10-15T00:00:00+03:00",
+                    "end_at": "2026-10-16T00:00:00+03:00",
+                    "traditional_goals": [
+                      "renewing_care"
+                    ],
+                    "astro_basis": [
+                      {
+                        "type": "lunar_cycle_direction",
+                        "value": "waxing"
+                      }
+                    ],
+                    "rule_ids": [
+                      "massage_waxing"
+                    ],
+                    "display_text": "Rahatlatıcı ve yenileyici masaj için uygun bir gün. Kendine dinlenme ve bakım zamanı ayırabilirsin."
+                  }
+                ]
+              },
+              {
+                "date": "2026-10-16",
+                "timezone": "Europe/Istanbul",
+                "schema_version": "1.0.0",
+                "ruleset_version": "beauty-1.1.0",
+                "beauty_recommendations": [
+                  {
+                    "category": "massage",
+                    "recommendation": "recommended",
+                    "start_at": "2026-10-16T00:00:00+03:00",
+                    "end_at": "2026-10-17T00:00:00+03:00",
+                    "traditional_goals": [
+                      "renewing_care"
+                    ],
+                    "astro_basis": [
+                      {
+                        "type": "lunar_cycle_direction",
+                        "value": "waxing"
+                      }
+                    ],
+                    "rule_ids": [
+                      "massage_waxing"
+                    ],
+                    "display_text": "Rahatlatıcı ve yenileyici masaj için uygun bir gün. Dinlenme ve bakım odaklı bir uygulama tercih edebilirsin."
+                  },
+                  {
+                    "category": "nail_care",
+                    "recommendation": "especially_recommended",
+                    "start_at": "2026-10-16T15:57:00+03:00",
+                    "end_at": "2026-10-17T00:00:00+03:00",
+                    "traditional_goals": [
+                      "longer_lasting_nail_care"
+                    ],
+                    "astro_basis": [
+                      {
+                        "type": "moon_sign",
+                        "value": "capricorn"
+                      }
+                    ],
+                    "rule_ids": [
+                      "nail_care_capricorn"
+                    ],
+                    "display_text": "15:57'den sonra manikür, pedikür, tırnak kesimi ve genel tırnak bakımı için güçlü bir zaman. Düzenli görünümünü daha uzun süre korumak istiyorsan değerlendirebilirsin."
+                  }
+                ]
+              },
+              {
+                "date": "2026-10-17",
+                "timezone": "Europe/Istanbul",
+                "schema_version": "1.0.0",
+                "ruleset_version": "beauty-1.1.0",
+                "beauty_recommendations": [
+                  {
+                    "category": "nail_care",
+                    "recommendation": "especially_recommended",
+                    "start_at": "2026-10-17T00:00:00+03:00",
+                    "end_at": "2026-10-18T00:00:00+03:00",
+                    "traditional_goals": [
+                      "longer_lasting_nail_care"
+                    ],
+                    "astro_basis": [
+                      {
+                        "type": "moon_sign",
+                        "value": "capricorn"
+                      }
+                    ],
+                    "rule_ids": [
+                      "nail_care_capricorn"
+                    ],
+                    "display_text": "Manikür, pedikür, tırnak kesimi ve genel tırnak bakımı için özellikle güçlü bir gün. Bakımın temiz ve düzenli görünümünü daha uzun süre korumak istiyorsan değerlendirebilirsin."
+                  },
+                  {
+                    "category": "massage",
+                    "recommendation": "recommended",
+                    "start_at": "2026-10-17T00:00:00+03:00",
+                    "end_at": "2026-10-18T00:00:00+03:00",
+                    "traditional_goals": [
+                      "renewing_care"
+                    ],
+                    "astro_basis": [
+                      {
+                        "type": "lunar_cycle_direction",
+                        "value": "waxing"
+                      }
+                    ],
+                    "rule_ids": [
+                      "massage_waxing"
+                    ],
+                    "display_text": "Rahatlatıcı ve yenileyici masaj için uygun bir gün. Bakım rutinine sakin bir masaj ekleyebilirsin."
+                  }
+                ]
+              },
+              {
+                "date": "2026-10-18",
+                "timezone": "Europe/Istanbul",
+                "schema_version": "1.0.0",
+                "ruleset_version": "beauty-1.1.0",
+                "beauty_recommendations": [
+                  {
+                    "category": "nail_care",
+                    "recommendation": "especially_recommended",
+                    "start_at": "2026-10-18T00:00:00+03:00",
+                    "end_at": "2026-10-19T00:00:00+03:00",
+                    "traditional_goals": [
+                      "longer_lasting_nail_care"
+                    ],
+                    "astro_basis": [
+                      {
+                        "type": "moon_sign",
+                        "value": "capricorn"
+                      }
+                    ],
+                    "rule_ids": [
+                      "nail_care_capricorn"
+                    ],
+                    "display_text": "Manikür, pedikür, tırnak kesimi ve genel tırnak bakımı için özellikle güçlü bir gün. Düzenli görünümü uzun süre korumaya yönelik bakım için değerlendirebilirsin."
+                  },
+                  {
+                    "category": "massage",
+                    "recommendation": "recommended",
+                    "start_at": "2026-10-18T00:00:00+03:00",
+                    "end_at": "2026-10-19T00:00:00+03:00",
+                    "traditional_goals": [
+                      "renewing_care"
+                    ],
+                    "astro_basis": [
+                      {
+                        "type": "lunar_cycle_direction",
+                        "value": "waxing"
+                      }
+                    ],
+                    "rule_ids": [
+                      "massage_waxing"
+                    ],
+                    "display_text": "Rahatlatıcı ve yenileyici masaj için uygun bir gün. Dinlenme ve bakım odaklı bir uygulama tercih edebilirsin."
+                  }
+                ]
+              },
+              {
+                "date": "2026-10-19",
+                "timezone": "Europe/Istanbul",
+                "schema_version": "1.0.0",
+                "ruleset_version": "beauty-1.1.0",
+                "beauty_recommendations": [
+                  {
+                    "category": "nail_care",
+                    "recommendation": "especially_recommended",
+                    "start_at": "2026-10-19T00:00:00+03:00",
+                    "end_at": "2026-10-19T04:40:00+03:00",
+                    "traditional_goals": [
+                      "longer_lasting_nail_care"
+                    ],
+                    "astro_basis": [
+                      {
+                        "type": "moon_sign",
+                        "value": "capricorn"
+                      }
+                    ],
+                    "rule_ids": [
+                      "nail_care_capricorn"
+                    ],
+                    "display_text": "04:40'a kadar manikür, pedikür, tırnak kesimi ve genel tırnak bakımı için güçlü bir zaman."
+                  },
+                  {
+                    "category": "hair_dye",
+                    "recommendation": "recommended",
+                    "start_at": "2026-10-19T04:40:00+03:00",
+                    "end_at": "2026-10-20T00:00:00+03:00",
+                    "traditional_goals": [
+                      "better_color_result"
+                    ],
+                    "astro_basis": [
+                      {
+                        "type": "moon_sign",
+                        "value": "aquarius"
+                      },
+                      {
+                        "type": "planet_status",
+                        "planet": "venus",
+                        "value": "retrograde"
+                      }
+                    ],
+                    "rule_ids": [
+                      "hair_dye_aquarius",
+                      "venus_retrograde_aesthetic_modifier"
+                    ],
+                    "display_text": "04:40'tan sonra saç rengini yenilemek için uygun bir zaman. Dip boya veya daha önce kullandığın bir rengi tazelemek için değerlendirebilirsin; ilk kez deneyeceğin çok farklı bir rengi retro sonrasına bırakmak daha iyi olabilir."
+                  },
+                  {
+                    "category": "massage",
+                    "recommendation": "recommended",
+                    "start_at": "2026-10-19T00:00:00+03:00",
+                    "end_at": "2026-10-20T00:00:00+03:00",
+                    "traditional_goals": [
+                      "renewing_care"
+                    ],
+                    "astro_basis": [
+                      {
+                        "type": "lunar_cycle_direction",
+                        "value": "waxing"
+                      }
+                    ],
+                    "rule_ids": [
+                      "massage_waxing"
+                    ],
+                    "display_text": "Rahatlatıcı ve yenileyici masaj için uygun bir gün. Dinlenmeye ve bakım rutinine zaman ayırabilirsin."
+                  }
+                ]
+              },
+              {
+                "date": "2026-10-20",
+                "timezone": "Europe/Istanbul",
+                "schema_version": "1.0.0",
+                "ruleset_version": "beauty-1.1.0",
+                "beauty_recommendations": [
+                  {
+                    "category": "hair_dye",
+                    "recommendation": "recommended",
+                    "start_at": "2026-10-20T00:00:00+03:00",
+                    "end_at": "2026-10-21T00:00:00+03:00",
+                    "traditional_goals": [
+                      "better_color_result"
+                    ],
+                    "astro_basis": [
+                      {
+                        "type": "moon_sign",
+                        "value": "aquarius"
+                      },
+                      {
+                        "type": "planet_status",
+                        "planet": "venus",
+                        "value": "retrograde"
+                      }
+                    ],
+                    "rule_ids": [
+                      "hair_dye_aquarius",
+                      "venus_retrograde_aesthetic_modifier"
+                    ],
+                    "display_text": "Saç rengini yenilemek için uygun bir gün. Dip boya veya alıştığın rengi tazelemek için değerlendirebilirsin; tamamen yeni ve radikal bir renk değişikliğini retro sonrasına bırakmak daha iyi olabilir."
+                  },
+                  {
+                    "category": "massage",
+                    "recommendation": "recommended",
+                    "start_at": "2026-10-20T00:00:00+03:00",
+                    "end_at": "2026-10-21T00:00:00+03:00",
+                    "traditional_goals": [
+                      "renewing_care"
+                    ],
+                    "astro_basis": [
+                      {
+                        "type": "lunar_cycle_direction",
+                        "value": "waxing"
+                      }
+                    ],
+                    "rule_ids": [
+                      "massage_waxing"
+                    ],
+                    "display_text": "Rahatlatıcı ve yenileyici masaj için uygun bir gün. Gevşeme ve bakım odaklı bir masaj tercih edebilirsin."
+                  }
+                ]
+              },
+              {
+                "date": "2026-10-21",
+                "timezone": "Europe/Istanbul",
+                "schema_version": "1.0.0",
+                "ruleset_version": "beauty-1.1.0",
+                "beauty_recommendations": [
+                  {
+                    "category": "hair_dye",
+                    "recommendation": "recommended",
+                    "start_at": "2026-10-21T00:00:00+03:00",
+                    "end_at": "2026-10-21T15:35:00+03:00",
+                    "traditional_goals": [
+                      "better_color_result"
+                    ],
+                    "astro_basis": [
+                      {
+                        "type": "moon_sign",
+                        "value": "aquarius"
+                      },
+                      {
+                        "type": "planet_status",
+                        "planet": "venus",
+                        "value": "retrograde"
+                      }
+                    ],
+                    "rule_ids": [
+                      "hair_dye_aquarius",
+                      "venus_retrograde_aesthetic_modifier"
+                    ],
+                    "display_text": "15:35'e kadar mevcut saç rengini tazelemek veya dip boya yaptırmak için uygun. İlk kez deneyeceğin çok farklı bir tona geçişi retro sonrasına bırakmak daha iyi olabilir."
+                  },
+                  {
+                    "category": "hair_cut",
+                    "recommendation": "not_recommended",
+                    "start_at": "2026-10-21T15:35:00+03:00",
+                    "end_at": "2026-10-22T00:00:00+03:00",
+                    "traditional_goals": [],
+                    "astro_basis": [
+                      {
+                        "type": "moon_sign",
+                        "value": "pisces"
+                      }
+                    ],
+                    "rule_ids": [
+                      "hair_cut_pisces_not_recommended"
+                    ],
+                    "display_text": "15:35'ten sonra saç kesimi için uygun bir zaman değil. Kesimi mümkünse başka bir güne bırak."
+                  },
+                  {
+                    "category": "massage",
+                    "recommendation": "recommended",
+                    "start_at": "2026-10-21T00:00:00+03:00",
+                    "end_at": "2026-10-22T00:00:00+03:00",
+                    "traditional_goals": [
+                      "renewing_care"
+                    ],
+                    "astro_basis": [
+                      {
+                        "type": "lunar_cycle_direction",
+                        "value": "waxing"
+                      }
+                    ],
+                    "rule_ids": [
+                      "massage_waxing"
+                    ],
+                    "display_text": "Rahatlatıcı ve yenileyici masaj için uygun bir gün. Bakım rutininde dinlenmeye biraz daha yer verebilirsin."
+                  }
+                ]
+              },
+                {
+                  "date": "2026-10-22",
+                  "timezone": "Europe/Istanbul",
+                  "schema_version": "1.0.0",
+                  "ruleset_version": "beauty-1.1.0",
+                  "beauty_recommendations": [
+                    {
+                      "category": "hair_cut",
+                      "recommendation": "not_recommended",
+                      "start_at": "2026-10-22T00:00:00+03:00",
+                      "end_at": "2026-10-23T00:00:00+03:00",
+                      "traditional_goals": [],
+                      "astro_basis": [
+                        {
+                          "type": "moon_sign",
+                          "value": "pisces"
+                        }
+                      ],
+                      "rule_ids": [
+                        "hair_cut_pisces_not_recommended"
+                      ],
+                      "display_text": "Saç kesimi için uygun bir gün değil. Kesimi mümkünse başka bir güne bırak."
+                    },
+                    {
+                      "category": "massage",
+                      "recommendation": "recommended",
+                      "start_at": "2026-10-22T00:00:00+03:00",
+                      "end_at": "2026-10-23T00:00:00+03:00",
+                      "traditional_goals": [
+                        "renewing_care"
+                      ],
+                      "astro_basis": [
+                        {
+                          "type": "lunar_cycle_direction",
+                          "value": "waxing"
+                        }
+                      ],
+                      "rule_ids": [
+                        "massage_waxing"
+                      ],
+                      "display_text": "Rahatlatıcı ve yenileyici masaj için uygun bir gün. Dinlenme ve bakım odaklı bir uygulama tercih edebilirsin."
+                    }
+                  ]
+                },
+                {
+                  "date": "2026-10-23",
+                  "timezone": "Europe/Istanbul",
+                  "schema_version": "1.0.0",
+                  "ruleset_version": "beauty-1.1.0",
+                  "beauty_recommendations": [
+                    {
+                      "category": "hair_cut",
+                      "recommendation": "not_recommended",
+                      "start_at": "2026-10-23T00:00:00+03:00",
+                      "end_at": "2026-10-23T22:53:00+03:00",
+                      "traditional_goals": [],
+                      "astro_basis": [
+                        {
+                          "type": "moon_sign",
+                          "value": "pisces"
+                        }
+                      ],
+                      "rule_ids": [
+                        "hair_cut_pisces_not_recommended"
+                      ],
+                      "display_text": "22:53'e kadar saç kesimi için uygun bir zaman değil. Kesimi günün ilerleyen saatlerine veya başka bir güne bırakabilirsin."
+                    },
+                    {
+                      "category": "massage",
+                      "recommendation": "recommended",
+                      "start_at": "2026-10-23T00:00:00+03:00",
+                      "end_at": "2026-10-24T00:00:00+03:00",
+                      "traditional_goals": [
+                        "renewing_care"
+                      ],
+                      "astro_basis": [
+                        {
+                          "type": "lunar_cycle_direction",
+                          "value": "waxing"
+                        }
+                      ],
+                      "rule_ids": [
+                        "massage_waxing"
+                      ],
+                      "display_text": "Rahatlatıcı ve yenileyici masaj için uygun bir gün. Kendine sakin bir bakım zamanı ayırabilirsin."
+                    }
+                  ]
+                },
+                {
+                  "date": "2026-10-24",
+                  "timezone": "Europe/Istanbul",
+                  "schema_version": "1.0.0",
+                  "ruleset_version": "beauty-1.1.0",
+                  "beauty_recommendations": [
+                    {
+                      "category": "massage",
+                      "recommendation": "recommended",
+                      "start_at": "2026-10-24T00:00:00+03:00",
+                      "end_at": "2026-10-25T00:00:00+03:00",
+                      "traditional_goals": [
+                        "renewing_care"
+                      ],
+                      "astro_basis": [
+                        {
+                          "type": "lunar_cycle_direction",
+                          "value": "waxing"
+                        }
+                      ],
+                      "rule_ids": [
+                        "massage_waxing"
+                      ],
+                      "display_text": "Rahatlatıcı ve yenileyici masaj için uygun bir gün. Alıştığın bakım rutinini sürdürebilirsin."
+                    }
+                  ]
+                },
+                {
+                  "date": "2026-10-25",
+                  "timezone": "Europe/Istanbul",
+                  "schema_version": "1.0.0",
+                  "ruleset_version": "beauty-1.1.0",
+                  "beauty_recommendations": [
+                    {
+                      "category": "massage",
+                      "recommendation": "recommended",
+                      "start_at": "2026-10-25T00:00:00+03:00",
+                      "end_at": "2026-10-26T00:00:00+03:00",
+                      "traditional_goals": [
+                        "renewing_care"
+                      ],
+                      "astro_basis": [
+                        {
+                          "type": "lunar_cycle_direction",
+                          "value": "waxing"
+                        }
+                      ],
+                      "rule_ids": [
+                        "massage_waxing"
+                      ],
+                      "display_text": "Rahatlatıcı ve yenileyici masaj için uygun bir gün. Dinlenmeye ve bakım rutinine zaman ayırabilirsin."
+                    }
+                  ]
+                },
+                {
+                  "date": "2026-10-26",
+                  "timezone": "Europe/Istanbul",
+                  "schema_version": "1.0.0",
+                  "ruleset_version": "beauty-1.1.0",
+                  "beauty_recommendations": [
+                    {
+                      "category": "massage",
+                      "recommendation": "recommended",
+                      "start_at": "2026-10-26T00:00:00+03:00",
+                      "end_at": "2026-10-26T07:12:00+03:00",
+                      "traditional_goals": [
+                        "renewing_care"
+                      ],
+                      "astro_basis": [
+                        {
+                          "type": "lunar_cycle_direction",
+                          "value": "waxing"
+                        }
+                      ],
+                      "rule_ids": [
+                        "massage_waxing"
+                      ],
+                      "display_text": "07:12'ye kadar rahatlatıcı ve yenileyici masaj için uygun bir zaman."
+                    },
+                    {
+                      "category": "skincare",
+                      "recommendation": "recommended",
+                      "start_at": "2026-10-26T07:12:00+03:00",
+                      "end_at": "2026-10-27T00:00:00+03:00",
+                      "traditional_goals": [],
+                      "astro_basis": [
+                        {
+                          "type": "lunar_cycle_direction",
+                          "value": "waning"
+                        }
+                      ],
+                      "rule_ids": [
+                        "skincare_waning"
+                      ],
+                      "display_text": "07:12'den sonra cilt bakımı, peeling ve arındırıcı kozmetik uygulamalar için uygun bir zaman."
+                    },
+                    {
+                      "category": "epilation",
+                      "recommendation": "recommended",
+                      "start_at": "2026-10-26T07:12:00+03:00",
+                      "end_at": "2026-10-27T00:00:00+03:00",
+                      "traditional_goals": [
+                        "slower_regrowth"
+                      ],
+                      "astro_basis": [
+                        {
+                          "type": "lunar_cycle_direction",
+                          "value": "waning"
+                        }
+                      ],
+                      "rule_ids": [
+                        "epilation_waning"
+                      ],
+                      "display_text": "07:12'den sonra epilasyon ve tüy alma işlemleri için uygun. Tüylerin daha geç belirginleşmesini hedefliyorsan değerlendirebilirsin."
+                    },
+                    {
+                      "category": "hair_lightening",
+                      "recommendation": "recommended",
+                      "start_at": "2026-10-26T07:12:00+03:00",
+                      "end_at": "2026-10-27T00:00:00+03:00",
+                      "traditional_goals": [],
+                      "astro_basis": [
+                        {
+                          "type": "lunar_cycle_direction",
+                          "value": "waning"
+                        },
+                        {
+                          "type": "planet_status",
+                          "planet": "venus",
+                          "value": "retrograde"
+                        },
+                        {
+                          "type": "planet_status",
+                          "planet": "mercury",
+                          "value": "retrograde"
+                        }
+                      ],
+                      "rule_ids": [
+                        "hair_lightening_waning",
+                        "venus_retrograde_aesthetic_modifier",
+                        "mercury_retrograde_communication_modifier"
+                      ],
+                      "display_text": "Daha önce yaptırdığın bir saç açma işlemini yenilemek için değerlendirilebilir. İlk kez çok farklı bir tona geçmek için retro sonrasını beklemek daha iyi olabilir. İstediğin tonu ve uygulanacak işlemi kuaförünle netleştirmen iyi olur."
+                    }
+                  ]
+                },
+                {
+                  "date": "2026-10-27",
+                  "timezone": "Europe/Istanbul",
+                  "schema_version": "1.0.0",
+                  "ruleset_version": "beauty-1.1.0",
+                  "beauty_recommendations": [
+                    {
+                      "category": "skincare",
+                      "recommendation": "recommended",
+                      "start_at": "2026-10-27T00:00:00+03:00",
+                      "end_at": "2026-10-28T00:00:00+03:00",
+                      "traditional_goals": [],
+                      "astro_basis": [
+                        {
+                          "type": "lunar_cycle_direction",
+                          "value": "waning"
+                        }
+                      ],
+                      "rule_ids": [
+                        "skincare_waning"
+                      ],
+                      "display_text": "Cilt bakımı, peeling ve arındırıcı kozmetik uygulamalar için uygun bir gün."
+                    },
+                    {
+                      "category": "epilation",
+                      "recommendation": "recommended",
+                      "start_at": "2026-10-27T00:00:00+03:00",
+                      "end_at": "2026-10-28T00:00:00+03:00",
+                      "traditional_goals": [
+                        "slower_regrowth"
+                      ],
+                      "astro_basis": [
+                        {
+                          "type": "lunar_cycle_direction",
+                          "value": "waning"
+                        }
+                      ],
+                      "rule_ids": [
+                        "epilation_waning"
+                      ],
+                      "display_text": "Epilasyon ve tüy alma işlemleri için uygun bir gün. Tüylerin daha geç belirginleşmesini hedefliyorsan değerlendirebilirsin."
+                    },
+                    {
+                      "category": "hair_lightening",
+                      "recommendation": "recommended",
+                      "start_at": "2026-10-27T00:00:00+03:00",
+                      "end_at": "2026-10-28T00:00:00+03:00",
+                      "traditional_goals": [],
+                      "astro_basis": [
+                        {
+                          "type": "lunar_cycle_direction",
+                          "value": "waning"
+                        },
+                        {
+                          "type": "planet_status",
+                          "planet": "venus",
+                          "value": "retrograde"
+                        },
+                        {
+                          "type": "planet_status",
+                          "planet": "mercury",
+                          "value": "retrograde"
+                        }
+                      ],
+                      "rule_ids": [
+                        "hair_lightening_waning",
+                        "venus_retrograde_aesthetic_modifier",
+                        "mercury_retrograde_communication_modifier"
+                      ],
+                      "display_text": "Alıştığın bir saç açma işlemini yenilemek için değerlendirilebilir. İlk kez büyük bir renk değişikliği yapacaksan beklemek daha iyi olabilir. Tonu ve işlem detaylarını önceden netleştirmen faydalı olur."
+                    }
+                  ]
+                },
+                {
+                  "date": "2026-10-28",
+                  "timezone": "Europe/Istanbul",
+                  "schema_version": "1.0.0",
+                  "ruleset_version": "beauty-1.1.0",
+                  "beauty_recommendations": [
+                    {
+                      "category": "skincare",
+                      "recommendation": "recommended",
+                      "start_at": "2026-10-28T00:00:00+03:00",
+                      "end_at": "2026-10-29T00:00:00+03:00",
+                      "traditional_goals": [],
+                      "astro_basis": [
+                        {
+                          "type": "lunar_cycle_direction",
+                          "value": "waning"
+                        }
+                      ],
+                      "rule_ids": [
+                        "skincare_waning"
+                      ],
+                      "display_text": "Cilt bakımı, peeling ve arındırıcı kozmetik uygulamalar için uygun bir gün."
+                    },
+                    {
+                      "category": "epilation",
+                      "recommendation": "recommended",
+                      "start_at": "2026-10-28T00:00:00+03:00",
+                      "end_at": "2026-10-29T00:00:00+03:00",
+                      "traditional_goals": [
+                        "slower_regrowth"
+                      ],
+                      "astro_basis": [
+                        {
+                          "type": "lunar_cycle_direction",
+                          "value": "waning"
+                        }
+                      ],
+                      "rule_ids": [
+                        "epilation_waning"
+                      ],
+                      "display_text": "Epilasyon ve tüy alma işlemleri için uygun bir gün. Tüylerin daha geç belirginleşmesini hedefliyorsan değerlendirebilirsin."
+                    },
+                    {
+                      "category": "hair_lightening",
+                      "recommendation": "recommended",
+                      "start_at": "2026-10-28T00:00:00+03:00",
+                      "end_at": "2026-10-29T00:00:00+03:00",
+                      "traditional_goals": [],
+                      "astro_basis": [
+                        {
+                          "type": "lunar_cycle_direction",
+                          "value": "waning"
+                        },
+                        {
+                          "type": "planet_status",
+                          "planet": "venus",
+                          "value": "retrograde"
+                        },
+                        {
+                          "type": "planet_status",
+                          "planet": "mercury",
+                          "value": "retrograde"
+                        }
+                      ],
+                      "rule_ids": [
+                        "hair_lightening_waning",
+                        "venus_retrograde_aesthetic_modifier",
+                        "mercury_retrograde_communication_modifier"
+                      ],
+                      "display_text": "Daha önce yaptırdığın bir açma işlemini yenilemek için değerlendirilebilir. Yeni ve büyük bir renk değişikliğini ertelemek; istediğin tonu da kuaförünle netleştirmek daha iyi olabilir."
+                    }
+                  ]
+                },
+                {
+                  "date": "2026-10-29",
+                  "timezone": "Europe/Istanbul",
+                  "schema_version": "1.0.0",
+                  "ruleset_version": "beauty-1.1.0",
+                  "beauty_recommendations": [
+                    {
+                      "category": "skincare",
+                      "recommendation": "recommended",
+                      "start_at": "2026-10-29T00:00:00+03:00",
+                      "end_at": "2026-10-30T00:00:00+03:00",
+                      "traditional_goals": [],
+                      "astro_basis": [
+                        {
+                          "type": "lunar_cycle_direction",
+                          "value": "waning"
+                        }
+                      ],
+                      "rule_ids": [
+                        "skincare_waning"
+                      ],
+                      "display_text": "Cilt bakımı, peeling ve arındırıcı kozmetik uygulamalar için uygun bir gün."
+                    },
+                    {
+                      "category": "epilation",
+                      "recommendation": "recommended",
+                      "start_at": "2026-10-29T00:00:00+03:00",
+                      "end_at": "2026-10-30T00:00:00+03:00",
+                      "traditional_goals": [
+                        "slower_regrowth"
+                      ],
+                      "astro_basis": [
+                        {
+                          "type": "lunar_cycle_direction",
+                          "value": "waning"
+                        }
+                      ],
+                      "rule_ids": [
+                        "epilation_waning"
+                      ],
+                      "display_text": "Epilasyon ve tüy alma işlemleri için uygun bir gün. Tüylerin daha geç belirginleşmesini hedefliyorsan değerlendirebilirsin."
+                    },
+                    {
+                      "category": "hair_lightening",
+                      "recommendation": "recommended",
+                      "start_at": "2026-10-29T00:00:00+03:00",
+                      "end_at": "2026-10-30T00:00:00+03:00",
+                      "traditional_goals": [],
+                      "astro_basis": [
+                        {
+                          "type": "lunar_cycle_direction",
+                          "value": "waning"
+                        },
+                        {
+                          "type": "planet_status",
+                          "planet": "venus",
+                          "value": "retrograde"
+                        },
+                        {
+                          "type": "planet_status",
+                          "planet": "mercury",
+                          "value": "retrograde"
+                        }
+                      ],
+                      "rule_ids": [
+                        "hair_lightening_waning",
+                        "venus_retrograde_aesthetic_modifier",
+                        "mercury_retrograde_communication_modifier"
+                      ],
+                      "display_text": "Alıştığın saç açma işlemini yenilemek için değerlendirilebilir. İlk kez çok farklı bir tona geçmek için beklemek; işlem öncesinde istediğin sonucu netleştirmek daha iyi olabilir."
+                    }
+                  ]
+                },
+                {
+                  "date": "2026-10-30",
+                  "timezone": "Europe/Istanbul",
+                  "schema_version": "1.0.0",
+                  "ruleset_version": "beauty-1.1.0",
+                  "beauty_recommendations": [
+                    {
+                      "category": "skincare",
+                      "recommendation": "recommended",
+                      "start_at": "2026-10-30T00:00:00+03:00",
+                      "end_at": "2026-10-31T00:00:00+03:00",
+                      "traditional_goals": [],
+                      "astro_basis": [
+                        {
+                          "type": "lunar_cycle_direction",
+                          "value": "waning"
+                        }
+                      ],
+                      "rule_ids": [
+                        "skincare_waning"
+                      ],
+                      "display_text": "Cilt bakımı, peeling ve arındırıcı kozmetik uygulamalar için uygun bir gün."
+                    },
+                    {
+                      "category": "epilation",
+                      "recommendation": "recommended",
+                      "start_at": "2026-10-30T00:00:00+03:00",
+                      "end_at": "2026-10-31T00:00:00+03:00",
+                      "traditional_goals": [
+                        "slower_regrowth"
+                      ],
+                      "astro_basis": [
+                        {
+                          "type": "lunar_cycle_direction",
+                          "value": "waning"
+                        }
+                      ],
+                      "rule_ids": [
+                        "epilation_waning"
+                      ],
+                      "display_text": "Epilasyon ve tüy alma işlemleri için uygun bir gün. Tüylerin daha geç belirginleşmesini hedefliyorsan değerlendirebilirsin."
+                    },
+                    {
+                      "category": "hair_lightening",
+                      "recommendation": "recommended",
+                      "start_at": "2026-10-30T00:00:00+03:00",
+                      "end_at": "2026-10-31T00:00:00+03:00",
+                      "traditional_goals": [],
+                      "astro_basis": [
+                        {
+                          "type": "lunar_cycle_direction",
+                          "value": "waning"
+                        },
+                        {
+                          "type": "planet_status",
+                          "planet": "venus",
+                          "value": "retrograde"
+                        },
+                        {
+                          "type": "planet_status",
+                          "planet": "mercury",
+                          "value": "retrograde"
+                        }
+                      ],
+                      "rule_ids": [
+                        "hair_lightening_waning",
+                        "venus_retrograde_aesthetic_modifier",
+                        "mercury_retrograde_communication_modifier"
+                      ],
+                      "display_text": "Daha önce yaptırdığın bir açma işlemini yenilemek için değerlendirilebilir. Büyük bir değişiklik düşünüyorsan retro sonrasını beklemek; ton ve işlem detaylarını önceden netleştirmek daha iyi olabilir."
+                    }
+                  ]
+                },
+                {
+                  "date": "2026-10-31",
+                  "timezone": "Europe/Istanbul",
+                  "schema_version": "1.0.0",
+                  "ruleset_version": "beauty-1.1.0",
+                  "beauty_recommendations": [
+                    {
+                      "category": "skincare",
+                      "recommendation": "recommended",
+                      "start_at": "2026-10-31T00:00:00+03:00",
+                      "end_at": "2026-11-01T00:00:00+03:00",
+                      "traditional_goals": [],
+                      "astro_basis": [
+                        {
+                          "type": "lunar_cycle_direction",
+                          "value": "waning"
+                        }
+                      ],
+                      "rule_ids": [
+                        "skincare_waning"
+                      ],
+                      "display_text": "Cilt bakımı, peeling ve arındırıcı kozmetik uygulamalar için uygun bir gün."
+                    },
+                    {
+                      "category": "epilation",
+                      "recommendation": "recommended",
+                      "start_at": "2026-10-31T00:00:00+03:00",
+                      "end_at": "2026-11-01T00:00:00+03:00",
+                      "traditional_goals": [
+                        "slower_regrowth"
+                      ],
+                      "astro_basis": [
+                        {
+                          "type": "lunar_cycle_direction",
+                          "value": "waning"
+                        }
+                      ],
+                      "rule_ids": [
+                        "epilation_waning"
+                      ],
+                      "display_text": "Epilasyon ve tüy alma işlemleri için uygun bir gün. Tüylerin daha geç belirginleşmesini hedefliyorsan değerlendirebilirsin."
+                    },
+                    {
+                      "category": "hair_lightening",
+                      "recommendation": "recommended",
+                      "start_at": "2026-10-31T00:00:00+03:00",
+                      "end_at": "2026-11-01T00:00:00+03:00",
+                      "traditional_goals": [],
+                      "astro_basis": [
+                        {
+                          "type": "lunar_cycle_direction",
+                          "value": "waning"
+                        },
+                        {
+                          "type": "planet_status",
+                          "planet": "venus",
+                          "value": "retrograde"
+                        },
+                        {
+                          "type": "planet_status",
+                          "planet": "mercury",
+                          "value": "retrograde"
+                        }
+                      ],
+                      "rule_ids": [
+                        "hair_lightening_waning",
+                        "venus_retrograde_aesthetic_modifier",
+                        "mercury_retrograde_communication_modifier"
+                      ],
+                      "display_text": "Alıştığın bir saç açma işlemini yenilemek için değerlendirilebilir. İlk kez büyük bir renk değişikliği yapacaksan beklemek ve işlem detaylarını önceden netleştirmek daha iyi olabilir."
+                    }
+                  ]
+                }
+
+          
+        
+
+]

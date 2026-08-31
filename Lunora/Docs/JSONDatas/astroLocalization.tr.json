@@ -1,0 +1,102 @@
+{
+  "meta": {
+    "name": "Lunora Astro Localization TR",
+    "schema_version": "1.0.0",
+    "locale": "tr-TR",
+    "purpose": "Canonical astrolojik machine değerlerini Türkçe kullanıcı arayüzü metinlerine dönüştürür.",
+    "important_note": "Bu dosya yalnızca localization/display içindir. Scoring, rule matching veya astrolojik yorum kaynağı olarak kullanılmamalıdır."
+  },
+  "event_types": {
+    "moon_sign": "Ay Burcu",
+    "moon_phase": "Ay Fazı",
+    "planet_status": "Gezegen Durumu",
+    "aspect": "Açı",
+    "lunar_condition": "Ay Durumu",
+    "eclipse": "Tutulma",
+    "moon_next_aspect": "Ay’ın Sıradaki Açısı"
+  },
+  "planets": {
+    "sun": "Güneş",
+    "moon": "Ay",
+    "mercury": "Merkür",
+    "venus": "Venüs",
+    "mars": "Mars",
+    "jupiter": "Jüpiter",
+    "saturn": "Satürn",
+    "uranus": "Uranüs",
+    "neptune": "Neptün",
+    "pluto": "Plüton"
+  },
+  "signs": {
+    "aries": "Koç",
+    "taurus": "Boğa",
+    "gemini": "İkizler",
+    "cancer": "Yengeç",
+    "leo": "Aslan",
+    "virgo": "Başak",
+    "libra": "Terazi",
+    "scorpio": "Akrep",
+    "sagittarius": "Yay",
+    "capricorn": "Oğlak",
+    "aquarius": "Kova",
+    "pisces": "Balık"
+  },
+  "moon_phases": {
+    "new_moon": "Yeni Ay",
+    "waxing_crescent": "Büyüyen Hilal",
+    "first_quarter": "İlk Dördün",
+    "waxing_gibbous": "Büyüyen Şişkin Ay",
+    "full_moon": "Dolunay",
+    "waning_gibbous": "Küçülen Şişkin Ay",
+    "last_quarter": "Son Dördün",
+    "balsamic": "Balsamik Ay"
+  },
+  "planet_statuses": {
+    "direct": "Direkt",
+    "retrograde": "Retro",
+    "stationary_retrograde": "Stationary Retrograde",
+    "stationary_direct": "Stationary Direct",
+    "under_the_beams": "Güneş Işınları Altında",
+    "combust": "Combust",
+    "cazimi": "Cazimi"
+  },
+  "aspect_types": {
+    "conjunction": "Kavuşum",
+    "sextile": "Sekstil",
+    "square": "Kare",
+    "trine": "Üçgen",
+    "opposition": "Karşıt"
+  },
+  "lunar_conditions": {
+    "moon_void_of_course": "Ay Boşlukta (Void of Course)"
+  },
+  "eclipse_events": {
+    "solar_eclipse": "Güneş Tutulması",
+    "lunar_eclipse": "Ay Tutulması"
+  },
+  "moon_next_aspect_signals": {
+    "benefic_supportive": "Benefic Supportive",
+    "malefic_hard": "Malefic Hard"
+  },
+  "ui_labels": {
+    "moon_transition": "Ay Geçişi",
+    "moon_phase": "Ay Fazı",
+    "planet_status": "Gezegen Durumu",
+    "aspect": "Açı",
+    "lunar_condition": "Ay Durumu",
+    "eclipse": "Tutulma",
+    "moon_next_aspect": "Ay’ın Sıradaki Açısı"
+  },
+  "templates": {
+    "moon_sign_single": "Ay {sign} burcunda",
+    "moon_sign_transition_summary": "Ay {from} → {to} burcunda",
+    "moon_transition_pair": "{from} → {to}",
+    "moon_transition_description": "Ay saat {time}'da {from} burcundan {to} burcuna geçiyor.",
+    "moon_phase": "{phase}",
+    "planet_status": "{planet} {status}",
+    "aspect": "{planet1}–{planet2} {aspect}",
+    "lunar_condition": "{condition}",
+    "eclipse": "{event}",
+    "moon_next_aspect": "Ay’ın Sıradaki Açısı: {signal}"
+  }
+}

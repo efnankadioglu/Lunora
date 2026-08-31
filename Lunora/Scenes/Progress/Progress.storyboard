@@ -141,10 +141,10 @@
             </objects>
             <point key="canvasLocation" x="983.96946564885491" y="-2.1126760563380285"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Lunora Navigation Controller-->
         <scene sceneID="gp3-QY-fuv">
             <objects>
-                <navigationController storyboardIdentifier="ProgressVC" automaticallyAdjustsScrollViewInsets="NO" id="ylB-bB-1Wj" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="ProgressVC" automaticallyAdjustsScrollViewInsets="NO" id="ylB-bB-1Wj" customClass="LunoraNavigationController" customModule="Lunora" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="u0e-6Y-lHo">
                         <rect key="frame" x="0.0" y="118" width="393" height="54"/>

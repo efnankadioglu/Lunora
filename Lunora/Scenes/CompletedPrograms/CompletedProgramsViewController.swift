@@ -13,6 +13,8 @@ final class CompletedProgramsViewController: UIViewController {
     private let enrollmentRepository = EnrollmentRepository()
     private var completedItems: [CompletedProgramDisplayItem] = []
     private let summaryHeaderView = CompletedSummaryHeaderView()
+    private weak var activeCoachMark: LunoraCoachMarkView?
+    
     private let tableView = UITableView()
     private let pageBackgroundColor = UIColor(named: "lunoraPink") ?? UIColor(
         red: 246/255,
@@ -34,87 +36,297 @@ final class CompletedProgramsViewController: UIViewController {
         
         loadCompletedPrograms()
     }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
 
-    private func loadCompletedPrograms() {
-        guard let userId = Auth.auth().currentUser?.uid else {
-            print("🔴 Completed: userId yok")
-            
+        print("🧭 GUIDED: Completed viewDidAppear")
+
+        DispatchQueue.main.async { [weak self] in
+            self?.showCompletedGuidedOnboardingIfNeeded()
+        }
+    }
+    
+    private func showCompletedGuidedOnboardingIfNeeded() {
+
+        guard activeCoachMark == nil else {
             return
         }
 
-        let programs = ProgramLoader.loadPrograms()
+        guard let uid = Auth.auth().currentUser?.uid else {
+            return
+        }
 
-        enrollmentRepository.fetchCompletedEnrollments(userId: userId) { [weak self] result in
-            DispatchQueue.main.async {
-                guard let self = self else { return }
+        let manager = GuidedOnboardingManager.shared
 
-                switch result {
-                case .success(let enrollments):
-                    self.completedItems = enrollments.compactMap { enrollment in
-                        guard let program = programs.first(where: { $0.id == enrollment.programId }) else {
-                            print("🔴 Completed: program bulunamadı:", enrollment.programId)
-                            return nil
+        print(
+            "🧭 GUIDED Completed active:",
+            manager.isActive(for: uid)
+        )
+
+        print(
+            "🧭 GUIDED Completed step:",
+            manager.currentStep(for: uid)?.rawValue ?? "nil"
+        )
+
+        guard manager.isActive(for: uid) else {
+            return
+        }
+
+        guard manager.currentStep(for: uid) == .completed else {
+            return
+        }
+
+        view.layoutIfNeeded()
+        tableView.layoutIfNeeded()
+
+        guard let hostView =
+            tabBarController?.view ?? viewIfLoaded
+        else {
+            return
+        }
+
+        activeCoachMark =
+            GuidedOnboardingCoordinator.shared.present(
+                uid: uid,
+                step: .completed,
+                over: hostView,
+                targetView: summaryHeaderView,
+
+                // Bu son coach mark.
+                // Henüz Manager'ı finish etme.
+                advanceOnPrimary: false,
+
+                onPrimary: { [weak self] in
+
+                    guard let self else {
+                        return
+                    }
+
+                    self.activeCoachMark = nil
+
+                    print(
+                        "🧭 GUIDED: Completed anlatımı bitti → final modal"
+                    )
+
+                    GuidedOnboardingCompletionView.present(
+                        over: hostView
+                    ) { [weak self] in
+
+                        guard let self else {
+                            return
                         }
 
-                        return CompletedProgramDisplayItem(
-                            enrollmentId: enrollment.enrollmentId,
-                            programName: program.name,
-                            imageName: program.badgeImageName ?? program.imageName,
-                            durationText: program.durationText,
-                            completedDateText: self.formatCompletedDate(enrollment.completedAt?.dateValue()),
-                            completionNote: enrollment.completionNote,
-                            completedDaysCount: enrollment.completedDaysCount,
-                            elements: program.elements
+                        GuidedOnboardingManager.shared.finish(
+                            for: uid
+                        )
+
+                        print(
+                            "🧭 GUIDED: Onboarding tamamen tamamlandı ✨"
+                        )
+
+                        self.tabBarController?.selectedIndex = 0
+                    }
+                },
+
+                onSkip: { [weak self] in
+                    self?.activeCoachMark = nil
+                }
+            )
+    }
+
+    private func loadCompletedPrograms() {
+
+        guard let userId = Auth.auth().currentUser?.uid else {
+            print("🔴 Completed: userId yok")
+            return
+        }
+
+        ProgramService.shared.fetchAllPrograms { [weak self] programs in
+
+            guard let self = self else {
+                return
+            }
+
+            self.enrollmentRepository.fetchCompletedEnrollments(
+                userId: userId
+            ) { [weak self] result in
+
+                DispatchQueue.main.async {
+
+                    guard let self = self else {
+                        return
+                    }
+
+                    switch result {
+
+                    case .success(let enrollments):
+
+                        self.completedItems =
+                            enrollments.compactMap { enrollment in
+
+                                guard
+                                    let program =
+                                        programs.first(
+                                            where: {
+                                                $0.id ==
+                                                enrollment.programId
+                                            }
+                                        )
+                                else {
+
+                                    print(
+                                        "🔴 Completed: program bulunamadı:",
+                                        enrollment.programId
+                                    )
+
+                                    return nil
+                                }
+
+                                return CompletedProgramDisplayItem(
+                                    enrollmentId:
+                                        enrollment.enrollmentId,
+
+                                    programName:
+                                        program.name,
+
+                                    imageName:
+                                        program.badgeImageName
+                                        ?? program.imageName,
+
+                                    durationText:
+                                        program.durationText,
+
+                                    completedDateText:
+                                        self.formatCompletedDate(
+                                            enrollment
+                                                .completedAt?
+                                                .dateValue()
+                                        ),
+
+                                    completionNote:
+                                        enrollment.completionNote,
+
+                                    completedDaysCount:
+                                        enrollment.completedDaysCount,
+
+                                    elements:
+                                        program.elements
+                                )
+                            }
+
+                        self.tableView.reloadData()
+
+                        let totalPrograms =
+                            self.completedItems.count
+
+                        let badgeImages =
+                            self.completedItems.map {
+                                $0.imageName
+                            }
+
+                        self.enrollmentRepository
+                            .fetchTotalActivityDays(
+                                userId: userId
+                            ) { [weak self] activityDaysResult in
+
+                                guard let self = self else {
+                                    return
+                                }
+
+                                let totalActivityDays: Int
+
+                                switch activityDaysResult {
+
+                                case .success(let days):
+
+                                    totalActivityDays = days
+
+                                    print(
+                                        "🟣 Completed toplam aktivite günü:",
+                                        days
+                                    )
+
+                                case .failure(let error):
+
+                                    print(
+                                        "🔴 Toplam aktivite günü hesaplanamadı:",
+                                        error.localizedDescription
+                                    )
+
+                                    totalActivityDays = 0
+                                }
+
+                                self.enrollmentRepository
+                                    .fetchLongestFullTaskStreak(
+                                        userId: userId,
+                                        programs: programs
+                                    ) { [weak self] streakResult in
+
+                                        DispatchQueue.main.async {
+
+                                            guard let self = self else {
+                                                return
+                                            }
+
+                                            let longestFullTaskStreak: Int
+
+                                            switch streakResult {
+
+                                            case .success(let streak):
+
+                                                longestFullTaskStreak =
+                                                    streak
+
+                                            case .failure(let error):
+
+                                                print(
+                                                    "🔴 Longest full task streak hesaplanamadı:",
+                                                    error.localizedDescription
+                                                )
+
+                                                longestFullTaskStreak = 0
+                                            }
+
+                                            let headerData =
+                                                CompletedSummaryHeaderData(
+                                                    completedProgramCount:
+                                                        totalPrograms,
+
+                                                    totalCompletedDays:
+                                                        totalActivityDays,
+
+                                                    bestStreakText:
+                                                        "\(longestFullTaskStreak)",
+
+                                                    badgeImageNames:
+                                                        badgeImages
+                                                )
+
+                                            self.summaryHeaderView
+                                                .configure(
+                                                    with: headerData
+                                                )
+
+                                            self.tableView
+                                                .tableHeaderView =
+                                                self.summaryHeaderView
+                                        }
+                                    }
+                            }
+
+                        print(
+                            "🟢 Completed item count:",
+                            self.completedItems.count
+                        )
+
+                    case .failure(let error):
+
+                        print(
+                            "🔴 Completed kayıtları alınamadı:",
+                            error.localizedDescription
                         )
                     }
-                    
-                    self.tableView.reloadData()
-                    
-                    let totalPrograms = self.completedItems.count
-                    let totalDays = self.completedItems.reduce(0) { $0 + $1.completedDaysCount }
-
-                    let badgeImages = self.completedItems.map { $0.imageName }
-
-                    let elementCardViewModel = self.makeElementBalanceCardViewModel(
-                        from: self.completedItems
-                    )
-                    
-                    self.enrollmentRepository.fetchLongestFullTaskStreak(
-                        userId: userId,
-                        programs: programs
-                    ) { [weak self] streakResult in
-                        
-                        DispatchQueue.main.async {
-                            guard let self = self else { return }
-                            
-                            let longestFullTaskStreak: Int
-                            
-                            switch streakResult {
-                            case .success(let streak):
-                                longestFullTaskStreak = streak
-                                
-                            case .failure(let error):
-                                print("🔴 Longest full task streak hesaplanamadı:", error.localizedDescription)
-                                longestFullTaskStreak = 0
-                            }
-                            
-                            let headerData = CompletedSummaryHeaderData(
-                                completedProgramCount: totalPrograms,
-                                totalCompletedDays: totalDays,
-                                bestStreakText: "\(longestFullTaskStreak)",
-                                badgeImageNames: badgeImages,
-                                elementCardViewModel: elementCardViewModel 
-                            )
-                            
-                            self.summaryHeaderView.configure(with: headerData)
-                            self.tableView.tableHeaderView = self.summaryHeaderView
-                        }
-                    }
-
-                    print("🟢 Completed item count:", self.completedItems.count)
-
-                case .failure(let error):
-                    print("🔴 Completed kayıtları alınamadı:", error.localizedDescription)
                 }
             }
         }
@@ -129,49 +341,6 @@ final class CompletedProgramsViewController: UIViewController {
         formatter.locale = Locale(identifier: "tr_TR")
         formatter.dateFormat = "d MMMM yyyy"
         return formatter.string(from: date)
-    }
-    
-    private func makeElementBalanceCardViewModel(
-        from items: [CompletedProgramDisplayItem]
-    ) -> ElementBalanceCardViewModel {
-        
-        guard !items.isEmpty else {
-            return ElementBalanceCardFactory.makeEmptyCard()
-        }
-        
-        var elementCounts: [LunoraElement: Int] = [:]
-        
-        for item in items {
-            let parsedElements = LunoraElementParser.parseElements(from: item.elements)
-            
-            for element in parsedElements {
-                elementCounts[element, default: 0] += 1
-            }
-        }
-        
-        guard let maxCount = elementCounts.values.max(), maxCount > 0 else {
-            return ElementBalanceCardFactory.makeEmptyCard()
-        }
-        
-        let candidateElements = elementCounts
-            .filter { $0.value == maxCount }
-            .map { $0.key }
-        
-        var selectedElement = candidateElements.first ?? .air
-        
-        for item in items {
-            let parsedElements = LunoraElementParser.parseElements(from: item.elements)
-            
-            if let matchedElement = parsedElements.first(where: { candidateElements.contains($0) }) {
-                selectedElement = matchedElement
-                break
-            }
-        }
-        
-        return ElementBalanceCardFactory.makeCard(
-            element: selectedElement,
-            count: maxCount
-        )
     }
     
     private func setupTableView() {
@@ -241,8 +410,12 @@ extension CompletedProgramsViewController: UITableViewDataSource, UITableViewDel
             x: 0,
             y: 0,
             width: UIScreen.main.bounds.width,
-            height: 520
+            height: 450
         )
+
+        summaryHeaderView.onTapAddProgram = { [weak self] in
+            self?.tabBarController?.selectedIndex = 0
+        }
 
         tableView.tableHeaderView = summaryHeaderView
     }

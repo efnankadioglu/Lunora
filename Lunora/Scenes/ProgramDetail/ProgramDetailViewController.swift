@@ -36,11 +36,31 @@ enum ProgramDetailSection {
         title: String,
         items: [String]
     )
+    
+    case activities(
+        title: String,
+        items: [ProgramActivityType]
+    )
+    
+    case requirements(
+        title: String,
+        items: [ProgramRequirementItem]
+    )
+    
+    case skyCompatibility(
+        compatibility: ProgramSkyCompatibility
+    )
+    
+    case journeyStages(
+        title: String,
+        stages: [ProgramJourneyStage]
+    )
 
     case details(
         duration: String,
+        dailyDuration: String,
         difficulty: String,
-        flexibility: String
+        elementItems: [String]
     )
 
     case badge(
@@ -59,8 +79,13 @@ final class ProgramDetailViewController: UIViewController {
     private var sections: [ProgramDetailSection] = []
 
     private let enrollmentRepository = EnrollmentRepository()
+    
+//    private let skyCompatibilityProvider = MockProgramSkyCompatibilityProvider()
+    
+    private let skyCompatibilityProvider = SimpleProgramSkyCompatibilityProvider()
 
     private var activeEnrollment: ActiveEnrollment?
+    private weak var activeCoachMark: LunoraCoachMarkView?
 
 
     // MARK: - UI
@@ -89,6 +114,22 @@ final class ProgramDetailViewController: UIViewController {
 
         label.adjustsFontSizeToFitWidth = true
         label.minimumScaleFactor = 0.75
+
+        return label
+    }()
+    
+    private let subtitleLabel: UILabel = {
+        let label = UILabel()
+        label.translatesAutoresizingMaskIntoConstraints = false
+
+        label.font = .systemFont(
+            ofSize: 15,
+            weight: .regular
+        )
+
+        label.textColor = ProgramDetailTheme.secondaryTextColor
+        label.textAlignment = .center
+        label.numberOfLines = 0
 
         return label
     }()
@@ -130,8 +171,8 @@ final class ProgramDetailViewController: UIViewController {
     }()
 
 
-    private lazy var startButton: UIButton = {
-        let button = UIButton(type: .system)
+    private lazy var startButton: GradientPrimaryButton = {
+        let button = GradientPrimaryButton()
 
         button.translatesAutoresizingMaskIntoConstraints = false
 
@@ -196,6 +237,109 @@ final class ProgramDetailViewController: UIViewController {
         buildSections()
         fetchActiveEnrollmentDetails()
     }
+    
+    override func viewDidAppear(
+        _ animated: Bool
+    ) {
+        super.viewDidAppear(animated)
+
+        print(
+            "🧭 GUIDED: ProgramDetail viewDidAppear"
+        )
+
+        showGuidedOnboardingIfNeeded()
+    }
+    
+    // MARK: - Guided Onboarding
+
+    private func showGuidedOnboardingIfNeeded() {
+
+        guard activeCoachMark == nil else {
+            return
+        }
+
+        guard
+            let uid = Auth.auth().currentUser?.uid
+        else {
+            return
+        }
+
+        let manager =
+            GuidedOnboardingManager.shared
+
+        print(
+            "🧭 GUIDED Detail active:",
+            manager.isActive(
+                for: uid
+            )
+        )
+
+        print(
+            "🧭 GUIDED Detail step:",
+            manager.currentStep(
+                for: uid
+            )?.rawValue ?? "nil"
+        )
+
+        guard manager.isActive(
+            for: uid
+        ) else {
+            return
+        }
+
+        guard
+            manager.currentStep(
+                for: uid
+            ) == .programDetail
+        else {
+            return
+        }
+
+        view.layoutIfNeeded()
+
+        activeCoachMark =
+            GuidedOnboardingCoordinator
+                .shared
+                .present(
+                    uid: uid,
+                    step:
+                        .programDetail,
+                    over:
+                        view,
+                    targetView:
+                        headerView,
+                    onPrimary: {
+                        [weak self] in
+
+                        guard let self else {
+                            return
+                        }
+
+                        self.activeCoachMark = nil
+
+                        let tabBarController =
+                            self.tabBarController
+
+                        let programNavigationController =
+                            self.navigationController
+
+                        // Önce Progress tabına geç
+                        tabBarController?.selectedIndex = 1
+
+                        // Sonra Programs navigation stack'ini
+                        // arka planda temizle
+                        programNavigationController?
+                            .popToRootViewController(
+                                animated: false
+                            )
+                    },
+                    onSkip: {
+                        [weak self] in
+
+                        self?.activeCoachMark = nil
+                    }
+                )
+    }
 
 
     // MARK: - UI Setup
@@ -207,6 +351,7 @@ final class ProgramDetailViewController: UIViewController {
 
         view.addSubview(headerView)
         headerView.addSubview(titleLabel)
+        headerView.addSubview(subtitleLabel)
 
         view.addSubview(tableView)
 
@@ -249,7 +394,22 @@ final class ProgramDetailViewController: UIViewController {
                 constant: -24
             ),
 
-            titleLabel.bottomAnchor.constraint(
+            subtitleLabel.topAnchor.constraint(
+                equalTo: titleLabel.bottomAnchor,
+                constant: 8
+            ),
+
+            subtitleLabel.leadingAnchor.constraint(
+                equalTo: headerView.leadingAnchor,
+                constant: 28
+            ),
+
+            subtitleLabel.trailingAnchor.constraint(
+                equalTo: headerView.trailingAnchor,
+                constant: -28
+            ),
+
+            subtitleLabel.bottomAnchor.constraint(
                 equalTo: headerView.bottomAnchor,
                 constant: -16
             ),
@@ -288,7 +448,7 @@ final class ProgramDetailViewController: UIViewController {
             ),
 
             startButton.heightAnchor.constraint(
-                greaterThanOrEqualToConstant: 48
+                greaterThanOrEqualToConstant: 60
             ),
 
             startButton.bottomAnchor.constraint(
@@ -320,6 +480,7 @@ final class ProgramDetailViewController: UIViewController {
 
     private func configureUI() {
         titleLabel.text = program.name
+        subtitleLabel.text = program.detailPageSubtitle ?? program.oneSentenceSummary
     }
 
 
@@ -338,6 +499,26 @@ final class ProgramDetailViewController: UIViewController {
         tableView.register(
             BulletCardCell.self,
             forCellReuseIdentifier: "BulletCardCell"
+        )
+        
+        tableView.register(
+            ActivityTypesCell.self,
+            forCellReuseIdentifier: "ActivityTypesCell"
+        )
+        
+        tableView.register(
+            ProgramRequirementsCell.self,
+            forCellReuseIdentifier: "ProgramRequirementsCell"
+        )
+        
+        tableView.register(
+            ProgramSkyCompatibilityCell.self,
+            forCellReuseIdentifier: "ProgramSkyCompatibilityCell"
+        )
+        
+        tableView.register(
+            ProgramJourneyStagesCell.self,
+            forCellReuseIdentifier: "ProgramJourneyStagesCell"
         )
 
         tableView.register(
@@ -363,23 +544,12 @@ final class ProgramDetailViewController: UIViewController {
 
         sections.append(
             .details(
-                duration: makeDurationText(for: program),
-                difficulty: "\(program.difficultyLevel) / \(program.difficultyScale)",
-                flexibility: makeElementText(for: program)
+                duration: program.durationText,
+                dailyDuration: makeDailyDurationText(for: program),
+                difficulty: "\(program.difficultyLevel)/\(program.difficultyScale)",
+                elementItems: makeElementItems(for: program)
             )
         )
-
-
-        // MARK: Badge
-
-        sections.append(
-            .badge(
-                title: "Tamamladığında Kazanacağın Rozet",
-                subtitle: program.badgeDescription,
-                imageName: program.badgeImageName ?? program.imageName
-            )
-        )
-
 
         // MARK: Summary
 
@@ -412,11 +582,72 @@ final class ProgramDetailViewController: UIViewController {
 
             sections.append(
                 .bullets(
-                    title: "💡 Eğer bu problemlere sahipsen doğru programı seçtin",
+                    title: "Bu program sana iyi gelebilir eğer...",
                     items: problems
                 )
             )
         }
+        
+        // MARK: Activity Types
+
+        if let activityTypes = program.activityTypes,
+           !activityTypes.isEmpty {
+
+            sections.append(
+                .activities(
+                    title: "Bu programda seni neler bekliyor?",
+                    items: activityTypes
+                )
+            )
+        }
+        
+        // MARK: Program Requirements
+
+        if let requirements = program.programRequirements,
+           !requirements.items.isEmpty {
+
+            sections.append(
+                .requirements(
+                    title: "Bu yolculuk için ihtiyacın olanlar",
+                    items: requirements.items
+                )
+            )
+        }
+        
+        // MARK: Sky Compatibility
+
+        if let skyCompatibility =
+            skyCompatibilityProvider.compatibility(for: program) {
+
+            sections.append(
+                .skyCompatibility(
+                    compatibility: skyCompatibility
+                )
+            )
+        }
+        
+        // MARK: Journey Stages
+
+        if let journeyStages = program.journeyStages,
+           !journeyStages.isEmpty {
+
+            sections.append(
+                .journeyStages(
+                    title: "Bu program nasıl ilerler?",
+                    stages: journeyStages
+                )
+            )
+        }
+        
+        // MARK: Badge
+
+        sections.append(
+            .badge(
+                title: "Tamamladığında Kazanacağın Rozet",
+                subtitle: program.badgeDescription,
+                imageName: program.badgeImageName ?? program.imageName
+            )
+        )
 
 
         // MARK: Full Text
@@ -465,7 +696,20 @@ final class ProgramDetailViewController: UIViewController {
         \(program.dailyDurationText)
         """
     }
+    
+    private func makeDailyDurationText(
+        for program: Program
+    ) -> String {
 
+        return program.dailyDurationText
+            .replacingOccurrences(
+                of: "Günlük süre:",
+                with: ""
+            )
+            .trimmingCharacters(
+                in: .whitespacesAndNewlines
+            )
+    }
 
     private func makeElementText(
         for program: Program
@@ -482,6 +726,26 @@ final class ProgramDetailViewController: UIViewController {
         }
 
         return program.elements
+    }
+    
+    private func makeElementItems(
+        for program: Program
+    ) -> [String] {
+
+        if let programElements = program.programElements,
+           !programElements.isEmpty {
+
+            return programElements.map {
+                "\($0.emoji) \($0.name)"
+            }
+        }
+
+        let raw = program.elements
+            .components(separatedBy: ",")
+            .map { $0.trimmingCharacters(in: .whitespacesAndNewlines) }
+            .filter { !$0.isEmpty }
+
+        return raw
     }
 
 
@@ -816,12 +1080,79 @@ extension ProgramDetailViewController: UITableViewDataSource {
             )
 
             return cell
+            
+        case .activities(
+            let title,
+            let items
+        ):
+
+            let cell = tableView.dequeueReusableCell(
+                withIdentifier: "ActivityTypesCell",
+                for: indexPath
+            ) as! ActivityTypesCell
+
+            cell.configure(
+                title: title,
+                items: items
+            )
+
+            return cell
+            
+        case .requirements(
+            let title,
+            let items
+        ):
+
+            let cell = tableView.dequeueReusableCell(
+                withIdentifier: "ProgramRequirementsCell",
+                for: indexPath
+            ) as! ProgramRequirementsCell
+
+            cell.configure(
+                title: title,
+                items: items
+            )
+
+            return cell
+            
+        case .skyCompatibility(
+            let compatibility
+        ):
+
+            let cell = tableView.dequeueReusableCell(
+                withIdentifier: "ProgramSkyCompatibilityCell",
+                for: indexPath
+            ) as! ProgramSkyCompatibilityCell
+
+            cell.configure(
+                compatibility: compatibility
+            )
+
+            return cell
+            
+        case .journeyStages(
+            let title,
+            let stages
+        ):
+
+            let cell = tableView.dequeueReusableCell(
+                withIdentifier: "ProgramJourneyStagesCell",
+                for: indexPath
+            ) as! ProgramJourneyStagesCell
+
+            cell.configure(
+                title: title,
+                stages: stages
+            )
+
+            return cell
 
 
         case .details(
             let duration,
+            let dailyDuration,
             let difficulty,
-            let flexibility
+            let elementItems
         ):
 
             let cell = tableView.dequeueReusableCell(
@@ -831,10 +1162,11 @@ extension ProgramDetailViewController: UITableViewDataSource {
 
             cell.configure(
                 duration: duration,
+                dailyDuration: dailyDuration,
                 difficulty: difficulty,
-                flexibility: flexibility
-            )
+                elementItems: elementItems
 
+            )
             return cell
 
 

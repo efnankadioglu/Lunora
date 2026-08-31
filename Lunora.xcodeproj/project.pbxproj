@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5933C739304492A000F5336D /* FirebaseAnalytics in Frameworks */ = {isa = PBXBuildFile; productRef = 5933C738304492A000F5336D /* FirebaseAnalytics */; };
+		594DB444303DDEE800782EA5 /* FirebaseMessaging in Frameworks */ = {isa = PBXBuildFile; productRef = 594DB443303DDEE800782EA5 /* FirebaseMessaging */; };
 		5961DC032EB3953B00A8C049 /* FirebaseAuth in Frameworks */ = {isa = PBXBuildFile; productRef = 5961DC022EB3953B00A8C049 /* FirebaseAuth */; };
 		5961DC052EB3953B00A8C049 /* FirebaseCore in Frameworks */ = {isa = PBXBuildFile; productRef = 5961DC042EB3953B00A8C049 /* FirebaseCore */; };
 		5961DC082EB395DA00A8C049 /* GoogleSignIn in Frameworks */ = {isa = PBXBuildFile; productRef = 5961DC072EB395DA00A8C049 /* GoogleSignIn */; };
@@ -44,6 +46,8 @@
 		59911AF82EA50F0E001D8148 /* Exceptions for "Lunora" folder in "Lunora" target */ = {
 			isa = PBXFileSystemSynchronizedBuildFileExceptionSet;
 			membershipExceptions = (
+				Data/Models/Untitled.swift,
+				Data/Repositories/Untitled.swift,
 				SupportingFiles/Info.plist,
 			);
 			target = 59911ACC2EA50F0D001D8148 /* Lunora */;
@@ -76,6 +80,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				594DB444303DDEE800782EA5 /* FirebaseMessaging in Frameworks */,
 				5961DC052EB3953B00A8C049 /* FirebaseCore in Frameworks */,
 				5961DC032EB3953B00A8C049 /* FirebaseAuth in Frameworks */,
 				59AB56102EBE398600A276F0 /* TOCropViewController in Frameworks */,
@@ -83,6 +88,7 @@
 				59A6E5AB2EC7760C003A4B5C /* FirebaseFirestore in Frameworks */,
 				5961DC082EB395DA00A8C049 /* GoogleSignIn in Frameworks */,
 				59A55C8F2F73F2850040A4F6 /* FirebaseDatabase in Frameworks */,
+				5933C739304492A000F5336D /* FirebaseAnalytics in Frameworks */,
 				59A6E5AD2EC7760C003A4B5C /* FirebaseStorage in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -160,6 +166,8 @@
 				59A6E5AC2EC7760C003A4B5C /* FirebaseStorage */,
 				59A55C8E2F73F2850040A4F6 /* FirebaseDatabase */,
 				59CE91BF2FB61F510059E8F3 /* FirebaseFunctions */,
+				594DB443303DDEE800782EA5 /* FirebaseMessaging */,
+				5933C738304492A000F5336D /* FirebaseAnalytics */,
 			);
 			productName = Lunora;
 			productReference = 59911ACD2EA50F0D001D8148 /* Lunora.app */;
@@ -219,7 +227,7 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = 1;
 				LastSwiftUpdateCheck = 1640;
-				LastUpgradeCheck = 1640;
+				LastUpgradeCheck = 2660;
 				TargetAttributes = {
 					59911ACC2EA50F0D001D8148 = {
 						CreatedOnToolsVersion = 16.4;
@@ -240,6 +248,7 @@
 			knownRegions = (
 				en,
 				Base,
+				tr,
 			);
 			mainGroup = 59911AC42EA50F0D001D8148;
 			minimizedProjectReferenceProxies = 1;
@@ -327,6 +336,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Lunora/Lunora.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 9356TWZGRM;
@@ -356,6 +366,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = Lunora/Lunora.entitlements;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = 9356TWZGRM;
@@ -385,6 +396,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -439,7 +451,9 @@
 				MTL_FAST_MATH = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
 			name = Debug;
@@ -449,6 +463,7 @@
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
 				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
@@ -496,7 +511,9 @@
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
 				SDKROOT = iphoneos;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
 				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_EMIT_LOC_STRINGS = YES;
 				VALIDATE_PRODUCT = YES;
 			};
 			name = Release;
@@ -642,6 +659,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		5933C738304492A000F5336D /* FirebaseAnalytics */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5961DC012EB3953B00A8C049 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseAnalytics;
+		};
+		594DB443303DDEE800782EA5 /* FirebaseMessaging */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 5961DC012EB3953B00A8C049 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;
+			productName = FirebaseMessaging;
+		};
 		5961DC022EB3953B00A8C049 /* FirebaseAuth */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 5961DC012EB3953B00A8C049 /* XCRemoteSwiftPackageReference "firebase-ios-sdk" */;

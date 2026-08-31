@@ -1,0 +1,2230 @@
+[
+  {
+    "id": "create_vision_board",
+    "title": "Vision board hazırla",
+    "short_description": "Hayatında geliştirmek istediğin birkaç alan seçip her biri için seni temsil eden görseller, kelimeler ve hedefler toplayarak fiziksel ya da dijital bir pano oluştur. Panoyu yalnızca estetik seçimlerle değil, gerçekten yönelmek istediğin deneyim ve hedeflerle şekillendir.",
+    "topics": [
+      "personal_growth",
+      "creativity"
+    ],
+    "actions": [
+      "create",
+      "reflect"
+    ],
+    "context": [
+      "new"
+    ],
+    "intensity": "medium",
+    "relationship_modes": []
+  },
+  {
+    "id": "update_vision_board",
+    "title": "Vision board'unu güncelle",
+    "short_description": "Mevcut panonu gözden geçirip artık seni temsil etmeyen görselleri veya hedefleri çıkar ve yerine güncel isteklerini yansıtan yenilerini ekle. Özellikle son dönemde değişen önceliklerini dikkate alarak panonun hâlâ gitmek istediğin yönü gösterip göstermediğini kontrol et.",
+    "topics": [
+      "personal_growth",
+      "creativity"
+    ],
+    "actions": [
+      "review",
+      "organize"
+    ],
+    "context": [
+      "existing"
+    ],
+    "intensity": "low",
+    "relationship_modes": []
+  },
+  {
+    "id": "write_letter_to_future_self",
+    "title": "Gelecekteki kendine mektup yaz",
+    "short_description": "Mektuba bugünkü durumundan, beklentilerinden ve gelecekte kendine hatırlatmak istediğin birkaç cümleden de ekleyebilirsin.",
+    "topics": [
+      "self_reflection",
+      "personal_growth"
+    ],
+    "actions": [
+      "write",
+      "reflect"
+    ],
+    "context": [],
+    "intensity": "low",
+    "relationship_modes": []
+  },
+  {
+    "id": "set_three_month_goals",
+    "title": "Önümüzdeki 3 ay için üç ana hedef belirle",
+    "short_description": "Önündeki üç ayı düşünerek hayatında gerçekten ilerletmek istediğin üç alan seç ve her biri için ulaşılabilir bir hedef yaz. Hedefleri mümkün olduğunca somutlaştırıp ilk adımını ve yaklaşık ne zaman tamamlamak istediğini de belirle.",
+    "topics": [
+      "personal_growth",
+      "productivity"
+    ],
+    "actions": [
+      "plan",
+      "clarify",
+      "commit"
+    ],
+    "context": [
+      "new"
+    ],
+    "intensity": "medium",
+    "relationship_modes": []
+  },
+  {
+    "id": "set_monthly_intention",
+    "title": "Bu ayın niyetini belirle",
+    "short_description": "Önündeki ayda nasıl hissetmek ve hangi davranışı daha fazla hayatına taşımak istediğini düşünerek tek bir ana niyet seç.",
+    "topics": [
+      "self_reflection",
+      "personal_growth"
+    ],
+    "actions": [
+      "reflect",
+      "clarify",
+      "write"
+    ],
+    "context": [
+      "new"
+    ],
+    "intensity": "low",
+    "relationship_modes": []
+  },
+  {
+    "id": "do_monthly_reset",
+    "title": "Monthly Reset yap",
+    "short_description": "Geçen ayın hedeflerini, takvimini ve seni meşgul eden konuları kısaca gözden geçirerek yarım kalanları, devam etmek istediklerini ve bırakabileceklerini ayır.",
+    "topics": [
+      "productivity",
+      "personal_growth"
+    ],
+    "actions": [
+      "review",
+      "organize",
+      "plan"
+    ],
+    "context": [
+      "existing"
+    ],
+    "intensity": "medium",
+    "relationship_modes": []
+  },
+  {
+    "id": "do_sunday_reset",
+    "title": "Sunday Reset yap",
+    "short_description": "Önündeki haftanın takvimini, önemli sorumluluklarını ve kişisel planlarını gözden geçirerek hangi gün neye odaklanacağını kabaca belirle. Gereksiz yoğunluğu azaltmak için erteleyebileceğin işleri ayır ve haftanın en önemli birkaç önceliğini netleştir.",
+    "topics": [
+      "productivity",
+      "wellbeing"
+    ],
+    "actions": [
+      "review",
+      "organize",
+      "plan"
+    ],
+    "context": [
+      "existing"
+    ],
+    "intensity": "low",
+    "relationship_modes": []
+  },
+  {
+    "id": "reset_one_life_area",
+    "title": "Hayatının bir alanını yeniden düzenle",
+    "short_description": "Para, kariyer, ilişki veya sağlık gibi şu sıralar en fazla dikkat isteyen bir alan seçip mevcut durumunu ve değiştirmek istediğin noktaları yaz. Ardından kontrol edebileceğin konuları ayırarak önümüzdeki birkaç hafta için uygulanabilir iki veya üç adım belirle.",
+    "topics": [
+      "personal_growth",
+      "self_reflection"
+    ],
+    "actions": [
+      "review",
+      "reflect",
+      "plan"
+    ],
+    "context": [
+      "existing"
+    ],
+    "intensity": "medium",
+    "relationship_modes": []
+  },
+  {
+    "id": "write_personal_outs_list",
+    "title": "Bundan sonra istemediklerim listesi hazırla",
+    "short_description": "Hayatında artık sürdürmek istemediğin alışkanlıkları, durumları veya davranış biçimlerini düşünerek kısa ve somut bir liste oluştur. Her maddeyi yazarken neden artık sana uygun olmadığını ve yerine nasıl bir deneyim istediğini bir cümleyle açıklamaya çalış.",
+    "topics": [
+      "self_reflection",
+      "personal_growth"
+    ],
+    "actions": [
+      "reflect",
+      "write",
+      "clarify"
+    ],
+    "context": [
+      "existing"
+    ],
+    "intensity": "low",
+    "relationship_modes": []
+  },
+  {
+    "id": "identify_habits_to_quit",
+    "title": "Bırakmak istediğin üç alışkanlığı yaz",
+    "short_description": "Günlük hayatında seni zorlayan veya artık sana hizmet etmediğini düşündüğün üç alışkanlığı belirleyip bunları hangi durumlarda tekrarladığını not et. Şimdilik değiştirmeye çalışmadan, her birinin hayatındaki etkisini ve neden bırakmak istediğini açıkça yaz.",
+    "topics": [
+      "self_reflection",
+      "personal_growth"
+    ],
+    "actions": [
+      "reflect",
+      "write"
+    ],
+    "context": [
+      "existing"
+    ],
+    "intensity": "low",
+    "relationship_modes": []
+  },
+  {
+    "id": "create_dopamine_menu",
+    "title": "Dopamine Menu hazırla",
+    "short_description": "Seni kısa sürede iyi hissettiren, orta süreli keyif veren ve daha fazla zaman isteyen aktiviteleri ayrı başlıklarda listeleyerek telefon dışında başvurabileceğin kişisel bir menü oluştur.",
+    "topics": [
+      "wellbeing",
+      "personal_growth"
+    ],
+    "actions": [
+      "create",
+      "write",
+      "reflect"
+    ],
+    "context": [
+      "new"
+    ],
+    "intensity": "low",
+    "relationship_modes": []
+  },
+  {
+    "id": "plan_solo_date",
+    "title": "Kendine solo date planla",
+    "short_description": "Tek başına gerçekten keyif alacağın bir kafe, sergi, yürüyüş, yemek veya küçük etkinlik seçip gününü ve saatini belirleyerek kendin için gerçek bir plan oluştur.",
+    "topics": [
+      "wellbeing",
+      "personal_growth"
+    ],
+    "actions": [
+      "plan"
+    ],
+    "context": [
+      "new"
+    ],
+    "intensity": "low",
+    "relationship_modes": []
+  },
+  {
+    "id": "buy_yourself_flowers",
+    "title": "Kendine çiçek al",
+    "short_description": "Sevdiğin renk veya kokulardan oluşan küçük bir buket seçip evinde sık göreceğin bir yere yerleştirerek sıradan bir günü küçük bir güzellik ritüeline dönüştür.",
+    "topics": [
+      "beauty",
+      "wellbeing"
+    ],
+    "actions": [
+      "purchase"
+    ],
+    "context": [],
+    "intensity": "low",
+    "relationship_modes": []
+  },
+  {
+    "id": "take_phone_free_hour",
+    "title": "Bir saatlik telefonsuz zaman yarat",
+    "short_description": "Bir saat belirleyip telefonu başka bir odaya bırak veya bildirimleri tamamen kapat; bu sürede yürüyüş, okuma, yemek ya da sessizce dinlenme gibi tek bir şeye odaklan.",
+    "topics": [
+      "wellbeing",
+      "productivity"
+    ],
+    "actions": [
+      "focus",
+      "rest"
+    ],
+    "context": [],
+    "intensity": "low",
+    "relationship_modes": []
+  },
+  {
+    "id": "have_slow_morning",
+    "title": "Slow morning yap",
+    "short_description": "Mümkünse sabahına fazladan zaman bırakıp kahvaltını acele etmeden yap, hazırlanırken telefonu ikinci plana koy ve güne tek bir öncelik belirleyerek başla.",
+    "topics": [
+      "wellbeing"
+    ],
+    "actions": [
+      "rest"
+    ],
+    "context": [],
+    "intensity": "low",
+    "relationship_modes": []
+  },
+  {
+    "id": "create_soft_evening",
+    "title": "Akşamını bilinçli şekilde yavaşlat",
+    "short_description": "Akşamın son bölümünde ışıkları azalt, ekran kullanımını sınırla ve duş, kitap, hafif müzik veya sıcak bir içecek gibi sakinleştirici bir rutin seç.",
+    "topics": [
+      "wellbeing"
+    ],
+    "actions": [
+      "rest"
+    ],
+    "context": [],
+    "intensity": "low",
+    "relationship_modes": []
+  },
+  {
+    "id": "do_everything_shower",
+    "title": "Uzun bir bakım ritüeli yap",
+    "short_description": "Duş, peeling, saç bakımı, nemlendirme ve sevdiğin diğer bakım adımlarından sana uygun olanları seçerek normalden biraz daha kapsamlı bir kişisel bakım rutini oluştur.",
+    "topics": [
+      "beauty",
+      "wellbeing"
+    ],
+    "actions": [
+      "beauty_care",
+      "rest"
+    ],
+    "context": [],
+    "intensity": "medium",
+    "relationship_modes": []
+  },
+  {
+    "id": "do_hair_care_ritual",
+    "title": "Saç bakım ritüeli yap",
+    "short_description": "Saçının ihtiyacına göre maske, yağ, bakım kremi veya saç derisi bakımı seçip ürünün önerilen süresine uyarak rutini tamamla.",
+    "topics": [
+      "beauty",
+      "wellbeing"
+    ],
+    "actions": [
+      "beauty_care"
+    ],
+    "context": [
+      "existing"
+    ],
+    "intensity": "low",
+    "relationship_modes": []
+  },
+  {
+    "id": "spend_extra_time_on_skincare",
+    "title": "Cilt bakımına biraz daha zaman ayır",
+    "short_description": "Cildinin mevcut ihtiyacını düşünerek kullandığın rutini sade biçimde uygula; temizleme, nemlendirme ve sana uygun mevcut bakım adımlarını acele etmeden tamamla.",
+    "topics": [
+      "beauty",
+      "wellbeing"
+    ],
+    "actions": [
+      "beauty_care"
+    ],
+    "context": [
+      "existing"
+    ],
+    "intensity": "low",
+    "relationship_modes": []
+  },
+  {
+    "id": "dress_up_for_yourself",
+    "title": "Kendini güzel hissettirecek şekilde hazırlan",
+    "short_description": "Bir yere gitme zorunluluğu olmadan sevdiğin bir kombin seç, saçını veya makyajını istediğin gibi yap ve seni en çok sen gibi hissettiren detaylara yönel.",
+    "topics": [
+      "beauty",
+      "personal_growth"
+    ],
+    "actions": [
+      "express"
+    ],
+    "context": [],
+    "intensity": "low",
+    "relationship_modes": []
+  },
+  {
+    "id": "take_long_walk",
+    "title": "Uzun bir yürüyüşe çık",
+    "short_description": "Rahat ayakkabılarını giyip mümkünse 30–60 dakikalık kesintisiz bir rota seç; müzik veya podcast eşliğinde yürüyebilir ya da çevreni gözlemleyerek temposunu doğal bırakabilirsin.",
+    "topics": [
+      "wellbeing"
+    ],
+    "actions": [
+      "movement"
+    ],
+    "context": [],
+    "intensity": "medium",
+    "relationship_modes": []
+  },
+  {
+    "id": "take_main_character_walk",
+    "title": "Main character walk yap",
+    "short_description": "Sana iyi hissettiren bir playlist seçip tek başına kısa bir yürüyüşe çık; acele etmek yerine duruşuna, çevrene ve o an nasıl hissettiğine dikkat et.",
+    "topics": [
+      "wellbeing",
+      "personal_growth"
+    ],
+    "actions": [
+      "movement",
+      "express"
+    ],
+    "context": [],
+    "intensity": "low",
+    "relationship_modes": []
+  },
+  {
+    "id": "practice_yoga",
+    "title": "Yoga yap",
+    "short_description": "Seviyene uygun 15–30 dakikalık bir yoga akışı seçip hareketleri hızlandırmadan nefesinle birlikte uygula; özellikle bedeninde gergin hissettiğin bölgelere nazikçe odaklan.",
+    "topics": [
+      "wellbeing"
+    ],
+    "actions": [
+      "movement",
+      "mindfulness"
+    ],
+    "context": [],
+    "intensity": "medium",
+    "relationship_modes": []
+  },
+  {
+    "id": "practice_pilates",
+    "title": "Pilates yap",
+    "short_description": "Seviyene uygun 20–40 dakikalık bir mat veya reformer seansı seçip hareketleri kontrollü biçimde, formunu bozmadan tamamlamaya odaklan.",
+    "topics": [
+      "wellbeing"
+    ],
+    "actions": [
+      "exercise",
+      "movement"
+    ],
+    "context": [],
+    "intensity": "medium",
+    "relationship_modes": []
+  },
+  {
+    "id": "do_short_workout",
+    "title": "10–20 dakikalık kısa bir workout yap",
+    "short_description": "Evde veya spor salonunda yapabileceğin kısa bir egzersiz seçip ısınmayla başla ve süren dolana kadar tek bir programa bağlı kal.",
+    "topics": [
+      "wellbeing"
+    ],
+    "actions": [
+      "exercise"
+    ],
+    "context": [],
+    "intensity": "medium",
+    "relationship_modes": []
+  },
+  {
+    "id": "do_mobility_session",
+    "title": "Esneme veya mobility seansı yap",
+    "short_description": "Boyun, omuz, kalça ve sırt gibi sık gerginleşen bölgeleri hedefleyen 10–20 dakikalık bir seri seçip hareketleri ağrı sınırına girmeden yavaşça uygula.",
+    "topics": [
+      "wellbeing"
+    ],
+    "actions": [
+      "movement"
+    ],
+    "context": [],
+    "intensity": "low",
+    "relationship_modes": []
+  },
+  {
+    "id": "dance_for_fun",
+    "title": "Dans et",
+    "short_description": "Sevdiğin birkaç şarkıyı açıp koreografi düşünmeden 10–20 dakika boyunca bedenini müziğin ritmine göre serbestçe hareket ettir; istersen kısa bir dans videosu da takip edebilirsin.",
+    "topics": [
+      "wellbeing",
+      "creativity"
+    ],
+    "actions": [
+      "movement",
+      "express"
+    ],
+    "context": [],
+    "intensity": "medium",
+    "relationship_modes": []
+  },
+  {
+    "id": "spend_time_in_nature",
+    "title": "Doğada zaman geçir",
+    "short_description": "Yakınındaki bir park, sahil, ormanlık alan veya bahçeyi seçip en az 20–30 dakika boyunca telefonunu geri planda tutarak çevrendeki seslere, havaya ve manzaraya odaklan.",
+    "topics": [
+      "wellbeing"
+    ],
+    "actions": [
+      "explore",
+      "rest"
+    ],
+    "context": [],
+    "intensity": "low",
+    "relationship_modes": []
+  },
+  {
+    "id": "watch_sunset",
+    "title": "Gün batımını izle",
+    "short_description": "Gün batımı saatini kontrol edip manzarayı rahatça görebileceğin bir noktaya biraz erken git ve birkaç dakika boyunca başka bir işle ilgilenmeden manzarayı izle.",
+    "topics": [
+      "wellbeing"
+    ],
+    "actions": [
+      "rest"
+    ],
+    "context": [],
+    "intensity": "low",
+    "relationship_modes": []
+  },
+  {
+    "id": "explore_new_walking_route",
+    "title": "Yeni bir yürüyüş rotası veya semt keşfet",
+    "short_description": "Daha önce uzun uzun gezmediğin güvenli bir semt, sahil veya yürüyüş rotası seçip yol üzerindeki kafeleri, sokakları ve dikkatini çeken küçük yerleri keşfet.",
+    "topics": [
+      "wellbeing",
+      "personal_growth"
+    ],
+    "actions": [
+      "explore",
+      "movement"
+    ],
+    "context": [
+      "new"
+    ],
+    "intensity": "medium",
+    "relationship_modes": []
+  },
+  {
+    "id": "write_journal",
+    "title": "Journal yaz",
+    "short_description": "10–15 dakika ayırıp gün içinde aklında kalan düşünceleri, duyguları ve dikkatini çeken olayları olduğu gibi yaz; düzenli ya da estetik olmasına odaklanmana gerek yok.",
+    "topics": [
+      "self_reflection",
+      "personal_growth"
+    ],
+    "actions": [
+      "write",
+      "reflect"
+    ],
+    "context": [],
+    "intensity": "low",
+    "relationship_modes": []
+  },
+  {
+    "id": "do_brain_dump",
+    "title": "10 dakikalık brain dump yap",
+    "short_description": "Bir zamanlayıcıyı 10 dakikaya ayarlayıp aklında dolaşan yapılacakları, kaygıları, fikirleri ve hatırlaman gereken şeyleri durmadan kağıda veya not uygulamana boşalt.",
+    "topics": [
+      "self_reflection",
+      "productivity"
+    ],
+    "actions": [
+      "write",
+      "organize"
+    ],
+    "context": [],
+    "intensity": "low",
+    "relationship_modes": []
+  },
+  {
+    "id": "create_gratitude_list",
+    "title": "Gratitude listesi hazırla",
+    "short_description": "Bugün için minnet duyduğun üç ila beş şeyi seçip her birinin neden önemli geldiğini kısa bir cümleyle yaz; çok büyük şeyler olmasına gerek yok.",
+    "topics": [
+      "self_reflection",
+      "wellbeing"
+    ],
+    "actions": [
+      "write",
+      "reflect"
+    ],
+    "context": [],
+    "intensity": "low",
+    "relationship_modes": []
+  },
+  {
+    "id": "write_current_needs",
+    "title": "Şu an gerçekten neye ihtiyacın olduğunu yaz",
+    "short_description": "Birkaç dakika durup bedensel, duygusal ve zihinsel olarak şu anda en çok neye ihtiyaç duyduğunu kendine sor; ardından ilk aklına gelen cevapları sansürlemeden yaz.",
+    "topics": [
+      "self_reflection",
+      "wellbeing"
+    ],
+    "actions": [
+      "reflect",
+      "clarify",
+      "write"
+    ],
+    "context": [
+      "existing"
+    ],
+    "intensity": "low",
+    "relationship_modes": []
+  },
+  {
+    "id": "identify_energy_drainers",
+    "title": "Son zamanlarda seni tüketen şeyleri belirle",
+    "short_description": "Son haftalarda seni yoran insanları, alışkanlıkları, ortamları veya sorumlulukları listeleyip her birinin seni neden tükettiğini birkaç kelimeyle not al.",
+    "topics": [
+      "self_reflection",
+      "personal_growth"
+    ],
+    "actions": [
+      "reflect",
+      "write",
+      "clarify"
+    ],
+    "context": [
+      "existing"
+    ],
+    "intensity": "low",
+    "relationship_modes": []
+  },
+  {
+    "id": "reflect_on_needed_boundary",
+    "title": "Sınır koyman gereken alanı düşün",
+    "short_description": "Günlük hayatında en çok zorlandığın ilişki, iş, aile veya zaman kullanım alanını seçip nerede fazla verdiğini ya da rahatsız olduğunu kısaca not al.",
+    "topics": [
+      "self_reflection",
+      "personal_growth"
+    ],
+    "actions": [
+      "reflect",
+      "clarify"
+    ],
+    "context": [
+      "existing"
+    ],
+    "intensity": "low",
+    "relationship_modes": []
+  },
+  {
+    "id": "write_delayed_decision",
+    "title": "Ertelediğin bir kararı kağıda dök",
+    "short_description": "Uzun süredir ertelediğin bir kararı yazıp seçeneklerini, her seçeneğin artı ve eksilerini ve seni durduran ana nedeni aynı sayfada toplu şekilde görmeye çalış.",
+    "topics": [
+      "self_reflection",
+      "personal_growth"
+    ],
+    "actions": [
+      "review",
+      "compare",
+      "clarify"
+    ],
+    "context": [
+      "unfinished"
+    ],
+    "intensity": "medium",
+    "relationship_modes": []
+  },
+  {
+    "id": "practice_meditation",
+    "title": "Meditasyon yap",
+    "short_description": "Sessiz bir yerde 5–15 dakikalık rehberli veya sessiz bir meditasyon açıp dikkatin dağıldığında nazikçe nefesine geri dönerek otur.",
+    "topics": [
+      "wellbeing"
+    ],
+    "actions": [
+      "mindfulness",
+      "rest"
+    ],
+    "context": [],
+    "intensity": "low",
+    "relationship_modes": []
+  },
+  {
+    "id": "practice_breathwork",
+    "title": "Nefes egzersizi yap",
+    "short_description": "Dört sayıda alıp dört sayıda ver gibi basit bir ritim seçerek birkaç dakika boyunca yalnızca nefesinin süresine ve bedenindeki etkisine odaklan.",
+    "topics": [
+      "wellbeing"
+    ],
+    "actions": [
+      "mindfulness"
+    ],
+    "context": [],
+    "intensity": "low",
+    "relationship_modes": []
+  },
+  {
+    "id": "do_something_you_love_for_an_hour",
+    "title": "Bir saat boyunca sadece sevdiğin bir şeyi yap",
+    "short_description": "Bir saatliğine verimlilik hedefi koymadan resim yapmak, müzik dinlemek, örgü örmek, film izlemek ya da sevdiğin başka bir uğraşa yönel ve bu süreyi sonuç odaklı değerlendirme.",
+    "topics": [
+      "wellbeing",
+      "personal_growth"
+    ],
+    "actions": [
+      "rest"
+    ],
+    "context": [],
+    "intensity": "low",
+    "relationship_modes": []
+  },
+  {
+    "id": "have_money_date",
+    "title": "Money Date yap",
+    "short_description": "Kahveni alıp banka hesaplarını, son harcamalarını ve yaklaşan ödemelerini 20–30 dakika boyunca tek yerde gözden geçir; ardından değiştirmek istediğin bir finansal alışkanlığı not et.",
+    "topics": [
+      "finance"
+    ],
+    "actions": [
+      "review",
+      "organize"
+    ],
+    "context": [
+      "existing"
+    ],
+    "intensity": "low",
+    "relationship_modes": []
+  },
+  {
+    "id": "review_monthly_subscriptions",
+    "title": "Aylık aboneliklerini gözden geçir",
+    "short_description": "Banka hareketlerinden veya telefon ayarlarından aktif aboneliklerini listeleyip hangilerini gerçekten kullandığını, ücretlerini ve tekrar ödeme tarihlerini kontrol et; gereksiz olanları ayır.",
+    "topics": [
+      "finance"
+    ],
+    "actions": [
+      "review",
+      "organize"
+    ],
+    "context": [
+      "existing"
+    ],
+    "intensity": "low",
+    "relationship_modes": []
+  },
+  {
+    "id": "set_savings_goal",
+    "title": "Bir birikim hedefi belirle",
+    "short_description": "Seyahat, acil durum fonu veya belirli bir alışveriş gibi net bir amaç seçip hedef tutarı ve ulaşmak istediğin tarihi yaz; ardından aylık ayırman gereken yaklaşık miktarı hesapla.",
+    "topics": [
+      "finance",
+      "personal_growth"
+    ],
+    "actions": [
+      "plan",
+      "commit"
+    ],
+    "context": [
+      "new"
+    ],
+    "intensity": "medium",
+    "relationship_modes": []
+  },
+  {
+    "id": "plan_no_spend_day",
+    "title": "No-spend day planla",
+    "short_description": "Yakın bir günü seçip zorunlu ödemeler dışında harcama yapmamayı hedefle; yemek, ulaşım ve gün içindeki ihtiyaçlarını önceden düşünerek plansız alışveriş ihtimalini azalt.",
+    "topics": [
+      "finance",
+      "personal_growth"
+    ],
+    "actions": [
+      "plan",
+      "commit"
+    ],
+    "context": [
+      "new"
+    ],
+    "intensity": "low",
+    "relationship_modes": []
+  },
+  {
+    "id": "review_wishlist",
+    "title": "İstek listeni gözden geçir",
+    "short_description": "Almayı düşündüğün ürünleri tek tek inceleyip hâlâ gerçekten istediğin, yalnızca anlık heves olan ve artık ihtiyaç duymadığın seçenekleri ayır; mümkünse öncelik sırası oluştur.",
+    "topics": [
+      "finance",
+      "self_reflection"
+    ],
+    "actions": [
+      "review",
+      "compare",
+      "organize"
+    ],
+    "context": [
+      "existing"
+    ],
+    "intensity": "low",
+    "relationship_modes": []
+  },
+  {
+    "id": "update_cv",
+    "title": "CV'ni güncelle",
+    "short_description": "Son deneyimlerini, eğitimlerini, projelerini ve yeni kazandığın becerileri ekleyip tarihleri, iletişim bilgilerini ve anlatımı baştan sona kontrol et; artık geçerli olmayan bölümleri çıkar.",
+    "topics": [
+      "career"
+    ],
+    "actions": [
+      "review",
+      "organize"
+    ],
+    "context": [
+      "existing"
+    ],
+    "intensity": "medium",
+    "relationship_modes": []
+  },
+  {
+    "id": "update_professional_profile",
+    "title": "LinkedIn veya portföyünü güncelle",
+    "short_description": "Profilindeki başlık, açıklama, deneyim ve projeleri inceleyip güncel olmayan bölümleri düzelt; son çalışmalarından seni iyi temsil eden örnekleri görünür bir yere ekle.",
+    "topics": [
+      "career"
+    ],
+    "actions": [
+      "review",
+      "organize",
+      "express"
+    ],
+    "context": [
+      "existing"
+    ],
+    "intensity": "medium",
+    "relationship_modes": []
+  },
+  {
+    "id": "create_career_moodboard",
+    "title": "Hayalindeki kariyer için moodboard hazırla",
+    "short_description": "Yapmak istediğin işlerin, çalışma ortamının, projelerin ve ulaşmak istediğin profesyonel yaşamın görsellerini veya kelimelerini bir araya getirerek dijital ya da fiziksel bir pano oluştur.",
+    "topics": [
+      "career",
+      "creativity"
+    ],
+    "actions": [
+      "create",
+      "reflect"
+    ],
+    "context": [
+      "new"
+    ],
+    "intensity": "medium",
+    "relationship_modes": []
+  },
+  {
+    "id": "do_lock_in_session",
+    "title": "Bir saatlik lock-in session yap",
+    "short_description": "Ders, proje, iş veya kişisel hedeflerinden tek bir görev seçip telefonu uzaklaştırarak 60 dakika boyunca yalnızca o işe odaklan; başlamadan önce tamamlamak istediğin çıktıyı netleştir.",
+    "topics": [
+      "productivity",
+      "personal_growth"
+    ],
+    "actions": [
+      "focus",
+      "continue"
+    ],
+    "context": [
+      "existing"
+    ],
+    "intensity": "medium",
+    "relationship_modes": []
+  },
+  {
+    "id": "take_first_step_to_learn_something",
+    "title": "Uzun zamandır öğrenmek istediğin bir şey için ilk adımı at",
+    "short_description": "Öğrenmek istediğin konuyu seçip ilk ders videosunu açmak, başlangıç kaynağı bulmak veya kısa bir deneme yapmak gibi hemen uygulanabilecek tek bir başlangıç adımı gerçekleştir.",
+    "topics": [
+      "learning",
+      "personal_growth"
+    ],
+    "actions": [
+      "start_new"
+    ],
+    "context": [
+      "new"
+    ],
+    "intensity": "medium",
+    "relationship_modes": []
+  },
+  {
+    "id": "start_new_course",
+    "title": "Yeni bir eğitime veya online kursa başla",
+    "short_description": "Uzun zamandır öğrenmek istediğin bir konu için seviyene ve ayırabileceğin zamana uygun bir eğitim seçip ilk dersini tamamlayarak başlangıç yap.",
+    "topics": [
+      "learning",
+      "personal_growth"
+    ],
+    "actions": [
+      "start_new",
+      "commit"
+    ],
+    "context": [
+      "new"
+    ],
+    "intensity": "medium",
+    "relationship_modes": []
+  },
+  {
+    "id": "research_topic_of_interest",
+    "title": "Merak ettiğin bir konuda mini araştırma yap",
+    "short_description": "Aklını kurcalayan tek bir konu seçip 20–30 dakika boyunca birkaç güvenilir kaynaktan temel bilgileri incele ve ilgini çeken noktaları kısa notlarla kaydet.",
+    "topics": [
+      "learning"
+    ],
+    "actions": [
+      "research"
+    ],
+    "context": [],
+    "intensity": "low",
+    "relationship_modes": []
+  },
+  {
+    "id": "start_learning_new_skill",
+    "title": "Yeni bir beceri öğrenmek için ilk dersini aç",
+    "short_description": "Öğrenmek istediğin beceri için başlangıç seviyesinde kısa bir ders veya eğitim seçip yalnızca ilk bölümü tamamlayarak konuyla ilk pratiğini yap.",
+    "topics": [
+      "learning",
+      "personal_growth"
+    ],
+    "actions": [
+      "start_new"
+    ],
+    "context": [
+      "new"
+    ],
+    "intensity": "medium",
+    "relationship_modes": []
+  },
+  {
+    "id": "list_things_to_learn",
+    "title": "Öğrenmek istediğin 5 şeyi listele",
+    "short_description": "Şu sıralar merak ettiğin veya gelecekte işine yarayacağını düşündüğün beş bilgi ya da beceriyi yazıp hangisinin sana en fazla heyecan verdiğini işaretle.",
+    "topics": [
+      "learning",
+      "personal_growth"
+    ],
+    "actions": [
+      "write",
+      "reflect"
+    ],
+    "context": [
+      "new"
+    ],
+    "intensity": "low",
+    "relationship_modes": []
+  },
+  {
+    "id": "start_delayed_book",
+    "title": "Uzun zamandır ertelediğin bir kitabı okumaya başla",
+    "short_description": "Bir süredir okumayı düşündüğün kitabı seçip ilk 10–20 sayfasını veya tek bir bölümünü okuyarak ertelediğin başlangıcı somutlaştır.",
+    "topics": [
+      "learning",
+      "personal_growth"
+    ],
+    "actions": [
+      "start_new"
+    ],
+    "context": [
+      "unfinished"
+    ],
+    "intensity": "low",
+    "relationship_modes": []
+  },
+  {
+    "id": "create_future_self_list",
+    "title": "Future Self listesi hazırla",
+    "short_description": "Altı ay sonraki halini düşünerek nasıl davrandığını, hangi alışkanlıklara sahip olduğunu, neleri artık yapmadığını ve hayatında nelerin değiştiğini maddeler halinde yaz.",
+    "topics": [
+      "self_reflection",
+      "personal_growth"
+    ],
+    "actions": [
+      "reflect",
+      "write",
+      "create"
+    ],
+    "context": [
+      "new"
+    ],
+    "intensity": "low",
+    "relationship_modes": []
+  },
+  {
+    "id": "write_future_day",
+    "title": "Gelecekteki bir gününü detaylı şekilde hayal edip yaz",
+    "short_description": "Gelecekte istediğin yaşamdan sıradan bir günü seçip nerede uyandığını, ne yaptığını, kimlerle olduğunu ve gün boyunca nasıl hissettiğini ayrıntılarıyla yaz.",
+    "topics": [
+      "self_reflection",
+      "personal_growth",
+      "creativity"
+    ],
+    "actions": [
+      "reflect",
+      "write",
+      "create"
+    ],
+    "context": [
+      "new"
+    ],
+    "intensity": "low",
+    "relationship_modes": []
+  },
+  {
+    "id": "set_thirty_day_challenge",
+    "title": "Kendin için 30 günlük mini challenge belirle",
+    "short_description": "Geliştirmek istediğin tek bir alışkanlık veya beceri seçip 30 gün boyunca uygulanabilecek küçük ve ölçülebilir bir günlük hedef belirleyerek takip yöntemini oluştur.",
+    "topics": [
+      "personal_growth",
+      "productivity"
+    ],
+    "actions": [
+      "start_new",
+      "plan",
+      "commit"
+    ],
+    "context": [
+      "new"
+    ],
+    "intensity": "medium",
+    "relationship_modes": []
+  },
+  {
+    "id": "try_new_routine",
+    "title": "Yeni bir rutin dene",
+    "short_description": "Sabah, akşam, çalışma veya bakım alanlarından birini seçip uygulaması kolay üç veya dört adımdan oluşan küçük bir rutin belirle ve bugün ilk kez uygula.",
+    "topics": [
+      "personal_growth",
+      "productivity"
+    ],
+    "actions": [
+      "start_new",
+      "plan",
+      "commit"
+    ],
+    "context": [
+      "new"
+    ],
+    "intensity": "medium",
+    "relationship_modes": []
+  },
+  {
+    "id": "choose_life_area_to_improve",
+    "title": "Hayatında yükseltmek istediğin bir alan seç",
+    "short_description": "Sağlık, para, kariyer, ilişki veya özgüven gibi alanları kısaca değerlendirip şu anda en fazla gelişmesini istediğin tek bir alanı seç ve nedenini yaz.",
+    "topics": [
+      "self_reflection",
+      "personal_growth"
+    ],
+    "actions": [
+      "reflect",
+      "clarify"
+    ],
+    "context": [
+      "existing"
+    ],
+    "intensity": "low",
+    "relationship_modes": []
+  },
+  {
+    "id": "create_ins_and_outs_list",
+    "title": "Bir “ins & outs” listesi hazırla",
+    "short_description": "Hayatına daha fazla dahil etmek istediğin alışkanlıkları, deneyimleri ve davranışları “ins”; azaltmak veya geride bırakmak istediklerini ise “outs” başlığı altında yaz.",
+    "topics": [
+      "self_reflection",
+      "personal_growth"
+    ],
+    "actions": [
+      "reflect",
+      "write",
+      "organize"
+    ],
+    "context": [
+      "existing"
+    ],
+    "intensity": "low",
+    "relationship_modes": []
+  },
+  {
+    "id": "choose_personal_motto",
+    "title": "Kendine yeni bir kişisel motto belirle",
+    "short_description": "Bu dönemde sana hatırlatmasını istediğin düşünceyi birkaç kelimeye indirerek kısa, gerçekçi ve günlük hayatında kullanabileceğin bir motto oluştur.",
+    "topics": [
+      "personal_growth",
+      "self_reflection"
+    ],
+    "actions": [
+      "reflect",
+      "create",
+      "clarify"
+    ],
+    "context": [
+      "new"
+    ],
+    "intensity": "low",
+    "relationship_modes": []
+  },
+  {
+    "id": "choose_period_theme_word",
+    "title": "Bu dönem için bir tema kelimesi seç",
+    "short_description": "Önümüzdeki haftaları veya ayları düşünerek cesaret, denge, disiplin ya da özgürlük gibi sana yön vermesini istediğin tek bir kelime belirle ve nedenini yaz.",
+    "topics": [
+      "self_reflection",
+      "personal_growth"
+    ],
+    "actions": [
+      "reflect",
+      "clarify",
+      "write"
+    ],
+    "context": [
+      "new"
+    ],
+    "intensity": "low",
+    "relationship_modes": []
+  },
+  {
+    "id": "rewrite_personal_story",
+    "title": "Kendinle ilgili değiştirmek istediğin bir hikâyeyi yeniden yaz",
+    "short_description": "Kendin hakkında sık tekrarladığın sınırlayıcı bir düşünceyi yazıp bunun hangi deneyimlerden geldiğini incele; ardından aynı durumu daha gerçekçi ve yapıcı biçimde anlatan yeni bir cümle oluştur.",
+    "topics": [
+      "self_reflection",
+      "personal_growth"
+    ],
+    "actions": [
+      "reflect",
+      "write",
+      "clarify"
+    ],
+    "context": [
+      "existing"
+    ],
+    "intensity": "medium",
+    "relationship_modes": []
+  },
+  {
+    "id": "review_personal_change",
+    "title": "Son bir yılda ne kadar değiştiğini görmek için eski fotoğraflarına ve notlarına bak",
+    "short_description": "Yaklaşık bir yıl önceki fotoğraflarını, notlarını veya mesajlarını gözden geçirip o dönemki hedeflerin, düşüncelerin ve yaşam biçiminle bugünü karşılaştırarak fark ettiğin değişimleri yaz.",
+    "topics": [
+      "self_reflection",
+      "personal_growth"
+    ],
+    "actions": [
+      "review",
+      "reflect"
+    ],
+    "context": [
+      "past"
+    ],
+    "intensity": "low",
+    "relationship_modes": []
+  },
+  {
+    "id": "create_digital_vision_board",
+    "title": "Dijital vision board hazırla",
+    "short_description": "Telefonunda veya bilgisayarında kariyer, yaşam tarzı, seyahat, ilişkiler ya da kişisel hedeflerini temsil eden görselleri bir araya getirip tek bir dijital pano oluştur.",
+    "topics": [
+      "personal_growth",
+      "creativity"
+    ],
+    "actions": [
+      "create",
+      "reflect"
+    ],
+    "context": [
+      "new"
+    ],
+    "intensity": "medium",
+    "relationship_modes": []
+  },
+  {
+    "id": "refresh_pinterest_board",
+    "title": "Pinterest panonu yenile",
+    "short_description": "Stil, ev, seyahat, kariyer veya yaşam hedeflerinden bir pano seçip artık seni temsil etmeyen görselleri çıkararak güncel zevklerini ve isteklerini yansıtan yeni içerikler ekle.",
+    "topics": [
+      "creativity",
+      "personal_growth"
+    ],
+    "actions": [
+      "review",
+      "organize"
+    ],
+    "context": [
+      "existing"
+    ],
+    "intensity": "low",
+    "relationship_modes": []
+  },
+  {
+    "id": "create_future_lifestyle_playlist",
+    "title": "Hayalindeki yaşam tarzını temsil eden bir playlist hazırla",
+    "short_description": "Olmak istediğin halin enerjisini, günlük yaşamını veya hayal ettiğin dönemi çağrıştıran şarkıları seçip sana ait bir playlist oluştur ve farklı ruh hallerine göre düzenle.",
+    "topics": [
+      "creativity",
+      "personal_growth"
+    ],
+    "actions": [
+      "create",
+      "express"
+    ],
+    "context": [
+      "new"
+    ],
+    "intensity": "low",
+    "relationship_modes": []
+  },
+  {
+    "id": "explore_personal_style",
+    "title": "Yeni bir kişisel stil veya estetik keşfet",
+    "short_description": "İlgini çeken birkaç stil veya estetik yaklaşımı inceleyip renk, kesim, aksesuar ve genel görünüm açısından sana gerçekten yakın gelen ortak detayları belirle.",
+    "topics": [
+      "beauty",
+      "personal_growth"
+    ],
+    "actions": [
+      "research",
+      "explore",
+      "compare"
+    ],
+    "context": [
+      "new"
+    ],
+    "intensity": "low",
+    "relationship_modes": []
+  },
+  {
+    "id": "create_new_outfits_from_favorites",
+    "title": "Gardırobundan kendini en iyi hissettiren 5 parçayı seç ve yeni kombinler oluştur",
+    "short_description": "Gardırobundan sana en çok yakıştığını veya seni iyi hissettirdiğini düşündüğün beş parçayı çıkarıp mevcut kıyafetlerinle birkaç farklı kombin oluştur ve beğendiklerini kaydet.",
+    "topics": [
+      "beauty",
+      "creativity"
+    ],
+    "actions": [
+      "organize",
+      "create"
+    ],
+    "context": [
+      "existing"
+    ],
+    "intensity": "low",
+    "relationship_modes": []
+  },
+  {
+    "id": "create_90_day_glow_up_plan",
+    "title": "90 günlük kişisel glow-up planı hazırla",
+    "short_description": "Sağlık, para, kariyer, görünüm veya zihinsel iyi oluş gibi geliştirmek istediğin alanlardan birkaçını seçip her biri için 90 gün sonunda görmek istediğin değişimi yaz. Ardından hedefleri küçük haftalık adımlara bölerek takip edebileceğin basit bir plan oluştur.",
+    "topics": [
+      "personal_growth",
+      "wellbeing"
+    ],
+    "actions": [
+      "plan",
+      "write",
+      "clarify"
+    ],
+    "context": [
+      "new"
+    ],
+    "intensity": "medium",
+    "relationship_modes": []
+  },
+  {
+    "id": "create_romanticize_your_life_list",
+    "title": "Bu ay hayatını nasıl romantize edebileceğini listele",
+    "short_description": "Gerçekçi biçimde uygulayabileceğin birkaç tanesini seçip takvimine dağıt.",
+    "topics": [
+      "wellbeing",
+      "personal_growth"
+    ],
+    "actions": [
+      "reflect",
+      "write",
+      "plan"
+    ],
+    "context": [
+      "new"
+    ],
+    "intensity": "low",
+    "relationship_modes": []
+  },
+  {
+    "id": "plan_dream_trip",
+    "title": "Hayalindeki bir seyahat için mini plan oluştur",
+    "short_description": "Gitmek istediğin bir şehir veya ülke seçip ulaşım, konaklama, yaklaşık bütçe ve görmek istediğin birkaç yeri araştırarak temel bir seyahat taslağı hazırla. Henüz rezervasyon yapmadan olası tarihleri ve toplam maliyeti not ederek planı daha somut hale getir.",
+    "topics": [
+      "personal_growth",
+      "finance"
+    ],
+    "actions": [
+      "research",
+      "plan"
+    ],
+    "context": [
+      "new"
+    ],
+    "intensity": "medium",
+    "relationship_modes": []
+  },
+  {
+    "id": "create_or_update_bucket_list",
+    "title": "Bucket list’ini oluştur veya güncelle",
+    "short_description": "Bu yıl, belirli bir yaşa kadar veya hayatın boyunca deneyimlemek istediğin şeyleri düşünerek kişisel bir liste oluştur; mevcut listen varsa artık seni heyecanlandırmayan maddeleri çıkar. Yeni isteklerini ekleyip gerçekten yapmak istediklerini öncelik sırasına koy.",
+    "topics": [
+      "personal_growth",
+      "self_reflection"
+    ],
+    "actions": [
+      "create",
+      "review",
+      "organize"
+    ],
+    "context": [
+      "new",
+      "existing"
+    ],
+    "intensity": "low",
+    "relationship_modes": []
+  },
+  {
+    "id": "sign_up_for_new_workshop",
+    "title": "Yeni bir workshop veya deneyime kaydol",
+    "short_description": "Seramik, dans, fotoğraf, resim, dil veya ilgini çeken başka bir alanda tarih ve bütçene uyan seçenekleri inceleyip katılmak istediğin bir etkinliği seç. Karar verdiğinde kayıt veya rezervasyon adımını tamamlayarak programına kesin olarak ekle.",
+    "topics": [
+      "learning",
+      "creativity"
+    ],
+    "actions": [
+      "research",
+      "start_new",
+      "commit"
+    ],
+    "context": [
+      "new"
+    ],
+    "intensity": "medium",
+    "relationship_modes": []
+  },
+  {
+    "id": "try_new_hobby",
+    "title": "Yeni bir hobi dene",
+    "short_description": "Merak ettiğin ama daha önce yapmadığın bir uğraş seçip başlangıç için gereken en temel malzeme, ders veya yöntemi belirle. İlk denemeyi kısa ve ulaşılabilir tutarak sonuç almaya çalışmadan yalnızca aktivitenin sana uygun olup olmadığını deneyimle.",
+    "topics": [
+      "creativity",
+      "personal_growth"
+    ],
+    "actions": [
+      "start_new",
+      "explore"
+    ],
+    "context": [
+      "new"
+    ],
+    "intensity": "medium",
+    "relationship_modes": []
+  },
+  {
+    "id": "plan_study_or_work_date",
+    "title": "Kendine bir study/work date ayarla",
+    "short_description": "Tamamlamak istediğin ders, iş veya proje görevini seçip odaklanabileceğin bir kafe, kütüphane ya da çalışma alanı belirle. Gün ve saat seçerek bunu takvimine ekle, yanında götürmen gereken materyalleri ve o oturumda bitirmek istediğin çıktıyı önceden netleştir.",
+    "topics": [
+      "productivity",
+      "learning"
+    ],
+    "actions": [
+      "plan"
+    ],
+    "context": [
+      "new"
+    ],
+    "intensity": "low",
+    "relationship_modes": []
+  },
+  {
+    "id": "refresh_phone_wallpaper",
+    "title": "Telefon duvar kâğıdını sana ilham veren bir şeyle yenile",
+    "short_description": "Sana hatırlatmasını istediğin hedef, duygu veya yaşam tarzını temsil eden tek bir görsel seç ya da birkaç görselden küçük bir kolaj hazırla. Tasarımı sade tutup gün içinde sık göreceğin telefon ekranına uygun biçimde ayarlayarak duvar kâğıdı olarak kullan.",
+    "topics": [
+      "creativity",
+      "personal_growth"
+    ],
+    "actions": [
+      "create",
+      "organize"
+    ],
+    "context": [
+      "existing"
+    ],
+    "intensity": "low",
+    "relationship_modes": []
+  },
+  {
+    "id": "refresh_personal_space_corner",
+    "title": "Çalışma masanı veya odandaki küçük bir köşeyi yenile",
+    "short_description": "Tüm odayı değiştirmeye çalışmadan yalnızca seçtiğin alanın daha düzenli ve kullanışlı görünmesine odaklan.",
+    "topics": [
+      "home",
+      "productivity"
+    ],
+    "actions": [
+      "organize"
+    ],
+    "context": [
+      "existing"
+    ],
+    "intensity": "low",
+    "relationship_modes": []
+  },
+  {
+    "id": "create_signature_routine",
+    "title": "Kendi imza rutinini oluştur",
+    "short_description": "Haftanın belirli bir zamanına bağlamak istediğin küçük bir ritüel seçip bakım, film, kahve, yürüyüş veya haftalık planlama gibi birkaç basit adımdan oluşan düzen oluştur. Uygulayacağın günü ve sıklığı belirleyerek rutini bugün ilk kez başlat.",
+    "topics": [
+      "personal_growth",
+      "wellbeing"
+    ],
+    "actions": [
+      "start_new",
+      "plan",
+      "commit"
+    ],
+    "context": [
+      "new"
+    ],
+    "intensity": "medium",
+    "relationship_modes": []
+  },
+  {
+    "id": "create_small_joys_list",
+    "title": "Bu ayın small joys listesini hazırla",
+    "short_description": "Listeyi kısa tutup gerçekten uygulamak istediğin birkaç küçük anı özellikle işaretle.",
+    "topics": [
+      "wellbeing",
+      "self_reflection"
+    ],
+    "actions": [
+      "reflect",
+      "write"
+    ],
+    "context": [
+      "new"
+    ],
+    "intensity": "low",
+    "relationship_modes": []
+  },
+  {
+    "id": "write_recent_wins",
+    "title": "Son dönemdeki küçük başarılarını yaz",
+    "short_description": "Son birkaç hafta veya aya dönüp tamamladığın işler, verdiğin kararlar, öğrendiğin şeyler ve zorlandığın halde sürdürdüğün davranışlardan en az beş tanesini yaz. Sadece büyük sonuçlara değil, ilerleme gösterdiğin küçük adımlara da özellikle yer ver.",
+    "topics": [
+      "self_reflection",
+      "personal_growth"
+    ],
+    "actions": [
+      "review",
+      "reflect",
+      "write"
+    ],
+    "context": [
+      "past"
+    ],
+    "intensity": "low",
+    "relationship_modes": []
+  },
+  {
+    "id": "write_ten_things_you_like_about_yourself",
+    "title": "Kendinle ilgili sevdiğin 10 şeyi yaz",
+    "short_description": "Karakterin, görünüşün, becerilerin, değerlerin veya verdiğin kararlar arasından kendinde gerçekten sevdiğin on özelliği düşünerek tek tek yaz. Genel ifadeler yerine mümkün olduğunca somut özellikler seçip her maddeyi neden sevdiğini kısaca düşün.",
+    "topics": [
+      "self_reflection",
+      "personal_growth"
+    ],
+    "actions": [
+      "reflect",
+      "write"
+    ],
+    "context": [
+      "existing"
+    ],
+    "intensity": "low",
+    "relationship_modes": []
+  },
+  {
+    "id": "create_dating_myself_list",
+    "title": "Kendine bir dating myself listesi hazırla",
+    "short_description": "Tek başına yapmak isteyeceğin kafe, sinema, müze, piknik, yemek, yürüyüş veya küçük gezi gibi en az on aktiviteyi bir listede topla. Farklı bütçe ve sürelerde seçenekler ekleyerek yalnız vakit geçirmek istediğinde kolayca seçebileceğin kişisel bir fikir havuzu oluştur.",
+    "topics": [
+      "wellbeing",
+      "personal_growth"
+    ],
+    "actions": [
+      "create",
+      "write"
+    ],
+    "context": [
+      "new"
+    ],
+    "intensity": "low",
+    "relationship_modes": []
+  },
+  {
+    "id": "try_new_look",
+    "title": "Uzun zamandır denemek istediğin yeni bir görünümü dene",
+    "short_description": "Aklında olan bir saç modeli, makyaj, kombin veya stil detayını seçip önce elindeki ürün ve parçalarla küçük ölçekte uygula. Kalıcı bir değişiklik yapmak zorunda kalmadan görünümün üzerinde nasıl durduğunu gözlemleyip sana gerçekten uygun olup olmadığını değerlendir.",
+    "topics": [
+      "beauty",
+      "personal_growth"
+    ],
+    "actions": [
+      "start_new",
+      "explore",
+      "express"
+    ],
+    "context": [
+      "new"
+    ],
+    "intensity": "medium",
+    "relationship_modes": []
+  },
+  {
+    "id": "apply_for_new_opportunity",
+    "title": "Yeni bir fırsata başvur",
+    "short_description": "İş, staj, burs, eğitim, yarışma, gönüllülük veya proje seçeneklerinden sana uygun bir fırsat belirleyip gerekli şartları ve son başvuru tarihini kontrol et. Belgelerini hazırlayıp başvuru formunu eksiksiz tamamlayarak belirtilen kanal üzerinden gönder.",
+    "topics": [
+      "career",
+      "personal_growth"
+    ],
+    "actions": [
+      "apply",
+      "commit"
+    ],
+    "context": [
+      "new"
+    ],
+    "intensity": "high",
+    "relationship_modes": []
+  },
+  {
+    "id": "send_brave_message",
+    "title": "Bir süredir ertelediğin cesur mesajı gönder",
+    "short_description": "İş bağlantısı, mentor, öğretmen, arkadaş veya iletişim kurmak istediğin başka bir kişiye neden yazdığını açıkça belirten kısa ve doğrudan bir mesaj hazırla. Gereksiz açıklamaları çıkarıp talebini veya söylemek istediğin şeyi netleştirdikten sonra mesajı gönder.",
+    "topics": [
+      "social",
+      "career"
+    ],
+    "actions": [
+      "communicate",
+      "connect"
+    ],
+    "context": [
+      "unfinished"
+    ],
+    "intensity": "medium",
+    "relationship_modes": []
+  },
+  {
+    "id": "set_low_buy_period",
+    "title": "Kendin için bir low-buy dönemi belirle",
+    "short_description": "Süreyi, istisnaları ve gerçekten para ayırmak istediğin alanları baştan netleştirerek uygulanabilir bir çerçeve oluştur.",
+    "topics": [
+      "finance",
+      "personal_growth"
+    ],
+    "actions": [
+      "start_new",
+      "plan",
+      "commit"
+    ],
+    "context": [
+      "new"
+    ],
+    "intensity": "medium",
+    "relationship_modes": []
+  },
+  {
+    "id": "create_future_me_checklist",
+    "title": "Önümüzdeki 6 ay için Future Me Checklist hazırla",
+    "short_description": "Büyük hedefleri günlük veya haftalık uygulanabilir adımlara bölerek ileride takip edebileceğin sade bir liste oluştur.",
+    "topics": [
+      "personal_growth",
+      "productivity"
+    ],
+    "actions": [
+      "reflect",
+      "write",
+      "plan"
+    ],
+    "context": [
+      "new"
+    ],
+    "intensity": "medium",
+    "relationship_modes": []
+  },
+  {
+    "id": "choose_mini_life_project",
+    "title": "Kendine bir mini hayat projesi seç",
+    "short_description": "Başlangıç ve bitiş aralığını belirleyerek neyi tamamlamış sayacağını baştan netleştir.",
+    "topics": [
+      "personal_growth",
+      "productivity"
+    ],
+    "actions": [
+      "start_new",
+      "plan",
+      "commit"
+    ],
+    "context": [
+      "new"
+    ],
+    "intensity": "medium",
+    "relationship_modes": []
+  },
+  {
+    "id": "have_phone_free_mini_date",
+    "title": "Telefonları bir kenara bırakıp mini date yapın",
+    "short_description": "En az 30 dakika boyunca telefonları sessize alıp ulaşamayacağınız bir yere koyarak birlikte yemek yiyin, kahve için veya yalnızca sohbet edin. Bu süre içinde başka ekranlara yönelmeden dikkatinizi birbirinize ve birlikte geçirdiğiniz zamana vermeye çalışın.",
+    "topics": [
+      "relationship"
+    ],
+    "actions": [
+      "connect",
+      "communicate"
+    ],
+    "context": [
+      "existing"
+    ],
+    "intensity": "low",
+    "relationship_modes": [
+      "quality_time",
+      "emotional_intimacy"
+    ]
+  },
+  {
+    "id": "try_something_new_with_partner",
+    "title": "Birlikte yeni bir şey deneyin",
+    "short_description": "İkinizin de daha önce yapmadığı bir kafe, oyun, tarif, workshop, spor veya yürüyüş rotası seçip birlikte deneyimlemek için gün ve saat belirleyin. Aktiviteyi kusursuz planlamak yerine ikiniz için de yeni olan ortak bir deneyim yaşamaya odaklanın.",
+    "topics": [
+      "relationship",
+      "social"
+    ],
+    "actions": [
+      "start_new",
+      "explore",
+      "connect"
+    ],
+    "context": [
+      "new"
+    ],
+    "intensity": "medium",
+    "relationship_modes": [
+      "quality_time",
+      "social_fun"
+    ]
+  },
+  {
+    "id": "express_liked_trait_to_partner",
+    "title": "Partnerine sevdiğin bir özelliğini söyle",
+    "short_description": "Partnerinde gerçekten değer verdiğin tek bir özelliği seçip bunu genel bir iltifat yerine yakın zamanda yaşadığınız somut bir örnekle birlikte dile getir. Neden senin için önemli olduğunu bir veya iki cümleyle anlatarak mesajını doğrudan ona ifade et.",
+    "topics": [
+      "relationship"
+    ],
+    "actions": [
+      "communicate",
+      "express"
+    ],
+    "context": [
+      "existing"
+    ],
+    "intensity": "low",
+    "relationship_modes": [
+      "romance",
+      "communication",
+      "emotional_intimacy"
+    ]
+  },
+  {
+    "id": "talk_about_future_dreams_with_partner",
+    "title": "Birlikte gelecek hayali kurun",
+    "short_description": "Seyahat, yaşamak istediğiniz yer, kariyer, günlük yaşam veya gelecekte birlikte deneyimlemek istediğiniz şeylerden birkaçını seçip karşılıklı olarak anlatın. Bu sohbeti kesin karar vermek için değil, birbirinizin isteklerini ve nasıl bir gelecek hayal ettiğinizi daha iyi anlamak için kullanın.",
+    "topics": [
+      "relationship"
+    ],
+    "actions": [
+      "communicate",
+      "connect"
+    ],
+    "context": [
+      "existing"
+    ],
+    "intensity": "medium",
+    "relationship_modes": [
+      "communication",
+      "emotional_intimacy"
+    ]
+  },
+  {
+    "id": "create_couple_vision_board",
+    "title": "Couple vision board hazırlayın",
+    "short_description": "Birlikte yapmak istediğiniz seyahatleri, aktiviteleri, yaşam tarzı fikirlerini ve ortak hedefleri temsil eden görsel veya kelimeleri seçerek fiziksel ya da dijital bir pano oluşturun. Panoya yalnızca ikinizin de gerçekten istediği ortak deneyimleri ekleyip kişisel hedeflerle karıştırmamaya çalışın.",
+    "topics": [
+      "relationship",
+      "creativity"
+    ],
+    "actions": [
+      "create",
+      "communicate"
+    ],
+    "context": [
+      "new"
+    ],
+    "intensity": "medium",
+    "relationship_modes": [
+      "quality_time",
+      "communication"
+    ]
+  },
+  {
+    "id": "recreate_favorite_relationship_memory",
+    "title": "Favori anılarınızdan birini yeniden yaşayın",
+    "short_description": "İlk buluşmanız, sevdiğiniz bir restoran, birlikte izlediğiniz bir film veya sizin için özel başka bir anı seçip mümkün olduğunca benzer şekilde yeniden planlayın. Amacınız geçmişi birebir kopyalamak değil, ikiniz için anlamlı olan ortak bir deneyimle yeniden bağ kurmak olsun.",
+    "topics": [
+      "relationship"
+    ],
+    "actions": [
+      "reconnect",
+      "connect"
+    ],
+    "context": [
+      "past"
+    ],
+    "intensity": "low",
+    "relationship_modes": [
+      "romance",
+      "reconnection",
+      "quality_time"
+    ]
+  },
+  {
+    "id": "ask_partner_five_meaningful_questions",
+    "title": "Birbirinize 5 anlamlı soru sorun",
+    "short_description": "Günlük konuların dışına çıkan beş soru hazırlayıp sırayla birbirinize sorun; son zamanlarda nasıl hissettiğiniz, nelerin değiştiği veya birlikte neyi daha fazla yapmak istediğiniz üzerine konuşabilirsiniz. Cevap verirken araya girmeden dinleyip ardından merak ettiğiniz noktaları açıkça sorun.",
+    "topics": [
+      "relationship"
+    ],
+    "actions": [
+      "communicate",
+      "connect"
+    ],
+    "context": [
+      "existing"
+    ],
+    "intensity": "medium",
+    "relationship_modes": [
+      "communication",
+      "emotional_intimacy"
+    ]
+  },
+  {
+    "id": "surprise_partner",
+    "title": "Partnerine küçük bir sürpriz yap",
+    "short_description": "Partnerinin sevdiği küçük bir yiyecek, not, kahve veya birlikte yapabileceğiniz kısa bir plan gibi kişisel ama abartısız bir jest seç.",
+    "topics": [
+      "relationship"
+    ],
+    "actions": [
+      "express",
+      "connect"
+    ],
+    "context": [
+      "existing"
+    ],
+    "intensity": "low",
+    "relationship_modes": [
+      "romance",
+      "quality_time"
+    ]
+  },
+  {
+    "id": "have_no_plan_evening_with_partner",
+    "title": "Birlikte plansız bir akşam geçirin",
+    "short_description": "Akşamı önceden ayrıntılı şekilde programlamak yerine birlikte kalabileceğiniz birkaç saat ayırıp o anda ne yapmak istediğinize beraber karar verin. Yemek hazırlamak, film izlemek, oyun oynamak veya sohbet etmek gibi seçeneklerden ikinizin de o an istediğine yönelin.",
+    "topics": [
+      "relationship"
+    ],
+    "actions": [
+      "connect",
+      "rest"
+    ],
+    "context": [
+      "existing"
+    ],
+    "intensity": "low",
+    "relationship_modes": [
+      "quality_time"
+    ]
+  },
+  {
+    "id": "plan_next_date_with_partner",
+    "title": "Bir sonraki date’inizi birlikte planlayın",
+    "short_description": "Her zamanki buluşmalarınızdan farklı olabilecek birkaç aktivite veya mekan önerisi çıkarıp bütçe, zaman ve ikinizin ilgisine göre birlikte bir seçenek belirleyin. Gün ve saati netleştirerek gerekiyorsa rezervasyon veya bilet gibi hazırlıkları önceden tamamlayın.",
+    "topics": [
+      "relationship",
+      "social"
+    ],
+    "actions": [
+      "plan",
+      "communicate"
+    ],
+    "context": [
+      "existing"
+    ],
+    "intensity": "low",
+    "relationship_modes": [
+      "quality_time",
+      "social_fun",
+      "communication"
+    ]
+  },
+  {
+    "id": "discuss_delayed_relationship_topic",
+    "title": "Uzun zamandır ertelediğiniz bir konuyu konuşun",
+    "short_description": "İkinizin de konuşmaktan kaçındığı ama ilişkide önemini koruyan tek bir konuyu seçip sakin ve uygun bir zamanda konuşmaya başlayın. Konuyu geçmişteki bütün sorunlara genişletmeden ne olduğunu, sizde nasıl bir etki yarattığını ve bundan sonra neyin farklı olmasını istediğinizi açıkça anlatın.",
+    "topics": [
+      "relationship"
+    ],
+    "actions": [
+      "communicate",
+      "clarify"
+    ],
+    "context": [
+      "existing",
+      "unfinished"
+    ],
+    "intensity": "medium",
+    "relationship_modes": [
+      "communication",
+      "conflict_resolution"
+    ]
+  },
+  {
+    "id": "share_relationship_needs",
+    "title": "İlişkide neye daha fazla ihtiyaç duyduğunuzu birbirinize söyleyin",
+    "short_description": "İlgi, alan, iletişim, romantizm, destek veya birlikte geçirilen zaman gibi ihtiyaçlardan hangilerinin şu sıralar sizin için daha önemli olduğunu ayrı ayrı düşünün. Ardından birbirinizi suçlamadan neye daha fazla ihtiyaç duyduğunuzu ve bunun günlük ilişkide nasıl görünebileceğini somut örneklerle paylaşın.",
+    "topics": [
+      "relationship"
+    ],
+    "actions": [
+      "reflect",
+      "communicate",
+      "clarify"
+    ],
+    "context": [
+      "existing"
+    ],
+    "intensity": "medium",
+    "relationship_modes": [
+      "communication",
+      "emotional_intimacy"
+    ]
+  },
+  {
+    "id": "discuss_bothersome_partner_behavior",
+    "title": "Son zamanlarda sizi rahatsız eden bir davranış hakkında açıkça konuşun",
+    "short_description": "Tekrarlanan ve sizi rahatsız eden belirli bir davranışı seçip kişiliğe yönelik genellemeler yapmadan hangi durumda gerçekleştiğini ve sizde nasıl bir etki yarattığını anlatın. Partnerinizi dinledikten sonra aynı durum tekrarlandığında ikiniz için daha uygun olacak davranışın ne olabileceğini birlikte netleştirin.",
+    "topics": [
+      "relationship"
+    ],
+    "actions": [
+      "communicate",
+      "clarify"
+    ],
+    "context": [
+      "existing"
+    ],
+    "intensity": "medium",
+    "relationship_modes": [
+      "communication",
+      "conflict_resolution"
+    ]
+  },
+  {
+    "id": "do_relationship_check_in",
+    "title": "İlişkinizin küçük bir check-in’ini yapın",
+    "short_description": "Birbirinize ilişkinizde şu anda iyi giden şeyleri, zorlandığınız noktaları ve son dönemde değiştirmek istediğiniz bir alanı sırayla sorun. Sohbeti sorun aramaya çevirmeden her iki tarafın da mevcut ilişki deneyimini anlamaya ve ortak bir küçük iyileştirme noktası belirlemeye odaklanın.",
+    "topics": [
+      "relationship"
+    ],
+    "actions": [
+      "review",
+      "reflect",
+      "communicate"
+    ],
+    "context": [
+      "existing"
+    ],
+    "intensity": "medium",
+    "relationship_modes": [
+      "communication",
+      "emotional_intimacy"
+    ]
+  },
+  {
+    "id": "plan_solution_for_relationship_issue",
+    "title": "Birlikte çözmeniz gereken bir konuyu planlayın",
+    "short_description": "Para, aile, zaman yönetimi, mesafe veya gelecek planları gibi ortak hayatınızı etkileyen tek bir konuyu seçip mevcut sorunu ve çözülmesi gereken noktaları birlikte yazın. Ardından kimin ne yapacağını, hangi adımın önce geleceğini ve konuyu ne zaman yeniden değerlendireceğinizi belirleyin.",
+    "topics": [
+      "relationship"
+    ],
+    "actions": [
+      "clarify",
+      "plan",
+      "communicate"
+    ],
+    "context": [
+      "existing"
+    ],
+    "intensity": "high",
+    "relationship_modes": [
+      "communication",
+      "conflict_resolution"
+    ]
+  },
+  {
+    "id": "share_boundary_with_partner",
+    "title": "Bir sınırını partnerinle paylaş",
+    "short_description": "İlişkide seni rahatsız eden veya bundan sonra farklı olmasını istediğin belirli bir durumu önce kendin için netleştir. Ardından sınırını karşı tarafı kontrol etmeye çalışmadan, hangi davranışın sana uygun olmadığını ve benzer bir durumda senin ne yapacağını açık ve sakin biçimde ifade et.",
+    "topics": [
+      "relationship"
+    ],
+    "actions": [
+      "clarify",
+      "communicate",
+      "set_boundary"
+    ],
+    "context": [
+      "existing"
+    ],
+    "intensity": "medium",
+    "relationship_modes": [
+      "communication",
+      "boundaries"
+    ]
+  },
+  {
+    "id": "reflect_on_needed_apology",
+    "title": "Birbirinizden özür dilemeniz gereken bir şey olup olmadığını düşünün",
+    "short_description": "Son dönemde partnerini kırmış olabileceğin bir söz, davranış veya ihmal olup olmadığını düşün ve varsa sorumluluğunu savunmaya geçmeden kabul et. Özür dileyeceksen ne için özür dilediğini açıkça söyle ve benzer durumda neyi farklı yapmayı düşündüğünü de paylaş.",
+    "topics": [
+      "relationship",
+      "self_reflection"
+    ],
+    "actions": [
+      "reflect",
+      "communicate"
+    ],
+    "context": [
+      "past"
+    ],
+    "intensity": "medium",
+    "relationship_modes": [
+      "communication",
+      "conflict_resolution",
+      "emotional_intimacy"
+    ]
+  },
+  {
+    "id": "share_three_relationship_desires",
+    "title": "İlişkinizde daha fazla görmek istediğiniz 3 şeyi paylaşın",
+    "short_description": "Daha fazla eğlence, fiziksel yakınlık, sohbet, spontane plan veya ortak hedef gibi ilişkinizde artmasını istediğiniz üç şeyi ayrı ayrı belirleyin. Ardından listelerinizi paylaşarak hangilerinin ortak olduğunu ve bunları günlük ilişkinize eklemek için atabileceğiniz küçük adımları birlikte konuşun.",
+    "topics": [
+      "relationship"
+    ],
+    "actions": [
+      "reflect",
+      "communicate",
+      "clarify"
+    ],
+    "context": [
+      "existing"
+    ],
+    "intensity": "medium",
+    "relationship_modes": [
+      "communication",
+      "emotional_intimacy"
+    ]
+  },
+  {
+    "id": "create_relationship_bucket_list",
+    "title": "Birlikte bir ilişki bucket list’i hazırlayın",
+    "short_description": "Birlikte gitmek istediğiniz yerleri, denemek istediğiniz aktiviteleri ve paylaşmak istediğiniz deneyimleri ayrı ayrı düşünüp ortak bir listede birleştirin. Listeyi yalnızca büyük seyahatlerle doldurmak yerine farklı bütçe ve sürelerde yapılabilecek seçenekler ekleyerek gerçekten gerçekleştirebileceğiniz bir deneyim havuzu oluşturun.",
+    "topics": [
+      "relationship",
+      "social"
+    ],
+    "actions": [
+      "create",
+      "communicate"
+    ],
+    "context": [
+      "new"
+    ],
+    "intensity": "low",
+    "relationship_modes": [
+      "quality_time",
+      "social_fun",
+      "communication"
+    ]
+  },
+  {
+    "id": "ask_partner_how_to_support",
+    "title": "Birbirinize “Seni şu an nasıl daha iyi destekleyebilirim?” diye sorun",
+    "short_description": "Sırayla birbirinize şu anda hangi konuda desteğe ihtiyaç duyduğunuzu sorun ve cevap verirken çözüm önermeden önce karşı tarafın ne istediğini dikkatlice dinleyin. Destek; tavsiye vermek, yanında olmak, belirli bir konuda yardım etmek veya biraz alan tanımak gibi farklı biçimlerde olabilir.",
+    "topics": [
+      "relationship"
+    ],
+    "actions": [
+      "communicate",
+      "connect",
+      "clarify"
+    ],
+    "context": [
+      "existing"
+    ],
+    "intensity": "low",
+    "relationship_modes": [
+      "communication",
+      "emotional_intimacy"
+    ]
+  },
+  {
+    "id": "plan_girls_brunch",
+    "title": "Kız kıza brunch planlayın",
+    "short_description": "Arkadaşlarınla rahatça sohbet edebileceğiniz bir gün ve mekan belirleyip herkesin uygunluğunu kontrol ederek küçük bir brunch planı oluşturun. Rezervasyon gerekiyorsa önceden yapın ve buluşmayı yalnızca yemek için değil, birlikte kaliteli zaman geçirebileceğiniz kadar rahat bir zaman aralığına yerleştirin.",
+    "topics": [
+      "social"
+    ],
+    "actions": [
+      "plan",
+      "socialize",
+      "connect"
+    ],
+    "context": [
+      "existing"
+    ],
+    "intensity": "low",
+    "relationship_modes": []
+  },
+  {
+    "id": "create_vision_board_with_friends",
+    "title": "Birlikte vision board hazırlayın",
+    "short_description": "Her biriniz önümüzdeki dönem için istediğiniz yaşam tarzı, kariyer, seyahat veya kişisel hedefleri temsil eden görseller ve kelimeler seçin. Malzemelerinizi veya dijital araçlarınızı hazırlayıp herkesin kendi panosunu oluşturabileceği, fikirlerinizi paylaşabileceğiniz rahat bir buluşma düzenleyin.",
+    "topics": [
+      "social",
+      "personal_growth",
+      "creativity"
+    ],
+    "actions": [
+      "create",
+      "socialize"
+    ],
+    "context": [
+      "new"
+    ],
+    "intensity": "medium",
+    "relationship_modes": []
+  },
+  {
+    "id": "have_self_care_night_with_friends",
+    "title": "Birlikte bakım gecesi yapın",
+    "short_description": "Cilt maskesi, saç bakımı, manikür veya sevdiğiniz diğer kişisel bakım adımlarından birkaçını seçip herkesin kullanacağı ürünleri önceden hazırlayın. Rahat kıyafetler, atıştırmalıklar ve sohbet eşliğinde bakımı acele etmeden birlikte yapabileceğiniz sakin bir akşam planlayın.",
+    "topics": [
+      "social",
+      "beauty",
+      "wellbeing"
+    ],
+    "actions": [
+      "beauty_care",
+      "socialize",
+      "connect"
+    ],
+    "context": [],
+    "intensity": "low",
+    "relationship_modes": []
+  },
+  {
+    "id": "dress_up_and_go_out_with_friends",
+    "title": "Kız kıza hazırlanıp güzel bir yere çıkın",
+    "short_description": "Arkadaşlarınla gitmek istediğiniz restoran, kafe, etkinlik veya başka bir mekan seçip buluşma saatini belirleyin; hazırlanırken sevdiğiniz kombinleri ve görünümü seçin. Günlük rutininizden biraz farklı bir plan yaparak birlikte dışarı çıkmaya ve eğlenmeye odaklanın.",
+    "topics": [
+      "social",
+      "beauty"
+    ],
+    "actions": [
+      "socialize",
+      "express"
+    ],
+    "context": [],
+    "intensity": "medium",
+    "relationship_modes": []
+  },
+  {
+    "id": "explore_new_cafe_with_friends",
+    "title": "Yeni bir kafe keşfedin",
+    "short_description": "Daha önce birlikte gitmediğiniz birkaç kafeyi konum, ortam ve bütçe açısından inceleyip birini seçerek buluşma planı yapın. Mümkünse her zamanki bölgenizin biraz dışına çıkarak yeni bir mekan deneyin ve sohbet etmek için yeterince zaman bırakın.",
+    "topics": [
+      "social"
+    ],
+    "actions": [
+      "research",
+      "explore",
+      "socialize"
+    ],
+    "context": [
+      "new"
+    ],
+    "intensity": "low",
+    "relationship_modes": []
+  },
+  {
+    "id": "choose_outfits_for_each_other",
+    "title": "Birlikte alışverişe çıkın ama birbirinize kombin seçin",
+    "short_description": "Önceden bir bütçe veya yalnızca deneme kuralı belirleyip mağazalarda birbiriniz için günlük tarzınızdan biraz farklı kombinler seçin. Seçtiğiniz parçaları birlikte deneyerek hangilerinin gerçekten kişisel stile uyduğunu konuşun ve alışveriş yapacaksanız yalnızca beğendiğiniz seçenekleri değerlendirin.",
+    "topics": [
+      "social",
+      "beauty"
+    ],
+    "actions": [
+      "socialize",
+      "compare",
+      "express"
+    ],
+    "context": [],
+    "intensity": "medium",
+    "relationship_modes": []
+  },
+  {
+    "id": "join_workshop_with_friends",
+    "title": "Bir workshop’a birlikte katılın",
+    "short_description": "Seramik, resim, takı, mum, parfüm veya ilginizi çeken başka bir alanda uygun tarih ve bütçedeki workshopları araştırıp ortak bir seçenek belirleyin. Yerlerinizi ayırttıktan sonra etkinliğe birlikte katılarak yeni bir şey öğrenmeye ve ortak bir deneyim yaşamaya odaklanın.",
+    "topics": [
+      "social",
+      "learning",
+      "creativity"
+    ],
+    "actions": [
+      "research",
+      "start_new",
+      "socialize"
+    ],
+    "context": [
+      "new"
+    ],
+    "intensity": "medium",
+    "relationship_modes": []
+  },
+  {
+    "id": "take_long_walk_and_talk_with_friends",
+    "title": "Kız kıza uzun bir yürüyüş ve hayat konuşması yapın",
+    "short_description": "Rahatça yürüyebileceğiniz bir park, sahil veya uzun rota seçip en az 30–60 dakikalık bir buluşma planlayın. Yürürken günlük yüzeysel konuların yanında son zamanlarda nasıl hissettiğinizi, hayatınızda nelerin değiştiğini veya aklınızı meşgul eden konuları birbirinizle paylaşın.",
+    "topics": [
+      "social",
+      "wellbeing"
+    ],
+    "actions": [
+      "connect",
+      "communicate",
+      "movement"
+    ],
+    "context": [
+      "existing"
+    ],
+    "intensity": "medium",
+    "relationship_modes": []
+  },
+  {
+    "id": "talk_about_future_selves_with_friends",
+    "title": "Birlikte gelecekteki haliniz hakkında konuşun",
+    "short_description": "Kariyer, ilişkiler, yaşam tarzı, seyahat, para veya kişisel hedefler açısından birkaç yıl sonra nasıl bir hayat istediğinizi sırayla birbirinize anlatın. Sohbet sırasında birbirinizin fikirlerini düzeltmek yerine merak ettiğiniz noktaları sorarak hayallerinizi ve değişen önceliklerinizi daha açık biçimde paylaşın.",
+    "topics": [
+      "social",
+      "personal_growth"
+    ],
+    "actions": [
+      "reflect",
+      "communicate",
+      "connect"
+    ],
+    "context": [
+      "new"
+    ],
+    "intensity": "low",
+    "relationship_modes": []
+  },
+  {
+    "id": "have_movie_night_with_friends",
+    "title": "Kız kıza evde film gecesi yapın",
+    "short_description": "Herkesin izlemek isteyeceği birkaç film seçeneği çıkarıp birlikte bir tanesine karar verin ve rahat bir izleme alanı hazırlayın. Atıştırmalıkları paylaşarak telefonları mümkün olduğunca ikinci plana bırakın ve filmin ardından sohbet etmek için de biraz zaman ayırın.",
+    "topics": [
+      "social",
+      "wellbeing"
+    ],
+    "actions": [
+      "socialize",
+      "connect",
+      "rest"
+    ],
+    "context": [],
+    "intensity": "low",
+    "relationship_modes": []
+  },
+  {
+    "id": "try_new_sport_class_with_friends",
+    "title": "Birlikte yeni bir spor veya ders deneyin",
+    "short_description": "Pilates, yoga, dans, reformer veya başka bir aktiviteden ikinizin de daha önce denemediği bir seçenek belirleyip başlangıç seviyesinde tek ders ayarlayın. İlk seansı performans hedefi koymadan tamamlayarak aktivitenin size uygun olup olmadığını birlikte deneyimleyin.",
+    "topics": [
+      "social",
+      "wellbeing"
+    ],
+    "actions": [
+      "start_new",
+      "exercise",
+      "socialize"
+    ],
+    "context": [
+      "new"
+    ],
+    "intensity": "medium",
+    "relationship_modes": []
+  },
+  {
+    "id": "choose_small_gifts_for_each_other",
+    "title": "Birbirinize küçük hediyeler seçin",
+    "short_description": "Önceden düşük ve eşit bir bütçe belirleyip birbirinizin zevklerini düşünerek küçük, kişisel bir hediye seçin.",
+    "topics": [
+      "social"
+    ],
+    "actions": [
+      "purchase",
+      "express",
+      "connect"
+    ],
+    "context": [
+      "existing"
+    ],
+    "intensity": "low",
+    "relationship_modes": []
+  },
+  {
+    "id": "do_life_reset_with_friends",
+    "title": "Birlikte life reset günü yapın",
+    "short_description": "Takvim, hedefler, para, iş veya okul gibi düzenlemek istediğiniz yaşam alanlarını önceden belirleyip birkaç saatlik ortak bir çalışma buluşması yapın. Herkes kendi durumunu gözden geçirip yarım kalanları, öncelikleri ve önümüzdeki dönem için atacağı birkaç somut adımı ayrı ayrı planlasın.",
+    "topics": [
+      "social",
+      "productivity",
+      "personal_growth"
+    ],
+    "actions": [
+      "review",
+      "organize",
+      "plan",
+      "socialize"
+    ],
+    "context": [
+      "existing"
+    ],
+    "intensity": "medium",
+    "relationship_modes": []
+  }
+]

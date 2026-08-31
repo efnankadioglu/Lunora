@@ -7,6 +7,7 @@
 
 import UIKit
 import FirebaseAuth
+import FirebaseFirestore
 
 class ProgressViewController: UIViewController {
 
@@ -33,9 +34,92 @@ class ProgressViewController: UIViewController {
     private var tasks: [DailyTask] = []
     private var taskStates: [DailyTaskUIState] = []
     private let enrollmentRepository = EnrollmentRepository()
+    private let db = Firestore.firestore()
     private var activeEnrollment: ActiveEnrollment?
     private var todayLog: DailyLog?
     private var allDailyLogs: [DailyLog] = []
+    
+    private weak var activeCoachMark: LunoraCoachMarkView?
+    private weak var guidedEmptyStateView: UIView?
+    
+    private var isFinalizingEnrollment = false
+    private var handledCompletedEnrollmentId: String?
+    
+    private lazy var completionLoadingOverlay: UIView = {
+
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+        view.backgroundColor = UIColor.black.withAlphaComponent(0.18)
+        view.alpha = 0
+        return view
+    }()
+
+    private lazy var completionLoadingCard: UIView = {
+
+        let view = UIView()
+        view.translatesAutoresizingMaskIntoConstraints = false
+
+        view.backgroundColor = UIColor(
+            red: 1.0,
+            green: 0.98,
+            blue: 0.99,
+            alpha: 1
+        )
+
+        view.layer.cornerRadius = 24
+
+        view.layer.shadowColor =
+            UIColor.black.cgColor
+
+        view.layer.shadowOpacity = 0.08
+        view.layer.shadowRadius = 18
+        view.layer.shadowOffset = CGSize(
+            width: 0,
+            height: 8
+        )
+
+        return view
+    }()
+
+    private lazy var completionLoadingIndicator: UIActivityIndicatorView = {
+
+        let indicator =
+            UIActivityIndicatorView(style: .medium)
+
+        indicator.translatesAutoresizingMaskIntoConstraints =
+            false
+
+        indicator.hidesWhenStopped = true
+
+        return indicator
+    }()
+
+    private lazy var completionLoadingLabel: UILabel = {
+
+        let label = UILabel()
+
+        label.translatesAutoresizingMaskIntoConstraints =
+            false
+
+        label.text = "Programın tamamlanıyor ✨"
+
+        label.font =
+            .systemFont(
+                ofSize: 17,
+                weight: .semibold
+            )
+
+        label.textColor = UIColor(
+            red: 35/255,
+            green: 45/255,
+            blue: 63/255,
+            alpha: 1
+        )
+
+        label.textAlignment = .center
+
+        return label
+    }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -46,6 +130,13 @@ class ProgressViewController: UIViewController {
         setupSegmentControl()
         showTodayContent()
         loadProfileImage()
+        
+        NotificationCenter.default.addObserver(
+            self,
+            selector: #selector(handleProfileDidUpdate),
+            name: .lunoraProfileDidUpdate,
+            object: nil
+        )
 
         // Geçici olarak cache'i temizliyoruz.
         // Çünkü artık Progress ekranı kararını Firestore lifecycle kontrolünden almalı.
@@ -84,13 +175,27 @@ class ProgressViewController: UIViewController {
         userProfileImageView.clipsToBounds = true
     }
 
-        private func setupScreen() {
-            view.backgroundColor = UIColor(red: 246/255, green: 238/255, blue: 244/255, alpha: 1)
+    private func setupScreen() {
 
-            scrollContentView.alwaysBounceVertical = true
-            scrollContentView.showsVerticalScrollIndicator = false
-            scrollContentView.contentInsetAdjustmentBehavior = .never
+        view.backgroundColor = UIColor(
+            red: 246/255,
+            green: 238/255,
+            blue: 244/255,
+            alpha: 1
+        )
+
+        scrollContentView.alwaysBounceVertical = true
+        scrollContentView.showsVerticalScrollIndicator = false
+        scrollContentView.contentInsetAdjustmentBehavior = .never
+
+        // Program adı uzun olduğunda ... ile kesilmesin.
+        if let programNameLabel = findProgramNameLabel() {
+            programNameLabel.numberOfLines = 1
+            programNameLabel.adjustsFontSizeToFitWidth = true
+            programNameLabel.minimumScaleFactor = 0.68
+            programNameLabel.lineBreakMode = .byClipping
         }
+    }
 
         private func setupContentStack() {
             contentStackView.translatesAutoresizingMaskIntoConstraints = false
@@ -154,7 +259,6 @@ class ProgressViewController: UIViewController {
             setHeaderVisibility(isVisible: false)
             headerStatusLabel.text = "Gün - / - · 0 gün streak 🔥"
             findProgramNameLabel()?.text = ""
-            userProfileImageView.image = UIImage(named: "defaultAvatar")
             return
         }
 
@@ -168,46 +272,108 @@ class ProgressViewController: UIViewController {
 
         headerStatusLabel.text = "\(currentDayText) · \(streakText)"
 
-        if userProfileImageView.image == nil {
-            userProfileImageView.image = UIImage(named: "defaultAvatar")
-        }
-
         userProfileImageView.contentMode = .scaleAspectFill
         userProfileImageView.clipsToBounds = true
         userProfileImageView.layer.cornerRadius = userProfileImageView.bounds.width / 2
     }
-        
-    
-    private func getDefaultAvatar(for uid: String) -> UIImage? {
-        
-//        Default avatar BURAYI UNUTMA BURADAN EKLE !!
-        return nil
-    }
-    
-    private func resolveAvatarImage(for uid: String) -> UIImage? {
-        
-        if let profile = ProfileStore.shared.fetchProfile(uid: uid),
-           let data = profile.avatarImageData,
-           let image = UIImage(data: data) {
-            return image
-        }
-
-        if let defaultAvatar = getDefaultAvatar(for: uid) {
-            return defaultAvatar
-        }
-
-        return UIImage(named: "defaultAvatar")
-    }
     
     private func loadProfileImage() {
+
         guard let uid = Auth.auth().currentUser?.uid else {
-            applyAvatarUI(image: UIImage(named: "defaultAvatar"))
+
+            applyAvatarUI(
+                image: UIImage(named: "defaultAvatar")
+            )
+
             return
         }
 
-        let avatar = resolveAvatarImage(for: uid)
-        applyAvatarUI(image: avatar)
+        // MARK: - 1. Önce cihazdaki local profil fotoğrafını kullan
+
+        if let profile = ProfileStore.shared.fetchProfile(uid: uid),
+           let imageData = profile.avatarImageData,
+           let image = UIImage(data: imageData) {
+
+            print("✅ Progress: profil fotoğrafı localden yüklendi")
+
+            applyAvatarUI(
+                image: image
+            )
+
+            return
+        }
+
+
+        // MARK: - 2. Local fotoğraf yoksa mevcut online sistem
+
+        db.collection("profiles")
+            .document(uid)
+            .getDocument { [weak self] snapshot, error in
+
+                guard let self = self else {
+                    return
+                }
+
+                guard
+                    error == nil,
+                    let data = snapshot?.data(),
+                    let urlString =
+                        data["profileImageURL"] as? String,
+                    let url = URL(string: urlString)
+                else {
+
+                    DispatchQueue.main.async {
+
+                        self.applyAvatarUI(
+                            image: UIImage(
+                                named: "defaultAvatar"
+                            )
+                        )
+                    }
+
+                    return
+                }
+
+
+                URLSession.shared.dataTask(
+                    with: url
+                ) { [weak self] data, _, _ in
+
+                    guard let self = self else {
+                        return
+                    }
+
+                    let image: UIImage?
+
+                    if let data = data {
+                        image = UIImage(data: data)
+                    } else {
+                        image = UIImage(
+                            named: "defaultAvatar"
+                        )
+                    }
+
+                    DispatchQueue.main.async {
+
+                        self.applyAvatarUI(
+                            image:
+                                image
+                                ?? UIImage(
+                                    named: "defaultAvatar"
+                                )
+                        )
+                    }
+
+                }.resume()
+            }
     }
+
+    @objc private func handleProfileDidUpdate() {
+        loadProfileImage()
+    }
+        
+    
+   
     
     private func applyAvatarUI(image: UIImage?) {
         userProfileImageView.image = image
@@ -234,201 +400,79 @@ class ProgressViewController: UIViewController {
         )
     }
     
-    private func buildElementProgressItems(
-        from tasks: [DailyTask],
-        completedTaskIds: Set<String>
-    ) -> [ElementProgressItem] {
-        
-        let elementOrder = ["fire", "water", "air", "earth"]
-        
-        let groupedTasks = Dictionary(grouping: tasks) { task in
-            task.elementKey ?? "unknown"
-        }
-        
-        var items: [ElementProgressItem] = []
-        
-        for key in elementOrder {
-            guard let elementTasks = groupedTasks[key], !elementTasks.isEmpty else {
-                continue
+    private func calculateOverallProgramProgress(
+        for program: Program
+    ) -> (completed: Int, total: Int) {
+
+        // Yeni program formatı: görevler gün gün tutuluyor
+        if let programDays = program.days, !programDays.isEmpty {
+
+            let totalRequiredTaskCount = programDays.reduce(0) { total, day in
+                let requiredTasks = day.tasks.filter {
+                    $0.isRequired != false
+                }
+
+                return total + requiredTasks.count
             }
-            
-            let completedCount = elementTasks.filter {
-                completedTaskIds.contains($0.id)
-            }.count
-            
-            let firstTask = elementTasks[0]
-            
-            let item = ElementProgressItem(
-                key: key,
-                name: firstTask.elementName ?? key,
-                emoji: firstTask.elementEmoji ?? "✨",
-                totalCount: elementTasks.count,
-                completedCount: completedCount
-            )
-            
-            items.append(item)
-        }
-        
-        return items
-    }
-    
-    private func allProgramTasks(for program: Program) -> [DailyTask] {
-        if let days = program.days, !days.isEmpty {
-            return days.flatMap { $0.tasks }
-        }
 
-        return program.dailyTasks
-    }
+            var completedRequiredTaskCount = 0
 
-    private func completedTaskIdsAcrossProgram() -> Set<String> {
-        return Set(allDailyLogs.flatMap { $0.completedTaskIds })
-    }
-    
+            for log in allDailyLogs {
 
-    private func programElementsToShow(for program: Program, allTasks: [DailyTask]) -> [ProgramElement] {
-        if let elements = program.programElements, !elements.isEmpty {
-            return elements
-        }
+                guard let programDay = programDays.first(where: {
+                    $0.dayNumber == log.dayNumber
+                }) else {
+                    continue
+                }
 
-        let elementKeysInTasks = Set(allTasks.compactMap { $0.elementKey })
+                let requiredTaskIds = Set(
+                    programDay.tasks
+                        .filter { $0.isRequired != false }
+                        .map { $0.id }
+                )
 
-        if elementKeysInTasks.isEmpty {
-            return [
-                ProgramElement(key: "general", name: "Genel", emoji: "✨")
-            ]
-        }
+                let completedForThisDay = log.completedTaskIds.filter {
+                    requiredTaskIds.contains($0)
+                }.count
 
-        let defaultElements: [ProgramElement] = [
-            ProgramElement(key: "fire", name: "Ateş", emoji: "🔥"),
-            ProgramElement(key: "water", name: "Su", emoji: "💧"),
-            ProgramElement(key: "air", name: "Hava", emoji: "🌬️"),
-            ProgramElement(key: "earth", name: "Toprak", emoji: "🌍")
-        ]
+                completedRequiredTaskCount += completedForThisDay
+            }
 
-        return defaultElements.filter { elementKeysInTasks.contains($0.key) }
-    }
-
-    private func buildElementProgressItems(
-        for program: Program,
-        allTasks: [DailyTask],
-        completedTaskIds: Set<String>
-    ) -> [ElementProgressItem] {
-
-        let elements = programElementsToShow(for: program, allTasks: allTasks)
-
-        let groupedTasks = Dictionary(grouping: allTasks) { task in
-            task.elementKey ?? "general"
-        }
-
-        return elements.map { element in
-            let elementTasks = groupedTasks[element.key] ?? []
-
-            let completedCount = elementTasks.filter {
-                completedTaskIds.contains($0.id)
-            }.count
-
-            return ElementProgressItem(
-                key: element.key,
-                name: element.name,
-                emoji: element.emoji,
-                totalCount: elementTasks.count,
-                completedCount: completedCount
+            return (
+                completed: completedRequiredTaskCount,
+                total: totalRequiredTaskCount
             )
         }
-    }
 
-    private func colorForElementKey(_ key: String) -> UIColor {
-        switch key {
-        case "fire":
-            return UIColor(red: 241/255, green: 64/255, blue: 154/255, alpha: 1)
-        case "water":
-            return UIColor(red: 80/255, green: 160/255, blue: 255/255, alpha: 1)
-        case "air":
-            return UIColor(red: 156/255, green: 77/255, blue: 255/255, alpha: 1)
-        case "earth":
-            return UIColor(red: 80/255, green: 190/255, blue: 150/255, alpha: 1)
-        case "general":
-            return UIColor(red: 222/255, green: 120/255, blue: 174/255, alpha: 1)
-        default:
-            return UIColor.systemGray
+        // Eski program formatı için fallback
+        let requiredDailyTasks = program.dailyTasks.filter {
+            $0.isRequired != false
         }
+
+        let requiredDailyTaskIds = Set(
+            requiredDailyTasks.map { $0.id }
+        )
+
+        let totalRequiredTaskCount =
+            requiredDailyTasks.count * max(1, program.durationDays)
+
+        let completedRequiredTaskCount = allDailyLogs.reduce(0) {
+            partialResult,
+            log in
+
+            let completedForThisDay = log.completedTaskIds.filter {
+                requiredDailyTaskIds.contains($0)
+            }.count
+
+            return partialResult + completedForThisDay
+        }
+
+        return (
+            completed: completedRequiredTaskCount,
+            total: totalRequiredTaskCount
+        )
     }
 
-//    private func buildProgramProgressCardData() -> ProgramProgressCardData? {
-//        guard let selectedProgram = selectedProgram else {
-//            return nil
-//        }
-//
-//        let totalDays = max(1, selectedProgram.durationDays)
-//
-//        let currentDay: Int
-//        if let todayLog = todayLog {
-//            currentDay = min(todayLog.dayNumber, totalDays)
-//        } else {
-//            currentDay = 1
-//        }
-//
-//        let totalTaskCountPerDay = max(1, tasks.count)
-//        let totalPossibleTaskCompletions = totalDays * totalTaskCountPerDay
-//
-//        let validTaskIds = Set(tasks.map { $0.id })
-//
-//        // ✅ Sadece bu programa ait task id'lerini say
-//        let totalCompletedTaskCount = allDailyLogs.reduce(0) { result, log in
-//            let validCompletedIds = log.completedTaskIds.filter { validTaskIds.contains($0) }
-//            return result + validCompletedIds.count
-//        }
-//
-//        let progressRatio = Double(totalCompletedTaskCount) / Double(totalPossibleTaskCompletions)
-//        let progressPercent = Int((progressRatio * 100.0).rounded())
-//        let colorPalette: [UIColor] = [
-//            UIColor(red: 241/255, green: 64/255, blue: 154/255, alpha: 1),
-//            UIColor(red: 156/255, green: 77/255, blue: 255/255, alpha: 1),
-//            UIColor(red: 92/255, green: 99/255, blue: 235/255, alpha: 1),
-//            UIColor(red: 204/255, green: 70/255, blue: 255/255, alpha: 1),
-//            UIColor(red: 255/255, green: 170/255, blue: 80/255, alpha: 1),
-//            UIColor(red: 80/255, green: 190/255, blue: 180/255, alpha: 1),
-//            UIColor(red: 120/255, green: 130/255, blue: 255/255, alpha: 1),
-//            UIColor(red: 255/255, green: 120/255, blue: 150/255, alpha: 1)
-//        ]
-//
-//        let completedTaskIdsForToday = Set(
-//            taskStates
-//                .filter { $0.isCompleted }
-//                .map { $0.taskId }
-//        )
-//
-//        let elementItems = buildElementProgressItems(
-//            from: tasks,
-//            completedTaskIds: completedTaskIdsForToday
-//        )
-//
-//        let legendItems: [ProgramProgressCardLegendItem] = elementItems.enumerated().map { index, item in
-//            let chartValue = CGFloat(item.percentage) / 100.0
-//            
-//            return ProgramProgressCardLegendItem(
-//                color: colorPalette[index % colorPalette.count],
-//                title: "\(item.emoji) \(item.name)",
-//                valueText: "\(item.percentage)%",
-//                chartValue: chartValue
-//            )
-//        }
-//
-//        print("🟣 totalDays:", totalDays)
-//        print("🟣 totalTaskCountPerDay:", totalTaskCountPerDay)
-//        print("🟣 totalPossibleTaskCompletions:", totalPossibleTaskCompletions)
-//        print("🟣 totalCompletedTaskCount:", totalCompletedTaskCount)
-//        print("🟣 progressPercent:", progressPercent)
-//
-//        return ProgramProgressCardData(
-//            currentDay: currentDay,
-//            totalDays: totalDays,
-//            progressPercent: progressPercent,
-//            donutCenterPercent: progressPercent,
-//            legendItems: legendItems
-//        )
-//    }
-    
     private func buildProgramProgressCardData() -> ProgramProgressCardData? {
         guard let selectedProgram = selectedProgram else {
             return nil
@@ -443,102 +487,57 @@ class ProgressViewController: UIViewController {
             currentDay = 1
         }
 
-        let allTasks = allProgramTasks(for: selectedProgram)
-
-        let requiredTasks = allTasks.filter { $0.isRequired != false }
-        let requiredTaskIds = Set(requiredTasks.map { $0.id })
-
-        let completedTaskIds = completedTaskIdsAcrossProgram()
-        let completedRequiredTaskIds = completedTaskIds.filter {
-            requiredTaskIds.contains($0)
-        }
-
-        let totalRequiredTaskCount = max(1, requiredTasks.count)
-        let totalCompletedRequiredTaskCount = completedRequiredTaskIds.count
-
-        let progressRatio = Double(totalCompletedRequiredTaskCount) / Double(totalRequiredTaskCount)
-        let progressPercent = Int((progressRatio * 100.0).rounded())
-
-        let elementItems = buildElementProgressItems(
-            for: selectedProgram,
-            allTasks: allTasks,
-            completedTaskIds: completedTaskIds
+        let progressCounts = calculateOverallProgramProgress(
+            for: selectedProgram
         )
 
-//        let legendItems: [ProgramProgressCardLegendItem] = elementItems.map { item in
-//            let chartValue: CGFloat
-//
-//            if totalRequiredTaskCount > 0 {
-//                let requiredElementTasks = allTasks.filter {
-//                    ($0.elementKey ?? "general") == item.key && $0.isRequired != false
-//                }
-//
-//                let requiredElementTaskIds = Set(requiredElementTasks.map { $0.id })
-//
-//                let completedRequiredElementCount = completedTaskIds.filter {
-//                    requiredElementTaskIds.contains($0)
-//                }.count
-//
-//                chartValue = CGFloat(completedRequiredElementCount) / CGFloat(totalRequiredTaskCount)
-//            } else {
-//                chartValue = 0
-//            }
-//
-//            return ProgramProgressCardLegendItem(
-//                color: colorForElementKey(item.key),
-//                title: "\(item.emoji) \(item.name)",
-//                valueText: "\(item.percentage)%",
-//                chartValue: chartValue
-//            )
-//        }
-        
-        let legendItems: [ProgramProgressCardLegendItem] = elementItems.map { item in
+        let totalTaskCount = progressCounts.total
+        let completedTaskCount = progressCounts.completed
 
-            let requiredElementTasks = allTasks.filter {
-                ($0.elementKey ?? "general") == item.key && $0.isRequired != false
-            }
+        let progressRatio: Double
 
-            let requiredElementTaskIds = Set(requiredElementTasks.map { $0.id })
-
-            let completedRequiredElementCount = completedTaskIds.filter {
-                requiredElementTaskIds.contains($0)
-            }.count
-
-            let elementPercent: Int
-            if requiredElementTasks.isEmpty {
-                elementPercent = 0
-            } else {
-                elementPercent = Int((Double(completedRequiredElementCount) / Double(requiredElementTasks.count) * 100).rounded())
-            }
-
-            let chartValue: CGFloat
-            if totalRequiredTaskCount > 0 {
-                chartValue = CGFloat(completedRequiredElementCount) / CGFloat(totalRequiredTaskCount)
-            } else {
-                chartValue = 0
-            }
-
-            return ProgramProgressCardLegendItem(
-                color: colorForElementKey(item.key),
-                title: "\(item.emoji) \(item.name)",
-                valueText: "\(elementPercent)%",
-                chartValue: chartValue
-            )
+        if totalTaskCount > 0 {
+            progressRatio =
+                Double(completedTaskCount) /
+                Double(totalTaskCount)
+        } else {
+            progressRatio = 0
         }
 
-        print("🧩 legendItems:", legendItems.map { "\($0.title) value:\($0.valueText) chart:\($0.chartValue)" })
+        let progressPercent = Int(
+            (progressRatio * 100.0).rounded()
+        )
 
-        print("🟣 totalDays:", totalDays)
-        print("🟣 allTasks:", allTasks.count)
-        print("🟣 requiredTasks:", requiredTasks.count)
-        print("🟣 completedRequired:", totalCompletedRequiredTaskCount)
-        print("🟣 progressPercent:", progressPercent)
+        let safeProgressPercent = min(
+            max(progressPercent, 0),
+            100
+        )
+
+        let legendItems: [ProgramProgressCardLegendItem] = [
+            ProgramProgressCardLegendItem(
+                color: UIColor(
+                    red: 222/255,
+                    green: 120/255,
+                    blue: 174/255,
+                    alpha: 1
+                ),
+                title: "Genel İlerleme",
+                valueText: "\(safeProgressPercent)%",
+                chartValue: CGFloat(progressRatio)
+            )
+        ]
+
+        print(
+            "🌸 Genel ilerleme:",
+            "\(completedTaskCount)/\(totalTaskCount)",
+            "=%\(safeProgressPercent)"
+        )
 
         return ProgramProgressCardData(
             currentDay: currentDay,
             totalDays: totalDays,
-            progressPercent: progressPercent,
-            donutCenterPercent: progressPercent,
+            progressPercent: safeProgressPercent,
+            donutCenterPercent: safeProgressPercent,
             legendItems: legendItems
         )
     }
@@ -593,6 +592,11 @@ class ProgressViewController: UIViewController {
     
     private func toggleCompletion(for taskId: String) {
         
+        guard !isFinalizingEnrollment else {
+            print("🟡 Program finalization devam ediyor.")
+            return
+        }
+        
         guard let userId = Auth.auth().currentUser?.uid else {
                    print("🔴 toggleCompletion: userId yok")
                    return
@@ -626,14 +630,26 @@ class ProgressViewController: UIViewController {
         let isLastTask = completedRequiredCount == totalRequiredTaskCount
         let programDuration = selectedProgram?.durationDays ?? 0
         let isLastDay = todayLog.dayNumber >= programDuration
+//        let shouldFinalizeAfterSave =
+//            isTryingToCompleteTask &&
+//            isLastTask &&
+//            isLastDay
 
-        let shouldSkipPopup = UserDefaults.standard.bool(forKey: "skipCompletionPopupOnce")
+//        let shouldSkipPopup = UserDefaults.standard.bool(forKey: "skipCompletionPopupOnce")
+//
+//        if shouldSkipPopup {
+//            UserDefaults.standard.set(false, forKey: "skipCompletionPopupOnce")
+//        }
+//
+//        if !shouldSkipPopup && isTryingToCompleteTask && isLastTask && isLastDay {
+//            showCompletionPopup(for: taskId)
+//            return
+//        }
+        
+        if isTryingToCompleteTask &&
+            isLastTask &&
+            isLastDay {
 
-        if shouldSkipPopup {
-            UserDefaults.standard.set(false, forKey: "skipCompletionPopupOnce")
-        }
-
-        if !shouldSkipPopup && isTryingToCompleteTask && isLastTask && isLastDay {
             showCompletionPopup(for: taskId)
             return
         }
@@ -731,6 +747,16 @@ class ProgressViewController: UIViewController {
                     print("✅ toggleCompletion güncellendi")
                     print("✅ completedTaskIds:", updatedLog.completedTaskIds)
                     print("✅ isCompleted:", updatedLog.isCompleted)
+                    
+//                    if shouldFinalizeAfterSave {
+//
+//                        self.finalizeCurrentEnrollment(
+//                            userId: userId,
+//                            enrollment: activeEnrollment
+//                        )
+//
+//                        return
+//                    }
 
                     
                     self.enrollmentRepository.refreshEnrollmentProgressSummary(
@@ -773,9 +799,1056 @@ class ProgressViewController: UIViewController {
         }
     }
     
+    private func finalizeCurrentEnrollment(
+        userId: String,
+        enrollment: ActiveEnrollment
+    ) {
+
+        guard !isFinalizingEnrollment else {
+            return
+        }
+
+        isFinalizingEnrollment = true
+
+        enrollmentRepository.finalizeEnrollment(
+            userId: userId,
+            enrollment: enrollment,
+            trigger: .lastTask
+        ) { [weak self] result in
+
+            DispatchQueue.main.async {
+
+                guard let self = self else {
+                    return
+                }
+
+                switch result {
+
+                case .failure(let error):
+
+                    self.isFinalizingEnrollment = false
+
+                    print(
+                        "🔴 Program finalization hatası:",
+                        error.localizedDescription
+                    )
+
+                    let alert = UIAlertController(
+                        title: "Program henüz kapatılamadı",
+                        message:
+                            "Son görevin kaydedildi. Program sonucu şu anda kesinleştirilemedi. Lunora Progress ekranını tekrar açtığında işlemi yeniden kontrol edecek.",
+                        preferredStyle: .alert
+                    )
+
+                    alert.addAction(
+                        UIAlertAction(
+                            title: "Tamam",
+                            style: .default
+                        )
+                    )
+
+                    self.present(
+                        alert,
+                        animated: true
+                    )
+
+                case .success(let lifecycleResult):
+
+                    self.isFinalizingEnrollment = false
+
+                    switch lifecycleResult {
+
+                    case .completedWithBadge(let finalizedEnrollment):
+
+                        self.handleProgramCompletedWithBadge(
+                            userId: userId,
+                            enrollment: finalizedEnrollment
+                        )
+
+                    case .completedWithoutBadge(let finalizedEnrollment):
+
+                        self.handleProgramCompletedWithoutBadge(
+                            userId: userId,
+                            enrollment: finalizedEnrollment
+                        )
+
+                    case .stillActive(let enrollment):
+
+                        // Repository son günün gerçekten tamamlanmadığını
+                        // tespit ettiyse UI kendi başına programı bitirmez.
+                        self.activeEnrollment = enrollment
+
+                        print(
+                            "🟡 Program henüz finalization şartlarını sağlamıyor."
+                        )
+
+                    case .noActiveEnrollment:
+
+                        self.resetActiveProgramState()
+                    }
+                }
+            }
+        }
+    }
+    
+    
+//    private func showCompletionPopup(for taskId: String) {
+//        
+//        let popup = ConfirmationPopupView()
+//
+//        popup.titleText = "Son adımdasın ✨"
+//        popup.messageText = "Bu görevi tamamladığında program bitecek. Devam etmek istiyor musun?"
+//        popup.cancelTitle = "Vazgeç"
+//        popup.confirmTitle = "Devam et"
+//
+//        popup.onConfirm = { [weak self] in
+//
+//            UserDefaults.standard.set(
+//                true,
+//                forKey: "skipCompletionPopupOnce"
+//            )
+//
+//            self?.toggleCompletion(for: taskId)
+//        }
+//        popup.onCancel = {
+//            // hiçbir şey yapma
+//        }
+//
+//        popup.present(in: self.view)
+//    }
+    
+    private func showProgramCompletionLoading() {
+
+        guard completionLoadingOverlay.superview == nil
+        else {
+            return
+        }
+
+        completionLoadingOverlay.addSubview(
+            completionLoadingCard
+        )
+
+        completionLoadingCard.addSubview(
+            completionLoadingIndicator
+        )
+
+        completionLoadingCard.addSubview(
+            completionLoadingLabel
+        )
+
+        view.addSubview(
+            completionLoadingOverlay
+        )
+
+        NSLayoutConstraint.activate([
+
+            completionLoadingOverlay.topAnchor.constraint(
+                equalTo: view.topAnchor
+            ),
+
+            completionLoadingOverlay.leadingAnchor.constraint(
+                equalTo: view.leadingAnchor
+            ),
+
+            completionLoadingOverlay.trailingAnchor.constraint(
+                equalTo: view.trailingAnchor
+            ),
+
+            completionLoadingOverlay.bottomAnchor.constraint(
+                equalTo: view.bottomAnchor
+            ),
+
+            completionLoadingCard.centerXAnchor.constraint(
+                equalTo: completionLoadingOverlay.centerXAnchor
+            ),
+
+            completionLoadingCard.centerYAnchor.constraint(
+                equalTo: completionLoadingOverlay.centerYAnchor
+            ),
+
+            completionLoadingCard.leadingAnchor.constraint(
+                greaterThanOrEqualTo:
+                    completionLoadingOverlay.leadingAnchor,
+                constant: 36
+            ),
+
+            completionLoadingCard.trailingAnchor.constraint(
+                lessThanOrEqualTo:
+                    completionLoadingOverlay.trailingAnchor,
+                constant: -36
+            ),
+
+            completionLoadingIndicator.topAnchor.constraint(
+                equalTo:
+                    completionLoadingCard.topAnchor,
+                constant: 24
+            ),
+
+            completionLoadingIndicator.centerXAnchor.constraint(
+                equalTo:
+                    completionLoadingCard.centerXAnchor
+            ),
+
+            completionLoadingLabel.topAnchor.constraint(
+                equalTo:
+                    completionLoadingIndicator.bottomAnchor,
+                constant: 14
+            ),
+
+            completionLoadingLabel.leadingAnchor.constraint(
+                equalTo:
+                    completionLoadingCard.leadingAnchor,
+                constant: 24
+            ),
+
+            completionLoadingLabel.trailingAnchor.constraint(
+                equalTo:
+                    completionLoadingCard.trailingAnchor,
+                constant: -24
+            ),
+
+            completionLoadingLabel.bottomAnchor.constraint(
+                equalTo:
+                    completionLoadingCard.bottomAnchor,
+                constant: -24
+            )
+        ])
+
+        completionLoadingIndicator.startAnimating()
+
+        UIView.animate(
+            withDuration: 0.18
+        ) {
+            self.completionLoadingOverlay.alpha = 1
+        }
+    }
+
+
+    private func hideProgramCompletionLoading() {
+
+        guard completionLoadingOverlay.superview != nil
+        else {
+            return
+        }
+
+        UIView.animate(
+            withDuration: 0.15,
+            animations: {
+
+                self.completionLoadingOverlay.alpha = 0
+
+            },
+            completion: { _ in
+
+                self.completionLoadingIndicator.stopAnimating()
+
+                self.completionLoadingOverlay.removeFromSuperview()
+
+                self.completionLoadingCard.removeFromSuperview()
+            }
+        )
+    }
+    
+//    private func completeFinalTaskAndFinishProgram(
+//        taskId: String
+//    ) {
+//
+//        guard !isFinalizingEnrollment else {
+//            return
+//        }
+//
+//        guard
+//            let userId = Auth.auth().currentUser?.uid,
+//            let activeEnrollment = activeEnrollment,
+//            let todayLog = todayLog
+//        else {
+//            print("🔴 Final task completion için gerekli veri eksik.")
+//            return
+//        }
+//
+//        // Son görevi tamamlanmış listeye ekle.
+//        var updatedTaskIds = todayLog.completedTaskIds
+//
+//        if !updatedTaskIds.contains(taskId) {
+//            updatedTaskIds.append(taskId)
+//        }
+//
+//        let requiredTasks =
+//            tasks.filter {
+//                $0.isRequired != false
+//            }
+//
+//        let requiredTaskIds =
+//            Set(requiredTasks.map { $0.id })
+//
+//        let completedRequiredCount =
+//            updatedTaskIds.filter {
+//                requiredTaskIds.contains($0)
+//            }.count
+//
+//        let totalRequiredTaskCount =
+//            requiredTasks.count
+//
+//        let completionRate =
+//            totalRequiredTaskCount > 0
+//            ? Double(completedRequiredCount)
+//                / Double(totalRequiredTaskCount)
+//            : 0
+//
+//        let dailyThreshold =
+//            min(
+//                max(
+//                    selectedProgram?
+//                        .dailyTaskCompletionThreshold
+//                        ?? 0.5,
+//                    0.0
+//                ),
+//                1.0
+//            )
+//
+//        let isDayCompleted =
+//            completionRate >= dailyThreshold
+//
+//        isFinalizingEnrollment = true
+//        
+//        showProgramCompletionLoading()
+//
+//        // 1. ÖNCE son task gerçekten Firestore'a yazılır.
+//        enrollmentRepository.updateCompletedTaskIds(
+//            userId: userId,
+//            enrollmentId: activeEnrollment.enrollmentId,
+//            dateKey: todayLog.dateKey,
+//            completedTaskIds: updatedTaskIds,
+//            isCompleted: isDayCompleted
+//        ) { [weak self] result in
+//
+//            DispatchQueue.main.async {
+//
+//                guard let self = self else {
+//                    return
+//                }
+//
+//                switch result {
+//
+//                case .failure(let error):
+//
+//                    self.isFinalizingEnrollment = false
+//                    self.hideProgramCompletionLoading()
+//
+//                    print(
+//                        "🔴 Son görev kaydedilemedi:",
+//                        error.localizedDescription
+//                    )
+//
+//                    let alert = UIAlertController(
+//                        title: "Görev kaydedilemedi",
+//                        message:
+//                            "Son adım şu anda kaydedilemedi. Lütfen tekrar dene.",
+//                        preferredStyle: .alert
+//                    )
+//
+//                    alert.addAction(
+//                        UIAlertAction(
+//                            title: "Tamam",
+//                            style: .default
+//                        )
+//                    )
+//
+//                    self.present(
+//                        alert,
+//                        animated: true
+//                    )
+//
+//                case .success(let updatedLog):
+//
+//                    // Local UI state'i de güncelle.
+//                    self.todayLog = updatedLog
+//
+//                    self.taskStates =
+//                        self.taskStates.map { state in
+//
+//                            var updatedState = state
+//
+//                            updatedState.isCompleted =
+//                                updatedLog.completedTaskIds
+//                                    .contains(
+//                                        updatedState.taskId
+//                                    )
+//
+//                            return updatedState
+//                        }
+//
+//                    self.tasksCardView.update(
+//                        states: self.taskStates
+//                    )
+//
+//                    self.updateBottomSummaryUI()
+//
+//                    // 2. TASK KAYDI BAŞARILI.
+//                    // Şimdi programı gerçekten finalize ediyoruz.
+//
+//                    self.enrollmentRepository.finalizeEnrollment(
+//                        userId: userId,
+//                        enrollment: activeEnrollment,
+//                        trigger: .lastTask
+//                    ) { [weak self] finalizeResult in
+//
+//                        DispatchQueue.main.async {
+//
+//                            guard let self = self else {
+//                                return
+//                            }
+//
+//                            self.isFinalizingEnrollment = false
+//                            self.hideProgramCompletionLoading()
+//
+//                            switch finalizeResult {
+//
+//                            case .failure(let error):
+//
+//                                print(
+//                                    "🔴 Program finalize edilemedi:",
+//                                    error.localizedDescription
+//                                )
+//
+//                                let alert =
+//                                    UIAlertController(
+//                                        title:
+//                                            "Program tamamlanamadı",
+//                                        message:
+//                                            error.localizedDescription,
+//                                        preferredStyle:
+//                                            .alert
+//                                    )
+//
+//                                alert.addAction(
+//                                    UIAlertAction(
+//                                        title: "Tamam",
+//                                        style: .default
+//                                    )
+//                                )
+//
+//                                self.present(
+//                                    alert,
+//                                    animated: true
+//                                )
+//
+//                            case .success(
+//                                let lifecycleResult
+//                            ):
+//
+//                                switch lifecycleResult {
+//
+//                                case .completedWithBadge(
+//                                    let finalizedEnrollment
+//                                ):
+//
+//                                    /*
+//                                     İŞTE İSTEDİĞİN BAĞLANTI.
+//
+//                                     Bu fonksiyon:
+//                                     → Progress'i boşaltıyor
+//                                     → ProgramCompletionViewController
+//                                       oluşturuyor
+//                                     → present ediyor
+//                                    */
+//
+//                                    self.handleProgramCompletedWithBadge(
+//                                        userId: userId,
+//                                        enrollment:
+//                                            finalizedEnrollment
+//                                    )
+//
+//                                case .completedWithoutBadge(
+//                                    let finalizedEnrollment
+//                                ):
+//
+//                                    self.handleProgramCompletedWithoutBadge(
+//                                        userId: userId,
+//                                        enrollment:
+//                                            finalizedEnrollment
+//                                    )
+//
+//                                case .stillActive:
+//
+//                                    /*
+//                                     Buraya gelmemeliyiz.
+//                                     Çünkü kullanıcı final günün
+//                                     son required task'ını onayladı.
+//                                    */
+//
+//                                    print(
+//                                        "🔴 HATA: Son görev tamamlandı fakat repository programı stillActive döndürdü."
+//                                    )
+//
+//                                    let alert =
+//                                        UIAlertController(
+//                                            title:
+//                                                "Program sonucu kesinleştirilemedi",
+//                                            message:
+//                                                "Son görevin kaydedildi fakat programın tamamlanma durumu oluşturulamadı.",
+//                                            preferredStyle:
+//                                                .alert
+//                                        )
+//
+//                                    alert.addAction(
+//                                        UIAlertAction(
+//                                            title: "Tamam",
+//                                            style: .default
+//                                        )
+//                                    )
+//
+//                                    self.present(
+//                                        alert,
+//                                        animated: true
+//                                    )
+//
+//                                case .noActiveEnrollment:
+//
+//                                    self.resetActiveProgramState()
+//                                }
+//                            }
+//                        }
+//                    }
+//                }
+//            }
+//        }
+//    }
+    
+    private func completeFinalTaskAndFinishProgram(
+        taskId: String
+    ) {
+
+        guard !isFinalizingEnrollment else {
+            return
+        }
+
+        guard
+            let userId = Auth.auth().currentUser?.uid,
+            let activeEnrollment = activeEnrollment,
+            let todayLog = todayLog
+        else {
+            print("🔴 Final task completion için gerekli veri eksik.")
+            return
+        }
+
+        // MARK: - Son görevi tamamlanmış listeye ekle
+
+        var updatedTaskIds = todayLog.completedTaskIds
+
+        if !updatedTaskIds.contains(taskId) {
+            updatedTaskIds.append(taskId)
+        }
+
+        let requiredTasks =
+            tasks.filter {
+                $0.isRequired != false
+            }
+
+        let requiredTaskIds =
+            Set(requiredTasks.map { $0.id })
+
+        let completedRequiredCount =
+            updatedTaskIds.filter {
+                requiredTaskIds.contains($0)
+            }.count
+
+        let totalRequiredTaskCount =
+            requiredTasks.count
+
+        let completionRate =
+            totalRequiredTaskCount > 0
+            ? Double(completedRequiredCount)
+                / Double(totalRequiredTaskCount)
+            : 0
+
+        let dailyThreshold =
+            min(
+                max(
+                    selectedProgram?
+                        .dailyTaskCompletionThreshold
+                        ?? 0.5,
+                    0.0
+                ),
+                1.0
+            )
+
+        let isDayCompleted =
+            completionRate >= dailyThreshold
+
+
+        // =====================================================
+        // MARK: - OFFLINE FINAL COMPLETION
+        // =====================================================
+
+        if !NetworkMonitor.shared.isConnected {
+
+            print("🟡 Offline: son görev local tamamlanıyor")
+
+            // 1. Son görevi local UI/cache'e uygula.
+            applyLocalTaskToggle(
+                taskId: taskId,
+                completedTaskIds: updatedTaskIds,
+                isCompleted: isDayCompleted
+            )
+
+            // 2. Normal görevlerde kullandığımız mevcut pending sisteme ekle.
+//            let pendingProgressAction =
+//                PendingProgressAction(
+//                    id: UUID(),
+//                    userId: userId,
+//                    enrollmentId: activeEnrollment.enrollmentId,
+//                    dateKey: todayLog.dateKey,
+//                    completedTaskIds: updatedTaskIds,
+//                    isCompleted: isDayCompleted,
+//                    createdAt: Date()
+//                )
+//
+//            PendingProgressManager.shared.add(
+//                pendingProgressAction
+//            )
+//
+//            // 3. Ayrıca programın finalize edilmesi gerektiğini kaydet.
+//            let pendingFinalization =
+//                PendingProgramFinalizationAction(
+//                    id: UUID(),
+//                    userId: userId,
+//                    enrollmentId: activeEnrollment.enrollmentId,
+//                    createdAt: Date()
+//                )
+//
+//            PendingProgramFinalizationManager.shared.add(
+//                pendingFinalization
+//            )
+            
+            let pendingProgressAction =
+                PendingProgressAction(
+                    id: UUID(),
+                    userId: userId,
+                    enrollmentId: activeEnrollment.enrollmentId,
+                    dateKey: todayLog.dateKey,
+                    completedTaskIds: updatedTaskIds,
+                    isCompleted: isDayCompleted,
+                    createdAt: Date(),
+                    shouldFinalizeProgram: true
+                )
+
+            PendingProgressManager.shared.add(
+                pendingProgressAction
+            )
+
+            print(
+                "🟡 Offline program finalization pending action içine kaydedildi:",
+                activeEnrollment.enrollmentId
+            )
+            
+
+            print(
+                "🟡 Offline program finalization kuyruğa alındı:",
+                activeEnrollment.enrollmentId
+            )
+
+            // 4. Local ilerlemeyi hesapla.
+            var finalProgressPercent =
+                activeEnrollment.progressPercent
+
+            if let selectedProgram = selectedProgram {
+
+                let counts =
+                    calculateOverallProgramProgress(
+                        for: selectedProgram
+                    )
+
+                if counts.total > 0 {
+                    finalProgressPercent =
+                        (
+                            Double(counts.completed)
+                            / Double(counts.total)
+                        ) * 100.0
+                }
+            }
+
+            finalProgressPercent =
+                min(
+                    max(finalProgressPercent, 0),
+                    100
+                )
+
+            let earnedBadge =
+                finalProgressPercent
+                >= ProgramCompletionPolicy.badgeUnlockPercent
+
+
+            // 5. Sadece UI için geçici "completed enrollment" oluştur.
+            // Firebase'e bunu yazmıyoruz.
+            let localCompletedData: [String: Any] = [
+
+                "userId": activeEnrollment.userId,
+                "programId": activeEnrollment.programId,
+
+                "programName":
+                    activeEnrollment.programName ?? "",
+
+                "durationDays":
+                    activeEnrollment.durationDays,
+
+                "badgeId":
+                    activeEnrollment.badgeId,
+
+                "badgeTitle":
+                    activeEnrollment.badgeTitle,
+
+                "badgeDescription":
+                    activeEnrollment.badgeDescription,
+
+                "badgeImageName":
+                    activeEnrollment.badgeImageName,
+
+                "programImageName":
+                    activeEnrollment.programImageName,
+
+                "status": "completed",
+
+                "currentDay":
+                    activeEnrollment.currentDay,
+
+                "completedDaysCount":
+                    activeEnrollment.completedDaysCount,
+
+                "progressPercent":
+                    finalProgressPercent,
+
+                "isCompleted": true,
+
+                "isFailed": false,
+
+                "earnedBadge":
+                    earnedBadge,
+
+                "badgeEvaluationCompleted":
+                    false,
+
+                "finalizationVersion":
+                    ProgramCompletionPolicy.finalizationVersion,
+
+                "completionReason":
+                    "offline_pending_sync",
+
+                "finalProgressPercent":
+                    finalProgressPercent
+            ]
+
+            guard
+                let localCompletedEnrollment =
+                    ActiveEnrollment(
+                        documentId:
+                            activeEnrollment.enrollmentId,
+                        data:
+                            localCompletedData
+                    )
+            else {
+
+                print(
+                    "🔴 Offline completed enrollment oluşturulamadı."
+                )
+
+                return
+            }
+
+
+            // 6. Kullanıcı açısından program hemen tamamlandı.
+            if earnedBadge {
+
+                handleProgramCompletedWithBadge(
+                    userId: userId,
+                    enrollment:
+                        localCompletedEnrollment
+                )
+
+            } else {
+
+                handleProgramCompletedWithoutBadge(
+                    userId: userId,
+                    enrollment:
+                        localCompletedEnrollment
+                )
+            }
+
+            // ÇOK ÖNEMLİ:
+            // Buradan sonra online Firestore koduna geçmiyoruz.
+            return
+        }
+
+
+        // =====================================================
+        // MARK: - ONLINE FINAL COMPLETION
+        // =====================================================
+        //
+        // BURADAN AŞAĞISI SENİN ÇALIŞAN SİSTEMİN.
+        // DEĞİŞTİRMİYORUZ.
+        // =====================================================
+
+        isFinalizingEnrollment = true
+
+        showProgramCompletionLoading()
+
+
+        // 1. ÖNCE son task gerçekten Firestore'a yazılır.
+
+        enrollmentRepository.updateCompletedTaskIds(
+
+            userId: userId,
+
+            enrollmentId:
+                activeEnrollment.enrollmentId,
+
+            dateKey:
+                todayLog.dateKey,
+
+            completedTaskIds:
+                updatedTaskIds,
+
+            isCompleted:
+                isDayCompleted
+
+        ) { [weak self] result in
+
+            DispatchQueue.main.async {
+
+                guard let self = self else {
+                    return
+                }
+
+
+                switch result {
+
+
+                // MARK: Task save failure
+
+                case .failure(let error):
+
+                    self.isFinalizingEnrollment = false
+
+                    self.hideProgramCompletionLoading()
+
+                    print(
+                        "🔴 Son görev kaydedilemedi:",
+                        error.localizedDescription
+                    )
+
+                    let alert =
+                        UIAlertController(
+                            title:
+                                "Görev kaydedilemedi",
+                            message:
+                                "Son adım şu anda kaydedilemedi. Lütfen tekrar dene.",
+                            preferredStyle:
+                                .alert
+                        )
+
+                    alert.addAction(
+                        UIAlertAction(
+                            title: "Tamam",
+                            style: .default
+                        )
+                    )
+
+                    self.present(
+                        alert,
+                        animated: true
+                    )
+
+
+                // MARK: Task save success
+
+                case .success(let updatedLog):
+
+                    self.todayLog =
+                        updatedLog
+
+                    self.taskStates =
+                        self.taskStates.map {
+                            state in
+
+                            var updatedState =
+                                state
+
+                            updatedState.isCompleted =
+                                updatedLog
+                                    .completedTaskIds
+                                    .contains(
+                                        updatedState.taskId
+                                    )
+
+                            return updatedState
+                        }
+
+                    self.tasksCardView.update(
+                        states:
+                            self.taskStates
+                    )
+
+                    self.updateBottomSummaryUI()
+
+
+                    // 2. Task başarıyla Firestore'a ulaştı.
+                    // Şimdi programı finalize ediyoruz.
+
+                    self.enrollmentRepository
+                        .finalizeEnrollment(
+
+                            userId:
+                                userId,
+
+                            enrollment:
+                                activeEnrollment,
+
+                            trigger:
+                                .lastTask
+
+                        ) { [weak self] finalizeResult in
+
+                            DispatchQueue.main.async {
+
+                                guard
+                                    let self = self
+                                else {
+                                    return
+                                }
+
+                                self.isFinalizingEnrollment =
+                                    false
+
+                                self.hideProgramCompletionLoading()
+
+
+                                switch finalizeResult {
+
+
+                                // MARK: Finalization failure
+
+                                case .failure(let error):
+
+                                    print(
+                                        "🔴 Program finalize edilemedi:",
+                                        error.localizedDescription
+                                    )
+
+                                    let alert =
+                                        UIAlertController(
+
+                                            title:
+                                                "Program tamamlanamadı",
+
+                                            message:
+                                                error.localizedDescription,
+
+                                            preferredStyle:
+                                                .alert
+                                        )
+
+                                    alert.addAction(
+                                        UIAlertAction(
+                                            title:
+                                                "Tamam",
+                                            style:
+                                                .default
+                                        )
+                                    )
+
+                                    self.present(
+                                        alert,
+                                        animated:
+                                            true
+                                    )
+
+
+                                // MARK: Finalization success
+
+                                case .success(
+                                    let lifecycleResult
+                                ):
+
+                                    switch lifecycleResult {
+
+
+                                    case .completedWithBadge(
+                                        let finalizedEnrollment
+                                    ):
+
+                                        self.handleProgramCompletedWithBadge(
+
+                                            userId:
+                                                userId,
+
+                                            enrollment:
+                                                finalizedEnrollment
+                                        )
+
+
+                                    case .completedWithoutBadge(
+                                        let finalizedEnrollment
+                                    ):
+
+                                        self.handleProgramCompletedWithoutBadge(
+
+                                            userId:
+                                                userId,
+
+                                            enrollment:
+                                                finalizedEnrollment
+                                        )
+
+
+                                    case .stillActive:
+
+                                        print(
+                                            "🔴 HATA: Son görev tamamlandı fakat repository programı stillActive döndürdü."
+                                        )
+
+                                        let alert =
+                                            UIAlertController(
+
+                                                title:
+                                                    "Program sonucu kesinleştirilemedi",
+
+                                                message:
+                                                    "Son görevin kaydedildi fakat programın tamamlanma durumu oluşturulamadı.",
+
+                                                preferredStyle:
+                                                    .alert
+                                            )
+
+                                        alert.addAction(
+                                            UIAlertAction(
+                                                title:
+                                                    "Tamam",
+                                                style:
+                                                    .default
+                                            )
+                                        )
+
+                                        self.present(
+                                            alert,
+                                            animated:
+                                                true
+                                        )
+
+
+                                    case .noActiveEnrollment:
+
+                                        self.resetActiveProgramState()
+                                    }
+                                }
+                            }
+                        }
+                }
+            }
+        }
+    }
     
     private func showCompletionPopup(for taskId: String) {
-        
+
         let popup = ConfirmationPopupView()
 
         popup.titleText = "Son adımdasın ✨"
@@ -784,12 +1857,16 @@ class ProgressViewController: UIViewController {
         popup.confirmTitle = "Devam et"
 
         popup.onConfirm = { [weak self] in
-            UserDefaults.standard.set(true, forKey: "skipCompletionPopupOnce")
-            self?.toggleCompletion(for: taskId)
-            self?.showProgramCompletionScreen()
+
+            guard let self = self else { return }
+
+            self.completeFinalTaskAndFinishProgram(
+                taskId: taskId
+            )
         }
+
         popup.onCancel = {
-            // hiçbir şey yapma
+            // Kullanıcı vazgeçti.
         }
 
         popup.present(in: self.view)
@@ -1093,17 +2170,49 @@ class ProgressViewController: UIViewController {
             }
         }
     }
+    
+    private func resetActiveProgramState() {
+
+        activeEnrollment = nil
+        todayLog = nil
+        allDailyLogs = []
+
+        selectedProgram = nil
+
+        tasks = []
+        taskStates = []
+
+        currentStreak = 0
+
+        programInfoStates = [
+            false,
+            false,
+            false,
+            false,
+            false
+        ]
+
+        ProgressCacheManager.shared.clear()
+
+        // Aktif program olmadığı için segmentin eski
+        // program içeriğini tekrar açmasını engelliyoruz.
+        segmentControl.selectedSegmentIndex = 0
+        segmentControl.isEnabled = false
+
+        showEmptyState()
+    }
       
     private func showEmptyState() {
         setHeaderVisibility(isVisible: false)
         clearContentStack()
 
         let emptyView = makeEmptyStateView()
+        guidedEmptyStateView = emptyView
+        
         contentStackView.addArrangedSubview(emptyView)
 
         headerStatusLabel.text = "Henüz aktif programın yok"
         findProgramNameLabel()?.text = ""
-        userProfileImageView.image = UIImage(named: "defaultAvatar")
 
         bottomSummaryCardView.configure(
             mantra: "Başlamak için kendine uygun bir program seç.",
@@ -1111,7 +2220,108 @@ class ProgressViewController: UIViewController {
             completedText: "0/0",
             remainingText: "--"
         )
+        
+        DispatchQueue.main.async {
+            [weak self] in
+
+            self?.showProgressGuidedOnboardingIfNeeded()
+        }
     }
+    
+    private func showProgressGuidedOnboardingIfNeeded() {
+
+        guard activeCoachMark == nil else {
+            return
+        }
+
+        guard
+            let uid = Auth.auth().currentUser?.uid
+        else {
+            return
+        }
+
+        let manager =
+            GuidedOnboardingManager.shared
+
+        print(
+            "🧭 GUIDED Progress active:",
+            manager.isActive(
+                for: uid
+            )
+        )
+
+        print(
+            "🧭 GUIDED Progress step:",
+            manager.currentStep(
+                for: uid
+            )?.rawValue ?? "nil"
+        )
+
+        guard manager.isActive(
+            for: uid
+        ) else {
+            return
+        }
+
+        guard
+            manager.currentStep(
+                for: uid
+            ) == .programProgress
+        else {
+            return
+        }
+
+        guard
+            let guidedEmptyStateView
+        else {
+            print(
+                "🧭 GUIDED: Progress empty state hazır değil"
+            )
+            return
+        }
+
+        view.layoutIfNeeded()
+
+        guard let hostView =
+            tabBarController?.view
+            ?? self.view
+        else {
+            return
+        }
+
+        activeCoachMark =
+            GuidedOnboardingCoordinator
+                .shared
+                .present(
+                    uid: uid,
+                    step:
+                        .programProgress,
+                    over:
+                        hostView,
+                    targetView:
+                        guidedEmptyStateView,
+                    onPrimary: { [weak self] in
+                        guard let self else {
+                            return
+                        }
+
+                        self.activeCoachMark = nil
+
+                        print(
+                            "🧭 GUIDED: Progress → Completed"
+                        )
+
+                        self.tabBarController?.selectedIndex = 2
+                    },
+                    onSkip: {
+                        [weak self] in
+
+                        self?.activeCoachMark = nil
+                    }
+                )
+    }
+    
+    
 
     private func makeEmptyStateView() -> UIView {
         let container = UIView()
@@ -1289,29 +2499,48 @@ class ProgressViewController: UIViewController {
         programBadgeCardView.configure(with: data)
     }
     
-    private func buildProgramBadgeCardData() -> ProgramBadgeCardData?  {
+    private func buildProgramBadgeCardData() -> ProgramBadgeCardData? {
         guard let selectedProgram = selectedProgram else {
             return nil
         }
 
-        let totalDays = max(1, selectedProgram.durationDays)
-        let totalTaskCountPerDay = max(1, tasks.count)
-        let totalPossibleTaskCompletions = totalDays * totalTaskCountPerDay
+        let progressCounts = calculateOverallProgramProgress(
+            for: selectedProgram
+        )
 
-        let totalCompletedTaskCount = allDailyLogs.reduce(0) { partialResult, log in
-            partialResult + log.completedTaskIds.count
+        let progressRatio: Double
+
+        if progressCounts.total > 0 {
+            progressRatio =
+                Double(progressCounts.completed) /
+                Double(progressCounts.total)
+        } else {
+            progressRatio = 0
         }
 
-        let progressRatio = Double(totalCompletedTaskCount) / Double(totalPossibleTaskCompletions)
-        let progressPercent = Int((progressRatio * 100.0).rounded())
+        let progressPercent = min(
+            max(
+                Int((progressRatio * 100.0).rounded()),
+                0
+            ),
+            100
+        )
 
-        let unlockThreshold = 80
+        // Rozet kazanma eşiği
+        let unlockThreshold =
+            Int(
+                ProgramCompletionPolicy
+                    .badgeUnlockPercent
+            )
+
+        // Yalnızca kilit burada açılıyor.
+        // Progress %100'e kadar devam edecek.
         let isUnlocked = progressPercent >= unlockThreshold
 
         return ProgramBadgeCardData(
             badgeName: "✨ \(selectedProgram.name) Rozeti",
-            badgeDescription: "Bu rozeti açmak için ilerlemeni %\(unlockThreshold) seviyesine ulaştır.",
-            badgeImageName: selectedProgram.imageName,
+            badgeDescription: "Program ilerlemenin %\(unlockThreshold)'ine ulaştığında bu rozeti kazanırsın.",
+            badgeImageName: selectedProgram.badgeImageName ?? selectedProgram.imageName,
             progressPercent: progressPercent,
             unlockThreshold: unlockThreshold,
             isUnlocked: isUnlocked
@@ -1373,6 +2602,7 @@ class ProgressViewController: UIViewController {
         enrollment: ActiveEnrollment
     ) {
         self.activeEnrollment = enrollment
+        segmentControl.isEnabled = true
 
         ProgramService.shared.fetchPrograms { [weak self] programs in
             DispatchQueue.main.async {
@@ -1484,48 +2714,114 @@ class ProgressViewController: UIViewController {
         userId: String,
         enrollment: ActiveEnrollment
     ) {
-        self.activeEnrollment = enrollment
 
-        ProgressCacheManager.shared.clear()
+        guard
+            handledCompletedEnrollmentId
+                != enrollment.enrollmentId
+        else {
+            return
+        }
+
+        handledCompletedEnrollmentId =
+            enrollment.enrollmentId
+
+        /*
+         Backend artık tamamlandı.
+         Progress tarafındaki active state hemen temizlenir.
+        */
+        resetActiveProgramState()
+
+        /*
+         Programlar / Tamamlanan gibi diğer ekranlara
+         backend state'in değiştiğini bildiriyoruz.
+        */
+        NotificationCenter.default.post(
+            name: .activeEnrollmentDidChange,
+            object: nil
+        )
 
         let vc = ProgramCompletionViewController()
-        vc.programTitle = enrollment.programName
-        vc.programImageName = enrollment.programImageName
+
+        vc.programTitle =
+            enrollment.badgeTitle.isEmpty
+            ? enrollment.programName
+            : enrollment.badgeTitle
+
+        vc.programImageName =
+            enrollment.badgeImageName.isEmpty
+            ? enrollment.programImageName
+            : enrollment.badgeImageName
+
         vc.userId = userId
         vc.enrollmentId = enrollment.enrollmentId
 
         vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true)
+
+        present(
+            vc,
+            animated: true
+        )
     }
     
     private func handleProgramCompletedWithoutBadge(
         userId: String,
         enrollment: ActiveEnrollment
     ) {
-        self.activeEnrollment = nil
-        self.todayLog = nil
-        self.allDailyLogs = []
-        self.currentStreak = 0
-        self.selectedProgram = nil
-        self.tasks = []
-        self.taskStates = []
 
-        ProgressCacheManager.shared.clear()
-        showEmptyState()
+        guard
+            handledCompletedEnrollmentId
+                != enrollment.enrollmentId
+        else {
+            return
+        }
+
+        handledCompletedEnrollmentId =
+            enrollment.enrollmentId
+
+        resetActiveProgramState()
+
+        NotificationCenter.default.post(
+            name: .activeEnrollmentDidChange,
+            object: nil
+        )
+
+        let finalPercent =
+            Int(
+                (
+                    enrollment.finalProgressPercent
+                    ?? enrollment.progressPercent
+                ).rounded()
+            )
 
         let alert = UIAlertController(
             title: "Yolculuğun Tamamlandı 🌙",
-            message: "Bu programın süresi tamamlandı. Bu kez rozet kazanmak için gereken ilerleme oranına ulaşamadın, ama attığın adımlar kaydedildi.",
+            message:
+                "Programını tamamladın. Genel ilerlemen %\(finalPercent) oldu. Rozet kazanmak için gereken %\(Int(ProgramCompletionPolicy.badgeUnlockPercent)) eşiğine bu kez ulaşamadın.",
             preferredStyle: .alert
         )
 
-        alert.addAction(UIAlertAction(title: "Yeni Programa Başla", style: .default, handler: { [weak self] _ in
-            self?.tabBarController?.selectedIndex = 0
-        }))
+        alert.addAction(
+            UIAlertAction(
+                title: "Yeni Programa Başla",
+                style: .default,
+                handler: { [weak self] _ in
+                    self?.tabBarController?
+                        .selectedIndex = 0
+                }
+            )
+        )
 
-        alert.addAction(UIAlertAction(title: "Tamam", style: .cancel))
+        alert.addAction(
+            UIAlertAction(
+                title: "Tamam",
+                style: .cancel
+            )
+        )
 
-        present(alert, animated: true)
+        present(
+            alert,
+            animated: true
+        )
     }
     
     
@@ -1543,19 +2839,22 @@ class ProgressViewController: UIViewController {
         return button
     }()
     
-    private func showProgramCompletionScreen() {
-        guard let userId = Auth.auth().currentUser?.uid,
-              let activeEnrollment = activeEnrollment else { return }
-
-        let vc = ProgramCompletionViewController()
-        vc.programTitle = selectedProgram?.name
-        vc.programImageName = selectedProgram?.imageName
-        vc.userId = userId
-        vc.enrollmentId = activeEnrollment.enrollmentId
-
-        vc.modalPresentationStyle = .fullScreen
-        present(vc, animated: true)
-    }
+//    private func showProgramCompletionScreen() {
+//        guard let userId = Auth.auth().currentUser?.uid,
+//              let activeEnrollment = activeEnrollment else { return }
+//
+//        let vc = ProgramCompletionViewController()
+//        vc.programTitle = selectedProgram?.name
+//        vc.programImageName = selectedProgram?.imageName
+//        vc.userId = userId
+//        vc.enrollmentId = activeEnrollment.enrollmentId
+//
+//        vc.modalPresentationStyle = .fullScreen
+//        present(vc, animated: true)
+//    }
     
     
     }
+extension Notification.Name {
+    static let profileImageDidChange = Notification.Name("profileImageDidChange")
+}

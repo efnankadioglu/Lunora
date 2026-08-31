@@ -24,10 +24,10 @@
             </objects>
             <point key="canvasLocation" x="983.96946564885491" y="-2.1126760563380285"/>
         </scene>
-        <!--Navigation Controller-->
+        <!--Lunora Navigation Controller-->
         <scene sceneID="lgP-kx-vs3">
             <objects>
-                <navigationController storyboardIdentifier="ProfileNav" automaticallyAdjustsScrollViewInsets="NO" id="TVc-vm-zWd" sceneMemberID="viewController">
+                <navigationController storyboardIdentifier="ProfileNav" automaticallyAdjustsScrollViewInsets="NO" id="TVc-vm-zWd" customClass="LunoraNavigationController" customModule="Lunora" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" id="8jG-gx-SpM">
                         <rect key="frame" x="0.0" y="118" width="393" height="54"/>
